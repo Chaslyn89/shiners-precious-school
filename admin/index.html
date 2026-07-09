@@ -28,7 +28,6 @@
             max-width: 400px !important;
             width: 100% !important;
             text-align: center !important;
-            position: relative !important;
         }
         
         /* Hide default Decap CMS login title */
@@ -42,8 +41,8 @@
             display: none !important;
         }
         
-        /* School Logo */
-        .decap-cms-login-box .login-logo {
+        /* Custom Login Elements */
+        .login-logo {
             display: block !important;
             margin: 0 auto 20px !important;
             width: 80px !important;
@@ -54,27 +53,22 @@
             background-color: white !important;
         }
         
-        /* School Name */
-        .decap-cms-login-box .login-school-name {
+        .login-school-name {
             display: block !important;
-            font-size: 22px !important;
+            font-size: 24px !important;
             font-weight: 700 !important;
             color: #800020 !important;
             letter-spacing: 1px !important;
             margin-bottom: 5px !important;
         }
         
-        .decap-cms-login-box .login-school-motto {
+        .login-school-motto {
             display: block !important;
-            font-size: 13px !important;
+            font-size: 14px !important;
             color: #D4AF37 !important;
             font-weight: 600 !important;
             letter-spacing: 2px !important;
-            margin-bottom: 20px !important;
-        }
-        
-        .decap-cms-login-box .login-subtitle {
-            display: none !important;
+            margin-bottom: 25px !important;
         }
 
         /* ---- HEADER (After Login) ---- */
@@ -94,7 +88,7 @@
             display: none !important;
         }
         
-        .decap-cms-header .school-header {
+        .school-header {
             display: flex !important;
             align-items: center !important;
             gap: 15px !important;
@@ -102,7 +96,7 @@
             color: white !important;
         }
         
-        .decap-cms-header .school-header .school-logo {
+        .school-header .school-logo {
             width: 40px !important;
             height: 40px !important;
             background: url('https://shinners-precious-academy.netlify.app/images/logo.png') center/contain no-repeat !important;
@@ -112,15 +106,15 @@
             background-color: white !important;
         }
         
-        .decap-cms-header .school-header .school-name {
-            font-size: 18px !important;
+        .school-header .school-name {
+            font-size: 20px !important;
             font-weight: 700 !important;
             color: white !important;
             letter-spacing: 1px !important;
         }
         
-        .decap-cms-header .school-header .school-tagline {
-            font-size: 11px !important;
+        .school-header .school-tagline {
+            font-size: 12px !important;
             color: #D4AF37 !important;
             letter-spacing: 0.5px !important;
             font-weight: 400 !important;
@@ -154,13 +148,13 @@
         }
 
         @media (max-width: 768px) {
-            .decap-cms-header .school-header .school-name {
+            .school-header .school-name {
                 font-size: 14px !important;
             }
-            .decap-cms-header .school-header .school-tagline {
+            .school-header .school-tagline {
                 font-size: 10px !important;
             }
-            .decap-cms-header .school-header .school-logo {
+            .school-header .school-logo {
                 width: 32px !important;
                 height: 32px !important;
             }
@@ -168,97 +162,88 @@
                 padding: 30px 20px !important;
                 margin: 20px !important;
             }
-            .decap-cms-login-box .login-logo {
+            .login-logo {
                 width: 60px !important;
                 height: 60px !important;
             }
-            .decap-cms-login-box .login-school-name {
+            .login-school-name {
                 font-size: 18px !important;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Custom Login Content -->
-    <div id="custom-login" style="display: none; min-height: 100vh; background: linear-gradient(135deg, #800020, #5a0016); display: flex; justify-content: center; align-items: center; padding: 20px;">
-        <div style="background: white; border-radius: 16px; padding: 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.4); border-top: 6px solid #D4AF37; max-width: 400px; width: 100%; text-align: center;">
-            <div style="width: 80px; height: 80px; margin: 0 auto 20px; background: url('https://shinners-precious-academy.netlify.app/images/logo.png') center/contain no-repeat; border-radius: 50%; border: 3px solid #D4AF37; background-color: white;"></div>
-            <div style="font-size: 22px; font-weight: 700; color: #800020; letter-spacing: 1px; margin-bottom: 5px;">Shinners Precious School</div>
-            <div style="font-size: 13px; color: #D4AF37; font-weight: 600; letter-spacing: 2px; margin-bottom: 20px;">Determined to win</div>
-            <div id="login-form-placeholder"></div>
-        </div>
-    </div>
-
+    <!-- Load Decap CMS -->
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    
     <script>
-        // Inject custom login page
-        document.addEventListener('DOMContentLoaded', function() {
-            // Wait for Decap CMS to load
-            setTimeout(function() {
-                // Hide default login and show custom login
-                const loginBox = document.querySelector('.decap-cms-login-box');
-                const loginPage = document.querySelector('.decap-cms-login-page');
-                
-                if (loginBox && loginPage) {
-                    // Hide default login elements
-                    loginBox.querySelector('h1')?.remove();
-                    loginBox.querySelector('.decap-cms-login-title')?.remove();
+        // ========================================
+        // CUSTOM BRANDING - Applied After Decap CMS Loads
+        // ========================================
+        
+        function applyBranding() {
+            // ---- LOGIN PAGE ----
+            const loginBox = document.querySelector('.decap-cms-login-box');
+            if (loginBox) {
+                // Check if custom elements already exist
+                if (!loginBox.querySelector('.login-logo')) {
+                    // Add logo
+                    const logo = document.createElement('div');
+                    logo.className = 'login-logo';
+                    loginBox.prepend(logo);
                     
-                    // Add custom elements
-                    const logoDiv = document.createElement('div');
-                    logoDiv.className = 'login-logo';
-                    loginBox.prepend(logoDiv);
+                    // Add school name
+                    const name = document.createElement('div');
+                    name.className = 'login-school-name';
+                    name.textContent = 'Shinners Precious School';
+                    loginBox.prepend(name);
                     
-                    const nameSpan = document.createElement('span');
-                    nameSpan.className = 'login-school-name';
-                    nameSpan.textContent = 'Shinners Precious School';
-                    loginBox.prepend(nameSpan);
-                    
-                    const mottoSpan = document.createElement('span');
-                    mottoSpan.className = 'login-school-motto';
-                    mottoSpan.textContent = 'Determined to win';
-                    loginBox.prepend(mottoSpan);
+                    // Add motto
+                    const motto = document.createElement('div');
+                    motto.className = 'login-school-motto';
+                    motto.textContent = 'Determined to win';
+                    loginBox.prepend(motto);
                 }
-            }, 500);
-        });
-
-        // Inject custom header after Decap CMS loads
-        (function() {
-            function injectHeader() {
-                const header = document.querySelector('.decap-cms-header');
-                if (header && !header.querySelector('.school-header')) {
-                    header.innerHTML = '';
-                    header.innerHTML = `
-                        <div class="school-header">
-                            <div class="school-logo"></div>
-                            <div>
-                                <span class="school-name">Shinners Precious School</span>
-                                <span class="school-tagline">Content Management System</span>
-                            </div>
+            }
+            
+            // ---- HEADER ----
+            const header = document.querySelector('.decap-cms-header');
+            if (header) {
+                // Check if custom header already exists
+                if (!header.querySelector('.school-header')) {
+                    // Hide default logo
+                    const defaultLogo = header.querySelector('.decap-cms-logo');
+                    if (defaultLogo) defaultLogo.style.display = 'none';
+                    
+                    // Create custom header
+                    const customHeader = document.createElement('div');
+                    customHeader.className = 'school-header';
+                    customHeader.innerHTML = `
+                        <div class="school-logo"></div>
+                        <div>
+                            <span class="school-name">Shinners Precious School</span>
+                            <span class="school-tagline">Content Management System</span>
                         </div>
                     `;
-                    return true;
+                    header.prepend(customHeader);
                 }
-                return false;
             }
+        }
 
-            // Try immediately
-            if (!injectHeader()) {
-                const observer = new MutationObserver(function() {
-                    if (injectHeader()) {
-                        observer.disconnect();
-                    }
-                });
-                observer.observe(document.body, {
-                    childList: true,
-                    subtree: true
-                });
-                setTimeout(function() {
-                    injectHeader();
-                    observer.disconnect();
-                }, 3000);
-            }
-        })();
+        // Try to apply branding immediately
+        setTimeout(applyBranding, 100);
+        setTimeout(applyBranding, 500);
+        setTimeout(applyBranding, 1000);
+        setTimeout(applyBranding, 2000);
+        
+        // Also watch for DOM changes
+        const observer = new MutationObserver(function() {
+            applyBranding();
+        });
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
     </script>
-    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </body>
 </html>
