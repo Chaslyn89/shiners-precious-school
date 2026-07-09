@@ -2,8 +2,7 @@ backend:
   name: git-gateway
   branch: master
 
-# ====== ADD THIS SECTION ======
-# Custom branding for Decap CMS
+# ====== CUSTOM BRANDING ======
 logo_url: "https://shinnerspreciousacademy.netlify.app/images/logo.png"
 display_name: "Shinners Precious School"
 
@@ -11,4 +10,159 @@ media_folder: "images/uploads"
 public_folder: "/images/uploads"
 
 collections:
-  # ... rest of your collections stay the same ...
+  - name: "settings"
+    label: "⚙️ Site Settings"
+    files:
+      - name: "general"
+        label: "General Settings"
+        file: "data/settings.json"
+        fields:
+          - { label: "School Phone", name: "phone", widget: "string" }
+          - { label: "Secondary Phone", name: "phone2", widget: "string" }
+          - { label: "Email", name: "email", widget: "string" }
+          - { label: "Director Name", name: "director_name", widget: "string" }
+          - { label: "Director Title", name: "director_title", widget: "string", default: "School Director" }
+          - { label: "Director Photo", name: "director_photo", widget: "image" }
+          - { label: "Welcome Message", name: "welcome_message", widget: "text" }
+          - { label: "Mission", name: "mission", widget: "text" }
+          - { label: "Vision", name: "vision", widget: "text" }
+          - { label: "Core Values", name: "core_values", widget: "text" }
+          - { label: "Admission Fee", name: "admission_fee", widget: "string", default: "KSh 1,000" }
+          - { label: "Meals Fee (per term)", name: "meals_fee", widget: "string", default: "KSh 3,900" }
+
+  - name: "about"
+    label: "📄 About Page"
+    files:
+      - name: "about"
+        label: "About Content"
+        file: "data/about.json"
+        fields:
+          - { label: "Hero Title", name: "hero_title", widget: "string" }
+          - { label: "Hero Subtitle", name: "hero_subtitle", widget: "string" }
+          - { label: "Welcome Text", name: "welcome_text", widget: "text" }
+          - { label: "Mission", name: "mission", widget: "text" }
+          - { label: "Vision", name: "vision", widget: "text" }
+          - { label: "Motto", name: "motto", widget: "string" }
+          - { label: "Motto Description", name: "motto_description", widget: "text" }
+          - { label: "Director Name", name: "director_name", widget: "string" }
+          - { label: "Director Title", name: "director_title", widget: "string" }
+          - { label: "Director Photo", name: "director_photo", widget: "image" }
+          - { label: "Director Message", name: "director_message", widget: "text" }
+          - { label: "Director Signature", name: "director_signature", widget: "text" }
+          - { label: "Brochure Link", name: "brochure_link", widget: "string" }
+
+  - name: "academics"
+    label: "📚 Academics"
+    files:
+      - name: "academics"
+        label: "Academics Content"
+        file: "data/academics.json"
+        fields:
+          - { label: "Hero Title", name: "hero_title", widget: "string" }
+          - { label: "Hero Subtitle", name: "hero_subtitle", widget: "string" }
+          - { label: "Curriculum Overview", name: "curriculum_overview", widget: "text" }
+
+  - name: "admissions"
+    label: "📝 Admissions"
+    files:
+      - name: "admissions"
+        label: "Admissions Content"
+        file: "data/admissions.json"
+        fields:
+          - { label: "Hero Title", name: "hero_title", widget: "string" }
+          - { label: "Hero Subtitle", name: "hero_subtitle", widget: "string" }
+          - { label: "Admission Fee", name: "admission_fee", widget: "string" }
+
+  - name: "contact"
+    label: "📞 Contact"
+    files:
+      - name: "contact"
+        label: "Contact Content"
+        file: "data/contact.json"
+        fields:
+          - { label: "Hero Title", name: "hero_title", widget: "string" }
+          - { label: "Hero Subtitle", name: "hero_subtitle", widget: "string" }
+          - { label: "Phone", name: "phone", widget: "string" }
+          - { label: "Phone 2", name: "phone2", widget: "string" }
+          - { label: "Email", name: "email", widget: "string" }
+
+  - name: "news"
+    label: "📰 News & Events"
+    folder: "data/news"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "date" }
+      - { label: "Content", name: "content", widget: "text" }
+      - { label: "Image", name: "image", widget: "image", required: false }
+
+  - name: "testimonials"
+    label: "💬 Testimonials"
+    folder: "data/testimonials"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Parent Name", name: "name", widget: "string" }
+      - { label: "Child's Grade", name: "grade", widget: "string" }
+      - { label: "Review", name: "review", widget: "text" }
+      - { label: "Rating (1-5)", name: "rating", widget: "number", default: 5, min: 1, max: 5 }
+      - { label: "Date", name: "date", widget: "date" }
+
+  - name: "leadership"
+    label: "👨‍🏫 Leadership Team"
+    folder: "data/leadership"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Photo", name: "photo", widget: "image", required: false }
+      - { label: "Order", name: "order", widget: "number", default: 0, required: false }
+
+  - name: "gallery"
+    label: "🖼️ Gallery"
+    folder: "data/gallery"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Caption", name: "caption", widget: "string" }
+      - { label: "Category", name: "category", widget: "select", options: ["facilities", "classes", "events", "uniform", "staff"] }
+
+  - name: "staff"
+    label: "👥 Staff"
+    folder: "data/staff"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Qualifications", name: "qualifications", widget: "string", required: false }
+      - { label: "Subjects", name: "subjects", widget: "string", required: false }
+      - { label: "Photo", name: "photo", widget: "image", required: false }
+      - { label: "Type", name: "type", widget: "select", options: ["teacher", "support", "leadership"] }
+
+  - name: "uniform"
+    label: "👕 Uniform"
+    folder: "data/uniform"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Price", name: "price", widget: "string" }
+      - { label: "Category", name: "category", widget: "select", options: ["maroon", "navy"] }
+
+  - name: "school-life"
+    label: "⚽ School Life"
+    folder: "data/school-life"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Category", name: "category", widget: "select", options: ["sports", "clubs", "events", "testimonials"] }
