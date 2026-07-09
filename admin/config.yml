@@ -2,6 +2,10 @@ backend:
   name: git-gateway
   branch: master
 
+# ====== OFFICIAL DECAP CMS BRANDING ======
+logo_url: "https://shinners-precious-academy.netlify.app/images/logo.png"
+display_name: "Shinners Precious School"
+
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
 
