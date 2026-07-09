@@ -1,0 +1,57 @@
+{
+    "hero_title": "Photo Gallery",
+    "hero_subtitle": "Explore life at Shinners Precious School",
+    "featured": {
+        "image": "images/featured-sports-day.jpg",
+        "title": "2026 Sports Day",
+        "description": "Our annual Sports Day was filled with energy, teamwork, and great performances. Students competed in football, netball, athletics, and fun games.",
+        "meta": "15 Photos | 2 Videos",
+        "link": "#sports-gallery"
+    },
+    "categories": {
+        "facilities": {
+            "photos": [
+                { "src": "images/facility-building.jpg", "alt": "School Building", "caption": "School Building Exterior" },
+                { "src": "images/facility-classroom.jpg", "alt": "Classroom", "caption": "Modern Classroom" },
+                { "src": "images/facility-library.jpg", "alt": "Library", "caption": "School Library" },
+                { "src": "images/facility-computerlab.jpg", "alt": "Computer Lab", "caption": "Computer Lab" },
+                { "src": "images/facility-playground.jpg", "alt": "Playground", "caption": "Playground" },
+                { "src": "images/facility-bus.jpg", "alt": "School Bus", "caption": "School Transport" }
+            ]
+        },
+        "classes": {
+            "photos": [
+                { "src": "images/students-class1.jpg", "alt": "Students Learning", "caption": "Active Classroom Learning" },
+                { "src": "images/students-class2.jpg", "alt": "Digital Literacy Class", "caption": "Digital Literacy Lesson" },
+                { "src": "images/students-french.jpg", "alt": "French Class", "caption": "French Language Class" },
+                { "src": "images/students-group.jpg", "alt": "Group Learning", "caption": "Group Discussion" }
+            ]
+        },
+        "events": {
+            "photos": [
+                { "src": "images/event-sports.jpg", "alt": "Sports Day", "caption": "Sports Day" },
+                { "src": "images/event-graduation.jpg", "alt": "Graduation", "caption": "Graduation Ceremony" },
+                { "src": "images/event-prizegiving.jpg", "alt": "Prize Giving", "caption": "Prize Giving Day" },
+                { "src": "images/event-cultural.jpg", "alt": "Cultural Day", "caption": "Cultural Day" }
+            ]
+        },
+        "uniform": {
+            "photos": [
+                { "src": "images/uniform-maroon.jpg", "alt": "Maroon Uniform", "caption": "Maroon Uniform (Playgroup - Grade 6)" },
+                { "src": "images/uniform-navy.jpg", "alt": "Navy Uniform", "caption": "Navy Blue Uniform (Grade 7 - 9)" }
+            ]
+        },
+        "staff": {
+            "photos": [
+                { "src": "images/staff-director.jpg", "alt": "School Director", "caption": "School Director" },
+                { "src": "images/staff-teachers.jpg", "alt": "Teaching Staff", "caption": "Our Dedicated Teachers" },
+                { "src": "images/staff-support.jpg", "alt": "Support Staff", "caption": "Support Staff" }
+            ]
+        }
+    },
+    "videos": [
+        { "src": "videos/school-tour.mp4", "poster": "images/video-poster1.jpg", "caption": "🎬 School Tour" },
+        { "src": "videos/graduation-2026.mp4", "poster": "images/video-poster2.jpg", "caption": "🎓 Graduation Ceremony 2026" },
+        { "src": "videos/sports-day.mp4", "poster": "images/video-poster3.jpg", "caption": "⚽ Sports Day Highlights" }
+    ]
+}

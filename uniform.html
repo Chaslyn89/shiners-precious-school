@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Shinners Precious School Uniform Guide - Maroon uniform for Playgroup to Grade 6, Navy Blue uniform for Grade 7 to Grade 9.">
+    <meta property="og:title" content="Uniform Guide | Shinners Precious School">
+    <meta property="og:description" content="Maroon & Navy Blue uniforms — Our Pride, Your Child's Future.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="images/logo.png">
+    <title>Uniform Guide | Shinners Precious School</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <style>
+        .uniform-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .uniform-gallery-item {
+            background: var(--gray-light);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
+        .uniform-gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .price-table th, .price-table td {
+            border: 1px solid var(--gray-medium);
+            padding: 10px;
+            text-align: left;
+        }
+        .price-table th {
+            background: var(--maroon);
+            color: white;
+        }
+        .package-list {
+            list-style: none;
+            padding: 0;
+        }
+        .package-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--gray-medium);
+        }
+        .info-note {
+            background: #fff3cd;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            text-align: center;
+        }
+        
+        /* Fix navbar overflow - dropdown fix */
+        .navbar,
+        header,
+        nav {
+            overflow: visible !important;
+        }
+        
+        /* Dropdown styles - NO YELLOW HIGHLIGHTING */
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-content {
+            display: none;
+            flex-direction: column;
+            background: var(--maroon);
+            min-width: 160px;
+            border-radius: 8px;
+            margin-top: 5px;
+            overflow: hidden;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .dropdown-content a {
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            display: block;
+            background: var(--maroon);
+            transition: all 0.3s;
+        }
+        .dropdown-content a:hover {
+            background: var(--gold);
+            color: var(--maroon-dark);
+        }
+        .dropdown-content a:focus,
+        .dropdown-content a:active,
+        .dropdown-content a:focus-visible {
+            background: var(--maroon);
+            color: white;
+            outline: none;
+        }
+        @media (min-width: 769px) {
+            .dropdown:hover .dropdown-content {
+                display: flex;
+            }
+        }
+        @media (max-width: 768px) {
+            .dropdown-content {
+                position: static;
+                background: var(--maroon-light);
+                margin-top: 5px;
+                box-shadow: none;
+            }
+            .dropdown.active .dropdown-content {
+                display: flex;
+            }
+            .dropdown > a::after {
+                content: " ▼";
+                font-size: 10px;
+            }
+            .dropdown-content a {
+                color: white !important;
+                background: var(--maroon-light) !important;
+            }
+        }
+        
+        /* Active navigation link */
+        .nav-links li a.active {
+            color: var(--gold);
+            border-bottom: 2px solid var(--gold);
+        }
+        
+        /* WhatsApp float button - show text on ALL devices */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50px;
+            width: auto;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s;
+        }
+        .whatsapp-float:hover {
+            background-color: #20b859;
+            transform: scale(1.05);
+        }
+        @media (max-width: 480px) {
+            .whatsapp-float {
+                padding: 8px 14px;
+                border-radius: 50px;
+                font-size: 12px;
+                bottom: 15px;
+                right: 15px;
+            }
+            .whatsapp-float span {
+                display: inline !important;
+                font-size: 12px;
+            }
+            .whatsapp-float::before {
+                content: none;
+            }
+        }
+        
+        /* Back to top button with label */
+        #back-to-top {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            background: var(--maroon);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            width: auto;
+            padding: 10px 18px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 100;
+            display: none;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        #back-to-top:hover {
+            background: var(--maroon-dark);
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== ANNOUNCEMENT BAR ========== -->
+    <div id="announcement-bar" class="announcement-bar" style="display: flex; justify-content: space-between; align-items: center;">
+        <span>👕 2026 Uniform Guide | Available at school shop | Call <span id="header-phone">0720 994 337</span></span>
+        <span id="close-announcement" aria-label="Close announcement" style="cursor: pointer; font-size: 20px; padding: 0 10px;">&times;</span>
+    </div>
+
+    <!-- ========== HEADER & NAVIGATION ========== -->
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <img src="images/logo.png" alt="Shinners Precious School Logo" loading="lazy" onerror="this.style.display='none'">
+                <div class="logo-text">
+                    <h1>SHINNERS PRECIOUS SCHOOL</h1>
+                    <p>Excellence in Education | Playgroup - Grade 9</p>
+                </div>
+            </div>
+            
+            <div class="hamburger" id="hamburger" role="button" aria-label="Menu" tabindex="0">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <nav aria-label="Main navigation">
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="academics.html">Academics</a></li>
+                    <li><a href="admissions.html">Admissions</a></li>
+                    <li><a href="fees.html">Fees</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li class="dropdown" id="moreDropdown">
+                        <a href="#" id="moreLink">More ▼</a>
+                        <div class="dropdown-content">
+                            <a href="uniform.html" class="active">Uniform</a>
+                            <a href="school-life.html">Life</a>
+                            <a href="news.html">News</a>
+                            <a href="staff.html">Staff</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1 id="uniform-hero-title">School Uniform</h1>
+                <p id="uniform-hero-subtitle">Maroon for Playgroup to Grade 6 | Navy Blue for Grade 7 to Grade 9</p>
+            </div>
+        </section>
+
+        <!-- Uniform Gallery -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Uniform Gallery</h2>
+                <div id="uniform-gallery" class="uniform-gallery">
+                    <div class="uniform-gallery-item">
+                        <img src="images/uniform-maroon-boy.jpg" alt="Maroon uniform for boys" onerror="this.src='https://placehold.co/200x200/800020/white?text=Maroon+Boy'">
+                        <p><strong>Boys (Playgroup - Grade 6)</strong><br>Maroon Trousers + White Shirt</p>
+                    </div>
+                    <div class="uniform-gallery-item">
+                        <img src="images/uniform-maroon-girl.jpg" alt="Maroon uniform for girls" onerror="this.src='https://placehold.co/200x200/800020/white?text=Maroon+Girl'">
+                        <p><strong>Girls (Playgroup - Grade 6)</strong><br>Hospital Hill Checked Dress</p>
+                    </div>
+                    <div class="uniform-gallery-item">
+                        <img src="images/uniform-navy-boy.jpg" alt="Navy blue uniform for boys" onerror="this.src='https://placehold.co/200x200/1F3A93/white?text=Navy+Boy'">
+                        <p><strong>Boys (Grade 7 - 9)</strong><br>Navy Trousers + White Shirt</p>
+                    </div>
+                    <div class="uniform-gallery-item">
+                        <img src="images/uniform-navy-girl.jpg" alt="Navy blue uniform for girls" onerror="this.src='https://placehold.co/200x200/1F3A93/white?text=Navy+Girl'">
+                        <p><strong>Girls (Grade 7 - 9)</strong><br>Navy Skirt + White Blouse</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Uniform Comparison Full -->
+        <section class="section section-light">
+            <div class="container">
+                <h2 class="section-title">Uniform by Level</h2>
+                <div id="uniform-comparison" class="uniform-comparison">
+                    <div class="uniform-card uniform-maroon">
+                        <h3>🟤 Playgroup - Grade 6</h3>
+                        <h4 style="color: var(--maroon); margin: 15px 0 10px;">👔 Boys</h4>
+                        <ul class="uniform-list">
+                            <li>Maroon trousers / shorts</li>
+                            <li>White shirt</li>
+                            <li>Maroon sweater with white stripes</li>
+                            <li>Grey socks with maroon stripes</li>
+                            <li>Black leather shoes</li>
+                            <li>Maroon tracksuit with white stripes</li>
+                        </ul>
+                        
+                        <h4 style="color: var(--maroon); margin: 15px 0 10px;">👗 Girls</h4>
+                        <ul class="uniform-list">
+                            <li>Checked maroon school dress (Hospital Hill pattern)</li>
+                            <li>Maroon sweater with white stripes</li>
+                            <li>White socks with maroon stripes</li>
+                            <li>Black leather shoes</li>
+                            <li>Maroon tracksuit with white stripes</li>
+                        </ul>
+                    </div>
+
+                    <div class="uniform-card uniform-navy">
+                        <h3>🔵 Grade 7 - Grade 9</h3>
+                        <h4 style="color: var(--navy); margin: 15px 0 10px;">👔 Boys</h4>
+                        <ul class="uniform-list">
+                            <li>Navy blue trousers</li>
+                            <li>White shirt</li>
+                            <li>Maroon sweater with white stripes</li>
+                            <li>Navy socks with maroon stripes</li>
+                            <li>Black leather shoes</li>
+                            <li>Maroon tracksuit with white stripes</li>
+                        </ul>
+                        
+                        <h4 style="color: var(--navy); margin: 15px 0 10px;">👗 Girls</h4>
+                        <ul class="uniform-list">
+                            <li>Navy blue skirt</li>
+                            <li>White blouse</li>
+                            <li>Maroon sweater with white stripes</li>
+                            <li>Navy socks with maroon stripes</li>
+                            <li>Black leather shoes</li>
+                            <li>Maroon tracksuit with white stripes</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Uniform Price List -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Uniform Price List (KES)</h2>
+                <div style="overflow-x: auto;">
+                    <table id="uniform-price-table" class="price-table">
+                        <thead>
+                            <tr><th>Item</th><th>Price (KES)</th><th>Notes</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>White shirt / blouse</td><td>800</td><td></td></tr>
+                            <tr><td>Maroon trousers (PG-Grade 6)</td><td>1,200</td><td></td></tr>
+                            <tr><td>Navy blue trousers (Grade 7-9)</td><td>1,200</td><td></td></tr>
+                            <tr><td>Hospital Hill checked dress</td><td>1,800</td><td>Girls PG-Grade 6</td></tr>
+                            <tr><td>Navy blue skirt</td><td>1,200</td><td>Girls Grade 7-9</td></tr>
+                            <tr><td>Maroon sweater with white stripes</td><td>1,500</td><td>All levels</td></tr>
+                            <tr><td>Maroon tracksuit</td><td>2,000</td><td>All levels</td></tr>
+                            <tr><td>Socks (pair)</td><td>300</td><td></td></tr>
+                            <tr><td>Black leather shoes</td><td>1,500</td><td>Approximate</td></tr>
+                        </tbody>
+                    </table>
+                    <p style="font-size: 12px; color: #666; margin-top: 10px;">* Prices are subject to periodic review. Contact the school office for current pricing.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Uniform Summary Table -->
+        <section class="section section-light">
+            <div class="container">
+                <h2 class="section-title">Quick Comparison</h2>
+                <div style="overflow-x: auto;">
+                    <table id="uniform-comparison-table" class="fee-table">
+                        <thead>
+                            <tr><th>Item</th><th>Playgroup - Grade 6</th><th>Grade 7 - Grade 9</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Boys' Bottom</td><td>Maroon trousers/shorts</td><td>Navy blue trousers</td></tr>
+                            <tr><td>Girls' Dress/Skirt</td><td>Hospital Hill checked dress</td><td>Navy blue skirt</td></tr>
+                            <tr><td>Top (Boys)</td><td>White shirt</td><td>White shirt</td></tr>
+                            <tr><td>Top (Girls)</td><td>White blouse</td><td>White blouse</td></tr>
+                            <tr><td>Sweater</td><td colspan="2" style="text-align: center;">Maroon with white stripes</td></tr>
+                            <tr><td>Socks (Boys)</td><td>Grey with maroon stripes</td><td>Navy with maroon stripes</td></tr>
+                            <tr><td>Socks (Girls)</td><td>White with maroon stripes</td><td>Navy with maroon stripes</td></tr>
+                            <tr><td>Shoes</td><td colspan="2" style="text-align: center;">Black leather shoes</td></tr>
+                            <tr><td>Tracksuit</td><td colspan="2" style="text-align: center;">Maroon with white stripes</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- New Student Uniform Package -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">New Student Uniform Package</h2>
+                <div id="uniform-package" class="grid-3">
+                    <div class="card">
+                        <div class="card-content">
+                            <h3>📦 Recommended Items</h3>
+                            <ul class="package-list">
+                                <li>2 White shirts / blouses</li>
+                                <li>2 Uniform bottoms (trousers/skirt/dress)</li>
+                                <li>1 School sweater</li>
+                                <li>1 Tracksuit</li>
+                                <li>2 Pairs of socks</li>
+                                <li>1 Pair black leather shoes</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-content">
+                            <h3>🔄 Replacement Schedule</h3>
+                            <p>We recommend replacing uniform items when:</p>
+                            <ul class="package-list">
+                                <li>Child outgrows current size</li>
+                                <li>Damaged beyond repair</li>
+                                <li>Faded or stained</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-content">
+                            <h3>⚠️ Important</h3>
+                            <p>All uniform items must be clearly labelled with your child's name and class.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Uniform Care Instructions -->
+        <section class="section section-light">
+            <div class="container">
+                <h2 class="section-title">Uniform Care Instructions</h2>
+                <div id="uniform-care" class="grid-3">
+                    <div class="card">
+                        <div class="card-content">
+                            <h3>🧺 Washing</h3>
+                            <p>• Wash dark colors separately<br>• Use cold/warm water<br>• Avoid bleach<br>• Iron while slightly damp</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-content">
+                            <h3>🏷️ Labelling</h3>
+                            <p>• Label all items clearly<br>• Use permanent marker or name tags<br>• Include name and class<br>• Replace labels when faded</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-content">
+                            <h3>👞 Shoe Care</h3>
+                            <p>• Polish shoes weekly<br>• Keep laces tied<br>• Replace worn-out shoes promptly<br>• Clean mud/dirt daily</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Where to Buy -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Where to Get the Uniform</h2>
+                <div id="uniform-where-to-buy" class="grid-3" style="text-align: center;">
+                    <div class="card">
+                        <div class="card-content">
+                            <h3>🏫 School Uniform Shop</h3>
+                            <p>Available at the school premises</p>
+                            <p><strong>Open:</strong> Monday - Friday, 8am - 4pm</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-content">
+                            <h3>📞 Order via Phone</h3>
+                            <p>Call: <span id="uniform-phone">0720 994 337</span> / <span id="uniform-phone2">0725 055 871</span></p>
+                            <p>Delivery available on request</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-content">
+                            <h3>📱 Order via WhatsApp</h3>
+                            <p>Send your child's details to:</p>
+                            <p><strong><span id="uniform-whatsapp">0720 994 337</span></strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download Button -->
+        <section class="section section-light" style="text-align: center;">
+            <div class="container">
+                <a id="uniform-download-link" href="assets/Uniform-Guide.pdf" class="btn-primary" download style="font-size: 18px; padding: 15px 30px;">
+                    📄 Download Complete Uniform Guide (PDF)
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px;">
+                
+                <div>
+                    <h3 style="color: var(--gold);">Shinners Precious School</h3>
+                    <p>P.O. Box 40-0521, Embakasi</p>
+                    <p>Nairobi, Kenya</p>
+                    <p>📞 <span id="footer-phone">0720 994 337</span> / <span id="footer-phone2">0726 314 846</span></p>
+                    <p>✉️ <span id="footer-email">shinnersprecious@gmail.com</span></p>
+                </div>
+                
+                <div>
+                    <h3 style="color: var(--gold);">Quick Links</h3>
+                    <p><a href="admissions.html" style="color: white;">Admissions</a></p>
+                    <p><a href="fees.html" style="color: white;">Fee Structure</a></p>
+                    <p><a href="uniform.html" style="color: white;">Uniform Guide</a></p>
+                    <p><a href="gallery.html" style="color: white;">Gallery</a></p>
+                    <p><a href="staff.html" style="color: white;">Our Staff</a></p>
+                </div>
+                
+                <div>
+                    <h3 style="color: var(--gold);">School Hours</h3>
+                    <p>Monday - Friday: 8:00 AM - 4:00 PM</p>
+                    <p>Saturday: 9:00 AM - 12:00 PM (Office only)</p>
+                    <p>Sunday: Closed</p>
+                </div>
+                
+                <div>
+                    <h3 style="color: var(--gold);">Location</h3>
+                    <p>Embakasi, near Imara Daima</p>
+                    <p><a href="https://maps.google.com/?q=Embakasi+Nairobi" target="_blank" style="color: #D4AF37;">View on Google Maps →</a></p>
+                    
+                    <h3 style="color: var(--gold); margin-top: 20px;">Follow Us</h3>
+                    <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+                        <a href="#" style="color: white; text-decoration: none;">📘 Facebook</a>
+                        <a href="#" style="color: white; text-decoration: none;">📸 Instagram</a>
+                        <a href="https://wa.me/254720994337" style="color: white; text-decoration: none;">💬 WhatsApp</a>
+                        <a href="#" style="color: white; text-decoration: none;">🎵 TikTok</a>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year">2026</span> Shinners Precious School. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========== WHATSAPP FLOAT ========== -->
+    <a href="https://wa.me/254720994337?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20uniforms%20at%20Shinners%20Precious%20School." 
+       class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+        💬 <span>Admissions Help</span>
+    </a>
+
+    <!-- ========== BACK TO TOP ========== -->
+    <button id="back-to-top">↑ Page Up</button>
+
+    <script src="js/main.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/uniform.js"></script>
+</body>
+</html>

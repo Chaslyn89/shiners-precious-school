@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Shinners Precious School Fee Structure - Playgroup to Grade 9. Termly fees, admission fee, meals, transport, and payment methods.">
+    <meta property="og:title" content="Fee Structure | Shinners Precious School">
+    <meta property="og:description" content="Complete fee structure for all levels. KCB Bank & Lipa Na Mpesa payments accepted.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="images/logo.png">
+    <title>Fee Structure | Shinners Precious School</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <style>
+        .fee-note {
+            background: var(--gray-light);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid var(--gold);
+        }
+        .payment-method {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+        .calculator {
+            background: var(--gray-light);
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+        .calculator select, .calculator input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid var(--gray-medium);
+            border-radius: 5px;
+        }
+        .fee-result {
+            background: var(--maroon);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.5rem;
+            margin-top: 20px;
+        }
+        .transport-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        .transport-table th, .transport-table td {
+            border: 1px solid var(--gray-medium);
+            padding: 10px;
+            text-align: left;
+        }
+        .transport-table th {
+            background: var(--navy);
+            color: white;
+        }
+        .faq-item {
+            margin-bottom: 20px;
+        }
+        .faq-question {
+            font-weight: bold;
+            color: var(--maroon);
+            margin-bottom: 5px;
+        }
+        .faq-answer {
+            color: var(--gray-dark);
+            padding-left: 15px;
+            border-left: 3px solid var(--gold);
+        }
+        .last-updated {
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            margin-top: 20px;
+        }
+        .info-note {
+            background: #fff3cd;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        /* Fix navbar overflow - dropdown fix */
+        .navbar,
+        header,
+        nav {
+            overflow: visible !important;
+        }
+        
+        /* Dropdown styles - NO YELLOW HIGHLIGHTING */
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-content {
+            display: none;
+            flex-direction: column;
+            background: var(--maroon);
+            min-width: 160px;
+            border-radius: 8px;
+            margin-top: 5px;
+            overflow: hidden;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .dropdown-content a {
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            display: block;
+            background: var(--maroon);
+            transition: all 0.3s;
+        }
+        .dropdown-content a:hover {
+            background: var(--gold);
+            color: var(--maroon-dark);
+        }
+        .dropdown-content a:focus,
+        .dropdown-content a:active,
+        .dropdown-content a:focus-visible {
+            background: var(--maroon);
+            color: white;
+            outline: none;
+        }
+        @media (min-width: 769px) {
+            .dropdown:hover .dropdown-content {
+                display: flex;
+            }
+        }
+        @media (max-width: 768px) {
+            .dropdown-content {
+                position: static;
+                background: var(--maroon-light);
+                margin-top: 5px;
+                box-shadow: none;
+            }
+            .dropdown.active .dropdown-content {
+                display: flex;
+            }
+            .dropdown > a::after {
+                content: " ▼";
+                font-size: 10px;
+            }
+            .dropdown-content a {
+                color: white !important;
+                background: var(--maroon-light) !important;
+            }
+        }
+        
+        /* Active navigation link */
+        .nav-links li a.active {
+            color: var(--gold);
+            border-bottom: 2px solid var(--gold);
+        }
+        
+        /* WhatsApp float button - show text on ALL devices */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50px;
+            width: auto;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s;
+        }
+        .whatsapp-float:hover {
+            background-color: #20b859;
+            transform: scale(1.05);
+        }
+        @media (max-width: 480px) {
+            .whatsapp-float {
+                padding: 8px 14px;
+                border-radius: 50px;
+                font-size: 12px;
+                bottom: 15px;
+                right: 15px;
+            }
+            .whatsapp-float span {
+                display: inline !important;
+                font-size: 12px;
+            }
+            .whatsapp-float::before {
+                content: none;
+            }
+        }
+        
+        /* Back to top button with label */
+        #back-to-top {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            background: var(--maroon);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            width: auto;
+            padding: 10px 18px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 100;
+            display: none;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        #back-to-top:hover {
+            background: var(--maroon-dark);
+            transform: translateY(-3px);
+        }
+
+        /* Social media links in footer */
+        .social-footer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 5px;
+        }
+        .social-footer a {
+            color: white;
+            text-decoration: none;
+            font-size: 13px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s;
+            padding: 4px 0;
+        }
+        .social-footer a:hover {
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== ANNOUNCEMENT BAR ========== -->
+    <div id="announcement-bar" class="announcement-bar" style="display: flex; justify-content: space-between; align-items: center;">
+        <span>💰 2026 Fee Structure | Last Updated: June 2026 | No cash payments accepted</span>
+        <span id="close-announcement" aria-label="Close announcement" style="cursor: pointer; font-size: 20px; padding: 0 10px;">&times;</span>
+    </div>
+
+    <!-- ========== HEADER & NAVIGATION ========== -->
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <img src="images/logo.png" alt="Shinners Precious School Logo" loading="lazy" onerror="this.style.display='none'">
+                <div class="logo-text">
+                    <h1>SHINNERS PRECIOUS SCHOOL</h1>
+                    <p>Excellence in Education | Playgroup - Grade 9</p>
+                </div>
+            </div>
+            
+            <div class="hamburger" id="hamburger" role="button" aria-label="Menu" tabindex="0">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <nav aria-label="Main navigation">
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="academics.html">Academics</a></li>
+                    <li><a href="admissions.html">Admissions</a></li>
+                    <li><a href="fees.html" class="active">Fees</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li class="dropdown" id="moreDropdown">
+                        <a href="#" id="moreLink">More ▼</a>
+                        <div class="dropdown-content">
+                            <a href="uniform.html">Uniform</a>
+                            <a href="school-life.html">Life</a>
+                            <a href="news.html">News</a>
+                            <a href="staff.html">Staff</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1 id="fees-hero-title">Fee Structure 2026</h1>
+                <p id="fees-hero-subtitle">Affordable, transparent fees with flexible payment options</p>
+            </div>
+        </section>
+
+        <!-- Fee Tables -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Playgroup - Grade 3</h2>
+                <div style="overflow-x: auto;">
+                    <table class="fee-table" id="fees-table-pg-g3">
+                        <thead>
+                            <tr><th>ITEM</th><th>TERM 1</th><th>TERM 2</th><th>TERM 3</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Tuition Fees</td><td>KSh 7,400</td><td>KSh 7,400</td><td>KSh 7,400</td></tr>
+                            <tr><td>Assessment</td><td>KSh 300</td><td>KSh 300</td><td>KSh 300</td></tr>
+                            <tr><td>Activity</td><td>KSh 200</td><td>KSh 200</td><td>-</td></tr>
+                            <tr><td>Diary</td><td>KSh 300</td><td>-</td><td>-</td></tr>
+                            <tr><td>PTA</td><td>KSh 200</td><td>-</td><td>-</td></tr>
+                            <tr><td>Assessment Book</td><td>KSh 400</td><td>-</td><td>-</td></tr>
+                            <tr style="background: var(--gray-light); font-weight: bold;"><td>TOTAL</td><td>KSh 8,800</td><td>KSh 7,900</td><td>KSh 7,700</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-light">
+            <div class="container">
+                <h2 class="section-title">Grade 4 - Grade 6</h2>
+                <div style="overflow-x: auto;">
+                    <table class="fee-table" id="fees-table-g4-g6">
+                        <thead>
+                            <tr><th>ITEM</th><th>TERM 1</th><th>TERM 2</th><th>TERM 3</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Tuition Fees</td><td>KSh 9,400</td><td>KSh 9,400</td><td>KSh 9,400</td></tr>
+                            <tr><td>Assessment</td><td>KSh 300</td><td>KSh 300</td><td>KSh 300</td></tr>
+                            <tr><td>Activity</td><td>KSh 200</td><td>KSh 200</td><td>-</td></tr>
+                            <tr><td>Diary</td><td>KSh 300</td><td>-</td><td>-</td></tr>
+                            <tr><td>PTA</td><td>KSh 200</td><td>-</td><td>-</td></tr>
+                            <tr><td>Assessment Book</td><td>KSh 400</td><td>-</td><td>-</td></tr>
+                            <tr><td>Digital Literacy & French</td><td>KSh 600</td><td>KSh 600</td><td>KSh 600</td></tr>
+                            <tr style="background: var(--gray-light); font-weight: bold;"><td>TOTAL</td><td>KSh 11,400</td><td>KSh 10,500</td><td>KSh 10,300</td></tr>
+                        </tbody>
+                    </table>
+                    <p style="font-size: 12px; color: #666; margin-top: 5px;">* Grade 6 tuition is KSh 10,800 per term</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Grade 7 - Grade 9 (Junior Secondary)</h2>
+                <div style="overflow-x: auto;">
+                    <table class="fee-table" id="fees-table-g7-g9">
+                        <thead>
+                            <tr><th>ITEM</th><th>TERM 1</th><th>TERM 2</th><th>TERM 3</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Tuition Fees</td><td>KSh 14,200</td><td>KSh 14,200</td><td>KSh 14,200</td></tr>
+                            <tr><td>Assessment</td><td>KSh 300</td><td>KSh 300</td><td>KSh 300</td></tr>
+                            <tr><td>Activity</td><td>KSh 300</td><td>KSh 300</td><td>-</td></tr>
+                            <tr><td>Diary</td><td>KSh 300</td><td>-</td><td>-</td></tr>
+                            <tr><td>PTA</td><td>KSh 200</td><td>-</td><td>-</td></tr>
+                            <tr><td>Assessment Book</td><td>KSh 500</td><td>-</td><td>-</td></tr>
+                            <tr><td>Digital Literacy & French</td><td>KSh 600</td><td>KSh 600</td><td>KSh 600</td></tr>
+                            <tr style="background: var(--gray-light); font-weight: bold;"><td>TOTAL (Grade 7-8)</td><td>KSh 16,400</td><td>KSh 15,400</td><td>KSh 15,100</td></tr>
+                        </tbody>
+                    </table>
+                    <p style="font-size: 12px; color: #666; margin-top: 5px;">* Grade 9 tuition is KSh 14,700 per term</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Annual Fee Summary -->
+        <section class="section section-light">
+            <div class="container">
+                <h2 class="section-title">Annual Fee Summary</h2>
+                <div style="overflow-x: auto;">
+                    <table class="fee-table" id="fees-annual-summary">
+                        <thead><tr><th>Level</th><th>Annual Fees (3 Terms)</th></tr></thead>
+                        <tbody>
+                            <tr><td>Playgroup - Grade 3</td><td>KSh 24,400</td></tr>
+                            <tr><td>Grade 4 - Grade 5</td><td>KSh 32,200</td></tr>
+                            <tr><td>Grade 6</td><td>KSh 34,600</td></tr>
+                            <tr><td>Grade 7 - Grade 8</td><td>KSh 46,900</td></tr>
+                            <tr><td>Grade 9</td><td>KSh 47,400</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Optional Services -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Optional Services</h2>
+                <div class="grid-3">
+                    <div class="card">
+                        <div class="card-content">
+                            <h3>🍎 Meals Program</h3>
+                            <p><strong>KSh 3,900 per term</strong></p>
+                            <p>Nutritious lunch served daily. Optional for all learners.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-content">
+                            <h3>🚌 Transport Services</h3>
+                            <table class="transport-table" id="fees-transport-table">
+                                <tr><th>Route</th><th>Fee/Term</th></tr>
+                                <tr><td>Imara Daima</td><td>KSh 7,000</td></tr>
+                                <tr><td>Pipeline</td><td>KSh 6,000</td></tr>
+                                <tr><td>AA & KOBIL</td><td>KSh 6,000</td></tr>
+                                <tr><td>Kwanjenga</td><td>KSh 6,000</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-content">
+                            <h3>💰 Admission Fee</h3>
+                            <p><strong>KSh 1,000 (once)</strong></p>
+                            <p>For Playgroup - Grade 6</p>
+                            <p><strong>KSh 1,500 (once)</strong></p>
+                            <p>For Grade 7 - Grade 9 (Junior Secondary)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- New Admission Cost Example -->
+        <section class="section section-light">
+            <div class="container">
+                <h2 class="section-title">New Admission Cost Example</h2>
+                <div style="overflow-x: auto;">
+                    <table class="fee-table" id="fees-admission-example">
+                        <thead><tr><th>Item</th><th>New Grade 1 Learner</th><th>New Grade 7 Learner</th></tr></thead>
+                        <tbody>
+                            <tr><td>Term 1 Fees</td><td>KSh 8,800</td><td>KSh 16,400</td></tr>
+                            <tr><td>Admission Fee</td><td>KSh 1,000</td><td>KSh 1,500</td></tr>
+                            <tr><td>Uniform (Approx.)</td><td>Contact School</td><td>Contact School</td></tr>
+                            <tr><td>Meals (Optional)</td><td>KSh 3,900</td><td>KSh 3,900</td></tr>
+                            <tr style="background: var(--gray-light); font-weight: bold;"><td>Estimated Total</td><td>KSh 13,700+</td><td>KSh 21,800+</td></tr>
+                        </tbody>
+                    </table>
+                    <p style="font-size: 12px; margin-top: 10px;">* Uniform costs available from school shop. Meals are optional.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fee Calculator -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Fee Calculator</h2>
+                <div class="calculator">
+                    <label>Select Grade Level</label>
+                    <select id="grade-select">
+                        <option value="playgroup">Playgroup</option>
+                        <option value="pp1">PP1</option>
+                        <option value="pp2">PP2</option>
+                        <option value="grade1-3">Grade 1-3</option>
+                        <option value="grade4-5">Grade 4-5</option>
+                        <option value="grade6">Grade 6</option>
+                        <option value="grade7-8">Grade 7-8</option>
+                        <option value="grade9">Grade 9</option>
+                    </select>
+                    
+                    <label><input type="checkbox" id="meals-option"> Add Meals (KSh 3,900/term)</label>
+                    
+                    <label>Add Transport (Optional)</label>
+                    <select id="transport-select">
+                        <option value="none">None</option>
+                        <option value="imara">Imara Daima - KSh 7,000</option>
+                        <option value="aakobil">AA & KOBIL - KSh 6,000</option>
+                        <option value="pipeline">Pipeline - KSh 6,000</option>
+                        <option value="kwanjenga">Kwanjenga - KSh 6,000</option>
+                    </select>
+                    
+                    <button id="calculate-fees" class="btn-primary" style="width: 100%; margin-top: 15px;">Calculate Total Fees</button>
+                    
+                    <div id="fee-result" class="fee-result" style="display: none;"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Payment Methods -->
+        <section class="section section-light">
+            <div class="container">
+                <h2 class="section-title">Payment Methods</h2>
+                <div class="grid-3">
+                    <div class="payment-method">
+                        <h3>🏦 Bank Deposit</h3>
+                        <p><strong>Kenya Commercial Bank (KCB)</strong></p>
+                        <p>Utawala Branch</p>
+                        <p><strong>A/C Name:</strong> Shinners Precious School</p>
+                        <p><strong>A/C Number:</strong> 1282776983</p>
+                    </div>
+                    <div class="payment-method">
+                        <h3>📱 Lipa Na Mpesa</h3>
+                        <p><strong>Paybill Number:</strong> 522123</p>
+                        <p><strong>Account Number:</strong></p>
+                        <p><code>82747K-LearnerName-Class</code></p>
+                        <p style="font-size: 12px; margin-top: 10px;">Example: 82747K-JOHNDOE-G4</p>
+                    </div>
+                    <div class="payment-method">
+                        <h3>⚠️ Important</h3>
+                        <p style="color: var(--maroon); font-weight: bold;">❌ No cash payments accepted</p>
+                        <p>All fees must be paid via Bank or Mpesa</p>
+                        <p>Keep your payment receipt for reference</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Payment Schedule -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Payment Schedule</h2>
+                <div class="grid-3">
+                    <div class="card">
+                        <div class="card-content">
+                            <h3>📅 Term 1</h3>
+                            <p>Due before opening day (January)</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-content">
+                            <h3>📅 Term 2</h3>
+                            <p>Due before opening day (April/May)</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-content">
+                            <h3>📅 Term 3</h3>
+                            <p>Due before opening day (August/September)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="fee-note" style="margin-top: 20px;">
+                    <p>💡 <strong>Installment arrangements</strong> may be discussed with the school administration on a case-by-case basis.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fee FAQs -->
+        <section class="section section-light">
+            <div class="container">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <div class="grid-3" id="fees-faqs">
+                    <div class="faq-item">
+                        <div class="faq-question">❓ Can fees be paid in installments?</div>
+                        <div class="faq-answer">Contact the school office to discuss installment arrangements.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">❓ Are meals compulsory?</div>
+                        <div class="faq-answer">No, meals are optional. You can choose to add or remove.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">❓ Is transport compulsory?</div>
+                        <div class="faq-answer">No, transport is optional for parents who wish to use it.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">❓ Are fees refundable?</div>
+                        <div class="faq-answer">Fees are generally non-refundable. Discuss with administration for exceptions.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">❓ What is the admission fee for?</div>
+                        <div class="faq-answer">The admission fee covers registration and processing of new learners.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">❓ When is the fee payment deadline?</div>
+                        <div class="faq-answer">Fees should be paid before the term begins. Late payment may incur penalties.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fee Notes -->
+        <section class="section">
+            <div class="container">
+                <div class="fee-note" id="fees-notes">
+                    <h3>📌 Important Notes</h3>
+                    <ul>
+                        <li>Fees are payable per term, before the term begins.</li>
+                        <li>Admission fee is paid once upon enrollment.</li>
+                        <li>Meals and transport are optional but payable per term.</li>
+                        <li>Digital Literacy & French are mandatory for Grade 4-9.</li>
+                        <li>Activity fee covers sports, clubs, and co-curricular events.</li>
+                        <li>PTA fee supports parents' association activities.</li>
+                        <li>Diary and assessment books are issued in Term 1 only.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download Button -->
+        <section class="section section-light" style="text-align: center;">
+            <div class="container">
+                <a href="assets/Fee-Structure-2026.pdf" class="btn-primary" download style="font-size: 18px; padding: 15px 30px;">
+                    📄 Download Fee Structure (PDF)
+                </a>
+            </div>
+        </section>
+
+        <!-- Last Updated -->
+        <div class="last-updated" id="fees-last-updated">
+            Last Updated: June 2026 | For questions, call 0720 994 337
+        </div>
+
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px;">
+                
+                <div>
+                    <h3 style="color: var(--gold);">Shinners Precious School</h3>
+                    <p>P.O. Box 40-0521, Embakasi</p>
+                    <p>Nairobi, Kenya</p>
+                    <p>📞 <span id="footer-phone">0720 994 337</span> / <span id="footer-phone2">0726 314 846</span></p>
+                    <p>✉️ <span id="footer-email">shinnersprecious@gmail.com</span></p>
+                </div>
+                
+                <div>
+                    <h3 style="color: var(--gold);">Quick Links</h3>
+                    <p><a href="admissions.html" style="color: white;">Admissions</a></p>
+                    <p><a href="fees.html" style="color: white;">Fee Structure</a></p>
+                    <p><a href="uniform.html" style="color: white;">Uniform Guide</a></p>
+                    <p><a href="gallery.html" style="color: white;">Gallery</a></p>
+                    <p><a href="staff.html" style="color: white;">Our Staff</a></p>
+                </div>
+                
+                <div>
+                    <h3 style="color: var(--gold);">School Hours</h3>
+                    <p>Monday - Friday: 8:00 AM - 4:00 PM</p>
+                    <p>Saturday: 9:00 AM - 12:00 PM (Office only)</p>
+                    <p>Sunday: Closed</p>
+                </div>
+                
+                <div>
+                    <h3 style="color: var(--gold);">Location</h3>
+                    <p>Embakasi, near Imara Daima</p>
+                    <p><a href="https://maps.google.com/?q=Embakasi+Nairobi" target="_blank" style="color: #D4AF37;">View on Google Maps →</a></p>
+                    
+                    <h3 style="color: var(--gold); margin-top: 20px;">Follow Us</h3>
+                    <div class="social-footer">
+                        <a href="#">📘 Facebook</a>
+                        <a href="#">📸 Instagram</a>
+                        <a href="https://wa.me/254720994337">💬 WhatsApp</a>
+                        <a href="#">🎵 TikTok</a>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year">2026</span> Shinners Precious School. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========== WHATSAPP FLOAT ========== -->
+    <a href="https://wa.me/254720994337?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20fees%20at%20Shinners%20Precious%20School." 
+       class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+        💬 <span>Admissions Help</span>
+    </a>
+
+    <!-- ========== BACK TO TOP ========== -->
+    <button id="back-to-top">↑ Page Up</button>
+
+    <script src="js/main.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/fees.js"></script>
+</body>
+</html>

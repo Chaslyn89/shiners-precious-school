@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Shinners Precious School in Embakasi, Nairobi offers CBC education from Playgroup to Grade 9. Learn about our mission, vision, values, leadership, facilities, and commitment to academic excellence.">
+    <meta property="og:title" content="About Us | Shinners Precious School">
+    <meta property="og:description" content="Quality CBC education from Playgroup to Grade 9 in Embakasi, Nairobi. Learn about our mission, vision, and leadership.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="images/logo.png">
+    <title>About Us | Shinners Precious School | Embakasi, Nairobi</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <style>
+        /* Additional styles not in main CSS */
+        .info-note {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        .info-note.warning {
+            background: #f8d7da;
+            border-left-color: #dc3545;
+        }
+        .facilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .facility-card {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        .facility-card:hover {
+            transform: translateY(-5px);
+        }
+        .facility-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+        .leadership-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        .leader-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+        .leader-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .leader-card h3 {
+            color: var(--maroon);
+            margin: 15px 0 5px;
+        }
+        .leader-title {
+            color: var(--gold);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .curriculum-badge {
+            background: var(--gold);
+            color: var(--maroon-dark);
+            padding: 5px 10px;
+            border-radius: 20px;
+            display: inline-block;
+            margin: 5px;
+            font-size: 12px;
+        }
+        @media (max-width: 768px) {
+            .director-section {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+        
+        /* Fix navbar overflow - dropdown fix */
+        .navbar,
+        header,
+        nav {
+            overflow: visible !important;
+        }
+        
+        /* Dropdown styles - NO YELLOW HIGHLIGHTING */
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-content {
+            display: none;
+            flex-direction: column;
+            background: var(--maroon);
+            min-width: 160px;
+            border-radius: 8px;
+            margin-top: 5px;
+            overflow: hidden;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .dropdown-content a {
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            display: block;
+            background: var(--maroon);
+            transition: all 0.3s;
+        }
+        .dropdown-content a:hover {
+            background: var(--gold);
+            color: var(--maroon-dark);
+        }
+        .dropdown-content a:focus,
+        .dropdown-content a:active,
+        .dropdown-content a:focus-visible {
+            background: var(--maroon);
+            color: white;
+            outline: none;
+        }
+        @media (min-width: 769px) {
+            .dropdown:hover .dropdown-content {
+                display: flex;
+            }
+        }
+        @media (max-width: 768px) {
+            .dropdown-content {
+                position: static;
+                background: var(--maroon-light);
+                margin-top: 5px;
+                box-shadow: none;
+            }
+            .dropdown.active .dropdown-content {
+                display: flex;
+            }
+            .dropdown > a::after {
+                content: " ▼";
+                font-size: 10px;
+            }
+            .dropdown-content a {
+                color: white !important;
+                background: var(--maroon-light) !important;
+            }
+        }
+        
+        /* Active navigation link */
+        .nav-links li a.active {
+            color: var(--gold);
+            border-bottom: 2px solid var(--gold);
+        }
+        
+        /* WhatsApp float button - show text on ALL devices */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50px;
+            width: auto;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s;
+        }
+        .whatsapp-float:hover {
+            background-color: #20b859;
+            transform: scale(1.05);
+        }
+        @media (max-width: 480px) {
+            .whatsapp-float {
+                padding: 8px 14px;
+                border-radius: 50px;
+                font-size: 12px;
+                bottom: 15px;
+                right: 15px;
+            }
+            .whatsapp-float span {
+                display: inline !important;
+                font-size: 12px;
+            }
+            .whatsapp-float::before {
+                content: none;
+            }
+        }
+        
+        /* Back to top button with label */
+        #back-to-top {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            background: var(--maroon);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            width: auto;
+            padding: 10px 18px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 100;
+            display: none;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        #back-to-top:hover {
+            background: var(--maroon-dark);
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== ANNOUNCEMENT BAR ========== -->
+    <div id="announcement-bar" class="announcement-bar" style="display: flex; justify-content: space-between; align-items: center;">
+        <span>📢 2026 Admissions Now Open! | Enroll your child today | Call <span id="header-phone">0720 994 337</span></span>
+        <span id="close-announcement" aria-label="Close announcement" style="cursor: pointer; font-size: 20px; padding: 0 10px;">&times;</span>
+    </div>
+
+    <!-- ========== HEADER & NAVIGATION ========== -->
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <img src="images/logo.png" alt="Shinners Precious School Logo" loading="lazy" onerror="this.style.display='none'">
+                <div class="logo-text">
+                    <h1>SHINNERS PRECIOUS SCHOOL</h1>
+                    <p>Excellence in Education | Playgroup - Grade 9</p>
+                </div>
+            </div>
+            
+            <div class="hamburger" id="hamburger" role="button" aria-label="Menu" tabindex="0">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <nav aria-label="Main navigation">
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html" class="active">About</a></li>
+                    <li><a href="academics.html">Academics</a></li>
+                    <li><a href="admissions.html">Admissions</a></li>
+                    <li><a href="fees.html">Fees</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li class="dropdown" id="moreDropdown">
+                        <a href="#" id="moreLink">More ▼</a>
+                        <div class="dropdown-content">
+                            <a href="uniform.html">Uniform</a>
+                            <a href="school-life.html">Life</a>
+                            <a href="news.html">News</a>
+                            <a href="staff.html">Staff</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1 id="about-hero-title">About Shinners Precious School</h1>
+                <p id="about-hero-subtitle">Excellence in Education | Shaping Future Leaders</p>
+            </div>
+        </section>
+
+        <!-- Welcome / Overview -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Welcome to Our School</h2>
+                <p id="about-welcome" style="text-align: center; max-width: 800px; margin: 0 auto;">
+                    Shinners Precious School is a leading CBC educational institution located in Embakasi, Nairobi. 
+                    Established in <strong>2009</strong>, we offer quality education from Playgroup to Grade 9, nurturing young minds with a strong foundation 
+                    in academics, character, and faith. Our school is committed to providing affordable, holistic education 
+                    that prepares learners for the future.
+                </p>
+            </div>
+        </section>
+
+        <!-- Mission & Vision -->
+        <section class="section section-light">
+            <div class="container">
+                <div class="grid-3">
+                    <div class="card">
+                        <div class="card-content">
+                            <h3>🎓 Our Mission</h3>
+                            <p id="about-mission">To provide high quality education and childcare in a safe, respectful and inclusive environment that builds a foundation for lifelong learning.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-content">
+                            <h3>👁️ Our Vision</h3>
+                            <p id="about-vision">To be a center of excellence that produces lifelong learners and critical thinkers equipped for global success.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-content">
+                            <h3>📜 Our Motto</h3>
+                            <p><strong id="about-motto">Determined to win</strong></p>
+                            <p id="about-motto-desc">Striving for excellence in everything we do.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Curriculum Section -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Our Curriculum</h2>
+                <div id="about-curriculum-badges" style="text-align: center;">
+                    <span class="curriculum-badge">📚 CBC Curriculum</span>
+                    <span class="curriculum-badge">💻 Digital Literacy</span>
+                    <span class="curriculum-badge">🇫🇷 French Language</span>
+                    <span class="curriculum-badge">⚽ Sports</span>
+                    <span class="curriculum-badge">🎭 Clubs & Activities</span>
+                    <span class="curriculum-badge">⛪ Christian Education</span>
+                </div>
+                <p id="about-curriculum-text" style="text-align: center; margin-top: 20px;">
+                    We follow the Competency Based Curriculum (CBC) which emphasizes practical learning, 
+                    creativity, and critical thinking. Our learners are prepared for Junior Secondary (Grade 7-9) 
+                    and beyond with a strong foundation in core subjects and essential life skills.
+                </p>
+            </div>
+        </section>
+
+        <!-- School History -->
+        <section class="section section-light">
+            <div class="container">
+                <h2 class="section-title">Our History</h2>
+                <div id="about-history" class="history-timeline" style="position: relative; padding-left: 30px;">
+                    <div style="position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--gold);"></div>
+                    <div style="margin-bottom: 25px; position: relative;">
+                        <div style="position: absolute; left: -38px; color: var(--maroon); font-size: 20px;">●</div>
+                        <div class="timeline-year" style="font-weight: bold; color: var(--maroon);">📅 2009 - School Established</div>
+                        <p>Shinners Precious School was established with a vision to provide quality, affordable education to the Embakasi community.</p>
+                    </div>
+                    <div style="margin-bottom: 25px; position: relative;">
+                        <div style="position: absolute; left: -38px; color: var(--maroon); font-size: 20px;">●</div>
+                        <div class="timeline-year" style="font-weight: bold; color: var(--maroon);">📈 Growth & Expansion</div>
+                        <p>Starting with Playgroup and PP1, the school has grown to offer education up to Grade 9, now serving over 500 learners.</p>
+                    </div>
+                    <div style="margin-bottom: 25px; position: relative;">
+                        <div style="position: absolute; left: -38px; color: var(--maroon); font-size: 20px;">●</div>
+                        <div class="timeline-year" style="font-weight: bold; color: var(--maroon);">🏆 Excellence in CBC</div>
+                        <p>The school is recognized for excellence in CBC implementation and holistic learner development.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Values -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Our Core Values</h2>
+                <div id="about-values" class="values-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                    <div class="value-card" style="text-align: center; padding: 20px; background: var(--white); border-radius: 10px; box-shadow: var(--shadow);">
+                        <div class="value-icon" style="font-size: 40px;">⭐</div>
+                        <h3>Excellence</h3>
+                        <p>Striving for the highest standards in academics and character.</p>
+                    </div>
+                    <div class="value-card" style="text-align: center; padding: 20px; background: var(--white); border-radius: 10px; box-shadow: var(--shadow);">
+                        <div class="value-icon" style="font-size: 40px;">🤝</div>
+                        <h3>Integrity</h3>
+                        <p>Honesty and transparency in all our dealings.</p>
+                    </div>
+                    <div class="value-card" style="text-align: center; padding: 20px; background: var(--white); border-radius: 10px; box-shadow: var(--shadow);">
+                        <div class="value-icon" style="font-size: 40px;">📏</div>
+                        <h3>Discipline</h3>
+                        <p>Instilling self-control and respect for others.</p>
+                    </div>
+                    <div class="value-card" style="text-align: center; padding: 20px; background: var(--white); border-radius: 10px; box-shadow: var(--shadow);">
+                        <div class="value-icon" style="font-size: 40px;">💡</div>
+                        <h3>Creativity</h3>
+                        <p>Encouraging innovation and critical thinking.</p>
+                    </div>
+                    <div class="value-card" style="text-align: center; padding: 20px; background: var(--white); border-radius: 10px; box-shadow: var(--shadow);">
+                        <div class="value-icon" style="font-size: 40px;">⛪</div>
+                        <h3>Faith</h3>
+                        <p>Nurturing spiritual growth and moral values.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Director's Message -->
+        <section class="section section-light">
+            <div class="container">
+                <h2 class="section-title">Message from the Director</h2>
+                <div class="director-section" style="display: grid; grid-template-columns: 1fr 2fr; gap: 40px; align-items: start;">
+                    <div class="director-photo" style="text-align: center;">
+                        <img id="about-director-photo" src="images/director-placeholder.jpg" alt="School Director" style="width: 100%; max-width: 250px; border-radius: 15px; box-shadow: var(--shadow);" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27250%27 height=%27250%27 viewBox=%270 0 250 250%27%3E%3Crect width=%27250%27 height=%27250%27 fill=%27%23800020%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dy=%27.3em%27 fill=%27white%27 font-size=%2716%27%3EDirector Photo%3C/text%3E%3C/svg%3E'">
+                        <p><strong id="about-director-name">Shem Oyugi</strong></p>
+                        <p id="about-director-title">Director, Shinners Precious School</p>
+                    </div>
+                    <div class="director-message" style="background: var(--gray-light); padding: 25px; border-radius: 15px; border-left: 5px solid var(--gold);">
+                        <h3>Welcome to Shinners Precious School</h3>
+                        <div id="about-director-message">
+                            <p>Dear Parents, Guardians, and Learners,</p>
+                            <p>It is my honor to welcome you to Shinners Precious School. We are committed to providing a nurturing environment where every child can thrive academically, socially, and spiritually.</p>
+                            <p>Our dedicated team of CBC-trained teachers works tirelessly to ensure that each learner reaches their full potential. We believe in holistic education that prepares our children not just for exams, but for life.</p>
+                            <p>As we continue to grow, we remain focused on our mission: to provide quality, affordable education that builds character and excellence.</p>
+                            <p>Thank you for entrusting your child to us. Together, we will build a bright future.</p>
+                        </div>
+                        <div id="about-director-signature" class="director-signature" style="margin-top: 20px; font-style: italic; color: var(--navy);">
+                            <p>Yours in education,</p>
+                            <p><strong>Shem Oyugi</strong><br>Director, Shinners Precious School</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Leadership Team Section -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">School Leadership</h2>
+                <div id="about-leadership" class="leadership-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px;">
+                    <div class="leader-card" style="background: var(--white); border-radius: 10px; overflow: hidden; text-align: center; box-shadow: var(--shadow);" data-leader="0">
+                        <img id="leader-img-0" src="images/director-placeholder.jpg" alt="Director" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27250%27 height=%27200%27 viewBox=%270 0 250 200%27%3E%3Crect width=%27250%27 height=%27200%27 fill=%27%23800020%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dy=%27.3em%27 fill=%27white%27%3EDirector%3C/text%3E%3C/svg%3E'">
+                        <h3 id="leader-name-0">Shem Oyugi</h3>
+                        <div class="leader-title" style="color: var(--gold); font-weight: bold;">Director</div>
+                    </div>
+                    <div class="leader-card" style="background: var(--white); border-radius: 10px; overflow: hidden; text-align: center; box-shadow: var(--shadow);" data-leader="1">
+                        <img id="leader-img-1" src="images/headteacher-placeholder.jpg" alt="Headteacher" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27250%27 height=%27200%27 viewBox=%270 0 250 200%27%3E%3Crect width=%27250%27 height=%27200%27 fill=%27%231F3A93%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dy=%27.3em%27 fill=%27white%27%3EHeadteacher%3C/text%3E%3C/svg%3E'">
+                        <h3 id="leader-name-1">Benard Ochanda</h3>
+                        <div class="leader-title" style="color: var(--gold); font-weight: bold;">Headteacher</div>
+                    </div>
+                    <div class="leader-card" style="background: var(--white); border-radius: 10px; overflow: hidden; text-align: center; box-shadow: var(--shadow);" data-leader="2">
+                        <img id="leader-img-2" src="images/deputy-placeholder.jpg" alt="Deputy Headteacher" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27250%27 height=%27200%27 viewBox=%270 0 250 200%27%3E%3Crect width=%27250%27 height=%27200%27 fill=%27%231F3A93%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dy=%27.3em%27 fill=%27white%27%3EDeputy%3C/text%3E%3C/svg%3E'">
+                        <h3 id="leader-name-2">[DEPUTY NAME]</h3>
+                        <div class="leader-title" style="color: var(--gold); font-weight: bold;">Deputy Headteacher</div>
+                    </div>
+                    <div class="leader-card" style="background: var(--white); border-radius: 10px; overflow: hidden; text-align: center; box-shadow: var(--shadow);" data-leader="3">
+                        <img id="leader-img-3" src="images/academic-placeholder.jpg" alt="Academic Coordinator" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27250%27 height=%27200%27 viewBox=%270 0 250 200%27%3E%3Crect width=%27250%27 height=%27200%27 fill=%27%231F3A93%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dy=%27.3em%27 fill=%27white%27%3EAcademic Coordinator%3C/text%3E%3C/svg%3E'">
+                        <h3 id="leader-name-3">[COORDINATOR NAME]</h3>
+                        <div class="leader-title" style="color: var(--gold); font-weight: bold;">Academic Coordinator</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- School Facilities Section -->
+        <section class="section section-light">
+            <div class="container">
+                <h2 class="section-title">Our Facilities</h2>
+                <div id="about-facilities" class="facilities-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                    <div class="facility-card" style="background: var(--white); padding: 20px; border-radius: 10px; text-align: center;">
+                        <div class="facility-icon" style="font-size: 40px;">💻</div>
+                        <h3>Computer Lab</h3>
+                        <p>Modern computers with internet access</p>
+                    </div>
+                    <div class="facility-card" style="background: var(--white); padding: 20px; border-radius: 10px; text-align: center;">
+                        <div class="facility-icon" style="font-size: 40px;">📚</div>
+                        <h3>Library</h3>
+                        <p>Well-stocked reading materials</p>
+                    </div>
+                    <div class="facility-card" style="background: var(--white); padding: 20px; border-radius: 10px; text-align: center;">
+                        <div class="facility-icon" style="font-size: 40px;">🚌</div>
+                        <h3>School Bus</h3>
+                        <p>Safe transport across Embakasi</p>
+                    </div>
+                    <div class="facility-card" style="background: var(--white); padding: 20px; border-radius: 10px; text-align: center;">
+                        <div class="facility-icon" style="font-size: 40px;">⚽</div>
+                        <h3>Playground</h3>
+                        <p>Safe outdoor play area</p>
+                    </div>
+                    <div class="facility-card" style="background: var(--white); padding: 20px; border-radius: 10px; text-align: center;">
+                        <div class="facility-icon" style="font-size: 40px;">🔬</div>
+                        <h3>CBC Learning Areas</h3>
+                        <p>Activity-based learning spaces</p>
+                    </div>
+                    <div class="facility-card" style="background: var(--white); padding: 20px; border-radius: 10px; text-align: center;">
+                        <div class="facility-icon" style="font-size: 40px;">🍎</div>
+                        <h3>Dining Area</h3>
+                        <p>Clean, spacious dining hall</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Why Choose Shinners Precious School?</h2>
+                <div id="about-why-choose" class="grid-3">
+                    <div class="card"><div class="card-content"><h3>💻 Modern CBC Curriculum</h3><p>Fully trained teachers implementing Competency Based Curriculum with Digital Literacy and French.</p></div></div>
+                    <div class="card"><div class="card-content"><h3>👩‍🏫 Qualified Teachers</h3><p>Experienced, passionate, and CBC-trained educators dedicated to each child's success.</p></div></div>
+                    <div class="card"><div class="card-content"><h3>🚌 Safe Transport</h3><p>Reliable school transport covering major routes in Embakasi and surrounding areas.</p></div></div>
+                    <div class="card"><div class="card-content"><h3>🍎 Affordable Meals</h3><p>Nutritious, balanced meals at an affordable cost (optional).</p></div></div>
+                    <div class="card"><div class="card-content"><h3>⛪ Christian Values</h3><p>Strong moral and spiritual foundation integrated into daily learning.</p></div></div>
+                    <div class="card"><div class="card-content"><h3>🏆 Holistic Development</h3><p>Sports, clubs, music, drama, and co-curricular activities for all-round growth.</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- School Statistics -->
+        <section class="section section-light">
+            <div class="container">
+                <h2 class="section-title">Our School at a Glance</h2>
+                <div id="about-stats" class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; text-align: center;">
+                    <div class="stat-card"><div class="stat-number">500+</div><div class="stat-label">Learners</div></div>
+                    <div class="stat-card"><div class="stat-number">CBC</div><div class="stat-label">Curriculum</div></div>
+                    <div class="stat-card"><div class="stat-number">PG-9</div><div class="stat-label">Classes Offered</div></div>
+                    <div class="stat-card"><div class="stat-number">Qualified</div><div class="stat-label">Teaching Staff</div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download Brochure -->
+        <section class="section" style="text-align: center;">
+            <div class="container">
+                <a id="about-brochure-link" href="assets/School-Brochure.pdf" class="btn-primary" download style="font-size: 18px; padding: 15px 30px;">
+                    📄 Download School Brochure (PDF)
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px;">
+                
+                <div>
+                    <h3 style="color: var(--gold);">Shinners Precious School</h3>
+                    <p>P.O. Box 40-0521, Embakasi</p>
+                    <p>Nairobi, Kenya</p>
+                    <p>📞 <span id="footer-phone">0720 994 337</span> / <span id="footer-phone2">0726 314 846</span></p>
+                    <p>✉️ <span id="footer-email">shinnersprecious@gmail.com</span></p>
+                </div>
+                
+                <div>
+                    <h3 style="color: var(--gold);">Quick Links</h3>
+                    <p><a href="admissions.html" style="color: white;">Admissions</a></p>
+                    <p><a href="fees.html" style="color: white;">Fee Structure</a></p>
+                    <p><a href="uniform.html" style="color: white;">Uniform Guide</a></p>
+                    <p><a href="gallery.html" style="color: white;">Gallery</a></p>
+                    <p><a href="staff.html" style="color: white;">Our Staff</a></p>
+                </div>
+                
+                <div>
+                    <h3 style="color: var(--gold);">School Hours</h3>
+                    <p>Monday - Friday: 8:00 AM - 4:00 PM</p>
+                    <p>Saturday: 9:00 AM - 12:00 PM (Office only)</p>
+                    <p>Sunday: Closed</p>
+                </div>
+                
+                <div>
+                    <h3 style="color: var(--gold);">Location</h3>
+                    <p>Embakasi, near Imara Daima</p>
+                    <p><a href="https://maps.google.com/?q=Embakasi+Nairobi" target="_blank" style="color: #D4AF37;">View on Google Maps →</a></p>
+                    
+                    <h3 style="color: var(--gold); margin-top: 20px;">Follow Us</h3>
+                    <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+                        <a href="#" style="color: white; text-decoration: none;">📘 Facebook</a>
+                        <a href="#" style="color: white; text-decoration: none;">📸 Instagram</a>
+                        <a href="https://wa.me/254720994337" style="color: white; text-decoration: none;">💬 WhatsApp</a>
+                        <a href="#" style="color: white; text-decoration: none;">🎵 TikTok</a>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year">2026</span> Shinners Precious School. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========== WHATSAPP FLOAT ========== -->
+    <a href="https://wa.me/254720994337?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20Shinners%20Precious%20School." 
+       class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+        💬 <span>Admissions Help</span>
+    </a>
+
+    <!-- ========== BACK TO TOP ========== -->
+    <button id="back-to-top">↑ Page Up</button>
+
+    <script src="js/main.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/about.js"></script>
+</body>
+</html>

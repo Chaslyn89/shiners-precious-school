@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Shinners Precious School Photo Gallery - See our school facilities, classrooms, students in action, sports events, and special moments.">
+    <meta property="og:title" content="Gallery | Shinners Precious School">
+    <meta property="og:description" content="Photo gallery showcasing our school facilities, students, and events.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="images/logo.png">
+    <title>Gallery | Shinners Precious School | Photo Gallery Embakasi</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <style>
+        .gallery-category {
+            margin-bottom: 50px;
+        }
+        .gallery-category h3 {
+            color: var(--maroon);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--gold);
+            display: inline-block;
+        }
+        .gallery-category .photo-count {
+            font-size: 14px;
+            color: var(--gray-dark);
+            margin-left: 15px;
+            font-weight: normal;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .gallery-item {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        .gallery-caption {
+            padding: 15px;
+            text-align: center;
+            background: var(--white);
+        }
+        .gallery-caption p {
+            margin: 0;
+            color: var(--gray-dark);
+            font-weight: 500;
+        }
+        
+        /* Filter Buttons */
+        .filter-container {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .filter-btn {
+            background: var(--gray-light);
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .filter-btn.active {
+            background: var(--maroon);
+            color: white;
+        }
+        .filter-btn:hover {
+            background: var(--gold);
+            color: var(--maroon-dark);
+        }
+        
+        /* Featured Album */
+        .featured-album {
+            background: var(--gray-light);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            align-items: center;
+        }
+        .featured-album-image {
+            flex: 1;
+            min-width: 200px;
+        }
+        .featured-album-image img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .featured-album-content {
+            flex: 2;
+        }
+        .featured-album-content h3 {
+            color: var(--maroon);
+            margin-bottom: 10px;
+        }
+        .featured-badge {
+            background: var(--gold);
+            color: var(--maroon-dark);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        
+        /* Lightbox */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 2000;
+            cursor: pointer;
+        }
+        .lightbox-image {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .lightbox-prev, .lightbox-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 20px;
+        }
+        .lightbox-prev { left: 20px; }
+        .lightbox-next { right: 20px; }
+        .lightbox-prev:hover, .lightbox-next:hover, .lightbox-close:hover {
+            color: var(--gold);
+        }
+        
+        /* Video Section */
+        .video-section {
+            margin-top: 50px;
+        }
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        .video-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        .video-card video {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .video-card .video-caption {
+            padding: 15px;
+            text-align: center;
+        }
+        .info-note {
+            background: #fff3cd;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+            .gallery-item img {
+                height: 160px;
+            }
+            .featured-album {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Fix navbar overflow - dropdown fix */
+        .navbar,
+        header,
+        nav {
+            overflow: visible !important;
+        }
+        
+        /* Dropdown styles - NO YELLOW HIGHLIGHTING */
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-content {
+            display: none;
+            flex-direction: column;
+            background: var(--maroon);
+            min-width: 160px;
+            border-radius: 8px;
+            margin-top: 5px;
+            overflow: hidden;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .dropdown-content a {
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            display: block;
+            background: var(--maroon);
+            transition: all 0.3s;
+        }
+        .dropdown-content a:hover {
+            background: var(--gold);
+            color: var(--maroon-dark);
+        }
+        .dropdown-content a:focus,
+        .dropdown-content a:active,
+        .dropdown-content a:focus-visible {
+            background: var(--maroon);
+            color: white;
+            outline: none;
+        }
+        @media (min-width: 769px) {
+            .dropdown:hover .dropdown-content {
+                display: flex;
+            }
+        }
+        @media (max-width: 768px) {
+            .dropdown-content {
+                position: static;
+                background: var(--maroon-light);
+                margin-top: 5px;
+                box-shadow: none;
+            }
+            .dropdown.active .dropdown-content {
+                display: flex;
+            }
+            .dropdown > a::after {
+                content: " ▼";
+                font-size: 10px;
+            }
+            .dropdown-content a {
+                color: white !important;
+                background: var(--maroon-light) !important;
+            }
+        }
+        
+        /* Active navigation link */
+        .nav-links li a.active {
+            color: var(--gold);
+            border-bottom: 2px solid var(--gold);
+        }
+        
+        /* WhatsApp float button - show text on ALL devices */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50px;
+            width: auto;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s;
+        }
+        .whatsapp-float:hover {
+            background-color: #20b859;
+            transform: scale(1.05);
+        }
+        @media (max-width: 480px) {
+            .whatsapp-float {
+                padding: 8px 14px;
+                border-radius: 50px;
+                font-size: 12px;
+                bottom: 15px;
+                right: 15px;
+            }
+            .whatsapp-float span {
+                display: inline !important;
+                font-size: 12px;
+            }
+            .whatsapp-float::before {
+                content: none;
+            }
+        }
+        
+        /* Back to top button with label */
+        #back-to-top {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            background: var(--maroon);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            width: auto;
+            padding: 10px 18px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 100;
+            display: none;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        #back-to-top:hover {
+            background: var(--maroon-dark);
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== ANNOUNCEMENT BAR ========== -->
+    <div id="announcement-bar" class="announcement-bar" style="display: flex; justify-content: space-between; align-items: center;">
+        <span>📸 School Photo Gallery | See our facilities, students, and events | Call <span id="header-phone">0720 994 337</span></span>
+        <span id="close-announcement" aria-label="Close announcement" style="cursor: pointer; font-size: 20px; padding: 0 10px;">&times;</span>
+    </div>
+
+    <!-- ========== HEADER & NAVIGATION ========== -->
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <img src="images/logo.png" alt="Shinners Precious School Logo" loading="lazy" onerror="this.style.display='none'">
+                <div class="logo-text">
+                    <h1>SHINNERS PRECIOUS SCHOOL</h1>
+                    <p>Excellence in Education | Playgroup - Grade 9</p>
+                </div>
+            </div>
+            
+            <div class="hamburger" id="hamburger" role="button" aria-label="Menu" tabindex="0">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <nav aria-label="Main navigation">
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="academics.html">Academics</a></li>
+                    <li><a href="admissions.html">Admissions</a></li>
+                    <li><a href="fees.html">Fees</a></li>
+                    <li><a href="gallery.html" class="active">Gallery</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li class="dropdown" id="moreDropdown">
+                        <a href="#" id="moreLink">More ▼</a>
+                        <div class="dropdown-content">
+                            <a href="uniform.html">Uniform</a>
+                            <a href="school-life.html">Life</a>
+                            <a href="news.html">News</a>
+                            <a href="staff.html">Staff</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1 id="gallery-hero-title">Photo Gallery</h1>
+                <p id="gallery-hero-subtitle">Explore life at Shinners Precious School</p>
+            </div>
+        </section>
+
+        <!-- Filter Buttons -->
+        <div class="container">
+            <div class="filter-container" id="gallery-filters">
+                <button class="filter-btn active" data-filter="all">📸 All</button>
+                <button class="filter-btn" data-filter="facilities">🏫 Facilities</button>
+                <button class="filter-btn" data-filter="classes">📚 Classes</button>
+                <button class="filter-btn" data-filter="events">🎉 Events</button>
+                <button class="filter-btn" data-filter="uniform">👕 Uniform</button>
+                <button class="filter-btn" data-filter="staff">👨‍🏫 Staff</button>
+            </div>
+        </div>
+
+        <!-- Featured Album -->
+        <div class="container">
+            <div class="featured-album" id="gallery-featured">
+                <div class="featured-album-image">
+                    <img id="featured-image" src="images/featured-sports-day.jpg" alt="2026 Sports Day" onerror="this.src='images/placeholder-school.jpg'">
+                </div>
+                <div class="featured-album-content">
+                    <span class="featured-badge">📸 FEATURED ALBUM</span>
+                    <h3 id="featured-title">2026 Sports Day</h3>
+                    <p id="featured-description">Our annual Sports Day was filled with energy, teamwork, and great performances. Students competed in football, netball, athletics, and fun games.</p>
+                    <p id="featured-meta"><strong>15 Photos | 2 Videos</strong></p>
+                    <a href="#sports-gallery" class="btn-secondary" style="padding: 8px 20px;">View Album →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category 1: School Facilities -->
+        <section class="section" id="facilities-gallery">
+            <div class="container">
+                <div class="gallery-category" data-category="facilities">
+                    <h3>🏫 School Facilities <span class="photo-count" id="facilities-count">(6 Photos)</span></h3>
+                    <div class="gallery-grid" id="facilities-grid">
+                        <div class="gallery-item"><img src="images/facility-building.jpg" alt="School Building" data-category="facilities" onerror="this.src='images/placeholder-school.jpg'"><div class="gallery-caption"><p>School Building Exterior</p></div></div>
+                        <div class="gallery-item"><img src="images/facility-classroom.jpg" alt="Classroom" data-category="facilities" onerror="this.src='images/placeholder-classroom.jpg'"><div class="gallery-caption"><p>Modern Classroom</p></div></div>
+                        <div class="gallery-item"><img src="images/facility-library.jpg" alt="Library" data-category="facilities" onerror="this.src='images/placeholder-library.jpg'"><div class="gallery-caption"><p>School Library</p></div></div>
+                        <div class="gallery-item"><img src="images/facility-computerlab.jpg" alt="Computer Lab" data-category="facilities" onerror="this.src='images/placeholder-computerlab.jpg'"><div class="gallery-caption"><p>Computer Lab</p></div></div>
+                        <div class="gallery-item"><img src="images/facility-playground.jpg" alt="Playground" data-category="facilities" onerror="this.src='images/placeholder-playground.jpg'"><div class="gallery-caption"><p>Playground</p></div></div>
+                        <div class="gallery-item"><img src="images/facility-bus.jpg" alt="School Bus" data-category="facilities" onerror="this.src='images/placeholder-bus.jpg'"><div class="gallery-caption"><p>School Transport</p></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Category 2: Students in Class -->
+        <section class="section section-light" id="classes-gallery">
+            <div class="container">
+                <div class="gallery-category" data-category="classes">
+                    <h3>📚 Students in Class <span class="photo-count" id="classes-count">(8 Photos)</span></h3>
+                    <div class="gallery-grid" id="classes-grid">
+                        <div class="gallery-item"><img src="images/students-class1.jpg" alt="Students Learning" data-category="classes" onerror="this.src='images/placeholder-classroom.jpg'"><div class="gallery-caption"><p>Active Classroom Learning</p></div></div>
+                        <div class="gallery-item"><img src="images/students-class2.jpg" alt="Digital Literacy Class" data-category="classes" onerror="this.src='images/placeholder-computerlab.jpg'"><div class="gallery-caption"><p>Digital Literacy Lesson</p></div></div>
+                        <div class="gallery-item"><img src="images/students-french.jpg" alt="French Class" data-category="classes" onerror="this.src='images/placeholder-classroom.jpg'"><div class="gallery-caption"><p>French Language Class</p></div></div>
+                        <div class="gallery-item"><img src="images/students-group.jpg" alt="Group Learning" data-category="classes" onerror="this.src='images/placeholder-classroom.jpg'"><div class="gallery-caption"><p>Group Discussion</p></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Category 3: Events & Activities -->
+        <section class="section" id="events-gallery">
+            <div class="container">
+                <div class="gallery-category" data-category="events">
+                    <h3>🎉 Events & Activities <span class="photo-count" id="events-count">(8 Photos)</span></h3>
+                    <div class="gallery-grid" id="events-grid">
+                        <div class="gallery-item"><img src="images/event-sports.jpg" alt="Sports Day" data-category="events" onerror="this.src='images/placeholder-event.jpg'"><div class="gallery-caption"><p>Sports Day</p></div></div>
+                        <div class="gallery-item"><img src="images/event-graduation.jpg" alt="Graduation" data-category="events" onerror="this.src='images/placeholder-event.jpg'"><div class="gallery-caption"><p>Graduation Ceremony</p></div></div>
+                        <div class="gallery-item"><img src="images/event-prizegiving.jpg" alt="Prize Giving" data-category="events" onerror="this.src='images/placeholder-event.jpg'"><div class="gallery-caption"><p>Prize Giving Day</p></div></div>
+                        <div class="gallery-item"><img src="images/event-cultural.jpg" alt="Cultural Day" data-category="events" onerror="this.src='images/placeholder-event.jpg'"><div class="gallery-caption"><p>Cultural Day</p></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Category 4: Uniform Showcase -->
+        <section class="section section-light" id="uniform-gallery">
+            <div class="container">
+                <div class="gallery-category" data-category="uniform">
+                    <h3>👕 Uniform Showcase <span class="photo-count" id="uniform-count">(2 Photos)</span></h3>
+                    <div class="gallery-grid" id="uniform-grid">
+                        <div class="gallery-item"><img src="images/uniform-maroon.jpg" alt="Maroon Uniform" data-category="uniform" onerror="this.src='images/placeholder-uniform.jpg'"><div class="gallery-caption"><p>Maroon Uniform (Playgroup - Grade 6)</p></div></div>
+                        <div class="gallery-item"><img src="images/uniform-navy.jpg" alt="Navy Uniform" data-category="uniform" onerror="this.src='images/placeholder-uniform.jpg'"><div class="gallery-caption"><p>Navy Blue Uniform (Grade 7 - 9)</p></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Category 5: Staff & Leadership -->
+        <section class="section" id="staff-gallery">
+            <div class="container">
+                <div class="gallery-category" data-category="staff">
+                    <h3>👨‍🏫 Staff & Leadership <span class="photo-count" id="staff-count">(3 Photos)</span></h3>
+                    <div class="gallery-grid" id="staff-grid">
+                        <div class="gallery-item"><img src="images/staff-director.jpg" alt="School Director" data-category="staff" onerror="this.src='images/placeholder-staff.jpg'"><div class="gallery-caption"><p>School Director</p></div></div>
+                        <div class="gallery-item"><img src="images/staff-teachers.jpg" alt="Teaching Staff" data-category="staff" onerror="this.src='images/placeholder-staff.jpg'"><div class="gallery-caption"><p>Our Dedicated Teachers</p></div></div>
+                        <div class="gallery-item"><img src="images/staff-support.jpg" alt="Support Staff" data-category="staff" onerror="this.src='images/placeholder-staff.jpg'"><div class="gallery-caption"><p>Support Staff</p></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Section -->
+        <section class="section section-light">
+            <div class="container">
+                <div class="video-section">
+                    <h2 class="section-title">School Videos</h2>
+                    <div class="video-grid" id="gallery-videos">
+                        <div class="video-card">
+                            <video controls poster="images/video-poster1.jpg">
+                                <source src="videos/school-tour.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <div class="video-caption"><p>🎬 School Tour</p></div>
+                        </div>
+                        <div class="video-card">
+                            <video controls poster="images/video-poster2.jpg">
+                                <source src="videos/graduation-2026.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <div class="video-caption"><p>🎓 Graduation Ceremony 2026</p></div>
+                        </div>
+                        <div class="video-card">
+                            <video controls poster="images/video-poster3.jpg">
+                                <source src="videos/sports-day.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <div class="video-caption"><p>⚽ Sports Day Highlights</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="section" style="text-align: center;">
+            <div class="container">
+                <h2 class="section-title">Experience Shinners Precious School</h2>
+                <p>The best way to experience our school is to visit us in person.</p>
+                <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 20px;">
+                    <a href="https://wa.me/254720994337?text=Hello%2C%20I%20would%20like%20to%20book%20a%20school%20visit." class="btn-primary" target="_blank">📅 Book a School Visit</a>
+                    <a href="admissions.html" class="btn-secondary">📝 Enroll Your Child</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Photo Consent Note -->
+        <section class="section section-light" style="text-align: center;">
+            <div class="container">
+                <p style="font-size: 12px; color: #666;">📸 All photos used with parental consent. For inquiries about photo usage, contact the school administration.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px;">
+                
+                <div>
+                    <h3 style="color: var(--gold);">Shinners Precious School</h3>
+                    <p>P.O. Box 40-0521, Embakasi</p>
+                    <p>Nairobi, Kenya</p>
+                    <p>📞 <span id="footer-phone">0720 994 337</span> / <span id="footer-phone2">0726 314 846</span></p>
+                    <p>✉️ <span id="footer-email">shinnersprecious@gmail.com</span></p>
+                </div>
+                
+                <div>
+                    <h3 style="color: var(--gold);">Quick Links</h3>
+                    <p><a href="admissions.html" style="color: white;">Admissions</a></p>
+                    <p><a href="fees.html" style="color: white;">Fee Structure</a></p>
+                    <p><a href="uniform.html" style="color: white;">Uniform Guide</a></p>
+                    <p><a href="gallery.html" style="color: white;">Gallery</a></p>
+                    <p><a href="staff.html" style="color: white;">Our Staff</a></p>
+                </div>
+                
+                <div>
+                    <h3 style="color: var(--gold);">School Hours</h3>
+                    <p>Monday - Friday: 8:00 AM - 4:00 PM</p>
+                    <p>Saturday: 9:00 AM - 12:00 PM (Office only)</p>
+                    <p>Sunday: Closed</p>
+                </div>
+                
+                <div>
+                    <h3 style="color: var(--gold);">Location</h3>
+                    <p>Embakasi, near Imara Daima</p>
+                    <p><a href="https://maps.google.com/?q=Embakasi+Nairobi" target="_blank" style="color: #D4AF37;">View on Google Maps →</a></p>
+                    
+                    <h3 style="color: var(--gold); margin-top: 20px;">Follow Us</h3>
+                    <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+                        <a href="#" style="color: white; text-decoration: none;">📘 Facebook</a>
+                        <a href="#" style="color: white; text-decoration: none;">📸 Instagram</a>
+                        <a href="https://wa.me/254720994337" style="color: white; text-decoration: none;">💬 WhatsApp</a>
+                        <a href="#" style="color: white; text-decoration: none;">🎵 TikTok</a>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year">2026</span> Shinners Precious School. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========== WHATSAPP FLOAT ========== -->
+    <a href="https://wa.me/254720994337?text=Hello%2C%20I%20would%20like%20to%20see%20more%20photos%20of%20Shinners%20Precious%20School." 
+       class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+        💬 <span>Admissions Help</span>
+    </a>
+
+    <!-- ========== BACK TO TOP ========== -->
+    <button id="back-to-top">↑ Page Up</button>
+
+    <script src="js/main.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/gallery.js"></script>
+</body>
+</html>

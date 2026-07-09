@@ -1,0 +1,26 @@
+{
+    "hero_title": "Contact Us",
+    "hero_subtitle": "We'd love to hear from you. Reach out with any questions.",
+    "phone": "0720 994 337",
+    "phone2": "0726 314 846",
+    "email": "shinnersprecious@gmail.com",
+    "admissions_person": "Admissions Office",
+    "admissions_phone": "0720 994 337",
+    "emergency_contact": "0720 994 337",
+    "form_endpoint": "https://formspree.io/f/mykaobba",
+    "hours": [
+        { "day": "Office Hours", "time": "8:00 AM - 4:00 PM (Mon-Fri)" },
+        { "day": "Learning Hours", "time": "7:30 AM - 3:30 PM (Mon-Fri)" },
+        { "day": "Saturday", "time": "9:00 AM - 12:00 PM (Office only)" },
+        { "day": "Sunday", "time": "Closed" },
+        { "day": "Public Holidays", "time": "Closed" }
+    ],
+    "faqs": [
+        { "question": "Do you admit mid-term transfers?", "answer": "Yes, mid-term transfers are accepted subject to vacancy availability." },
+        { "question": "What grades do you offer?", "answer": "Playgroup to Grade 9 (CBC Curriculum)." },
+        { "question": "How can I get fee information?", "answer": "Call or WhatsApp the admissions office at 0720 994 337." },
+        { "question": "Do you provide transport?", "answer": "Yes, transport is available. Contact the school office for routes and availability." },
+        { "question": "Do you provide meals?", "answer": "Yes, meals are available at an optional cost of KSh 3,900 per term." },
+        { "question": "Is there a registration fee?", "answer": "Yes, admission fee is KSh 1,000 (once) for Playgroup-Grade 6, and KSh 1,500 for Grade 7-9." }
+    ]
+}

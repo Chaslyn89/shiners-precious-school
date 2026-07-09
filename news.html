@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Shinners Precious School News & Events - Stay updated with the latest announcements, term dates, school events, and important notices.">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="News & Events | Shinners Precious School">
+    <meta property="og:description" content="Latest news, events, and announcements from Shinners Precious School.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="images/logo.png">
+    <meta property="og:url" content="https://shinnersprecious.sc.ke/news.html">
+    <title>News & Events | Shinners Precious School</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "name": "Shinners Precious School News",
+        "url": "https://shinnersprecious.sc.ke/news.html",
+        "publisher": {
+            "@type": "School",
+            "name": "Shinners Precious School"
+        }
+    }
+    </script>
+    
+    <style>
+        .news-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+        }
+        .news-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            transition: transform 0.3s;
+            padding: 0;
+        }
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+        .news-content {
+            padding: 25px;
+        }
+        .news-category {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        .news-category.academic {
+            background: #1F3A93;
+            color: white;
+        }
+        .news-category.co-curricular {
+            background: #D4AF37;
+            color: #5a0016;
+        }
+        .news-category.school-news {
+            background: #800020;
+            color: white;
+        }
+        .news-category.admissions {
+            background: #25D366;
+            color: white;
+        }
+        .news-category.achievement {
+            background: #FF6B00;
+            color: white;
+        }
+        .news-date {
+            color: var(--gray-dark);
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .news-title {
+            font-size: 1.4rem;
+            color: var(--maroon);
+            margin-bottom: 15px;
+        }
+        .news-excerpt {
+            color: var(--gray-dark);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        /* Sidebar */
+        .sidebar-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+        .sidebar-title {
+            color: var(--maroon);
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--gold);
+        }
+        
+        .term-card {
+            background: linear-gradient(135deg, var(--maroon), var(--navy));
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .term-card h3 {
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+        .term-dates {
+            text-align: left;
+            margin-top: 15px;
+        }
+        .term-dates p {
+            margin: 10px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .upcoming-event {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--gray-medium);
+        }
+        .event-date {
+            background: var(--navy);
+            color: white;
+            text-align: center;
+            padding: 8px 12px;
+            border-radius: 10px;
+            min-width: 60px;
+        }
+        .event-day {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .event-month {
+            font-size: 0.7rem;
+        }
+        .event-info h4 {
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+        .event-info p {
+            font-size: 0.85rem;
+            color: var(--gray-dark);
+        }
+        .announcement-item {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--gray-medium);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .announcement-item:last-child {
+            border-bottom: none;
+        }
+        .announcement-bullet {
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+        .category-list {
+            list-style: none;
+            padding: 0;
+        }
+        .category-list li {
+            margin-bottom: 12px;
+        }
+        .category-list a {
+            text-decoration: none;
+            color: var(--gray-dark);
+            display: flex;
+            justify-content: space-between;
+            transition: color 0.3s;
+        }
+        .category-list a:hover {
+            color: var(--maroon);
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+        .page-btn {
+            background: var(--gray-light);
+            color: var(--gray-dark);
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .page-btn.active {
+            background: var(--maroon);
+            color: white;
+        }
+        .page-btn:hover:not(.active) {
+            background: var(--gold);
+            color: var(--maroon-dark);
+        }
+        
+        .archive-list {
+            list-style: none;
+            padding: 0;
+        }
+        .archive-list li {
+            margin-bottom: 10px;
+        }
+        .archive-list a {
+            text-decoration: none;
+            color: var(--gray-dark);
+        }
+        .archive-list a:hover {
+            color: var(--maroon);
+        }
+        
+        .info-note {
+            background: #fff3cd;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            text-align: center;
+        }
+        
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .cta-whatsapp {
+            background: #25D366;
+            color: white;
+        }
+        .cta-whatsapp:hover {
+            background: #20b859;
+            transform: scale(1.02);
+        }
+        
+        .loading-text {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+        .error-text {
+            text-align: center;
+            padding: 40px;
+            color: #dc3545;
+        }
+        .empty-text {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+        
+        @media (max-width: 768px) {
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+            .news-image {
+                height: 180px;
+            }
+        }
+
+        .navbar,
+        header,
+        nav {
+            overflow: visible !important;
+        }
+        
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-content {
+            display: none;
+            flex-direction: column;
+            background: var(--maroon);
+            min-width: 160px;
+            border-radius: 8px;
+            margin-top: 5px;
+            overflow: hidden;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .dropdown-content a {
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            display: block;
+            background: var(--maroon);
+            transition: all 0.3s;
+        }
+        .dropdown-content a:hover {
+            background: var(--gold);
+            color: var(--maroon-dark);
+        }
+        .dropdown-content a:focus,
+        .dropdown-content a:active,
+        .dropdown-content a:focus-visible {
+            background: var(--maroon);
+            color: white;
+            outline: none;
+        }
+        @media (min-width: 769px) {
+            .dropdown:hover .dropdown-content {
+                display: flex;
+            }
+        }
+        @media (max-width: 768px) {
+            .dropdown-content {
+                position: static;
+                background: var(--maroon-light);
+                margin-top: 5px;
+                box-shadow: none;
+            }
+            .dropdown.active .dropdown-content {
+                display: flex;
+            }
+            .dropdown > a::after {
+                content: " ▼";
+                font-size: 10px;
+            }
+            .dropdown-content a {
+                color: white !important;
+                background: var(--maroon-light) !important;
+            }
+        }
+        
+        .nav-links li a.active {
+            color: var(--gold);
+            border-bottom: 2px solid var(--gold);
+        }
+        
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50px;
+            width: auto;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s;
+        }
+        .whatsapp-float:hover {
+            background-color: #20b859;
+            transform: scale(1.05);
+        }
+        @media (max-width: 480px) {
+            .whatsapp-float {
+                padding: 8px 14px;
+                border-radius: 50px;
+                font-size: 12px;
+                bottom: 15px;
+                right: 15px;
+            }
+            .whatsapp-float span {
+                display: inline !important;
+                font-size: 12px;
+            }
+            .whatsapp-float::before {
+                content: none;
+            }
+        }
+        
+        #back-to-top {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            background: var(--maroon);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            width: auto;
+            padding: 10px 18px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 100;
+            display: none;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        #back-to-top:hover {
+            background: var(--maroon-dark);
+            transform: translateY(-3px);
+        }
+
+        .social-footer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 5px;
+        }
+        .social-footer a {
+            color: white;
+            text-decoration: none;
+            font-size: 13px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s;
+            padding: 4px 0;
+        }
+        .social-footer a:hover {
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="announcement-bar" class="announcement-bar" style="display: flex; justify-content: space-between; align-items: center;">
+        <span>📢 Latest News: Check back regularly for updates | Admissions Ongoing | Call <span id="header-phone">0720 994 337</span></span>
+        <span id="close-announcement" aria-label="Close announcement" style="cursor: pointer; font-size: 20px; padding: 0 10px;">&times;</span>
+    </div>
+
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <img src="images/logo.png" alt="Shinners Precious School Logo" loading="lazy" onerror="this.style.display='none'">
+                <div class="logo-text">
+                    <h1>SHINNERS PRECIOUS SCHOOL</h1>
+                    <p>Excellence in Education | Playgroup - Grade 9</p>
+                </div>
+            </div>
+            
+            <div class="hamburger" id="hamburger" role="button" aria-label="Menu" tabindex="0">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <nav aria-label="Main navigation">
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="academics.html">Academics</a></li>
+                    <li><a href="admissions.html">Admissions</a></li>
+                    <li><a href="fees.html">Fees</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li class="dropdown" id="moreDropdown">
+                        <a href="#" id="moreLink">More ▼</a>
+                        <div class="dropdown-content">
+                            <a href="uniform.html">Uniform</a>
+                            <a href="school-life.html">Life</a>
+                            <a href="news.html" class="active">News</a>
+                            <a href="staff.html">Staff</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1 id="news-hero-title">News & Events</h1>
+                <p id="news-hero-subtitle">Stay updated with the latest happenings at Shinners Precious School</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="news-grid">
+                    
+                    <!-- Main News Container -->
+                    <div id="news-container">
+                        <div class="loading-text">⏳ Loading news...</div>
+                    </div>
+
+                    <!-- Sidebar -->
+                    <div>
+                        <!-- Term Card -->
+                        <div class="sidebar-card term-card">
+                            <h3>📅 TERM 2 2026</h3>
+                            <div class="term-dates" id="news-term-dates">
+                                <p><strong>Opening Date:</strong> April 27, 2026</p>
+                                <p><strong>Mid-Term Break:</strong> June 24-28, 2026</p>
+                                <p><strong>Closing Date:</strong> July 31, 2026</p>
+                                <p><strong>Next Holiday:</strong> Aug 3-21, 2026</p>
+                            </div>
+                            <div class="info-note" style="background: rgba(255,255,255,0.1); padding: 10px; border-radius: 8px; margin-top: 15px; font-size: 12px;">
+                                📌 According to Ministry of Education calendar
+                            </div>
+                        </div>
+
+                        <!-- Upcoming Events -->
+                        <div class="sidebar-card">
+                            <h3 class="sidebar-title">📅 Upcoming Events</h3>
+                            <div id="news-upcoming-events">
+                                <div class="upcoming-event">
+                                    <div class="event-date"><div class="event-day">24</div><div class="event-month">JUN</div></div>
+                                    <div class="event-info"><h4>Mid-Term Break Begins</h4><p>School closes for half-term</p></div>
+                                </div>
+                                <div class="upcoming-event">
+                                    <div class="event-date"><div class="event-day">28</div><div class="event-month">JUN</div></div>
+                                    <div class="event-info"><h4>Mid-Term Break Ends</h4><p>Learners return to school</p></div>
+                                </div>
+                                <div class="upcoming-event">
+                                    <div class="event-date"><div class="event-day">31</div><div class="event-month">JUL</div></div>
+                                    <div class="event-info"><h4>Term 2 Closes</h4><p>End of second term</p></div>
+                                </div>
+                                <div class="upcoming-event">
+                                    <div class="event-date"><div class="event-day">3</div><div class="event-month">AUG</div></div>
+                                    <div class="event-info"><h4>August Holiday Begins</h4><p>3-week holiday</p></div>
+                                </div>
+                            </div>
+                            <div class="info-note" style="margin-top: 15px;">
+                                📌 <strong>Note:</strong> Dates are subject to change. Confirm with school office.
+                            </div>
+                        </div>
+
+                        <!-- Quick Announcements -->
+                        <div class="sidebar-card">
+                            <h3 class="sidebar-title">📢 Quick Announcements</h3>
+                            <div id="news-announcements">
+                                <div class="announcement-item"><span class="announcement-bullet">📌</span><span>Mid-Term Break: June 24-28</span></div>
+                                <div class="announcement-item"><span class="announcement-bullet">📌</span><span>Fee payment deadline: End of June</span></div>
+                                <div class="announcement-item"><span class="announcement-bullet">📌</span><span>2026 Admissions ongoing - Limited slots</span></div>
+                                <div class="announcement-item"><span class="announcement-bullet">📌</span><span>School transport available - Contact office</span></div>
+                            </div>
+                        </div>
+
+                        <!-- Categories -->
+                        <div class="sidebar-card">
+                            <h3 class="sidebar-title">📂 Categories</h3>
+                            <ul class="category-list">
+                                <li><a href="#">📚 Academic <span id="cat-academic">0</span></a></li>
+                                <li><a href="#">🏫 School News <span id="cat-school">0</span></a></li>
+                                <li><a href="#">⚽ Co-Curricular <span id="cat-co">0</span></a></li>
+                                <li><a href="#">📝 Admissions <span id="cat-admissions">0</span></a></li>
+                                <li><a href="#">🏆 Achievements <span id="cat-achievement">0</span></a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Archives -->
+                        <div class="sidebar-card">
+                            <h3 class="sidebar-title">📁 Archives</h3>
+                            <ul class="archive-list" id="news-archives">
+                                <li><a href="#">June 2026</a></li>
+                                <li><a href="#">May 2026</a></li>
+                                <li><a href="#">April 2026</a></li>
+                                <li><a href="#">January 2026</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- WhatsApp -->
+                        <div class="sidebar-card">
+                            <h3 class="sidebar-title">✉️ Stay Updated</h3>
+                            <p>For the latest updates, follow us on WhatsApp or call the school office.</p>
+                            <a href="https://wa.me/254720994337" class="cta-btn cta-whatsapp" style="display: block; text-align: center; padding: 12px; border-radius: 50px; text-decoration: none; color: white; background: #25D366;">💬 WhatsApp Us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px;">
+                <div>
+                    <h3 style="color: var(--gold);">Shinners Precious School</h3>
+                    <p>P.O. Box 40-0521, Embakasi</p>
+                    <p>Nairobi, Kenya</p>
+                    <p>📞 <span id="footer-phone">0720 994 337</span> / <span id="footer-phone2">0726 314 846</span></p>
+                    <p>✉️ <span id="footer-email">shinnersprecious@gmail.com</span></p>
+                </div>
+                <div>
+                    <h3 style="color: var(--gold);">Quick Links</h3>
+                    <p><a href="admissions.html" style="color: white;">Admissions</a></p>
+                    <p><a href="fees.html" style="color: white;">Fee Structure</a></p>
+                    <p><a href="uniform.html" style="color: white;">Uniform Guide</a></p>
+                    <p><a href="gallery.html" style="color: white;">Gallery</a></p>
+                    <p><a href="staff.html" style="color: white;">Our Staff</a></p>
+                </div>
+                <div>
+                    <h3 style="color: var(--gold);">School Hours</h3>
+                    <p>Monday - Friday: 8:00 AM - 4:00 PM</p>
+                    <p>Saturday: 9:00 AM - 12:00 PM (Office only)</p>
+                    <p>Sunday: Closed</p>
+                </div>
+                <div>
+                    <h3 style="color: var(--gold);">Location</h3>
+                    <p>Embakasi, near Imara Daima</p>
+                    <p><a href="https://maps.google.com/?q=Embakasi+Nairobi" target="_blank" style="color: #D4AF37;">View on Google Maps →</a></p>
+                    
+                    <h3 style="color: var(--gold); margin-top: 20px;">Follow Us</h3>
+                    <div class="social-footer">
+                        <a href="#">📘 Facebook</a>
+                        <a href="#">📸 Instagram</a>
+                        <a href="https://wa.me/254720994337">💬 WhatsApp</a>
+                        <a href="#">🎵 TikTok</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year">2026</span> Shinners Precious School. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/254720994337?text=Hello%2C%20I%20have%20a%20question%20about%20Shinners%20Precious%20School." 
+       class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+        💬 <span>Admissions Help</span>
+    </a>
+
+    <button id="back-to-top">↑ Page Up</button>
+
+    <script src="js/main.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/news.js"></script>
+</body>
+</html>

@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Admissions at Shinners Precious School - Join our CBC school from Playgroup to Grade 9. Simple admission process, requirements, and online inquiry form.">
+    <meta property="og:title" content="Admissions | Shinners Precious School">
+    <meta property="og:description" content="Enroll your child at Shinners Precious School. Playgroup to Grade 9. Simple admission process and requirements.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="images/logo.png">
+    <title>Admissions | Shinners Precious School | Enroll Today</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <style>
+        .step-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 40px 0;
+        }
+        .step {
+            flex: 1;
+            min-width: 180px;
+            text-align: center;
+            padding: 20px;
+            background: var(--gray-light);
+            border-radius: 10px;
+            position: relative;
+        }
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--maroon);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 0 auto 15px;
+        }
+        .step h3 {
+            color: var(--maroon);
+            margin-bottom: 10px;
+        }
+        .requirements-list {
+            list-style: none;
+            padding: 0;
+        }
+        .requirements-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--gray-medium);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .requirements-list li::before {
+            content: "✓";
+            color: var(--gold);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .inquiry-form {
+            background: var(--gray-light);
+            padding: 30px;
+            border-radius: 15px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--gray-medium);
+            border-radius: 8px;
+            font-family: inherit;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--maroon);
+        }
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        .age-chart {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .age-chart th, .age-chart td {
+            border: 1px solid var(--gray-medium);
+            padding: 10px;
+            text-align: left;
+        }
+        .age-chart th {
+            background: var(--navy);
+            color: white;
+        }
+        .vacancy-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .vacancy-open {
+            background: #d4edda;
+            color: #155724;
+        }
+        .vacancy-limited {
+            background: #fff3cd;
+            color: #856404;
+        }
+        .vacancy-closed {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .testimonial-card {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            font-style: italic;
+        }
+        .testimonial-card .quote {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+        .testimonial-card .author {
+            font-weight: bold;
+            color: var(--maroon);
+            font-style: normal;
+        }
+        .faq-item {
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--gray-medium);
+            padding-bottom: 15px;
+        }
+        .faq-question {
+            font-weight: bold;
+            color: var(--maroon);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+        }
+        .faq-answer {
+            display: none;
+            margin-top: 10px;
+            padding-left: 15px;
+            border-left: 3px solid var(--gold);
+        }
+        .faq-answer.show {
+            display: block;
+        }
+        .book-visit-btn {
+            background: var(--gold);
+            color: var(--maroon-dark);
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: bold;
+        }
+        .info-note {
+            background: #fff3cd;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            text-align: center;
+        }
+        
+        /* Fix navbar overflow - dropdown fix */
+        .navbar,
+        header,
+        nav {
+            overflow: visible !important;
+        }
+        
+        /* Dropdown styles - NO YELLOW HIGHLIGHTING */
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-content {
+            display: none;
+            flex-direction: column;
+            background: var(--maroon);
+            min-width: 160px;
+            border-radius: 8px;
+            margin-top: 5px;
+            overflow: hidden;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .dropdown-content a {
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            display: block;
+            background: var(--maroon);
+            transition: all 0.3s;
+        }
+        .dropdown-content a:hover {
+            background: var(--gold);
+            color: var(--maroon-dark);
+        }
+        .dropdown-content a:focus,
+        .dropdown-content a:active,
+        .dropdown-content a:focus-visible {
+            background: var(--maroon);
+            color: white;
+            outline: none;
+        }
+        @media (min-width: 769px) {
+            .dropdown:hover .dropdown-content {
+                display: flex;
+            }
+        }
+        @media (max-width: 768px) {
+            .dropdown-content {
+                position: static;
+                background: var(--maroon-light);
+                margin-top: 5px;
+                box-shadow: none;
+            }
+            .dropdown.active .dropdown-content {
+                display: flex;
+            }
+            .dropdown > a::after {
+                content: " ▼";
+                font-size: 10px;
+            }
+            .dropdown-content a {
+                color: white !important;
+                background: var(--maroon-light) !important;
+            }
+        }
+        
+        /* Active navigation link */
+        .nav-links li a.active {
+            color: var(--gold);
+            border-bottom: 2px solid var(--gold);
+        }
+        
+        /* WhatsApp float button - show text on ALL devices */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50px;
+            width: auto;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s;
+        }
+        .whatsapp-float:hover {
+            background-color: #20b859;
+            transform: scale(1.05);
+        }
+        @media (max-width: 480px) {
+            .whatsapp-float {
+                padding: 8px 14px;
+                border-radius: 50px;
+                font-size: 12px;
+                bottom: 15px;
+                right: 15px;
+            }
+            .whatsapp-float span {
+                display: inline !important;
+                font-size: 12px;
+            }
+            .whatsapp-float::before {
+                content: none;
+            }
+        }
+        
+        /* Back to top button with label */
+        #back-to-top {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            background: var(--maroon);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            width: auto;
+            padding: 10px 18px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 100;
+            display: none;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        #back-to-top:hover {
+            background: var(--maroon-dark);
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== ANNOUNCEMENT BAR ========== -->
+    <div id="announcement-bar" class="announcement-bar" style="display: flex; justify-content: space-between; align-items: center;">
+        <span>📢 2026 Admissions Now Open! | Limited slots available | Call <span id="header-phone">0720 994 337</span></span>
+        <span id="close-announcement" aria-label="Close announcement" style="cursor: pointer; font-size: 20px; padding: 0 10px;">&times;</span>
+    </div>
+
+    <!-- ========== HEADER & NAVIGATION ========== -->
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <img src="images/logo.png" alt="Shinners Precious School Logo" loading="lazy" onerror="this.style.display='none'">
+                <div class="logo-text">
+                    <h1>SHINNERS PRECIOUS SCHOOL</h1>
+                    <p>Excellence in Education | Playgroup - Grade 9</p>
+                </div>
+            </div>
+            
+            <div class="hamburger" id="hamburger" role="button" aria-label="Menu" tabindex="0">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <nav aria-label="Main navigation">
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="academics.html">Academics</a></li>
+                    <li><a href="admissions.html" class="active">Admissions</a></li>
+                    <li><a href="fees.html">Fees</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li class="dropdown" id="moreDropdown">
+                        <a href="#" id="moreLink">More ▼</a>
+                        <div class="dropdown-content">
+                            <a href="uniform.html">Uniform</a>
+                            <a href="school-life.html">Life</a>
+                            <a href="news.html">News</a>
+                            <a href="staff.html">Staff</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1 id="admissions-hero-title">Admissions</h1>
+                <p id="admissions-hero-subtitle">Join the Shinners Precious School Family | 2026 Enrollment Now Open</p>
+            </div>
+        </section>
+
+        <!-- Vacancy Status -->
+        <section class="section">
+            <div class="container">
+                <div class="info-note" style="background: var(--gray-light); padding: 20px; border-radius: 10px; text-align: center;">
+                    <h3>📊 Current Vacancy Status</h3>
+                    <div id="admissions-vacancy" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 15px;">
+                        <span class="vacancy-badge vacancy-open">✓ Playgroup - Open</span>
+                        <span class="vacancy-badge vacancy-open">✓ PP1 - Open</span>
+                        <span class="vacancy-badge vacancy-open">✓ PP2 - Open</span>
+                        <span class="vacancy-badge vacancy-open">✓ Grade 1-3 - Open</span>
+                        <span class="vacancy-badge vacancy-limited">⚠️ Grade 4-6 - Limited Slots</span>
+                        <span class="vacancy-badge vacancy-limited">⚠️ Grade 7-9 - Limited Slots</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Enroll -->
+        <section class="section section-light">
+            <div class="container">
+                <h2 class="section-title">Why Enroll at Shinners Precious School?</h2>
+                <div id="admissions-why-enroll" class="grid-3">
+                    <div class="card"><div class="card-content"><h3>📚 CBC Curriculum</h3><p>Fully implemented Competency Based Curriculum with trained teachers.</p></div></div>
+                    <div class="card"><div class="card-content"><h3>💻 Digital Literacy & French</h3><p>ICT skills from Grade 1 and French from Grade 4.</p></div></div>
+                    <div class="card"><div class="card-content"><h3>🚌 Safe Transport</h3><p>Reliable school transport covering major Embakasi routes.</p></div></div>
+                    <div class="card"><div class="card-content"><h3>🍎 Affordable Meals</h3><p>Nutritious, optional meals program.</p></div></div>
+                    <div class="card"><div class="card-content"><h3>⛪ Christian Values</h3><p>Strong moral and spiritual foundation.</p></div></div>
+                    <div class="card"><div class="card-content"><h3>🏆 Holistic Development</h3><p>Sports, clubs, music, drama, and co-curricular activities.</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Parent Testimonials -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">What Parents Say</h2>
+                <div id="admissions-testimonials" class="grid-3">
+                    <div class="testimonial-card">
+                        <div class="quote">⭐ ⭐ ⭐ ⭐ ⭐</div>
+                        <div class="quote">"Shinners Precious School has transformed our child's confidence and academic performance. The teachers are dedicated and caring."</div>
+                        <div class="author">— Mrs. Wanjiku, Parent of Grade 4 Learner</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="quote">⭐ ⭐ ⭐ ⭐ ⭐</div>
+                        <div class="quote">"The CBC implementation is excellent. My child loves the digital literacy classes and French lessons."</div>
+                        <div class="author">— Mr. Otieno, Parent of Grade 6 Learner</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="quote">⭐ ⭐ ⭐ ⭐ ⭐</div>
+                        <div class="quote">"Affordable fees, great transport system, and wonderful Christian values. Best decision we made."</div>
+                        <div class="author">— Mr. Kamau, Parent of PP2 Learner</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Age Requirements -->
+        <section class="section section-light">
+            <div class="container">
+                <h2 class="section-title">Age Requirements</h2>
+                <div style="overflow-x: auto;">
+                    <table class="age-chart">
+                        <thead><tr><th>Level</th><th>Minimum Age by January</th></tr></thead>
+                        <tbody id="admissions-age-body">
+                            <tr><td>Playgroup</td><td>2 years</td></tr>
+                            <tr><td>PP1</td><td>3 years</td></tr>
+                            <tr><td>PP2</td><td>4 years</td></tr>
+                            <tr><td>Grade 1</td><td>5 years</td></tr>
+                            <tr><td>Grade 2</td><td>6 years</td></tr>
+                            <tr><td>Grade 3</td><td>7 years</td></tr>
+                            <tr><td>Grade 4</td><td>8 years</td></tr>
+                            <tr><td>Grade 5</td><td>9 years</td></tr>
+                            <tr><td>Grade 6</td><td>10 years</td></tr>
+                            <tr><td colspan="2"><strong>Junior Secondary (Grade 7-9)</strong> - Based on successful completion of Grade 6</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Book a School Visit -->
+        <section class="section">
+            <div class="container">
+                <div class="info-note" style="background: var(--gray-light); padding: 25px; border-radius: 10px; text-align: center;">
+                    <h3>🏫 Book a School Visit</h3>
+                    <p id="admissions-visit-message">Visit Shinners Precious School for a tour and meet our teachers.</p>
+                    <p><strong id="admissions-visit-hours">Available:</strong> Weekdays, 8:00 AM – 4:00 PM</p>
+                    <a id="admissions-visit-link" href="https://wa.me/254720994337?text=Hello%2C%20I%20would%20like%20to%20book%20a%20school%20visit%20for%20my%20child." class="book-visit-btn" target="_blank">📅 Book a Visit via WhatsApp</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Admission Process Steps -->
+        <section class="section section-light">
+            <div class="container">
+                <h2 class="section-title">Admission Process</h2>
+                <div id="admissions-steps" class="step-container">
+                    <div class="step"><div class="step-number">1</div><h3>Visit School</h3><p>Visit Shinners Precious School in Embakasi for a tour and initial consultation.</p></div>
+                    <div class="step"><div class="step-number">2</div><h3>Collect Form</h3><p>Collect and fill the admission form from the school office.</p></div>
+                    <div class="step"><div class="step-number">3</div><h3>Submit Documents</h3><p>Submit required documents with the completed form.</p></div>
+                    <div class="step"><div class="step-number">4</div><h3>Pay Admission Fee</h3><p>Pay KSh 1,000 admission fee via bank or Mpesa.</p></div>
+                    <div class="step"><div class="step-number">5</div><h3>Confirmation</h3><p>Receive admission confirmation and reporting instructions.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Required Documents -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Required Documents</h2>
+                <div id="admissions-documents" class="grid-3">
+                    <div class="card"><div class="card-content"><h3>📄 For All New Learners</h3><ul class="requirements-list"><li>Birth Certificate (copy)</li><li>Passport Photos (2 recent)</li><li>Immunization/Health Record</li><li>Parent/Guardian ID Copies</li></ul></div></div>
+                    <div class="card"><div class="card-content"><h3>📋 Transferring Learners</h3><ul class="requirements-list"><li>Previous School Report Card</li><li>Transfer Letter from Previous School</li><li>Leaving Certificate (if applicable)</li></ul></div></div>
+                    <div class="card"><div class="card-content"><h3>💰 Payment</h3><ul class="requirements-list"><li>Admission Fee: KSh 1,000 (once)</li><li>Term Fees (payable before term begins)</li><li>Bank or Mpesa payment slip</li></ul></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Frequently Asked Questions -->
+        <section class="section section-light">
+            <div class="container">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <div id="admissions-faqs">
+                    <div class="faq-item">
+                        <div class="faq-question">❓ Is there an entrance exam? <span>+</span></div>
+                        <div class="faq-answer">For transfer learners only. We conduct a simple assessment to place your child in the appropriate grade level.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">❓ Can fees be paid in installments? <span>+</span></div>
+                        <div class="faq-answer">Yes. Please contact the school administration to discuss installment arrangements.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">❓ Do you provide transport? <span>+</span></div>
+                        <div class="faq-answer">Yes. We cover Imara Daima, Pipeline, AA & KOBIL, and Kwanjenga routes. Transport is optional.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">❓ Do you provide meals? <span>+</span></div>
+                        <div class="faq-answer">Yes, optional meals program at KSh 3,900 per term. Nutritious lunch served daily.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">❓ When can admissions be done? <span>+</span></div>
+                        <div class="faq-answer">Admissions are open throughout the year, subject to vacancy availability.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Online Inquiry Form -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Online Inquiry Form</h2>
+                <p style="text-align: center; margin-bottom: 30px;">Fill the form below and we will contact you with more information.</p>
+                
+                <div class="inquiry-form">
+                    <form id="admission-inquiry-form" action="https://formspree.io/f/mykaobba" method="POST">
+                        <input type="hidden" name="_subject" value="Admissions Inquiry from Website">
+                        <div class="form-group">
+                            <label>Parent/Guardian Full Name *</label>
+                            <input type="text" name="parent_name" id="parent-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address *</label>
+                            <input type="email" name="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number *</label>
+                            <input type="tel" name="phone" id="phone" pattern="[0-9]{10}" required>
+                            <small>Enter 10 digits (e.g., 0720994337)</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Learner's Name *</label>
+                            <input type="text" name="learner_name" id="learner-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Grade Applying For *</label>
+                            <select name="grade_applying" id="grade-applying" required>
+                                <option value="">Select Grade</option>
+                                <option value="Playgroup">Playgroup</option>
+                                <option value="PP1">PP1</option>
+                                <option value="PP2">PP2</option>
+                                <option value="Grade 1">Grade 1</option>
+                                <option value="Grade 2">Grade 2</option>
+                                <option value="Grade 3">Grade 3</option>
+                                <option value="Grade 4">Grade 4</option>
+                                <option value="Grade 5">Grade 5</option>
+                                <option value="Grade 6">Grade 6</option>
+                                <option value="Grade 7">Grade 7</option>
+                                <option value="Grade 8">Grade 8</option>
+                                <option value="Grade 9">Grade 9</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Current School (if applicable)</label>
+                            <input type="text" name="current_school" id="current-school">
+                        </div>
+                        <div class="form-group">
+                            <label>Message / Questions</label>
+                            <textarea name="message" id="message" placeholder="Any specific questions about admissions, fees, or the school..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary" style="width: 100%;">Submit Inquiry</button>
+                    </form>
+                    <div id="form-message" style="margin-top: 15px; text-align: center;"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download Forms -->
+        <section class="section section-light">
+            <div class="container">
+                <h2 class="section-title">Download Admission Forms</h2>
+                <div id="admissions-downloads" style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                    <a href="assets/Admission-Form-2026.pdf" class="btn-primary" download>📄 Download Admission Form (PDF)</a>
+                    <a href="assets/Admission-Checklist.pdf" class="btn-secondary" download>✓ Admission Checklist</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fee Reminder -->
+        <section class="section">
+            <div class="container">
+                <div class="info-note" style="background: var(--gray-light); padding: 20px; border-radius: 10px; border-left: 4px solid var(--gold);">
+                    <h3>💰 Admission Fee: <span id="admissions-fee">KSh 1,000</span> (once)</h3>
+                    <p id="admissions-payment-info">Payment via KCB Bank or Lipa Na Mpesa. No cash payments accepted.</p>
+                    <p><strong id="admissions-bank-details">KCB Utawala:</strong> A/C 1282776983<br>
+                    <strong id="admissions-mpesa-details">Lipa Na Mpesa:</strong> Paybill 522123, Account: 82747K-LearnerName-Class</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px;">
+                
+                <div>
+                    <h3 style="color: var(--gold);">Shinners Precious School</h3>
+                    <p>P.O. Box 40-0521, Embakasi</p>
+                    <p>Nairobi, Kenya</p>
+                    <p>📞 <span id="footer-phone">0720 994 337</span> / <span id="footer-phone2">0726 314 846</span></p>
+                    <p>✉️ <span id="footer-email">shinnersprecious@gmail.com</span></p>
+                </div>
+                
+                <div>
+                    <h3 style="color: var(--gold);">Quick Links</h3>
+                    <p><a href="admissions.html" style="color: white;">Admissions</a></p>
+                    <p><a href="fees.html" style="color: white;">Fee Structure</a></p>
+                    <p><a href="uniform.html" style="color: white;">Uniform Guide</a></p>
+                    <p><a href="gallery.html" style="color: white;">Gallery</a></p>
+                    <p><a href="staff.html" style="color: white;">Our Staff</a></p>
+                </div>
+                
+                <div>
+                    <h3 style="color: var(--gold);">School Hours</h3>
+                    <p>Monday - Friday: 8:00 AM - 4:00 PM</p>
+                    <p>Saturday: 9:00 AM - 12:00 PM (Office only)</p>
+                    <p>Sunday: Closed</p>
+                </div>
+                
+                <div>
+                    <h3 style="color: var(--gold);">Location</h3>
+                    <p>Embakasi, near Imara Daima</p>
+                    <p><a href="https://maps.google.com/?q=Embakasi+Nairobi" target="_blank" style="color: #D4AF37;">View on Google Maps →</a></p>
+                    
+                    <h3 style="color: var(--gold); margin-top: 20px;">Follow Us</h3>
+                    <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+                        <a href="#" style="color: white; text-decoration: none;">📘 Facebook</a>
+                        <a href="#" style="color: white; text-decoration: none;">📸 Instagram</a>
+                        <a href="https://wa.me/254720994337" style="color: white; text-decoration: none;">💬 WhatsApp</a>
+                        <a href="#" style="color: white; text-decoration: none;">🎵 TikTok</a>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year">2026</span> Shinners Precious School. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========== WHATSAPP FLOAT ========== -->
+    <a href="https://wa.me/254720994337?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20admission%20at%20Shinners%20Precious%20School." 
+       class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+        💬 <span>Admissions Help</span>
+    </a>
+
+    <!-- ========== BACK TO TOP ========== -->
+    <button id="back-to-top">↑ Page Up</button>
+
+    <script src="js/main.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/admissions.js"></script>
+</body>
+</html>

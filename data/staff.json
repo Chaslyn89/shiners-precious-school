@@ -1,0 +1,97 @@
+{
+    "hero_title": "Our Staff",
+    "hero_subtitle": "Meet the dedicated team shaping future leaders",
+    "leadership": [
+        {
+            "name": "Shem Oyugi",
+            "title": "School Director",
+            "qualifications": "B.Ed, M.Ed",
+            "photo": "images/staff-director.jpg"
+        },
+        {
+            "name": "Benard Ochanda",
+            "title": "Headteacher",
+            "qualifications": "B.Ed, [Specialization]",
+            "photo": "images/staff-headteacher.jpg"
+        },
+        {
+            "name": "[DEPUTY NAME]",
+            "title": "Deputy Headteacher",
+            "qualifications": "[Qualifications]",
+            "photo": "images/deputy-placeholder.jpg"
+        },
+        {
+            "name": "[ACADEMIC COORDINATOR]",
+            "title": "Academic Coordinator",
+            "qualifications": "[Qualifications]",
+            "photo": "images/academic-placeholder.jpg"
+        }
+    ],
+    "teachers": [
+        {
+            "name": "[Teacher Name]",
+            "title": "[Subject/Level] Teacher",
+            "qualifications": "B.Ed, [Specialization]",
+            "subjects": "[Subjects]",
+            "photo": "images/teacher-1.jpg"
+        },
+        {
+            "name": "[Teacher Name]",
+            "title": "[Subject/Level] Teacher",
+            "qualifications": "B.Ed, [Specialization]",
+            "subjects": "[Subjects]",
+            "photo": "images/teacher-2.jpg"
+        },
+        {
+            "name": "[Teacher Name]",
+            "title": "[Subject/Level] Teacher",
+            "qualifications": "B.Ed, [Specialization]",
+            "subjects": "[Subjects]",
+            "photo": "images/teacher-3.jpg"
+        },
+        {
+            "name": "[Teacher Name]",
+            "title": "[Subject/Level] Teacher",
+            "qualifications": "B.Ed, [Specialization]",
+            "subjects": "[Subjects]",
+            "photo": "images/teacher-4.jpg"
+        },
+        {
+            "name": "[Teacher Name]",
+            "title": "[Subject/Level] Teacher",
+            "qualifications": "B.Ed, [Specialization]",
+            "subjects": "[Subjects]",
+            "photo": "images/teacher-5.jpg"
+        },
+        {
+            "name": "[Teacher Name]",
+            "title": "[Subject/Level] Teacher",
+            "qualifications": "B.Ed, [Specialization]",
+            "subjects": "[Subjects]",
+            "photo": "images/teacher-6.jpg"
+        }
+    ],
+    "support": [
+        {
+            "name": "[Support Staff Name]",
+            "title": "Administrative Assistant",
+            "photo": "images/staff-support-1.jpg"
+        },
+        {
+            "name": "[Support Staff Name]",
+            "title": "Accountant",
+            "photo": "images/staff-support-2.jpg"
+        },
+        {
+            "name": "[Support Staff Name]",
+            "title": "Receptionist",
+            "photo": "images/staff-support-3.jpg"
+        }
+    ],
+    "stats": [
+        { "number": "35+", "label": "Qualified Teachers" },
+        { "number": "100%", "label": "CBC Trained" },
+        { "number": "10+", "label": "Support Staff" },
+        { "number": "5+", "label": "Years Average Experience" }
+    ]
+}

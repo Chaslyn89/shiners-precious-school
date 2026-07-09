@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Shinners Precious School - Quality CBC education from Playgroup to Grade 9 in Embakasi, Nairobi. Digital Literacy, French, and excellent facilities.">
+    <meta name="theme-color" content="#800020">
+    <!-- Open Graph Tags for WhatsApp/Facebook Sharing -->
+    <meta property="og:title" content="Shinners Precious School | CBC School in Embakasi Nairobi | Playgroup to Grade 9">
+    <meta property="og:description" content="Quality CBC education in Embakasi. Maroon & Navy Blue uniforms. Enrolling for 2026.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="images/preview.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://shinnersprecious.sc.ke">
+    <title>Shinners Precious School | CBC School in Embakasi Nairobi | Playgroup to Grade 9</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <style>
+        /* Fix navbar overflow - dropdown fix */
+        .navbar,
+        header,
+        nav {
+            overflow: visible !important;
+        }
+        
+        /* Dropdown styles - NO YELLOW HIGHLIGHTING */
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-content {
+            display: none;
+            flex-direction: column;
+            background: var(--maroon);
+            min-width: 160px;
+            border-radius: 8px;
+            margin-top: 5px;
+            overflow: hidden;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .dropdown-content a {
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            display: block;
+            background: var(--maroon);
+            transition: all 0.3s;
+        }
+        .dropdown-content a:hover {
+            background: var(--gold);
+            color: var(--maroon-dark);
+        }
+        /* Remove any yellow highlighting */
+        .dropdown-content a:focus,
+        .dropdown-content a:active,
+        .dropdown-content a:focus-visible {
+            background: var(--maroon);
+            color: white;
+            outline: none;
+        }
+        /* Show dropdown on hover for desktop */
+        @media (min-width: 769px) {
+            .dropdown:hover .dropdown-content {
+                display: flex;
+            }
+        }
+        /* Mobile dropdown toggle */
+        @media (max-width: 768px) {
+            .dropdown-content {
+                position: static;
+                background: var(--maroon-light);
+                margin-top: 5px;
+                box-shadow: none;
+            }
+            .dropdown.active .dropdown-content {
+                display: flex;
+            }
+            .dropdown > a::after {
+                content: " ▼";
+                font-size: 10px;
+            }
+            .dropdown-content a {
+                color: white !important;
+                background: var(--maroon-light) !important;
+            }
+        }
+        
+        /* Quick info row */
+        .quick-info {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+        }
+        .quick-info span {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,255,255,0.15);
+            padding: 6px 15px;
+            border-radius: 30px;
+        }
+        @media (max-width: 768px) {
+            .quick-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 8px;
+            }
+            .quick-info span {
+                width: 100%;
+                justify-content: center;
+                font-size: 0.85rem;
+                padding: 4px 12px;
+            }
+        }
+        
+        /* Active navigation link */
+        .nav-links li a.active {
+            color: var(--gold);
+            border-bottom: 2px solid var(--gold);
+        }
+        
+        /* Info note */
+        .info-note {
+            background: #fff3cd;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            text-align: center;
+        }
+        
+        /* Back to top button with label */
+        #back-to-top {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            background: var(--maroon);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            width: auto;
+            padding: 10px 18px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 100;
+            display: none;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        #back-to-top:hover {
+            background: var(--maroon-dark);
+            transform: translateY(-3px);
+        }
+        
+        /* WhatsApp float button - show text on ALL devices */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50px;
+            width: auto;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s;
+        }
+        .whatsapp-float:hover {
+            background-color: #20b859;
+            transform: scale(1.05);
+        }
+        @media (max-width: 480px) {
+            .whatsapp-float {
+                padding: 8px 14px;
+                border-radius: 50px;
+                font-size: 12px;
+                bottom: 15px;
+                right: 15px;
+            }
+            .whatsapp-float span {
+                display: inline !important;
+                font-size: 12px;
+            }
+            .whatsapp-float::before {
+                content: none;
+            }
+        }
+        
+        /* Hero buttons */
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        @media (max-width: 480px) {
+            .hero-buttons {
+                gap: 10px;
+            }
+            .hero-buttons .btn-primary,
+            .hero-buttons .btn-secondary {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+        }
+        
+        /* Social media links in footer */
+        .social-footer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 5px;
+        }
+        .social-footer a {
+            color: white;
+            text-decoration: none;
+            font-size: 13px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s;
+            padding: 4px 0;
+        }
+        .social-footer a:hover {
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+        
+        /* Director section - desktop: image left, message right */
+        .director-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            align-items: center;
+            justify-content: center;
+        }
+        .director-image {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+        }
+        .director-image img {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid var(--gold);
+        }
+        .director-message {
+            flex: 2;
+        }
+        .director-message h2 {
+            color: var(--maroon);
+        }
+        @media (max-width: 768px) {
+            .director-wrapper {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            .director-image img {
+                width: 130px;
+                height: 130px;
+            }
+            .director-message {
+                text-align: center;
+            }
+            .director-message h2 {
+                font-size: 1.3rem;
+            }
+            .director-message p {
+                font-size: 0.95rem;
+            }
+        }
+        
+        /* ========================================
+           STATISTICS CARDS - REDUCED SIZE ON MOBILE
+           ======================================== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            text-align: center;
+            margin-top: -40px;
+            position: relative;
+            z-index: 10;
+        }
+        .stat-card {
+            background: var(--white);
+            padding: 20px 15px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--maroon);
+            line-height: 1.2;
+        }
+        .stat-label {
+            color: var(--gray-dark);
+            font-size: 0.85rem;
+            margin-top: 2px;
+        }
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+                margin-top: -30px;
+            }
+            .stat-card {
+                padding: 12px 10px;
+            }
+            .stat-number {
+                font-size: 1.2rem;
+            }
+            .stat-label {
+                font-size: 0.7rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .stats-grid {
+                gap: 10px;
+                margin-top: -20px;
+            }
+            .stat-card {
+                padding: 10px 8px;
+                border-radius: 8px;
+            }
+            .stat-number {
+                font-size: 1rem;
+            }
+            .stat-label {
+                font-size: 0.65rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== ANNOUNCEMENT BAR ========== -->
+    <div id="announcement-bar" class="announcement-bar" style="display: flex; justify-content: space-between; align-items: center;">
+        <span>📢 2026 Admissions Now Open! | Limited slots available for Grade 7-9 (Navy Blue Uniform) | Call <span id="header-phone">0720 994 337</span></span>
+        <span id="close-announcement" aria-label="Close announcement" style="cursor: pointer; font-size: 20px; padding: 0 10px;">&times;</span>
+    </div>
+
+    <!-- ========== HEADER & NAVIGATION ========== -->
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <img src="images/logo.png" alt="Shinners Precious School Logo" loading="lazy" onerror="this.style.display='none'">
+                <div class="logo-text">
+                    <h1>SHINNERS PRECIOUS SCHOOL</h1>
+                    <p>Excellence in Education | Playgroup - Grade 9</p>
+                </div>
+            </div>
+            
+            <div class="hamburger" id="hamburger" role="button" aria-label="Menu" tabindex="0">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <nav aria-label="Main navigation">
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="academics.html">Academics</a></li>
+                    <li><a href="admissions.html">Admissions</a></li>
+                    <li><a href="fees.html">Fees</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li class="dropdown" id="moreDropdown">
+                        <a href="#" id="moreLink">More ▼</a>
+                        <div class="dropdown-content">
+                            <a href="uniform.html">Uniform</a>
+                            <a href="school-life.html">Life</a>
+                            <a href="news.html">News</a>
+                            <a href="staff.html">Staff</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <main>
+
+        <!-- ========== HERO SECTION ========== -->
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="container">
+                <h1 id="hero-title">Quality CBC Education from Playgroup to Grade 9</h1>
+                <p>Empowering learners through academic excellence, digital literacy, strong Christian values, and holistic development in a safe and nurturing environment.</p>
+                
+                <div class="quick-info">
+                    <span>📍 Embakasi, Nairobi</span>
+                    <span>🎓 Playgroup – Grade 9</span>
+                    <span>📞 Admissions: <span id="hero-phone">0720 994 337</span></span>
+                </div>
+                
+                <div class="hero-buttons">
+                    <a href="admissions.html" class="btn-primary">Enroll Today</a>
+                    <a href="tel:0720994337" class="btn-secondary">📞 Call Admissions</a>
+                    <a href="contact.html" class="btn-secondary">Contact Us</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== STATISTICS SECTION ========== -->
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">Playgroup – Grade 9</div>
+                    <div class="stat-label">Full CBC Cycle</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">CBC Curriculum</div>
+                    <div class="stat-label">Competency Based</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">Digital Literacy</div>
+                    <div class="stat-label">ICT from Grade 1</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">French Programme</div>
+                    <div class="stat-label">From Grade 4</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== DIRECTOR'S MESSAGE PREVIEW ========== -->
+        <section class="section section-light">
+            <div class="container">
+                <div class="director-wrapper">
+                    <div class="director-image">
+                        <img id="director-photo" src="images/director-placeholder.jpg" alt="School Director" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27180%27 height=%27180%27 viewBox=%270 0 180 180%27%3E%3Crect width=%27180%27 height=%27180%27 fill=%27%23800020%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dy=%27.3em%27 fill=%27white%27%3EDirector%3C/text%3E%3C/svg%3E'">
+                        <h3 id="director-name" style="color: var(--maroon); margin-top: 10px;">Shem Oyugi</h3>
+                        <p id="director-title">School Director</p>
+                    </div>
+                    <div class="director-message">
+                        <h2>Welcome from the Director</h2>
+                        <div id="welcome-message">
+                            <p>Dear Parents and Guardians,</p>
+                            <p>It is my honor to welcome you to Shinners Precious School. We are committed to providing quality CBC education that nurtures every child's potential. Our dedicated teachers ensure that each learner receives personal attention and support.</p>
+                            <p>We invite you to visit our school and experience the Shinners difference.</p>
+                        </div>
+                        <a href="about.html" class="btn-secondary" style="margin-top: 10px; display: inline-block;">Read More →</a>
+                    </div>
+                </div>
+                <!-- Director's photo note removed -->
+            </div>
+        </section>
+
+        <!-- ========== WELCOME SECTION ========== -->
+        <section class="section" aria-labelledby="welcome-title">
+            <div class="container">
+                <h2 id="welcome-title" class="section-title">Welcome to Shinners Precious School</h2>
+                <div class="grid-3">
+                    <div class="card">
+                        <div class="card-content">
+                            <h3>🎓 Our Mission</h3>
+                            <p id="mission-text">To provide high quality education and childcare in a safe, respectful and inclusive environment that builds a foundation for lifelong learning.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-content">
+                            <h3>👥 Our Vision</h3>
+                            <p id="vision-text">To be a center of excellence that produces lifelong learners and critical thinkers equipped for global success.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-content">
+                            <h3>💎 Core Values</h3>
+                            <p id="core-values-text">Integrity • Excellence • Discipline • Creativity • Faith</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== ACADEMIC LEVELS ========== -->
+        <section class="section section-light" aria-labelledby="levels-title">
+            <div class="container">
+                <h2 id="levels-title" class="section-title">Our Academic Levels</h2>
+                <div class="levels-grid">
+                    <div class="level-card"><h3>🎨 Playgroup</h3><div class="level-age">Age: 2-3 years</div><p class="level-description">Early childhood development through play-based learning.</p></div>
+                    <div class="level-card"><h3>📚 PP1 & PP2</h3><div class="level-age">Age: 4-5 years</div><p class="level-description">Foundational literacy, numeracy, and social skills.</p></div>
+                    <div class="level-card"><h3>✏️ Grade 1 - 3</h3><div class="level-age">Age: 6-8 years</div><p class="level-description">Core CBC subjects with integrated learning.</p></div>
+                    <div class="level-card"><h3>📖 Grade 4 - 6</h3><div class="level-age">Age: 9-11 years</div><p class="level-description">Upper primary with Digital Literacy & French.</p></div>
+                    <div class="level-card"><h3>⚓ Grade 7 - 9</h3><div class="level-age">Age: 12-14 years</div><p class="level-description">Junior Secondary — Navy Blue Uniform. Pre-vocational & pre-career pathways.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== WHY CHOOSE US ========== -->
+        <section class="section" aria-labelledby="why-title">
+            <div class="container">
+                <h2 id="why-title" class="section-title">Why Choose Shinners Precious School?</h2>
+                <div class="grid-3">
+                    <div class="card"><div class="card-content"><h3>💻 Digital Literacy</h3><p>Modern computer lab with internet access for all learners from Grade 1.</p></div></div>
+                    <div class="card"><div class="card-content"><h3>🇫🇷 French Program</h3><p>Competency-based French language instruction starting from Grade 4.</p></div></div>
+                    <div class="card"><div class="card-content"><h3>🚌 Safe Transport</h3><p>Reliable school transport covering Imara Daima, Pipeline, Kwanjenga, and AA/KOBIL areas.</p></div></div>
+                    <div class="card"><div class="card-content"><h3>🍎 Nutritious Meals</h3><p>Optional affordable meals program — <span id="meals-fee">KSh 3,900</span> per term.</p></div></div>
+                    <div class="card"><div class="card-content"><h3>🛡️ Safe Learning Environment</h3><p>Secure compound, supervised learners, and a caring school community.</p></div></div>
+                    <div class="card"><div class="card-content"><h3>⛪ Christian Values</h3><p>Moral and spiritual nurturing alongside academic excellence.</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== FACILITIES SECTION ========== -->
+        <section class="section section-light" aria-labelledby="facilities-title">
+            <div class="container">
+                <h2 id="facilities-title" class="section-title">Our Facilities</h2>
+                <div class="grid-3">
+                    <div class="card"><div class="card-content"><h3>💻 Computer Lab</h3><p>Modern computers with internet access for digital literacy lessons.</p></div></div>
+                    <div class="card"><div class="card-content"><h3>📚 Library</h3><p>Well-stocked library with CBC-approved resources.</p></div></div>
+                    <div class="card"><div class="card-content"><h3>🚌 School Bus</h3><p>Safe transport covering major Embakasi routes.</p></div></div>
+                    <div class="card"><div class="card-content"><h3>⚽ Playground</h3><p>Secure outdoor play area for sports and recreation.</p></div></div>
+                    <div class="card"><div class="card-content"><h3>🔬 Science Lab</h3><p>Equipped laboratory for practical learning (Grade 7-9).</p></div></div>
+                    <div class="card"><div class="card-content"><h3>🍎 Dining Area</h3><p>Clean, spacious dining hall for meals program.</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== UNIFORM HIGHLIGHT ========== -->
+        <section class="section" aria-labelledby="uniform-title">
+            <div class="container">
+                <h2 id="uniform-title" class="section-title">Our Distinct Uniforms</h2>
+                <div class="uniform-comparison">
+                    <div class="uniform-card uniform-maroon">
+                        <h3>🟤 Playgroup - Grade 6</h3>
+                        <ul class="uniform-list">
+                            <li>👔 Boys: Maroon trousers/shorts, White shirt</li>
+                            <li>👗 Girls: Hospital Hill checked dress</li>
+                            <li>🧥 Sweater: Maroon with white stripes</li>
+                            <li>🧦 Socks: Grey with maroon stripes</li>
+                            <li>👟 Shoes: Black leather</li>
+                        </ul>
+                    </div>
+                    <div class="uniform-card uniform-navy">
+                        <h3>🔵 Grade 7 - Grade 9</h3>
+                        <ul class="uniform-list">
+                            <li>👔 Boys: Navy blue trousers, White shirt</li>
+                            <li>👗 Girls: Navy blue skirt, White blouse</li>
+                            <li>🧥 Sweater: Maroon with white stripes</li>
+                            <li>🧦 Socks: Navy with maroon stripes</li>
+                            <li>👟 Shoes: Black leather</li>
+                        </ul>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="uniform.html" class="btn-secondary">View Full Uniform Guide →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== GALLERY PREVIEW ========== -->
+        <section class="section section-light" aria-labelledby="gallery-title">
+            <div class="container">
+                <h2 id="gallery-title" class="section-title">Life at Shinners Precious School</h2>
+                <div class="gallery-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                    <div class="gallery-item"><img src="images/placeholder-gallery.jpg" alt="School Life" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27200%27 height=%27150%27 viewBox=%270 0 200 150%27%3E%3Crect width=%27200%27 height=%27150%27 fill=%27%23800020%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dy=%27.3em%27 fill=%27white%27%3EPhoto%3C/text%3E%3C/svg%3E'"><div class="gallery-caption"><p>Sports Day</p></div></div>
+                    <div class="gallery-item"><img src="images/placeholder-gallery.jpg" alt="School Life" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27200%27 height=%27150%27 viewBox=%270 0 200 150%27%3E%3Crect width=%27200%27 height=%27150%27 fill=%27%231F3A93%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dy=%27.3em%27 fill=%27white%27%3EPhoto%3C/text%3E%3C/svg%3E'"><div class="gallery-caption"><p>Classroom Learning</p></div></div>
+                    <div class="gallery-item"><img src="images/placeholder-gallery.jpg" alt="School Life" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27200%27 height=%27150%27 viewBox=%270 0 200 150%27%3E%3Crect width=%27200%27 height=%27150%27 fill=%27%23D4AF37%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dy=%27.3em%27 fill=%27%235a0016%27%3EPhoto%3C/text%3E%3C/svg%3E'"><div class="gallery-caption"><p>Graduation</p></div></div>
+                    <div class="gallery-item"><img src="images/placeholder-gallery.jpg" alt="School Life" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27200%27 height=%27150%27 viewBox=%270 0 200 150%27%3E%3Crect width=%27200%27 height=%27150%27 fill=%27%23800020%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dy=%27.3em%27 fill=%27white%27%3EPhoto%3C/text%3E%3C/svg%3E'"><div class="gallery-caption"><p>School Building</p></div></div>
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="gallery.html" class="btn-secondary">View Full Gallery →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== TESTIMONIALS SECTION ========== -->
+        <section class="section" aria-labelledby="testimonial-title">
+            <div class="container">
+                <h2 id="testimonial-title" class="section-title">What Parents Say</h2>
+                <div id="testimonials-container" class="grid-3">
+                    <!-- Testimonials will be loaded here by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== LATEST NEWS PREVIEW ========== -->
+        <section class="section section-light" aria-labelledby="news-title">
+            <div class="container">
+                <h2 id="news-title" class="section-title">Latest News & Events</h2>
+                <div id="news-container">
+                    <!-- News will be loaded here by JavaScript -->
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="news.html" class="btn-secondary">View All News →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== CALL TO ACTION ========== -->
+        <section class="section" style="text-align: center;" aria-labelledby="cta-title">
+            <div class="container">
+                <h2 id="cta-title" style="color: var(--maroon, #800020);">Ready to Enroll Your Child?</h2>
+                <p style="margin: 20px 0;">Admission fee is only <span id="admission-fee">KSh 1,000</span> (once). Limited slots available for 2026.</p>
+                <div class="hero-buttons">
+                    <a href="admissions.html" class="btn-primary">Apply Now</a>
+                    <a href="contact.html" class="btn-secondary">Visit Us</a>
+                    <a href="tel:0720994337" class="btn-secondary">📞 Call Admissions</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                
+                <div>
+                    <h3 style="color: var(--gold);">Shinners Precious School</h3>
+                    <p>P.O. Box 40-0521, Embakasi</p>
+                    <p>Nairobi, Kenya</p>
+                    <p>📞 <span id="footer-phone">0720 994 337</span> / <span id="footer-phone2">0726 314 846</span></p>
+                    <p>✉️ <span id="footer-email">shinnersprecious@gmail.com</span></p>
+                </div>
+                
+                <div>
+                    <h3 style="color: var(--gold);">Quick Links</h3>
+                    <p><a href="admissions.html" style="color: white;">Admissions</a></p>
+                    <p><a href="fees.html" style="color: white;">Fee Structure</a></p>
+                    <p><a href="uniform.html" style="color: white;">Uniform Guide</a></p>
+                    <p><a href="gallery.html" style="color: white;">Gallery</a></p>
+                    <p><a href="staff.html" style="color: white;">Our Staff</a></p>
+                </div>
+                
+                <div>
+                    <h3 style="color: var(--gold);">School Hours</h3>
+                    <p>Monday - Friday: 8:00 AM - 4:00 PM</p>
+                    <p>Saturday: 9:00 AM - 12:00 PM (Office only)</p>
+                    <p>Sunday: Closed</p>
+                </div>
+                
+                <div>
+                    <h3 style="color: var(--gold);">Location</h3>
+                    <p>Embakasi, near Imara Daima</p>
+                    <p><a href="https://maps.google.com/?q=Embakasi+Nairobi" target="_blank" style="color: #D4AF37;">View on Google Maps →</a></p>
+                    
+                    <h3 style="color: var(--gold); margin-top: 20px;">Follow Us</h3>
+                    <div class="social-footer">
+                        <a href="#">📘 Facebook</a>
+                        <a href="#">📸 Instagram</a>
+                        <a href="https://wa.me/254720994337">💬 WhatsApp</a>
+                        <a href="#">🎵 TikTok</a>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year">2026</span> Shinners Precious School. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========== WHATSAPP FLOAT ========== -->
+    <a href="https://wa.me/254720994337?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20admission%20at%20Shinners%20Precious%20School." 
+       class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+        💬 <span>Admissions Help</span>
+    </a>
+
+    <!-- ========== BACK TO TOP ========== -->
+    <button id="back-to-top">↑ Page Up</button>
+
+    <script src="js/main.js"></script>
+    <script src="js/settings.js"></script>
+
+    <!-- Netlify Identity Widget -->
+    <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</body>
+</html>

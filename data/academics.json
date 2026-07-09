@@ -1,0 +1,86 @@
+{
+    "hero_title": "Our Academics",
+    "hero_subtitle": "Competency Based Curriculum (CBC) | Playgroup to Grade 9",
+    "pathway_steps": ["🎨 Playgroup", "📚 PP1", "📚 PP2", "✏️ Grade 1 - 3", "📖 Grade 4 - 6", "⚓ Grade 7 - 9"],
+    "pathway_description": "Our CBC pathway ensures smooth progression from early years to Junior Secondary.",
+    "curriculum_overview": "Shinners Precious School follows the Competency Based Curriculum (CBC) approved by the Kenya Institute of Curriculum Development (KICD). Our approach focuses on developing learners' potential through practical, learner-centered activities that build competencies for the 21st century.",
+    "achievements": [
+        { "number": "100%", "label": "Transition Rate to Next Grade" },
+        { "number": "Top 10%", "label": "Learners in Regional Assessments" },
+        { "number": "🏆", "label": "Best in CBC Implementation - Embakasi" },
+        { "number": "📈", "label": "Consistent Year-on-Year Improvement" }
+    ],
+    "learning_areas": {
+        "early_years": {
+            "title": "🎨 Early Years Education (Playgroup - PP2)",
+            "subjects": ["Language Activities", "Mathematical Activities", "Environmental Activities", "Psychomotor & Creative Activities", "Religious Education", "Play-Based Learning"]
+        },
+        "lower_primary": {
+            "title": "📚 Lower Primary (Grade 1 - 3)",
+            "subjects": ["English", "Kiswahili", "Mathematics", "Environmental Studies", "Hygiene & Nutrition", "Religious Education (CRE)", "Creative Arts", "Physical Education"]
+        },
+        "upper_primary": {
+            "title": "📖 Upper Primary (Grade 4 - 6)",
+            "subjects": ["English", "Kiswahili", "Mathematics", "Science & Technology", "Social Studies", "Religious Education (CRE)", "Agriculture & Nutrition", "Creative Arts", "Physical & Health Education", "💻 Digital Literacy", "🇫🇷 French"]
+        },
+        "junior_secondary": {
+            "title": "⚓ Junior Secondary (Grade 7 - 9) - Navy Blue Uniform",
+            "subjects": ["English", "Kiswahili", "Mathematics", "Integrated Science", "Agriculture & Nutrition", "Creative Arts", "Pre-Technical Studies", "Social Studies", "Religious Education (CRE)", "French", "💻 Digital Literacy"]
+        }
+    },
+    "special_programs": [
+        {
+            "icon": "💻",
+            "title": "Digital Literacy",
+            "description": "ICT skills from Grade 1, computer lab access, internet research skills, and basic programming concepts.",
+            "detail": "🖥️ Computer Lab: Available for all learners"
+        },
+        {
+            "icon": "🇫🇷",
+            "title": "French Program",
+            "description": "Competency-based French language instruction starting from Grade 4, preparing learners for global communication.",
+            "detail": "📚 French Class: Ongoing from Grade 4"
+        },
+        {
+            "icon": "🏆",
+            "title": "Guidance & Counseling",
+            "description": "Regular mentorship sessions, career guidance, and character development programs.",
+            "detail": "🤝 Guidance Session: Weekly mentorship"
+        }
+    ],
+    "resources": [
+        { "icon": "📚", "title": "Library", "description": "Well-stocked library with storybooks, reference materials, and CBC resources." },
+        { "icon": "💻", "title": "Computer Lab", "description": "Modern computers with internet access for Digital Literacy lessons." },
+        { "icon": "📖", "title": "CBC Learning Materials", "description": "Approved textbooks, activity books, and digital resources." }
+    ],
+    "assessment": [
+        { "type": "Continuous Assessment Tests (CATs)", "frequency": "Every 4-5 weeks", "purpose": "Monitor progress and identify areas for improvement" },
+        { "type": "End of Term Exams", "frequency": "Termly", "purpose": "Comprehensive termly evaluation" },
+        { "type": "Projects & Practicals", "frequency": "Ongoing", "purpose": "CBC competency-based assessment" },
+        { "type": "Termly Report", "frequency": "End of each term", "purpose": "Detailed feedback to parents" },
+        { "type": "Parent-Teacher Conferences", "frequency": "Termly", "purpose": "Discuss learner progress" }
+    ],
+    "school_hours": {
+        "morning": "8:00 AM - 12:30 PM",
+        "morning_desc": "Lessons, assemblies, and morning activities",
+        "lunch": "12:30 PM - 1:30 PM",
+        "lunch_desc": "Meals and supervised break",
+        "afternoon": "1:30 PM - 3:30 PM",
+        "afternoon_desc": "Lessons, clubs, and co-curricular"
+    },
+    "co_curricular": {
+        "sports": ["Football (Boys & Girls)", "Netball", "Athletics", "Swimming (Planned)"],
+        "clubs": ["Drama & Music Club", "Chess Club", "Scouts", "Debate Club", "Journalism Club"],
+        "spiritual": ["Morning Devotions", "Christian Union (CU)", "Bible Study", "Chapel Services"]
+    },
+    "calendar": [
+        { "term": "Term 1", "opening": "To be announced", "closing": "To be announced", "half_term": "To be announced" },
+        { "term": "Term 2", "opening": "To be announced", "closing": "To be announced", "half_term": "To be announced" },
+        { "term": "Term 3", "opening": "To be announced", "closing": "To be announced", "half_term": "To be announced" }
+    ],
+    "downloads": [
+        { "name": "📅 Academic Calendar", "link": "assets/Academic-Calendar-2026.pdf" },
+        { "name": "📖 Subject Summary", "link": "assets/Subject-Summary.pdf" },
+        { "name": "📘 CBC Parent Guide", "link": "assets/CBC-Guide.pdf" }
+    ]
+}

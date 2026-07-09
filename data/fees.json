@@ -1,0 +1,17 @@
+{
+    "playgroup": 6500,
+    "pp1": 7000,
+    "pp2": 7500,
+    "grade1-3": 7800,
+    "grade4-5": 8100,
+    "grade6": 10800,
+    "grade7-8": 9500,
+    "grade9": 14700,
+    "meals": 3900,
+    "transport": {
+        "imara": 7000,
+        "aakobil": 6000,
+        "pipeline": 6000,
+        "kwanjenga": 6000
+    }
+}

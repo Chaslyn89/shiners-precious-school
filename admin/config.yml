@@ -1,0 +1,61 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - name: "general"
+        label: "General Settings"
+        file: "data/settings.json"
+        fields:
+          - { label: "School Phone", name: "phone", widget: "string" }
+          - { label: "Secondary Phone", name: "phone2", widget: "string" }
+          - { label: "Email", name: "email", widget: "string" }
+          - { label: "Director Name", name: "director_name", widget: "string" }
+          - { label: "Director Title", name: "director_title", widget: "string", default: "School Director" }
+          - { label: "Director Photo", name: "director_photo", widget: "image" }
+          - { label: "Welcome Message", name: "welcome_message", widget: "text" }
+          - { label: "Mission", name: "mission", widget: "text" }
+          - { label: "Vision", name: "vision", widget: "text" }
+          - { label: "Core Values", name: "core_values", widget: "text" }
+          - { label: "Admission Fee", name: "admission_fee", widget: "string", default: "KSh 1,000" }
+          - { label: "Meals Fee (per term)", name: "meals_fee", widget: "string", default: "KSh 3,900" }
+
+  - name: "news"
+    label: "News & Events"
+    folder: "data/news"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "date" }
+      - { label: "Content", name: "content", widget: "text" }
+      - { label: "Image", name: "image", widget: "image", required: false }
+
+  - name: "testimonials"
+    label: "Testimonials"
+    folder: "data/testimonials"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Parent Name", name: "name", widget: "string" }
+      - { label: "Child's Grade", name: "grade", widget: "string" }
+      - { label: "Review", name: "review", widget: "text" }
+      - { label: "Rating (1-5)", name: "rating", widget: "number", default: 5, min: 1, max: 5 }
+      - { label: "Date", name: "date", widget: "date" }
+
+  - name: "leadership"
+    label: "Leadership Team"
+    folder: "data/leadership"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Photo", name: "photo", widget: "image", required: false }
+      - { label: "Order", name: "order", widget: "number", default: 0, required: false }

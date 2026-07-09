@@ -1,0 +1,116 @@
+{
+    "hero_title": "School Uniform",
+    "hero_subtitle": "Maroon for Playgroup to Grade 6 | Navy Blue for Grade 7 to Grade 9",
+    "gallery": [
+        {
+            "image": "images/uniform-maroon-boy.jpg",
+            "alt": "Maroon uniform for boys",
+            "label": "Boys (Playgroup - Grade 6)",
+            "description": "Maroon Trousers + White Shirt",
+            "color": "800020"
+        },
+        {
+            "image": "images/uniform-maroon-girl.jpg",
+            "alt": "Maroon uniform for girls",
+            "label": "Girls (Playgroup - Grade 6)",
+            "description": "Hospital Hill Checked Dress",
+            "color": "800020"
+        },
+        {
+            "image": "images/uniform-navy-boy.jpg",
+            "alt": "Navy blue uniform for boys",
+            "label": "Boys (Grade 7 - 9)",
+            "description": "Navy Trousers + White Shirt",
+            "color": "1F3A93"
+        },
+        {
+            "image": "images/uniform-navy-girl.jpg",
+            "alt": "Navy blue uniform for girls",
+            "label": "Girls (Grade 7 - 9)",
+            "description": "Navy Skirt + White Blouse",
+            "color": "1F3A93"
+        }
+    ],
+    "comparison": {
+        "maroon": {
+            "boys": [
+                "Maroon trousers / shorts",
+                "White shirt",
+                "Maroon sweater with white stripes",
+                "Grey socks with maroon stripes",
+                "Black leather shoes",
+                "Maroon tracksuit with white stripes"
+            ],
+            "girls": [
+                "Checked maroon school dress (Hospital Hill pattern)",
+                "Maroon sweater with white stripes",
+                "White socks with maroon stripes",
+                "Black leather shoes",
+                "Maroon tracksuit with white stripes"
+            ]
+        },
+        "navy": {
+            "boys": [
+                "Navy blue trousers",
+                "White shirt",
+                "Maroon sweater with white stripes",
+                "Navy socks with maroon stripes",
+                "Black leather shoes",
+                "Maroon tracksuit with white stripes"
+            ],
+            "girls": [
+                "Navy blue skirt",
+                "White blouse",
+                "Maroon sweater with white stripes",
+                "Navy socks with maroon stripes",
+                "Black leather shoes",
+                "Maroon tracksuit with white stripes"
+            ]
+        }
+    },
+    "prices": [
+        { "item": "White shirt / blouse", "price": "800", "notes": "" },
+        { "item": "Maroon trousers (PG-Grade 6)", "price": "1,200", "notes": "" },
+        { "item": "Navy blue trousers (Grade 7-9)", "price": "1,200", "notes": "" },
+        { "item": "Hospital Hill checked dress", "price": "1,800", "notes": "Girls PG-Grade 6" },
+        { "item": "Navy blue skirt", "price": "1,200", "notes": "Girls Grade 7-9" },
+        { "item": "Maroon sweater with white stripes", "price": "1,500", "notes": "All levels" },
+        { "item": "Maroon tracksuit", "price": "2,000", "notes": "All levels" },
+        { "item": "Socks (pair)", "price": "300", "notes": "" },
+        { "item": "Black leather shoes", "price": "1,500", "notes": "Approximate" }
+    ],
+    "comparison_table": [
+        { "item": "Boys' Bottom", "level1": "Maroon trousers/shorts", "level2": "Navy blue trousers" },
+        { "item": "Girls' Dress/Skirt", "level1": "Hospital Hill checked dress", "level2": "Navy blue skirt" },
+        { "item": "Top (Boys)", "level1": "White shirt", "level2": "White shirt" },
+        { "item": "Top (Girls)", "level1": "White blouse", "level2": "White blouse" },
+        { "item": "Sweater", "level1": "Maroon with white stripes", "level2": "Maroon with white stripes" },
+        { "item": "Socks (Boys)", "level1": "Grey with maroon stripes", "level2": "Navy with maroon stripes" },
+        { "item": "Socks (Girls)", "level1": "White with maroon stripes", "level2": "Navy with maroon stripes" },
+        { "item": "Shoes", "level1": "Black leather shoes", "level2": "Black leather shoes" },
+        { "item": "Tracksuit", "level1": "Maroon with white stripes", "level2": "Maroon with white stripes" }
+    ],
+    "recommended_package": [
+        "2 White shirts / blouses",
+        "2 Uniform bottoms (trousers/skirt/dress)",
+        "1 School sweater",
+        "1 Tracksuit",
+        "2 Pairs of socks",
+        "1 Pair black leather shoes"
+    ],
+    "replacement_schedule": [
+        "Child outgrows current size",
+        "Damaged beyond repair",
+        "Faded or stained"
+    ],
+    "important_note": "All uniform items must be clearly labelled with your child's name and class.",
+    "care_instructions": {
+        "washing": "• Wash dark colors separately\n• Use cold/warm water\n• Avoid bleach\n• Iron while slightly damp",
+        "labelling": "• Label all items clearly\n• Use permanent marker or name tags\n• Include name and class\n• Replace labels when faded",
+        "shoe_care": "• Polish shoes weekly\n• Keep laces tied\n• Replace worn-out shoes promptly\n• Clean mud/dirt daily"
+    },
+    "where_to_buy": {
+        "whatsapp": "0720 994 337"
+    },
+    "download_link": "assets/Uniform-Guide.pdf"
+}

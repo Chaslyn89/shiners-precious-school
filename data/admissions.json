@@ -1,0 +1,99 @@
+{
+    "hero_title": "Admissions",
+    "hero_subtitle": "Join the Shinners Precious School Family | 2026 Enrollment Now Open",
+    "vacancy_status": [
+        { "level": "Playgroup", "status": "Open", "class": "vacancy-open" },
+        { "level": "PP1", "status": "Open", "class": "vacancy-open" },
+        { "level": "PP2", "status": "Open", "class": "vacancy-open" },
+        { "level": "Grade 1-3", "status": "Open", "class": "vacancy-open" },
+        { "level": "Grade 4-6", "status": "Limited Slots", "class": "vacancy-limited" },
+        { "level": "Grade 7-9", "status": "Limited Slots", "class": "vacancy-limited" }
+    ],
+    "why_enroll": [
+        { "icon": "📚", "title": "CBC Curriculum", "description": "Fully implemented Competency Based Curriculum with trained teachers." },
+        { "icon": "💻", "title": "Digital Literacy & French", "description": "ICT skills from Grade 1 and French from Grade 4." },
+        { "icon": "🚌", "title": "Safe Transport", "description": "Reliable school transport covering major Embakasi routes." },
+        { "icon": "🍎", "title": "Affordable Meals", "description": "Nutritious, optional meals program." },
+        { "icon": "⛪", "title": "Christian Values", "description": "Strong moral and spiritual foundation." },
+        { "icon": "🏆", "title": "Holistic Development", "description": "Sports, clubs, music, drama, and co-curricular activities." }
+    ],
+    "testimonials": [
+        {
+            "rating": "⭐ ⭐ ⭐ ⭐ ⭐",
+            "quote": "Shinners Precious School has transformed our child's confidence and academic performance. The teachers are dedicated and caring.",
+            "author": "Mrs. Wanjiku, Parent of Grade 4 Learner"
+        },
+        {
+            "rating": "⭐ ⭐ ⭐ ⭐ ⭐",
+            "quote": "The CBC implementation is excellent. My child loves the digital literacy classes and French lessons.",
+            "author": "Mr. Otieno, Parent of Grade 6 Learner"
+        },
+        {
+            "rating": "⭐ ⭐ ⭐ ⭐ ⭐",
+            "quote": "Affordable fees, great transport system, and wonderful Christian values. Best decision we made.",
+            "author": "Mr. Kamau, Parent of PP2 Learner"
+        }
+    ],
+    "age_requirements": [
+        { "level": "Playgroup", "age": "2 years" },
+        { "level": "PP1", "age": "3 years" },
+        { "level": "PP2", "age": "4 years" },
+        { "level": "Grade 1", "age": "5 years" },
+        { "level": "Grade 2", "age": "6 years" },
+        { "level": "Grade 3", "age": "7 years" },
+        { "level": "Grade 4", "age": "8 years" },
+        { "level": "Grade 5", "age": "9 years" },
+        { "level": "Grade 6", "age": "10 years" }
+    ],
+    "visit_message": "Visit Shinners Precious School for a tour and meet our teachers.",
+    "visit_hours": "Weekdays, 8:00 AM – 4:00 PM",
+    "visit_whatsapp": "https://wa.me/254720994337?text=Hello%2C%20I%20would%20like%20to%20book%20a%20school%20visit%20for%20my%20child.",
+    "steps": [
+        { "number": "1", "title": "Visit School", "description": "Visit Shinners Precious School in Embakasi for a tour and initial consultation." },
+        { "number": "2", "title": "Collect Form", "description": "Collect and fill the admission form from the school office." },
+        { "number": "3", "title": "Submit Documents", "description": "Submit required documents with the completed form." },
+        { "number": "4", "title": "Pay Admission Fee", "description": "Pay KSh 1,000 admission fee via bank or Mpesa." },
+        { "number": "5", "title": "Confirmation", "description": "Receive admission confirmation and reporting instructions." }
+    ],
+    "documents": [
+        {
+            "title": "📄 For All New Learners",
+            "items": ["Birth Certificate (copy)", "Passport Photos (2 recent)", "Immunization/Health Record", "Parent/Guardian ID Copies"]
+        },
+        {
+            "title": "📋 Transferring Learners",
+            "items": ["Previous School Report Card", "Transfer Letter from Previous School", "Leaving Certificate (if applicable)"]
+        },
+        {
+            "title": "💰 Payment",
+            "items": ["Admission Fee: KSh 1,000 (once)", "Term Fees (payable before term begins)", "Bank or Mpesa payment slip"]
+        }
+    ],
+    "faqs": [
+        {
+            "question": "Is there an entrance exam?",
+            "answer": "For transfer learners only. We conduct a simple assessment to place your child in the appropriate grade level."
+        },
+        {
+            "question": "Can fees be paid in installments?",
+            "answer": "Yes. Please contact the school administration to discuss installment arrangements."
+        },
+        {
+            "question": "Do you provide transport?",
+            "answer": "Yes. We cover Imara Daima, Pipeline, AA & KOBIL, and Kwanjenga routes. Transport is optional."
+        },
+        {
+            "question": "Do you provide meals?",
+            "answer": "Yes, optional meals program at KSh 3,900 per term. Nutritious lunch served daily."
+        },
+        {
+            "question": "When can admissions be done?",
+            "answer": "Admissions are open throughout the year, subject to vacancy availability."
+        }
+    ],
+    "form_endpoint": "https://formspree.io/f/mykaobba",
+    "admission_fee": "KSh 1,000",
+    "payment_info": "Payment via KCB Bank or Lipa Na Mpesa. No cash payments accepted.",
+    "bank_details": "KCB Utawala: A/C 1282776983",
+    "mpesa_details": "Lipa Na Mpesa: Paybill 522123, Account: 82747K-LearnerName-Class"
+}

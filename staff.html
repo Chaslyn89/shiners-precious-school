@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Meet the dedicated team of teachers and staff at Shinners Precious School. Our qualified CBC-trained educators are committed to excellence in education.">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Shinners Precious School">
+    <meta name="theme-color" content="#800020">
+    <meta property="og:title" content="Our Staff | Shinners Precious School">
+    <meta property="og:description" content="Meet our qualified and dedicated teachers committed to CBC excellence.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="images/logo.png">
+    <meta property="og:url" content="https://shinnersprecious.sc.ke/staff.html">
+    <title>Our Staff | Shinners Precious School | Dedicated Teachers</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <style>
+        .staff-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .staff-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+            text-align: center;
+        }
+        .staff-card:hover {
+            transform: translateY(-5px);
+        }
+        .staff-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        .staff-info {
+            padding: 20px;
+        }
+        .staff-name {
+            font-size: 1.3rem;
+            color: var(--maroon);
+            margin-bottom: 5px;
+        }
+        .staff-title {
+            color: var(--gold);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .staff-qualification {
+            font-size: 0.85rem;
+            color: var(--gray-dark);
+            margin-bottom: 10px;
+        }
+        .staff-subjects {
+            font-size: 0.85rem;
+            color: var(--navy);
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid var(--gray-medium);
+        }
+        .leadership-section {
+            background: linear-gradient(135deg, var(--maroon), var(--navy));
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+        }
+        .leadership-section h2 {
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+        .leadership-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .leader-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+        }
+        .leader-card .staff-name {
+            color: var(--gold);
+        }
+        .stats-note {
+            background: var(--gray-light);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 30px;
+        }
+        .info-note {
+            background: #fff3cd;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 13px;
+        }
+        @media (max-width: 768px) {
+            .staff-image {
+                height: 200px;
+            }
+            .leadership-section {
+                padding: 25px;
+            }
+        }
+
+        /* Fix navbar overflow - dropdown fix */
+        .navbar,
+        header,
+        nav {
+            overflow: visible !important;
+        }
+        
+        /* Dropdown styles - NO YELLOW HIGHLIGHTING */
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-content {
+            display: none;
+            flex-direction: column;
+            background: var(--maroon);
+            min-width: 160px;
+            border-radius: 8px;
+            margin-top: 5px;
+            overflow: hidden;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .dropdown-content a {
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            display: block;
+            background: var(--maroon);
+            transition: all 0.3s;
+        }
+        .dropdown-content a:hover {
+            background: var(--gold);
+            color: var(--maroon-dark);
+        }
+        .dropdown-content a:focus,
+        .dropdown-content a:active,
+        .dropdown-content a:focus-visible {
+            background: var(--maroon);
+            color: white;
+            outline: none;
+        }
+        @media (min-width: 769px) {
+            .dropdown:hover .dropdown-content {
+                display: flex;
+            }
+        }
+        @media (max-width: 768px) {
+            .dropdown-content {
+                position: static;
+                background: var(--maroon-light);
+                margin-top: 5px;
+                box-shadow: none;
+            }
+            .dropdown.active .dropdown-content {
+                display: flex;
+            }
+            .dropdown > a::after {
+                content: " ▼";
+                font-size: 10px;
+            }
+            .dropdown-content a {
+                color: white !important;
+                background: var(--maroon-light) !important;
+            }
+        }
+        
+        /* Active navigation link */
+        .nav-links li a.active {
+            color: var(--gold);
+            border-bottom: 2px solid var(--gold);
+        }
+        
+        /* WhatsApp float button - show text on ALL devices */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50px;
+            width: auto;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s;
+        }
+        .whatsapp-float:hover {
+            background-color: #20b859;
+            transform: scale(1.05);
+        }
+        @media (max-width: 480px) {
+            .whatsapp-float {
+                padding: 8px 14px;
+                border-radius: 50px;
+                font-size: 12px;
+                bottom: 15px;
+                right: 15px;
+            }
+            .whatsapp-float span {
+                display: inline !important;
+                font-size: 12px;
+            }
+            .whatsapp-float::before {
+                content: none;
+            }
+        }
+        
+        /* Back to top button with label */
+        #back-to-top {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            background: var(--maroon);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            width: auto;
+            padding: 10px 18px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 100;
+            display: none;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        #back-to-top:hover {
+            background: var(--maroon-dark);
+            transform: translateY(-3px);
+        }
+
+        /* Social media links in footer */
+        .social-footer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 5px;
+        }
+        .social-footer a {
+            color: white;
+            text-decoration: none;
+            font-size: 13px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s;
+            padding: 4px 0;
+        }
+        .social-footer a:hover {
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== ANNOUNCEMENT BAR ========== -->
+    <div id="announcement-bar" class="announcement-bar" style="display: flex; justify-content: space-between; align-items: center;">
+        <span>👩‍🏫 Meet Our Team | Qualified and CBC-Trained Teachers | Call <span id="header-phone">0720 994 337</span></span>
+        <span id="close-announcement" aria-label="Close announcement" style="cursor: pointer; font-size: 20px; padding: 0 10px;">&times;</span>
+    </div>
+
+    <!-- ========== HEADER & NAVIGATION ========== -->
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <img src="images/logo.png" alt="Shinners Precious School Logo" loading="lazy" onerror="this.style.display='none'">
+                <div class="logo-text">
+                    <h1>SHINNERS PRECIOUS SCHOOL</h1>
+                    <p>Excellence in Education | Playgroup - Grade 9</p>
+                </div>
+            </div>
+            
+            <div class="hamburger" id="hamburger" role="button" aria-label="Menu" tabindex="0">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <nav aria-label="Main navigation">
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="academics.html">Academics</a></li>
+                    <li><a href="admissions.html">Admissions</a></li>
+                    <li><a href="fees.html">Fees</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li class="dropdown" id="moreDropdown">
+                        <a href="#" id="moreLink">More ▼</a>
+                        <div class="dropdown-content">
+                            <a href="uniform.html">Uniform</a>
+                            <a href="school-life.html">Life</a>
+                            <a href="news.html">News</a>
+                            <a href="staff.html" class="active">Staff</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1 id="staff-hero-title">Our Staff</h1>
+                <p id="staff-hero-subtitle">Meet the dedicated team shaping future leaders</p>
+            </div>
+        </section>
+
+        <!-- Leadership Team -->
+        <section class="section">
+            <div class="container">
+                <div class="leadership-section">
+                    <h2 class="section-title" style="color: var(--gold); margin-top: 0;">👨‍🏫 School Leadership</h2>
+                    <div id="staff-leadership" class="leadership-grid">
+                        <div class="leader-card">
+                            <img id="leader-img-0" src="images/staff-director.jpg" alt="School Director" style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%; margin-bottom: 15px;" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27150%27 height=%27150%27 viewBox=%270 0 150 150%27%3E%3Crect width=%27150%27 height=%27150%27 fill=%27%23800020%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dy=%27.3em%27 fill=%27white%27%3EDirector%3C/text%3E%3C/svg%3E'">
+                            <h3 id="leader-name-0" class="staff-name">Shem Oyugi</h3>
+                            <div id="leader-title-0" class="staff-title">School Director</div>
+                            <div id="leader-qual-0" class="staff-qualification">[Qualifications]</div>
+                        </div>
+                        <div class="leader-card">
+                            <img id="leader-img-1" src="images/staff-headteacher.jpg" alt="Headteacher" style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%; margin-bottom: 15px;" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27150%27 height=%27150%27 viewBox=%270 0 150 150%27%3E%3Crect width=%27150%27 height=%27150%27 fill=%27%231F3A93%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dy=%27.3em%27 fill=%27white%27%3EHeadteacher%3C/text%3E%3C/svg%3E'">
+                            <h3 id="leader-name-1" class="staff-name">Benard Ochanda</h3>
+                            <div id="leader-title-1" class="staff-title">Headteacher</div>
+                            <div id="leader-qual-1" class="staff-qualification">[Qualifications]</div>
+                        </div>
+                        <div class="leader-card">
+                            <img id="leader-img-2" src="images/deputy-placeholder.jpg" alt="Deputy Headteacher" style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%; margin-bottom: 15px;" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27150%27 height=%27150%27 viewBox=%270 0 150 150%27%3E%3Crect width=%27150%27 height=%27150%27 fill=%27%231F3A93%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dy=%27.3em%27 fill=%27white%27%3EDeputy%3C/text%3E%3C/svg%3E'">
+                            <h3 id="leader-name-2" class="staff-name">[DEPUTY NAME]</h3>
+                            <div id="leader-title-2" class="staff-title">Deputy Headteacher</div>
+                            <div id="leader-qual-2" class="staff-qualification">[Qualifications]</div>
+                        </div>
+                        <div class="leader-card">
+                            <img id="leader-img-3" src="images/academic-placeholder.jpg" alt="Academic Coordinator" style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%; margin-bottom: 15px;" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27150%27 height=%27150%27 viewBox=%270 0 150 150%27%3E%3Crect width=%27150%27 height=%27150%27 fill=%27%23800020%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dy=%27.3em%27 fill=%27white%27%3EAcademic%3C/text%3E%3C/svg%3E'">
+                            <h3 id="leader-name-3" class="staff-name">[ACADEMIC COORDINATOR]</h3>
+                            <div id="leader-title-3" class="staff-title">Academic Coordinator</div>
+                            <div id="leader-qual-3" class="staff-qualification">[Qualifications]</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Teaching Staff -->
+        <section class="section section-light">
+            <div class="container">
+                <h2 class="section-title">📚 Our Teaching Staff</h2>
+                <p style="text-align: center; max-width: 800px; margin: 0 auto 30px auto;">Our qualified and experienced teachers are trained in the Competency Based Curriculum (CBC) and committed to learner success.</p>
+                
+                <div id="staff-teachers" class="staff-grid">
+                    <div class="staff-card">
+                        <img src="images/teacher-1.jpg" alt="Teacher" class="staff-image" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27300%27 height=%27250%27 viewBox=%270 0 300 250%27%3E%3Crect width=%27300%27 height=%27250%27 fill=%27%23800020%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dy=%27.3em%27 fill=%27white%27%3ETeacher%3C/text%3E%3C/svg%3E'">
+                        <div class="staff-info">
+                            <h3 class="staff-name">[Teacher Name]</h3>
+                            <div class="staff-title">[Subject/Level] Teacher</div>
+                            <div class="staff-qualification">B.Ed, [Specialization]</div>
+                            <div class="staff-subjects">Teaches: [Subjects]</div>
+                        </div>
+                    </div>
+                    <div class="staff-card">
+                        <img src="images/teacher-2.jpg" alt="Teacher" class="staff-image" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27300%27 height=%27250%27 viewBox=%270 0 300 250%27%3E%3Crect width=%27300%27 height=%27250%27 fill=%27%231F3A93%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dy=%27.3em%27 fill=%27white%27%3ETeacher%3C/text%3E%3C/svg%3E'">
+                        <div class="staff-info">
+                            <h3 class="staff-name">[Teacher Name]</h3>
+                            <div class="staff-title">[Subject/Level] Teacher</div>
+                            <div class="staff-qualification">B.Ed, [Specialization]</div>
+                            <div class="staff-subjects">Teaches: [Subjects]</div>
+                        </div>
+                    </div>
+                    <div class="staff-card">
+                        <img src="images/teacher-3.jpg" alt="Teacher" class="staff-image" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27300%27 height=%27250%27 viewBox=%270 0 300 250%27%3E%3Crect width=%27300%27 height=%27250%27 fill=%27%23D4AF37%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dy=%27.3em%27 fill=%27%235a0016%27%3ETeacher%3C/text%3E%3C/svg%3E'">
+                        <div class="staff-info">
+                            <h3 class="staff-name">[Teacher Name]</h3>
+                            <div class="staff-title">[Subject/Level] Teacher</div>
+                            <div class="staff-qualification">B.Ed, [Specialization]</div>
+                            <div class="staff-subjects">Teaches: [Subjects]</div>
+                        </div>
+                    </div>
+                    <div class="staff-card">
+                        <img src="images/teacher-4.jpg" alt="Teacher" class="staff-image" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27300%27 height=%27250%27 viewBox=%270 0 300 250%27%3E%3Crect width=%27300%27 height=%27250%27 fill=%27%23800020%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dy=%27.3em%27 fill=%27white%27%3ETeacher%3C/text%3E%3C/svg%3E'">
+                        <div class="staff-info">
+                            <h3 class="staff-name">[Teacher Name]</h3>
+                            <div class="staff-title">[Subject/Level] Teacher</div>
+                            <div class="staff-qualification">B.Ed, [Specialization]</div>
+                            <div class="staff-subjects">Teaches: [Subjects]</div>
+                        </div>
+                    </div>
+                    <div class="staff-card">
+                        <img src="images/teacher-5.jpg" alt="Teacher" class="staff-image" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27300%27 height=%27250%27 viewBox=%270 0 300 250%27%3E%3Crect width=%27300%27 height=%27250%27 fill=%27%231F3A93%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dy=%27.3em%27 fill=%27white%27%3ETeacher%3C/text%3E%3C/svg%3E'">
+                        <div class="staff-info">
+                            <h3 class="staff-name">[Teacher Name]</h3>
+                            <div class="staff-title">[Subject/Level] Teacher</div>
+                            <div class="staff-qualification">B.Ed, [Specialization]</div>
+                            <div class="staff-subjects">Teaches: [Subjects]</div>
+                        </div>
+                    </div>
+                    <div class="staff-card">
+                        <img src="images/teacher-6.jpg" alt="Teacher" class="staff-image" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27300%27 height=%27250%27 viewBox=%270 0 300 250%27%3E%3Crect width=%27300%27 height=%27250%27 fill=%27%23D4AF37%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dy=%27.3em%27 fill=%27%235a0016%27%3ETeacher%3C/text%3E%3C/svg%3E'">
+                        <div class="staff-info">
+                            <h3 class="staff-name">[Teacher Name]</h3>
+                            <div class="staff-title">[Subject/Level] Teacher</div>
+                            <div class="staff-qualification">B.Ed, [Specialization]</div>
+                            <div class="staff-subjects">Teaches: [Subjects]</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Support Staff -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">🛠️ Support Staff</h2>
+                <div id="staff-support" class="staff-grid">
+                    <div class="staff-card">
+                        <img src="images/staff-support-1.jpg" alt="Support Staff" class="staff-image" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27300%27 height=%27250%27 viewBox=%270 0 300 250%27%3E%3Crect width=%27300%27 height=%27250%27 fill=%27%23800020%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dy=%27.3em%27 fill=%27white%27%3ESupport%3C/text%3E%3C/svg%3E'">
+                        <div class="staff-info">
+                            <h3 class="staff-name">[Support Staff Name]</h3>
+                            <div class="staff-title">[Role - e.g., Administrative Assistant]</div>
+                        </div>
+                    </div>
+                    <div class="staff-card">
+                        <img src="images/staff-support-2.jpg" alt="Support Staff" class="staff-image" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27300%27 height=%27250%27 viewBox=%270 0 300 250%27%3E%3Crect width=%27300%27 height=%27250%27 fill=%27%231F3A93%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dy=%27.3em%27 fill=%27white%27%3ESupport%3C/text%3E%3C/svg%3E'">
+                        <div class="staff-info">
+                            <h3 class="staff-name">[Support Staff Name]</h3>
+                            <div class="staff-title">[Role - e.g., Accountant]</div>
+                        </div>
+                    </div>
+                    <div class="staff-card">
+                        <img src="images/staff-support-3.jpg" alt="Support Staff" class="staff-image" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27300%27 height=%27250%27 viewBox=%270 0 300 250%27%3E%3Crect width=%27300%27 height=%27250%27 fill=%27%23D4AF37%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dy=%27.3em%27 fill=%27%235a0016%27%3ESupport%3C/text%3E%3C/svg%3E'">
+                        <div class="staff-info">
+                            <h3 class="staff-name">[Support Staff Name]</h3>
+                            <div class="staff-title">[Role - e.g., Receptionist]</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Staff Statistics -->
+        <section class="section section-light">
+            <div class="container">
+                <div class="stats-note">
+                    <h3>👥 Our Team at a Glance</h3>
+                    <div id="staff-stats" class="stats-grid" style="margin-top: 20px;">
+                        <div class="stat-card">
+                            <div class="stat-number">35+</div>
+                            <div class="stat-label">Qualified Teachers</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">100%</div>
+                            <div class="stat-label">CBC Trained</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">10+</div>
+                            <div class="stat-label">Support Staff</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">5+</div>
+                            <div class="stat-label">Years Average Experience</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Join Our Team CTA -->
+        <section class="section" style="text-align: center;">
+            <div class="container">
+                <h2 class="section-title">📢 Join Our Team</h2>
+                <p>We are always looking for qualified, passionate teachers to join our team.</p>
+                <a href="contact.html" class="btn-primary" style="margin-top: 20px;">Submit Your Application →</a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px;">
+                
+                <div>
+                    <h3 style="color: var(--gold);">Shinners Precious School</h3>
+                    <p>P.O. Box 40-0521, Embakasi</p>
+                    <p>Nairobi, Kenya</p>
+                    <p>📞 <span id="footer-phone">0720 994 337</span> / <span id="footer-phone2">0726 314 846</span></p>
+                    <p>✉️ <span id="footer-email">shinnersprecious@gmail.com</span></p>
+                </div>
+                
+                <div>
+                    <h3 style="color: var(--gold);">Quick Links</h3>
+                    <p><a href="admissions.html" style="color: white;">Admissions</a></p>
+                    <p><a href="fees.html" style="color: white;">Fee Structure</a></p>
+                    <p><a href="uniform.html" style="color: white;">Uniform Guide</a></p>
+                    <p><a href="gallery.html" style="color: white;">Gallery</a></p>
+                    <p><a href="staff.html" style="color: white;">Our Staff</a></p>
+                </div>
+                
+                <div>
+                    <h3 style="color: var(--gold);">School Hours</h3>
+                    <p>Monday - Friday: 8:00 AM - 4:00 PM</p>
+                    <p>Saturday: 9:00 AM - 12:00 PM (Office only)</p>
+                    <p>Sunday: Closed</p>
+                </div>
+                
+                <div>
+                    <h3 style="color: var(--gold);">Location</h3>
+                    <p>Embakasi, near Imara Daima</p>
+                    <p><a href="https://maps.google.com/?q=Embakasi+Nairobi" target="_blank" style="color: #D4AF37;">View on Google Maps →</a></p>
+                    
+                    <h3 style="color: var(--gold); margin-top: 20px;">Follow Us</h3>
+                    <div class="social-footer">
+                        <a href="#">📘 Facebook</a>
+                        <a href="#">📸 Instagram</a>
+                        <a href="https://wa.me/254720994337">💬 WhatsApp</a>
+                        <a href="#">🎵 TikTok</a>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year">2026</span> Shinners Precious School. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========== WHATSAPP FLOAT ========== -->
+    <a href="https://wa.me/254720994337?text=Hello%2C%20I%20would%20like%20to%20learn%20more%20about%20the%20staff%20at%20Shinners%20Precious%20School." 
+       class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+        💬 <span>Admissions Help</span>
+    </a>
+
+    <!-- ========== BACK TO TOP ========== -->
+    <button id="back-to-top">↑ Page Up</button>
+
+    <script src="js/main.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/staff.js"></script>
+</body>
+</html>
