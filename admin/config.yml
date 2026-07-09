@@ -3,7 +3,7 @@ backend:
   branch: master
 
 # ====== CUSTOM BRANDING ======
-logo_url: "https://shinnerspreciousacademy.netlify.app/images/logo.png"
+logo_url: "https://shinners-precious-academy.netlify.app/images/logo.png"
 display_name: "Shinners Precious School"
 
 media_folder: "images/uploads"
