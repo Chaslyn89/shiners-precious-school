@@ -2,55 +2,35 @@
    SHINNERS PRECIOUS SCHOOL - CMS BRANDING
    ======================================== */
 
-/* ---- HIDE DEFAULT HEADER LOGO ---- */
-.decap-cms-header .decap-cms-logo {
-    display: none !important;
-}
-.decap-cms-logo {
-    display: none !important;
+/* ---- LOGIN PAGE ---- */
+.decap-cms-login-page {
+    background: linear-gradient(135deg, #800020 0%, #5a0016 100%) !important;
+    min-height: 100vh !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
 }
 
-/* ---- CUSTOM HEADER ---- */
+.decap-cms-login-box {
+    background: white !important;
+    border-radius: 16px !important;
+    padding: 40px !important;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4) !important;
+    border-top: 6px solid #D4AF37 !important;
+}
+
+/* ---- HEADER ---- */
 .decap-cms-header {
     background: #800020 !important;
-    padding: 12px 25px !important;
     border-bottom: 4px solid #D4AF37 !important;
+    padding: 12px 25px !important;
     min-height: 65px !important;
     display: flex !important;
     align-items: center !important;
 }
 
-.decap-cms-header .school-header {
-    display: flex !important;
-    align-items: center !important;
-    gap: 15px !important;
-    width: 100% !important;
-    color: white !important;
-}
-
-.decap-cms-header .school-header .school-logo {
-    width: 40px !important;
-    height: 40px !important;
-    background: url('https://shinnerspreciousacademy.netlify.app/images/logo.png') center/contain no-repeat !important;
-    border-radius: 50% !important;
-    border: 2px solid #D4AF37 !important;
-    flex-shrink: 0 !important;
-    background-color: white !important;
-}
-
-.decap-cms-header .school-header .school-name {
-    font-size: 20px !important;
-    font-weight: 700 !important;
-    color: white !important;
-    letter-spacing: 1px !important;
-}
-
-.decap-cms-header .school-header .school-tagline {
-    font-size: 12px !important;
-    color: #D4AF37 !important;
-    letter-spacing: 0.5px !important;
-    font-weight: 400 !important;
-    margin-left: 5px !important;
+.decap-cms-header .decap-cms-logo {
+    display: none !important;
 }
 
 /* ---- SIDEBAR ---- */
@@ -79,16 +59,11 @@
     border-left: 4px solid #D4AF37 !important;
 }
 
-/* ---- RESPONSIVE ---- */
-@media (max-width: 768px) {
-    .decap-cms-header .school-header .school-name {
-        font-size: 16px !important;
-    }
-    .decap-cms-header .school-header .school-tagline {
-        font-size: 11px !important;
-    }
-    .decap-cms-header .school-header .school-logo {
-        width: 32px !important;
-        height: 32px !important;
-    }
+/* ---- COLLECTION DESCRIPTIONS ---- */
+.decap-cms-sidebar-item .collection-description {
+    display: block !important;
+    font-size: 11px !important;
+    color: #888 !important;
+    font-weight: 400 !important;
+    margin-top: 2px !important;
 }
