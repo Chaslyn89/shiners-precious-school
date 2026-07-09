@@ -4,63 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shinners Precious School CMS</title>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="custom.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏫</text></svg>">
     <style>
-        /* Hide Decap CMS default header */
-        .decap-cms-header .decap-cms-logo {
-            display: none !important;
-        }
-        .decap-cms-logo {
-            display: none !important;
-        }
-        .decap-cms-header .decap-cms-header__link {
-            display: none !important;
-        }
-        
-        /* ========== CUSTOM HEADER ========== */
-        .decap-cms-header {
-            background: #800020 !important;
-            padding: 12px 25px !important;
-            border-bottom: 4px solid #D4AF37 !important;
-            min-height: 65px !important;
-            display: flex !important;
-            align-items: center !important;
-        }
-        
-        .decap-cms-header .school-header {
-            display: flex !important;
-            align-items: center !important;
-            gap: 15px !important;
-            width: 100% !important;
-            color: white !important;
-        }
-        
-        .decap-cms-header .school-header .school-logo {
-            width: 40px !important;
-            height: 40px !important;
-            background: url('https://shinnerspreciousacademy.netlify.app/images/logo.png') center/contain no-repeat !important;
-            border-radius: 50% !important;
-            border: 2px solid #D4AF37 !important;
-            flex-shrink: 0 !important;
-            background-color: white !important;
-        }
-        
-        .decap-cms-header .school-header .school-name {
-            font-size: 20px !important;
-            font-weight: 700 !important;
-            color: white !important;
-            letter-spacing: 1px !important;
-        }
-        
-        .decap-cms-header .school-header .school-tagline {
-            font-size: 12px !important;
-            color: #D4AF37 !important;
-            letter-spacing: 0.5px !important;
-            font-weight: 400 !important;
-            margin-left: 5px !important;
-        }
-        
-        /* ========== LOGIN PAGE ========== */
+        /* Login page styles */
         .decap-cms-login-page {
             background: linear-gradient(135deg, #800020 0%, #5a0016 100%) !important;
             min-height: 100vh !important;
@@ -114,44 +62,7 @@
             display: none !important;
         }
         
-        /* ========== SIDEBAR ========== */
-        .decap-cms-sidebar {
-            background: #1a1a2e !important;
-            border-right: 2px solid #D4AF37 !important;
-        }
-        
-        .decap-cms-sidebar-item {
-            color: #ccc !important;
-            font-weight: 500 !important;
-            padding: 12px 20px !important;
-            border-radius: 8px !important;
-            margin: 4px 10px !important;
-            transition: all 0.3s !important;
-        }
-        
-        .decap-cms-sidebar-item:hover {
-            background: rgba(128, 0, 32, 0.3) !important;
-            color: white !important;
-        }
-        
-        .decap-cms-sidebar-item-active {
-            background: #800020 !important;
-            color: #D4AF37 !important;
-            border-left: 4px solid #D4AF37 !important;
-        }
-        
-        /* ========== RESPONSIVE ========== */
         @media (max-width: 768px) {
-            .decap-cms-header .school-header .school-name {
-                font-size: 16px !important;
-            }
-            .decap-cms-header .school-header .school-tagline {
-                font-size: 11px !important;
-            }
-            .decap-cms-header .school-header .school-logo {
-                width: 32px !important;
-                height: 32px !important;
-            }
             .decap-cms-login-box {
                 padding: 30px 20px !important;
                 margin: 20px !important;
@@ -170,7 +81,8 @@
     <script>
         // Inject custom header after Decap CMS loads
         (function() {
-            const observer = new MutationObserver(function() {
+            // Try to inject immediately
+            function injectHeader() {
                 const header = document.querySelector('.decap-cms-header');
                 if (header && !header.querySelector('.school-header')) {
                     header.innerHTML = '';
@@ -183,32 +95,29 @@
                             </div>
                         </div>
                     `;
-                    observer.disconnect();
+                    return true;
                 }
-            });
-            
-            observer.observe(document.body, {
-                childList: true,
-                subtree: true
-            });
-            
-            // Also check immediately in case header already exists
-            setTimeout(function() {
-                const header = document.querySelector('.decap-cms-header');
-                if (header && !header.querySelector('.school-header')) {
-                    header.innerHTML = '';
-                    header.innerHTML = `
-                        <div class="school-header">
-                            <div class="school-logo"></div>
-                            <div>
-                                <span class="school-name">Shinners Precious School</span>
-                                <span class="school-tagline">Content Management System</span>
-                            </div>
-                        </div>
-                    `;
+                return false;
+            }
+
+            // Try immediately
+            if (!injectHeader()) {
+                // If not ready, wait for mutations
+                const observer = new MutationObserver(function() {
+                    if (injectHeader()) {
+                        observer.disconnect();
+                    }
+                });
+                observer.observe(document.body, {
+                    childList: true,
+                    subtree: true
+                });
+                // Also try after a delay
+                setTimeout(function() {
+                    injectHeader();
                     observer.disconnect();
-                }
-            }, 2000);
+                }, 3000);
+            }
         })();
     </script>
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
