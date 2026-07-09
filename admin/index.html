@@ -28,9 +28,21 @@
             max-width: 400px !important;
             width: 100% !important;
             text-align: center !important;
+            position: relative !important;
         }
         
-        /* School Logo on Login Page */
+        /* Hide default Decap CMS login title */
+        .decap-cms-login-box h1 {
+            display: none !important;
+        }
+        .decap-cms-login-box .decap-cms-login-title {
+            display: none !important;
+        }
+        .decap-cms-logo {
+            display: none !important;
+        }
+        
+        /* School Logo */
         .decap-cms-login-box .login-logo {
             display: block !important;
             margin: 0 auto 20px !important;
@@ -42,31 +54,26 @@
             background-color: white !important;
         }
         
-        /* School Name on Login Page */
+        /* School Name */
         .decap-cms-login-box .login-school-name {
             display: block !important;
-            font-size: 24px !important;
+            font-size: 22px !important;
             font-weight: 700 !important;
             color: #800020 !important;
             letter-spacing: 1px !important;
             margin-bottom: 5px !important;
         }
         
-        .decap-cms-login-box .login-subtitle {
+        .decap-cms-login-box .login-school-motto {
             display: block !important;
-            color: #666 !important;
-            font-size: 14px !important;
-            margin-bottom: 25px !important;
+            font-size: 13px !important;
+            color: #D4AF37 !important;
+            font-weight: 600 !important;
+            letter-spacing: 2px !important;
+            margin-bottom: 20px !important;
         }
         
-        /* Hide Decap CMS default login elements */
-        .decap-cms-login-box h1 {
-            display: none !important;
-        }
-        .decap-cms-login-box .decap-cms-login-title {
-            display: none !important;
-        }
-        .decap-cms-logo {
+        .decap-cms-login-box .login-subtitle {
             display: none !important;
         }
 
@@ -80,7 +87,6 @@
             align-items: center !important;
         }
         
-        /* Hide default logo */
         .decap-cms-header .decap-cms-logo {
             display: none !important;
         }
@@ -88,7 +94,6 @@
             display: none !important;
         }
         
-        /* Custom Header Content */
         .decap-cms-header .school-header {
             display: flex !important;
             align-items: center !important;
@@ -108,14 +113,14 @@
         }
         
         .decap-cms-header .school-header .school-name {
-            font-size: 20px !important;
+            font-size: 18px !important;
             font-weight: 700 !important;
             color: white !important;
             letter-spacing: 1px !important;
         }
         
         .decap-cms-header .school-header .school-tagline {
-            font-size: 12px !important;
+            font-size: 11px !important;
             color: #D4AF37 !important;
             letter-spacing: 0.5px !important;
             font-weight: 400 !important;
@@ -148,13 +153,12 @@
             border-left: 4px solid #D4AF37 !important;
         }
 
-        /* ---- RESPONSIVE ---- */
         @media (max-width: 768px) {
             .decap-cms-header .school-header .school-name {
-                font-size: 16px !important;
+                font-size: 14px !important;
             }
             .decap-cms-header .school-header .school-tagline {
-                font-size: 11px !important;
+                font-size: 10px !important;
             }
             .decap-cms-header .school-header .school-logo {
                 width: 32px !important;
@@ -169,13 +173,54 @@
                 height: 60px !important;
             }
             .decap-cms-login-box .login-school-name {
-                font-size: 20px !important;
+                font-size: 18px !important;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Custom Login Content -->
+    <div id="custom-login" style="display: none; min-height: 100vh; background: linear-gradient(135deg, #800020, #5a0016); display: flex; justify-content: center; align-items: center; padding: 20px;">
+        <div style="background: white; border-radius: 16px; padding: 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.4); border-top: 6px solid #D4AF37; max-width: 400px; width: 100%; text-align: center;">
+            <div style="width: 80px; height: 80px; margin: 0 auto 20px; background: url('https://shinners-precious-academy.netlify.app/images/logo.png') center/contain no-repeat; border-radius: 50%; border: 3px solid #D4AF37; background-color: white;"></div>
+            <div style="font-size: 22px; font-weight: 700; color: #800020; letter-spacing: 1px; margin-bottom: 5px;">Shinners Precious School</div>
+            <div style="font-size: 13px; color: #D4AF37; font-weight: 600; letter-spacing: 2px; margin-bottom: 20px;">Determined to win</div>
+            <div id="login-form-placeholder"></div>
+        </div>
+    </div>
+
     <script>
+        // Inject custom login page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Wait for Decap CMS to load
+            setTimeout(function() {
+                // Hide default login and show custom login
+                const loginBox = document.querySelector('.decap-cms-login-box');
+                const loginPage = document.querySelector('.decap-cms-login-page');
+                
+                if (loginBox && loginPage) {
+                    // Hide default login elements
+                    loginBox.querySelector('h1')?.remove();
+                    loginBox.querySelector('.decap-cms-login-title')?.remove();
+                    
+                    // Add custom elements
+                    const logoDiv = document.createElement('div');
+                    logoDiv.className = 'login-logo';
+                    loginBox.prepend(logoDiv);
+                    
+                    const nameSpan = document.createElement('span');
+                    nameSpan.className = 'login-school-name';
+                    nameSpan.textContent = 'Shinners Precious School';
+                    loginBox.prepend(nameSpan);
+                    
+                    const mottoSpan = document.createElement('span');
+                    mottoSpan.className = 'login-school-motto';
+                    mottoSpan.textContent = 'Determined to win';
+                    loginBox.prepend(mottoSpan);
+                }
+            }, 500);
+        });
+
         // Inject custom header after Decap CMS loads
         (function() {
             function injectHeader() {
@@ -198,7 +243,6 @@
 
             // Try immediately
             if (!injectHeader()) {
-                // Wait for DOM changes
                 const observer = new MutationObserver(function() {
                     if (injectHeader()) {
                         observer.disconnect();
@@ -208,7 +252,6 @@
                     childList: true,
                     subtree: true
                 });
-                // Also try after delay
                 setTimeout(function() {
                     injectHeader();
                     observer.disconnect();
