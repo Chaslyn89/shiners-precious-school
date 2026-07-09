@@ -1,30 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shinners Precious School CMS</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏫</text></svg>">
     <style>
-        /* ---- CUSTOM HEADER ---- */
-        .decap-cms-header {
-            background: #800020 !important;
-            padding: 15px 25px !important;
-            border-bottom: 4px solid #D4AF37 !important;
-            min-height: 70px !important;
-            display: flex !important;
-            align-items: center !important;
-        }
-        
-        /* Hide default logo */
+        /* Hide Decap CMS default header */
         .decap-cms-header .decap-cms-logo {
             display: none !important;
         }
         .decap-cms-logo {
             display: none !important;
         }
+        .decap-cms-header .decap-cms-header__link {
+            display: none !important;
+        }
         
-        /* Custom header content */
-        .custom-header-content {
+        /* ========== CUSTOM HEADER ========== */
+        .decap-cms-header {
+            background: #800020 !important;
+            padding: 12px 25px !important;
+            border-bottom: 4px solid #D4AF37 !important;
+            min-height: 65px !important;
+            display: flex !important;
+            align-items: center !important;
+        }
+        
+        .decap-cms-header .school-header {
             display: flex !important;
             align-items: center !important;
             gap: 15px !important;
@@ -32,9 +35,9 @@
             color: white !important;
         }
         
-        .custom-header-content .header-logo {
-            width: 45px !important;
-            height: 45px !important;
+        .decap-cms-header .school-header .school-logo {
+            width: 40px !important;
+            height: 40px !important;
             background: url('https://shinnerspreciousacademy.netlify.app/images/logo.png') center/contain no-repeat !important;
             border-radius: 50% !important;
             border: 2px solid #D4AF37 !important;
@@ -42,22 +45,22 @@
             background-color: white !important;
         }
         
-        .custom-header-content .header-text .school-name {
+        .decap-cms-header .school-header .school-name {
             font-size: 20px !important;
             font-weight: 700 !important;
             color: white !important;
             letter-spacing: 1px !important;
-            line-height: 1.2 !important;
         }
         
-        .custom-header-content .header-text .school-tagline {
+        .decap-cms-header .school-header .school-tagline {
             font-size: 12px !important;
             color: #D4AF37 !important;
             letter-spacing: 0.5px !important;
             font-weight: 400 !important;
+            margin-left: 5px !important;
         }
         
-        /* ---- LOGIN PAGE ---- */
+        /* ========== LOGIN PAGE ========== */
         .decap-cms-login-page {
             background: linear-gradient(135deg, #800020 0%, #5a0016 100%) !important;
             min-height: 100vh !important;
@@ -88,7 +91,7 @@
             background-color: white !important;
         }
         
-        .decap-cms-login-box .login-school-name {
+        .decap-cms-login-box .login-title {
             display: block !important;
             font-size: 22px !important;
             font-weight: 700 !important;
@@ -102,14 +105,16 @@
             color: #666 !important;
             font-size: 14px !important;
             margin-bottom: 25px !important;
-            letter-spacing: 0.5px !important;
         }
         
         .decap-cms-login-box h1 {
             display: none !important;
         }
+        .decap-cms-login-box .decap-cms-login-title {
+            display: none !important;
+        }
         
-        /* ---- SIDEBAR ---- */
+        /* ========== SIDEBAR ========== */
         .decap-cms-sidebar {
             background: #1a1a2e !important;
             border-right: 2px solid #D4AF37 !important;
@@ -135,57 +140,77 @@
             border-left: 4px solid #D4AF37 !important;
         }
         
+        /* ========== RESPONSIVE ========== */
         @media (max-width: 768px) {
-            .custom-header-content .header-text .school-name {
-                font-size: 14px !important;
+            .decap-cms-header .school-header .school-name {
+                font-size: 16px !important;
             }
-            .custom-header-content .header-text .school-tagline {
-                font-size: 10px !important;
+            .decap-cms-header .school-header .school-tagline {
+                font-size: 11px !important;
             }
-            .custom-header-content .header-logo {
-                width: 35px !important;
-                height: 35px !important;
+            .decap-cms-header .school-header .school-logo {
+                width: 32px !important;
+                height: 32px !important;
+            }
+            .decap-cms-login-box {
+                padding: 30px 20px !important;
+                margin: 20px !important;
+            }
+            .decap-cms-login-box .login-logo {
+                width: 60px !important;
+                height: 60px !important;
+            }
+            .decap-cms-login-box .login-title {
+                font-size: 18px !important;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Load Decap CMS -->
-    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-    
     <script>
-        // This script injects the custom header after Decap CMS loads
-        (function injectHeader() {
-            // Wait for Decap CMS to load
-            const observer = new MutationObserver(function(mutations) {
+        // Inject custom header after Decap CMS loads
+        (function() {
+            const observer = new MutationObserver(function() {
                 const header = document.querySelector('.decap-cms-header');
-                if (header && !header.querySelector('.custom-header-content')) {
-                    // Clear the header
+                if (header && !header.querySelector('.school-header')) {
                     header.innerHTML = '';
-                    
-                    // Create custom header content
-                    const customDiv = document.createElement('div');
-                    customDiv.className = 'custom-header-content';
-                    customDiv.innerHTML = `
-                        <div class="header-logo"></div>
-                        <div class="header-text">
-                            <div class="school-name">Shinners Precious School</div>
-                            <div class="school-tagline">Content Management System</div>
+                    header.innerHTML = `
+                        <div class="school-header">
+                            <div class="school-logo"></div>
+                            <div>
+                                <span class="school-name">Shinners Precious School</span>
+                                <span class="school-tagline">Content Management System</span>
+                            </div>
                         </div>
                     `;
-                    header.appendChild(customDiv);
-                    
-                    // Stop observing once header is injected
                     observer.disconnect();
                 }
             });
             
-            // Start observing the document body for changes
             observer.observe(document.body, {
                 childList: true,
                 subtree: true
             });
+            
+            // Also check immediately in case header already exists
+            setTimeout(function() {
+                const header = document.querySelector('.decap-cms-header');
+                if (header && !header.querySelector('.school-header')) {
+                    header.innerHTML = '';
+                    header.innerHTML = `
+                        <div class="school-header">
+                            <div class="school-logo"></div>
+                            <div>
+                                <span class="school-name">Shinners Precious School</span>
+                                <span class="school-tagline">Content Management System</span>
+                            </div>
+                        </div>
+                    `;
+                    observer.disconnect();
+                }
+            }, 2000);
         })();
     </script>
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </body>
 </html>
