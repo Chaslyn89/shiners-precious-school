@@ -11,7 +11,8 @@
            ======================================== */
 
         /* ---- LOGIN PAGE ---- */
-        .decap-cms-login-page {
+        /* Target the login page by ID instead of class */
+        #login {
             background: linear-gradient(135deg, #800020 0%, #5a0016 100%) !important;
             min-height: 100vh !important;
             display: flex !important;
@@ -19,7 +20,9 @@
             align-items: center !important;
         }
         
-        .decap-cms-login-box {
+        /* Target the login box by ID */
+        .login-box,
+        [class*="login-box"] {
             background: white !important;
             border-radius: 16px !important;
             padding: 40px !important;
@@ -29,25 +32,14 @@
             width: 100% !important;
             text-align: center !important;
         }
-        
-        /* Hide default Decap CMS login title */
-        .decap-cms-login-box h1 {
-            display: none !important;
-        }
-        .decap-cms-login-box .decap-cms-login-title {
-            display: none !important;
-        }
-        .decap-cms-logo {
-            display: none !important;
-        }
-        
-        /* Custom Login Elements */
+
+        /* ---- CUSTOM LOGIN ELEMENTS ---- */
         .login-logo {
             display: block !important;
             margin: 0 auto 20px !important;
             width: 80px !important;
             height: 80px !important;
-            background: url('https://shinners-precious-academy.netlify.app/images/logo.png') center/contain no-repeat !important;
+            background: url('/images/logo.png') center/contain no-repeat !important;
             border-radius: 50% !important;
             border: 3px solid #D4AF37 !important;
             background-color: white !important;
@@ -71,23 +63,29 @@
             margin-bottom: 25px !important;
         }
 
+        .login-description {
+            display: block !important;
+            font-size: 13px !important;
+            color: #666 !important;
+            margin-bottom: 20px !important;
+        }
+
         /* ---- HEADER (After Login) ---- */
-        .decap-cms-header {
+        /* Target by attribute or common class */
+        [class*="header"] {
             background: #800020 !important;
-            padding: 12px 25px !important;
             border-bottom: 4px solid #D4AF37 !important;
+            padding: 12px 25px !important;
             min-height: 65px !important;
             display: flex !important;
             align-items: center !important;
         }
-        
-        .decap-cms-header .decap-cms-logo {
+
+        /* Hide default Decap CMS header elements */
+        [class*="header"] [class*="logo"] {
             display: none !important;
         }
-        .decap-cms-header .decap-cms-header__link {
-            display: none !important;
-        }
-        
+
         .school-header {
             display: flex !important;
             align-items: center !important;
@@ -99,7 +97,7 @@
         .school-header .school-logo {
             width: 40px !important;
             height: 40px !important;
-            background: url('https://shinners-precious-academy.netlify.app/images/logo.png') center/contain no-repeat !important;
+            background: url('/images/logo.png') center/contain no-repeat !important;
             border-radius: 50% !important;
             border: 2px solid #D4AF37 !important;
             flex-shrink: 0 !important;
@@ -122,12 +120,12 @@
         }
 
         /* ---- SIDEBAR ---- */
-        .decap-cms-sidebar {
+        [class*="sidebar"] {
             background: #1a1a2e !important;
             border-right: 2px solid #D4AF37 !important;
         }
-        
-        .decap-cms-sidebar-item {
+
+        [class*="sidebar-item"] {
             color: #ccc !important;
             font-weight: 500 !important;
             padding: 12px 20px !important;
@@ -136,17 +134,12 @@
             transition: all 0.3s !important;
         }
         
-        .decap-cms-sidebar-item:hover {
+        [class*="sidebar-item"]:hover {
             background: rgba(128, 0, 32, 0.3) !important;
             color: white !important;
         }
-        
-        .decap-cms-sidebar-item-active {
-            background: #800020 !important;
-            color: #D4AF37 !important;
-            border-left: 4px solid #D4AF37 !important;
-        }
 
+        /* ---- RESPONSIVE ---- */
         @media (max-width: 768px) {
             .school-header .school-name {
                 font-size: 14px !important;
@@ -158,7 +151,8 @@
                 width: 32px !important;
                 height: 32px !important;
             }
-            .decap-cms-login-box {
+            .login-box,
+            [class*="login-box"] {
                 padding: 30px 20px !important;
                 margin: 20px !important;
             }
@@ -173,77 +167,96 @@
     </style>
 </head>
 <body>
-    <!-- Load Decap CMS -->
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
     
     <script>
         // ========================================
-        // CUSTOM BRANDING - Applied After Decap CMS Loads
+        // CUSTOM BRANDING - Decap CMS v3 Compatible
         // ========================================
-        
+
         function applyBranding() {
+            let changed = false;
+
             // ---- LOGIN PAGE ----
-            const loginBox = document.querySelector('.decap-cms-login-box');
-            if (loginBox) {
-                // Check if custom elements already exist
-                if (!loginBox.querySelector('.login-logo')) {
-                    // Add logo
-                    const logo = document.createElement('div');
-                    logo.className = 'login-logo';
-                    loginBox.prepend(logo);
-                    
-                    // Add school name
-                    const name = document.createElement('div');
-                    name.className = 'login-school-name';
-                    name.textContent = 'Shinners Precious School';
-                    loginBox.prepend(name);
-                    
-                    // Add motto
-                    const motto = document.createElement('div');
-                    motto.className = 'login-school-motto';
-                    motto.textContent = 'Determined to win';
-                    loginBox.prepend(motto);
-                }
+            // Try multiple selectors to find the login box
+            const loginBox = document.querySelector('.decap-cms-login-box, [class*="login-box"]');
+            if (loginBox && !loginBox.querySelector('.login-logo')) {
+                // Create branding container
+                const branding = document.createElement('div');
+                branding.className = 'login-branding';
+                branding.innerHTML = `
+                    <div class="login-logo"></div>
+                    <div class="login-school-name">Shinners Precious School</div>
+                    <div class="login-school-motto">Determined to win</div>
+                    <div class="login-description">Website Content Management System</div>
+                `;
+                loginBox.prepend(branding);
+                changed = true;
             }
-            
+
             // ---- HEADER ----
-            const header = document.querySelector('.decap-cms-header');
-            if (header) {
-                // Check if custom header already exists
-                if (!header.querySelector('.school-header')) {
-                    // Hide default logo
-                    const defaultLogo = header.querySelector('.decap-cms-logo');
-                    if (defaultLogo) defaultLogo.style.display = 'none';
-                    
-                    // Create custom header
-                    const customHeader = document.createElement('div');
-                    customHeader.className = 'school-header';
-                    customHeader.innerHTML = `
-                        <div class="school-logo"></div>
-                        <div>
-                            <span class="school-name">Shinners Precious School</span>
-                            <span class="school-tagline">Content Management System</span>
-                        </div>
-                    `;
-                    header.prepend(customHeader);
-                }
+            // Find header by common attributes
+            const header = document.querySelector('[class*="header"]');
+            if (header && !header.querySelector('.school-header')) {
+                // Hide default logo
+                const defaultLogo = header.querySelector('[class*="logo"]');
+                if (defaultLogo) defaultLogo.style.display = 'none';
+                
+                // Create custom header
+                const customHeader = document.createElement('div');
+                customHeader.className = 'school-header';
+                customHeader.innerHTML = `
+                    <div class="school-logo"></div>
+                    <div>
+                        <span class="school-name">Shinners Precious School</span>
+                        <span class="school-tagline">Content Management System</span>
+                    </div>
+                `;
+                header.prepend(customHeader);
+                changed = true;
+            }
+
+            return changed;
+        }
+
+        // ========================================
+        // APPLY BRANDING SAFELY (No infinite loops)
+        // ========================================
+
+        let brandingApplied = false;
+
+        function tryApplyBranding() {
+            if (brandingApplied) return;
+            
+            if (applyBranding()) {
+                brandingApplied = true;
+                observer.disconnect();
             }
         }
 
-        // Try to apply branding immediately
-        setTimeout(applyBranding, 100);
-        setTimeout(applyBranding, 500);
-        setTimeout(applyBranding, 1000);
-        setTimeout(applyBranding, 2000);
-        
-        // Also watch for DOM changes
+        // Try on load
+        window.addEventListener('load', tryApplyBranding);
+
+        // Also try after delay for dynamic content
+        setTimeout(tryApplyBranding, 500);
+        setTimeout(tryApplyBranding, 1000);
+
+        // Watch for DOM changes (but disconnect once done)
         const observer = new MutationObserver(function() {
-            applyBranding();
+            if (!brandingApplied) {
+                tryApplyBranding();
+            }
         });
         observer.observe(document.body, {
             childList: true,
             subtree: true
         });
+
+        // Fallback: try again after 3 seconds
+        setTimeout(function() {
+            tryApplyBranding();
+            observer.disconnect();
+        }, 3000);
     </script>
 </body>
 </html>
