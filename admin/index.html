@@ -4,25 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shinners Precious School CMS</title>
-    <!-- Load Decap CMS -->
-    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
     <style>
-        /* ========================================
-           PROFESSIONAL CUSTOM STYLES FOR DECAP CMS
-           Shinners Precious School Branding
-           ======================================== */
-
-        /* ---- HIDE DEFAULT DECAP CMS HEADER ---- */
-        .decap-cms-header .decap-cms-logo {
-            display: none !important;
-        }
-        .decap-cms-logo {
-            display: none !important;
-        }
-        .decap-cms-header .decap-cms-header__link {
-            display: none !important;
-        }
-        
         /* ---- CUSTOM HEADER ---- */
         .decap-cms-header {
             background: #800020 !important;
@@ -33,14 +15,24 @@
             align-items: center !important;
         }
         
-        .decap-cms-header .custom-header {
+        /* Hide default logo */
+        .decap-cms-header .decap-cms-logo {
+            display: none !important;
+        }
+        .decap-cms-logo {
+            display: none !important;
+        }
+        
+        /* Custom header content */
+        .custom-header-content {
             display: flex !important;
             align-items: center !important;
             gap: 15px !important;
             width: 100% !important;
+            color: white !important;
         }
         
-        .decap-cms-header .custom-header .header-logo {
+        .custom-header-content .header-logo {
             width: 45px !important;
             height: 45px !important;
             background: url('https://shinnerspreciousacademy.netlify.app/images/logo.png') center/contain no-repeat !important;
@@ -50,12 +42,7 @@
             background-color: white !important;
         }
         
-        .decap-cms-header .custom-header .header-title {
-            display: flex !important;
-            flex-direction: column !important;
-        }
-        
-        .decap-cms-header .custom-header .header-title .school-name {
+        .custom-header-content .header-text .school-name {
             font-size: 20px !important;
             font-weight: 700 !important;
             color: white !important;
@@ -63,61 +50,13 @@
             line-height: 1.2 !important;
         }
         
-        .decap-cms-header .custom-header .header-title .school-tagline {
+        .custom-header-content .header-text .school-tagline {
             font-size: 12px !important;
             color: #D4AF37 !important;
             letter-spacing: 0.5px !important;
             font-weight: 400 !important;
         }
         
-        /* ---- SIDEBAR STYLING ---- */
-        .decap-cms-sidebar {
-            background: #1a1a2e !important;
-            border-right: 2px solid #D4AF37 !important;
-            padding-top: 10px !important;
-        }
-        
-        .decap-cms-sidebar-item {
-            color: #ccc !important;
-            font-weight: 500 !important;
-            padding: 12px 20px !important;
-            border-radius: 8px !important;
-            margin: 4px 10px !important;
-            transition: all 0.3s !important;
-            font-size: 14px !important;
-        }
-        
-        .decap-cms-sidebar-item:hover {
-            background: rgba(128, 0, 32, 0.3) !important;
-            color: white !important;
-        }
-        
-        .decap-cms-sidebar-item-active {
-            background: #800020 !important;
-            color: #D4AF37 !important;
-            border-left: 4px solid #D4AF37 !important;
-        }
-        
-        /* ---- CONTENT AREA ---- */
-        .decap-cms-content {
-            background: #f5f0eb !important;
-        }
-
-        /* ---- BUTTONS ---- */
-        .decap-cms-button-primary {
-            background: #800020 !important;
-            border: none !important;
-            border-radius: 6px !important;
-            padding: 10px 20px !important;
-            font-weight: 600 !important;
-            transition: all 0.3s !important;
-        }
-        .decap-cms-button-primary:hover {
-            background: #a00028 !important;
-            transform: translateY(-2px) !important;
-            box-shadow: 0 4px 12px rgba(128, 0, 32, 0.3) !important;
-        }
-
         /* ---- LOGIN PAGE ---- */
         .decap-cms-login-page {
             background: linear-gradient(135deg, #800020 0%, #5a0016 100%) !important;
@@ -169,70 +108,41 @@
         .decap-cms-login-box h1 {
             display: none !important;
         }
-        .decap-cms-login-box .decap-cms-login-title {
-            display: none !important;
+        
+        /* ---- SIDEBAR ---- */
+        .decap-cms-sidebar {
+            background: #1a1a2e !important;
+            border-right: 2px solid #D4AF37 !important;
         }
-
-        /* ---- LOGIN INPUTS ---- */
-        .decap-cms-login-box input[type="email"],
-        .decap-cms-login-box input[type="password"] {
-            border: 2px solid #e0d6cc !important;
+        
+        .decap-cms-sidebar-item {
+            color: #ccc !important;
+            font-weight: 500 !important;
+            padding: 12px 20px !important;
             border-radius: 8px !important;
-            padding: 12px 16px !important;
-            font-size: 16px !important;
-            transition: border-color 0.3s !important;
-            width: 100% !important;
-            margin-bottom: 15px !important;
-        }
-        .decap-cms-login-box input[type="email"]:focus,
-        .decap-cms-login-box input[type="password"]:focus {
-            border-color: #800020 !important;
-            outline: none !important;
-            box-shadow: 0 0 0 3px rgba(128, 0, 32, 0.1) !important;
-        }
-
-        .decap-cms-login-box button[type="submit"] {
-            background: #800020 !important;
-            border: none !important;
-            border-radius: 8px !important;
-            padding: 14px !important;
-            font-size: 16px !important;
-            font-weight: 600 !important;
-            color: white !important;
+            margin: 4px 10px !important;
             transition: all 0.3s !important;
-            width: 100% !important;
-            margin-top: 5px !important;
-            cursor: pointer !important;
         }
-        .decap-cms-login-box button[type="submit"]:hover {
-            background: #a00028 !important;
-            transform: translateY(-2px) !important;
-            box-shadow: 0 4px 15px rgba(128, 0, 32, 0.3) !important;
+        
+        .decap-cms-sidebar-item:hover {
+            background: rgba(128, 0, 32, 0.3) !important;
+            color: white !important;
         }
-
-        /* ---- RESPONSIVE ---- */
+        
+        .decap-cms-sidebar-item-active {
+            background: #800020 !important;
+            color: #D4AF37 !important;
+            border-left: 4px solid #D4AF37 !important;
+        }
+        
         @media (max-width: 768px) {
-            .decap-cms-header .custom-header .header-title .school-name {
+            .custom-header-content .header-text .school-name {
                 font-size: 14px !important;
             }
-            .decap-cms-header .custom-header .header-title .school-tagline {
+            .custom-header-content .header-text .school-tagline {
                 font-size: 10px !important;
             }
-            .decap-cms-login-box {
-                padding: 30px 20px !important;
-                margin: 20px !important;
-            }
-            .decap-cms-login-box .login-logo {
-                width: 60px !important;
-                height: 60px !important;
-            }
-            .decap-cms-login-box .login-school-name {
-                font-size: 18px !important;
-            }
-            .decap-cms-header {
-                padding: 10px 15px !important;
-            }
-            .decap-cms-header .custom-header .header-logo {
+            .custom-header-content .header-logo {
                 width: 35px !important;
                 height: 35px !important;
             }
@@ -240,31 +150,42 @@
     </style>
 </head>
 <body>
+    <!-- Load Decap CMS -->
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    
     <script>
-        // Custom JavaScript to inject header after CMS loads
-        document.addEventListener('DOMContentLoaded', function() {
-            // Wait for CMS to fully load
-            setTimeout(function() {
-                // Find the header
+        // This script injects the custom header after Decap CMS loads
+        (function injectHeader() {
+            // Wait for Decap CMS to load
+            const observer = new MutationObserver(function(mutations) {
                 const header = document.querySelector('.decap-cms-header');
-                if (header) {
-                    // Clear existing content
+                if (header && !header.querySelector('.custom-header-content')) {
+                    // Clear the header
                     header.innerHTML = '';
-                    // Add custom header
-                    const customHeader = document.createElement('div');
-                    customHeader.className = 'custom-header';
-                    customHeader.innerHTML = `
+                    
+                    // Create custom header content
+                    const customDiv = document.createElement('div');
+                    customDiv.className = 'custom-header-content';
+                    customDiv.innerHTML = `
                         <div class="header-logo"></div>
-                        <div class="header-title">
-                            <span class="school-name">Shinners Precious School</span>
-                            <span class="school-tagline">Content Management System</span>
+                        <div class="header-text">
+                            <div class="school-name">Shinners Precious School</div>
+                            <div class="school-tagline">Content Management System</div>
                         </div>
                     `;
-                    header.appendChild(customHeader);
+                    header.appendChild(customDiv);
+                    
+                    // Stop observing once header is injected
+                    observer.disconnect();
                 }
-            }, 1000);
-        });
+            });
+            
+            // Start observing the document body for changes
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+        })();
     </script>
-    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </body>
 </html>
