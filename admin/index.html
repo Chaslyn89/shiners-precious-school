@@ -4,11 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shinners Precious School CMS</title>
-    <!-- Load custom CSS -->
-    <link rel="stylesheet" href="custom.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏫</text></svg>">
 </head>
 <body>
+    <!-- Load Decap CMS first -->
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    
+    <!-- Load custom CSS AFTER Decap loads -->
+    <link rel="stylesheet" href="custom.css">
 </body>
 </html>
