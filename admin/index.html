@@ -6,61 +6,11 @@
     <title>Shinners Precious School CMS</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏫</text></svg>">
     <style>
-        /* Override the header with school branding */
-        .decap-cms-header .decap-cms-logo {
-            display: none !important;
-        }
-        .decap-cms-header .decap-cms-header__link {
-            display: none !important;
-        }
-        
-        .decap-cms-header {
-            background: #800020 !important;
-            padding: 10px 20px !important;
-            border-bottom: 3px solid #D4AF37 !important;
-            min-height: 60px !important;
-            display: flex !important;
-            align-items: center !important;
-        }
-        
-        /* Create a simple text-based header */
-        .decap-cms-header::after {
-            content: "🏫 Shinners Precious School CMS" !important;
-            font-size: 18px !important;
-            font-weight: 700 !important;
-            color: white !important;
-            letter-spacing: 1px !important;
-            display: block !important;
-            width: 100% !important;
-        }
-        
-        /* Sidebar styling */
-        .decap-cms-sidebar {
-            background: #1a1a2e !important;
-            border-right: 2px solid #D4AF37 !important;
-        }
-        
-        .decap-cms-sidebar-item {
-            color: #ccc !important;
-            font-weight: 500 !important;
-            padding: 10px 18px !important;
-            border-radius: 6px !important;
-            margin: 3px 8px !important;
-            transition: all 0.3s !important;
-        }
-        
-        .decap-cms-sidebar-item:hover {
-            background: rgba(128, 0, 32, 0.3) !important;
-            color: white !important;
-        }
-        
-        .decap-cms-sidebar-item-active {
-            background: #800020 !important;
-            color: #D4AF37 !important;
-            border-left: 4px solid #D4AF37 !important;
-        }
-        
-        /* Login page */
+        /* ========================================
+           SHINNERS PRECIOUS SCHOOL - CMS BRANDING
+           ======================================== */
+
+        /* ---- LOGIN PAGE ---- */
         .decap-cms-login-page {
             background: linear-gradient(135deg, #800020 0%, #5a0016 100%) !important;
             min-height: 100vh !important;
@@ -80,42 +30,192 @@
             text-align: center !important;
         }
         
-        .decap-cms-login-box::before {
-            content: "";
-            display: block;
-            margin: 0 auto 20px;
-            width: 80px;
-            height: 80px;
-            background: url('https://shinnerspreciousacademy.netlify.app/images/logo.png') center/contain no-repeat;
-            border-radius: 50%;
-            border: 3px solid #D4AF37;
+        /* School Logo on Login Page */
+        .decap-cms-login-box .login-logo {
+            display: block !important;
+            margin: 0 auto 20px !important;
+            width: 80px !important;
+            height: 80px !important;
+            background: url('https://shinners-precious-academy.netlify.app/images/logo.png') center/contain no-repeat !important;
+            border-radius: 50% !important;
+            border: 3px solid #D4AF37 !important;
+            background-color: white !important;
         }
         
+        /* School Name on Login Page */
+        .decap-cms-login-box .login-school-name {
+            display: block !important;
+            font-size: 24px !important;
+            font-weight: 700 !important;
+            color: #800020 !important;
+            letter-spacing: 1px !important;
+            margin-bottom: 5px !important;
+        }
+        
+        .decap-cms-login-box .login-subtitle {
+            display: block !important;
+            color: #666 !important;
+            font-size: 14px !important;
+            margin-bottom: 25px !important;
+        }
+        
+        /* Hide Decap CMS default login elements */
         .decap-cms-login-box h1 {
             display: none !important;
         }
-        
         .decap-cms-login-box .decap-cms-login-title {
             display: none !important;
         }
+        .decap-cms-logo {
+            display: none !important;
+        }
+
+        /* ---- HEADER (After Login) ---- */
+        .decap-cms-header {
+            background: #800020 !important;
+            padding: 12px 25px !important;
+            border-bottom: 4px solid #D4AF37 !important;
+            min-height: 65px !important;
+            display: flex !important;
+            align-items: center !important;
+        }
         
+        /* Hide default logo */
+        .decap-cms-header .decap-cms-logo {
+            display: none !important;
+        }
+        .decap-cms-header .decap-cms-header__link {
+            display: none !important;
+        }
+        
+        /* Custom Header Content */
+        .decap-cms-header .school-header {
+            display: flex !important;
+            align-items: center !important;
+            gap: 15px !important;
+            width: 100% !important;
+            color: white !important;
+        }
+        
+        .decap-cms-header .school-header .school-logo {
+            width: 40px !important;
+            height: 40px !important;
+            background: url('https://shinners-precious-academy.netlify.app/images/logo.png') center/contain no-repeat !important;
+            border-radius: 50% !important;
+            border: 2px solid #D4AF37 !important;
+            flex-shrink: 0 !important;
+            background-color: white !important;
+        }
+        
+        .decap-cms-header .school-header .school-name {
+            font-size: 20px !important;
+            font-weight: 700 !important;
+            color: white !important;
+            letter-spacing: 1px !important;
+        }
+        
+        .decap-cms-header .school-header .school-tagline {
+            font-size: 12px !important;
+            color: #D4AF37 !important;
+            letter-spacing: 0.5px !important;
+            font-weight: 400 !important;
+            margin-left: 5px !important;
+        }
+
+        /* ---- SIDEBAR ---- */
+        .decap-cms-sidebar {
+            background: #1a1a2e !important;
+            border-right: 2px solid #D4AF37 !important;
+        }
+        
+        .decap-cms-sidebar-item {
+            color: #ccc !important;
+            font-weight: 500 !important;
+            padding: 12px 20px !important;
+            border-radius: 8px !important;
+            margin: 4px 10px !important;
+            transition: all 0.3s !important;
+        }
+        
+        .decap-cms-sidebar-item:hover {
+            background: rgba(128, 0, 32, 0.3) !important;
+            color: white !important;
+        }
+        
+        .decap-cms-sidebar-item-active {
+            background: #800020 !important;
+            color: #D4AF37 !important;
+            border-left: 4px solid #D4AF37 !important;
+        }
+
+        /* ---- RESPONSIVE ---- */
         @media (max-width: 768px) {
-            .decap-cms-header::after {
-                font-size: 14px !important;
-                content: "🏫 Shinners CMS" !important;
+            .decap-cms-header .school-header .school-name {
+                font-size: 16px !important;
+            }
+            .decap-cms-header .school-header .school-tagline {
+                font-size: 11px !important;
+            }
+            .decap-cms-header .school-header .school-logo {
+                width: 32px !important;
+                height: 32px !important;
             }
             .decap-cms-login-box {
                 padding: 30px 20px !important;
                 margin: 20px !important;
             }
-            .decap-cms-login-box::before {
+            .decap-cms-login-box .login-logo {
                 width: 60px !important;
                 height: 60px !important;
+            }
+            .decap-cms-login-box .login-school-name {
+                font-size: 20px !important;
             }
         }
     </style>
 </head>
 <body>
+    <script>
+        // Inject custom header after Decap CMS loads
+        (function() {
+            function injectHeader() {
+                const header = document.querySelector('.decap-cms-header');
+                if (header && !header.querySelector('.school-header')) {
+                    header.innerHTML = '';
+                    header.innerHTML = `
+                        <div class="school-header">
+                            <div class="school-logo"></div>
+                            <div>
+                                <span class="school-name">Shinners Precious School</span>
+                                <span class="school-tagline">Content Management System</span>
+                            </div>
+                        </div>
+                    `;
+                    return true;
+                }
+                return false;
+            }
+
+            // Try immediately
+            if (!injectHeader()) {
+                // Wait for DOM changes
+                const observer = new MutationObserver(function() {
+                    if (injectHeader()) {
+                        observer.disconnect();
+                    }
+                });
+                observer.observe(document.body, {
+                    childList: true,
+                    subtree: true
+                });
+                // Also try after delay
+                setTimeout(function() {
+                    injectHeader();
+                    observer.disconnect();
+                }, 3000);
+            }
+        })();
+    </script>
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </body>
 </html>
