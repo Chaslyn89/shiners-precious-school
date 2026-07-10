@@ -1,16 +1,70 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shinners Precious School CMS</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏫</text></svg>">
-</head>
-<body>
-    <!-- Load Decap CMS first -->
-    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-    
-    <!-- Load custom CSS AFTER Decap loads -->
-    <link rel="stylesheet" href="custom.css">
-</body>
-</html>
+/* ========================================
+   SHINNERS PRECIOUS SCHOOL - CMS BRANDING
+   ======================================== */
+
+/* ---- LOGIN PAGE ---- */
+/* Target the login page container */
+div[class*="login-page"] {
+    background: linear-gradient(135deg, #800020 0%, #5a0016 100%) !important;
+    min-height: 100vh !important;
+}
+
+/* Target the login box */
+div[class*="login-box"] {
+    border-top: 6px solid #D4AF37 !important;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4) !important;
+}
+
+/* ---- HEADER ---- */
+header[class*="header"],
+div[class*="header"] {
+    background: #800020 !important;
+    border-bottom: 4px solid #D4AF37 !important;
+    padding: 12px 25px !important;
+    min-height: 65px !important;
+}
+
+/* Hide Decap's default logo */
+header[class*="header"] svg,
+header[class*="header"] img,
+div[class*="header"] svg,
+div[class*="header"] img {
+    display: none !important;
+}
+
+/* ---- SIDEBAR ---- */
+nav[class*="sidebar"],
+div[class*="sidebar"] {
+    background: #1a1a2e !important;
+    border-right: 2px solid #D4AF37 !important;
+}
+
+/* Sidebar items */
+[class*="sidebar-item"] {
+    color: #ccc !important;
+    font-weight: 500 !important;
+    padding: 12px 20px !important;
+    border-radius: 8px !important;
+    margin: 4px 10px !important;
+    transition: all 0.3s !important;
+}
+
+[class*="sidebar-item"]:hover {
+    background: rgba(128, 0, 32, 0.3) !important;
+    color: white !important;
+}
+
+[class*="sidebar-item"][class*="active"] {
+    background: #800020 !important;
+    color: #D4AF37 !important;
+    border-left: 4px solid #D4AF37 !important;
+}
+
+/* ---- COLLECTION DESCRIPTIONS ---- */
+[class*="collection-description"] {
+    display: block !important;
+    font-size: 11px !important;
+    color: #888 !important;
+    font-weight: 400 !important;
+    margin-top: 2px !important;
+}
