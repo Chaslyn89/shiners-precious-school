@@ -7,28 +7,25 @@ document.addEventListener('DOMContentLoaded', function() {
         const container = document.getElementById('news-container');
         if (!container) return;
 
-        // List of news files in data/news/ folder
-        // The CMS saves new articles here automatically
         const newsFiles = [
-            '2026-07-11-school-closing-dates',
             '2026-06-15-term-3-opens',
-            '2026-05-20-new-uniform'
+            'school-closing-dates',
+            'staff-meeting'
         ];
 
         let newsHTML = '';
         let counts = { academic: 0, 'school-news': 0, 'co-curricular': 0, admissions: 0, achievement: 0 };
+        let foundArticles = false;
 
-        // Sort files by date (newest first)
-        const sortedFiles = newsFiles.sort().reverse();
-
-        for (const file of sortedFiles) {
+        for (const file of newsFiles) {
             try {
                 const response = await fetch(`data/news/${file}.md`);
                 if (response.ok) {
                     const text = await response.text();
                     const parsed = parseMarkdown(text);
-                    if (parsed) {
-                        // Determine category class
+                    if (parsed && parsed.title) {
+                        foundArticles = true;
+                        
                         let categoryClass = 'school-news';
                         const categoryMap = {
                             'Academic': 'academic',
@@ -46,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div class="news-card">
                                 <div class="news-content">
                                     <span class="news-category ${categoryClass}">${parsed.category || 'School News'}</span>
-                                    <div class="news-date">📅 ${parsed.date}</div>
+                                    <div class="news-date">📅 ${parsed.date || 'Date not set'}</div>
                                     <h2 class="news-title">${parsed.title}</h2>
                                     <p class="news-excerpt">${parsed.content}</p>
                                     ${parsed.author ? `<p style="font-size: 12px; color: #999; margin-top: 10px;">✍️ ${parsed.author}</p>` : ''}
@@ -60,14 +57,13 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // Update category counts
         document.getElementById('cat-academic').textContent = counts.academic || 0;
         document.getElementById('cat-school').textContent = counts['school-news'] || 0;
         document.getElementById('cat-co').textContent = counts['co-curricular'] || 0;
         document.getElementById('cat-admissions').textContent = counts.admissions || 0;
         document.getElementById('cat-achievement').textContent = counts.achievement || 0;
 
-        if (newsHTML) {
+        if (foundArticles) {
             container.innerHTML = newsHTML;
         } else {
             container.innerHTML = `
@@ -91,9 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const dateMatch = frontmatter.match(/date:\s*([\d-]+)/);
             const categoryMatch = frontmatter.match(/category:\s*"([^"]*)"/);
             const authorMatch = frontmatter.match(/author:\s*"([^"]*)"/);
-            const imageMatch = frontmatter.match(/image:\s*"([^"]*)"/);
 
-            // Format date
             let formattedDate = dateMatch ? dateMatch[1] : '';
             if (formattedDate) {
                 const parts = formattedDate.split('-');
@@ -103,11 +97,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
             return {
                 title: titleMatch ? titleMatch[1] : 'Untitled',
-                date: formattedDate,
+                date: formattedDate || 'Date not set',
                 category: categoryMatch ? categoryMatch[1] : 'School News',
                 author: authorMatch ? authorMatch[1] : '',
-                content: content,
-                image: imageMatch ? imageMatch[1] : null
+                content: content
             };
         } catch (e) {
             return null;
@@ -122,7 +115,6 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const data = await response.json();
             
-            // Update the term dates in the sidebar
             const termContainer = document.querySelector('.term-card .term-dates');
             if (termContainer && data) {
                 termContainer.innerHTML = `
@@ -133,7 +125,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 `;
             }
             
-            // Update the term name in the sidebar
             const termTitle = document.querySelector('.term-card h3');
             if (termTitle && data.term_name) {
                 termTitle.textContent = `📅 ${data.term_name}`;
@@ -148,13 +139,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // ========== LOAD UPCOMING EVENTS ==========
     async function loadUpcomingEvents() {
         try {
-            // List of upcoming event files
             const eventFiles = [
                 'mid-term-break-begins',
                 'mid-term-break-ends'
             ];
             
             let eventsHTML = '';
+            let foundEvents = false;
             
             for (const file of eventFiles) {
                 try {
@@ -163,6 +154,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         const text = await response.text();
                         const parsed = parseEventMarkdown(text);
                         if (parsed) {
+                            foundEvents = true;
                             eventsHTML += `
                                 <div class="upcoming-event">
                                     <div class="event-date">
@@ -182,25 +174,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
             
-            // Update the upcoming events in the sidebar
-            const eventsContainer = document.querySelector('.sidebar-card .upcoming-event');
-            if (eventsContainer && eventsHTML) {
-                // Find the parent container and replace all events
-                const parentContainer = eventsContainer.parentElement;
-                if (parentContainer) {
-                    // Remove all existing events
-                    const existingEvents = parentContainer.querySelectorAll('.upcoming-event');
-                    existingEvents.forEach(el => el.remove());
-                    
-                    // Insert new events after the title
-                    const title = parentContainer.querySelector('.sidebar-title');
-                    if (title) {
-                        const tempDiv = document.createElement('div');
-                        tempDiv.innerHTML = eventsHTML;
-                        while (tempDiv.firstChild) {
-                            title.after(tempDiv.firstChild);
-                        }
-                    }
+            const eventsContainer = document.getElementById('news-upcoming-events');
+            if (eventsContainer) {
+                if (foundEvents) {
+                    eventsContainer.innerHTML = eventsHTML;
+                } else {
+                    eventsContainer.innerHTML = `
+                        <div style="padding: 10px 0; text-align: center; color: #999;">
+                            No upcoming events
+                        </div>
+                    `;
                 }
             }
             
@@ -222,16 +205,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const dayMatch = frontmatter.match(/day:\s*(\d+)/);
             const monthMatch = frontmatter.match(/month:\s*"([^"]*)"/);
             const descriptionMatch = frontmatter.match(/description:\s*"([^"]*)"/);
-            const dateMatch = frontmatter.match(/date:\s*"([^"]*)"/);
-            const orderMatch = frontmatter.match(/order:\s*(\d+)/);
 
             return {
                 title: titleMatch ? titleMatch[1] : 'Untitled',
                 day: dayMatch ? dayMatch[1] : '',
                 month: monthMatch ? monthMatch[1] : '',
-                description: descriptionMatch ? descriptionMatch[1] : '',
-                date: dateMatch ? dateMatch[1] : '',
-                order: orderMatch ? parseInt(orderMatch[1]) : 0
+                description: descriptionMatch ? descriptionMatch[1] : ''
             };
         } catch (e) {
             return null;
@@ -245,6 +224,5 @@ document.addEventListener('DOMContentLoaded', function() {
         await loadUpcomingEvents();
     }
 
-    // ========== LOAD ALL DATA ON PAGE LOAD ==========
     loadAllData();
 });
