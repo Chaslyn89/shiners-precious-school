@@ -7,15 +7,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const container = document.getElementById('news-container');
         if (!container) return;
 
-        // ====== AUTOMATIC FILE DETECTION ======
-        // Instead of a hardcoded list, we'll try to fetch all markdown files
-        // We'll use a naming pattern to find files
+        // List of all news files in data/news/
         const newsFiles = [
-            // We'll try to fetch these files
-            // If they don't exist, they'll be skipped
             'staff-meeting',
             'school-closing-dates',
-            '2026-07-11-school-closing-dates',
             '2026-06-15-term-3-opens',
             '2026-05-20-new-uniform'
         ];
@@ -24,24 +19,15 @@ document.addEventListener('DOMContentLoaded', function() {
         let counts = { academic: 0, 'school-news': 0, 'co-curricular': 0, admissions: 0, achievement: 0 };
         let foundArticles = false;
 
-        // Try to fetch each file
         for (const file of newsFiles) {
             try {
-                // Try both formats: with date and without
-                let response = await fetch(`data/news/${file}.md`);
-                
-                // If not found, try with .markdown extension
-                if (!response.ok) {
-                    response = await fetch(`data/news/${file}.markdown`);
-                }
-                
+                const response = await fetch(`data/news/${file}.md`);
                 if (response.ok) {
                     const text = await response.text();
                     const parsed = parseMarkdown(text);
                     if (parsed && parsed.title) {
                         foundArticles = true;
                         
-                        // Determine category class
                         let categoryClass = 'school-news';
                         const categoryMap = {
                             'Academic': 'academic',
@@ -73,7 +59,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // Update category counts
         document.getElementById('cat-academic').textContent = counts.academic || 0;
         document.getElementById('cat-school').textContent = counts['school-news'] || 0;
         document.getElementById('cat-co').textContent = counts['co-curricular'] || 0;
@@ -104,9 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const dateMatch = frontmatter.match(/date:\s*([\d-]+)/);
             const categoryMatch = frontmatter.match(/category:\s*"([^"]*)"/);
             const authorMatch = frontmatter.match(/author:\s*"([^"]*)"/);
-            const imageMatch = frontmatter.match(/image:\s*"([^"]*)"/);
 
-            // Format date
             let formattedDate = dateMatch ? dateMatch[1] : '';
             if (formattedDate) {
                 const parts = formattedDate.split('-');
@@ -119,14 +102,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 date: formattedDate || 'Date not set',
                 category: categoryMatch ? categoryMatch[1] : 'School News',
                 author: authorMatch ? authorMatch[1] : '',
-                content: content,
-                image: imageMatch ? imageMatch[1] : null
+                content: content
             };
         } catch (e) {
             return null;
         }
     }
 
-    // ========== LOAD NEWS ON PAGE LOAD ==========
     loadNews();
 });
