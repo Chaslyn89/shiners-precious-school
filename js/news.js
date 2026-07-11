@@ -1,4 +1,4 @@
-// ========== NEWS PAGE - Automatically loads ALL news from markdown files ==========
+// ========== NEWS PAGE - Loads news from markdown files ==========
 
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -8,53 +8,37 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!container) return;
 
         try {
-            // ====== STEP 1: Get the list of news files from GitHub ======
-            // Since we can't read folders directly in the browser,
-            // we use a known list and check which ones exist.
-            // When you add a new news article through the CMS, 
-            // it will be saved with the date prefix, so we can find it.
-            
-            // ====== STEP 2: Try to fetch all possible news files ======
-            // The CMS saves files with the date prefix, e.g. 2026-07-11-school-opening-date.md
-            // We'll try to find all files that match this pattern
-            
-            // We'll use the GitHub API to list files in the news folder
-            // This is the only reliable way to get all files without manual updates
+            // Use GitHub API to list all files in the news folder
             const apiUrl = 'https://api.github.com/repos/Chaslyn89/shiners-precious-school/contents/data/news';
             
             let newsFiles = [];
             let foundArticles = false;
             
             try {
-                // Try to get the list from GitHub API
                 const response = await fetch(apiUrl);
                 if (response.ok) {
                     const files = await response.json();
-                    // Filter for .md files
                     const mdFiles = files.filter(file => file.name.endsWith('.md'));
-                    // Extract just the filename without extension
                     newsFiles = mdFiles.map(file => file.name.replace('.md', ''));
-                    
                     console.log('Found news files:', newsFiles);
                 } else {
-                    // If GitHub API fails, fall back to a manual list
                     console.log('GitHub API not available, using fallback list');
                     newsFiles = [
-                        '2026-06-15-term-3-opens'
+                        'test-news',
+                        'shinners-precious-academy-parents-meeting'
                     ];
                 }
             } catch (e) {
                 console.log('Error fetching file list, using fallback list');
                 newsFiles = [
-                    '2026-06-15-term-3-opens'
+                    'test-news',
+                    'shinners-precious-academy-parents-meeting'
                 ];
             }
 
-            // ====== STEP 3: Load each news file ======
             let newsHTML = '';
             let counts = { academic: 0, 'school-news': 0, 'co-curricular': 0, admissions: 0, achievement: 0 };
 
-            // Sort files by date (newest first) - assuming filenames start with date
             const sortedFiles = newsFiles.sort().reverse();
 
             for (const file of sortedFiles) {
@@ -66,7 +50,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         if (parsed && parsed.title) {
                             foundArticles = true;
                             
-                            // Determine category class
                             let categoryClass = 'school-news';
                             const categoryMap = {
                                 'Academic': 'academic',
@@ -98,7 +81,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
 
-            // Update category counts
             document.getElementById('cat-academic').textContent = counts.academic || 0;
             document.getElementById('cat-school').textContent = counts['school-news'] || 0;
             document.getElementById('cat-co').textContent = counts['co-curricular'] || 0;
@@ -128,33 +110,44 @@ document.addEventListener('DOMContentLoaded', function() {
     // ========== PARSE MARKDOWN FRONTMATTER ==========
     function parseMarkdown(text) {
         try {
+            // Check if the file has frontmatter
             const match = text.match(/---\n([\s\S]*?)\n---\n([\s\S]*)/);
-            if (!match) return null;
+            if (!match) {
+                // If no frontmatter, treat the whole text as content
+                return {
+                    title: 'Untitled',
+                    date: 'Date not set',
+                    category: 'School News',
+                    author: '',
+                    content: text.trim()
+                };
+            }
 
             const frontmatter = match[1];
             const content = match[2].trim();
 
-            const titleMatch = frontmatter.match(/title:\s*"([^"]*)"/);
-            const dateMatch = frontmatter.match(/date:\s*([\d-]+)/);
-            const categoryMatch = frontmatter.match(/category:\s*"([^"]*)"/);
-            const authorMatch = frontmatter.match(/author:\s*"([^"]*)"/);
-            const imageMatch = frontmatter.match(/image:\s*"([^"]*)"/);
+            // Extract fields with or without quotes
+            const titleMatch = frontmatter.match(/title:\s*"?([^"\n]*?)"?\s*$/m);
+            const dateMatch = frontmatter.match(/date:\s*"?([^"\n]*?)"?\s*$/m);
+            const categoryMatch = frontmatter.match(/category:\s*"?([^"\n]*?)"?\s*$/m);
+            const authorMatch = frontmatter.match(/author:\s*"?([^"\n]*?)"?\s*$/m);
 
+            let title = titleMatch ? titleMatch[1].trim() : 'Untitled';
+            
             // Format date
-            let formattedDate = dateMatch ? dateMatch[1] : '';
-            if (formattedDate) {
+            let formattedDate = dateMatch ? dateMatch[1].trim() : '';
+            if (formattedDate && formattedDate.match(/\d{4}-\d{2}-\d{2}/)) {
                 const parts = formattedDate.split('-');
                 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
                 formattedDate = `${months[parseInt(parts[1]) - 1]} ${parseInt(parts[2])}, ${parts[0]}`;
             }
 
             return {
-                title: titleMatch ? titleMatch[1] : 'Untitled',
+                title: title,
                 date: formattedDate || 'Date not set',
-                category: categoryMatch ? categoryMatch[1] : 'School News',
-                author: authorMatch ? authorMatch[1] : '',
-                content: content,
-                image: imageMatch ? imageMatch[1] : null
+                category: categoryMatch ? categoryMatch[1].trim() : 'School News',
+                author: authorMatch ? authorMatch[1].trim() : '',
+                content: content || ''
             };
         } catch (e) {
             return null;
@@ -193,7 +186,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // ========== LOAD UPCOMING EVENTS ==========
     async function loadUpcomingEvents() {
         try {
-            // Use GitHub API to get list of event files
             const apiUrl = 'https://api.github.com/repos/Chaslyn89/shiners-precious-school/contents/data/upcoming-events';
             
             let eventFiles = [];
@@ -205,16 +197,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     const mdFiles = files.filter(file => file.name.endsWith('.md'));
                     eventFiles = mdFiles.map(file => file.name.replace('.md', ''));
                 } else {
-                    eventFiles = [
-                        'mid-term-break-begins',
-                        'mid-term-break-ends'
-                    ];
+                    eventFiles = [];
                 }
             } catch (e) {
-                eventFiles = [
-                    'mid-term-break-begins',
-                    'mid-term-break-ends'
-                ];
+                eventFiles = [];
             }
             
             let eventsHTML = '';
@@ -274,16 +260,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const frontmatter = match[1];
 
-            const titleMatch = frontmatter.match(/title:\s*"([^"]*)"/);
+            const titleMatch = frontmatter.match(/title:\s*"?([^"\n]*?)"?\s*$/m);
             const dayMatch = frontmatter.match(/day:\s*(\d+)/);
-            const monthMatch = frontmatter.match(/month:\s*"([^"]*)"/);
-            const descriptionMatch = frontmatter.match(/description:\s*"([^"]*)"/);
+            const monthMatch = frontmatter.match(/month:\s*"?([^"\n]*?)"?\s*$/m);
+            const descriptionMatch = frontmatter.match(/description:\s*"?([^"\n]*?)"?\s*$/m);
 
             return {
-                title: titleMatch ? titleMatch[1] : 'Untitled',
+                title: titleMatch ? titleMatch[1].trim() : 'Untitled',
                 day: dayMatch ? dayMatch[1] : '',
-                month: monthMatch ? monthMatch[1] : '',
-                description: descriptionMatch ? descriptionMatch[1] : ''
+                month: monthMatch ? monthMatch[1].trim() : '',
+                description: descriptionMatch ? descriptionMatch[1].trim() : ''
             };
         } catch (e) {
             return null;
