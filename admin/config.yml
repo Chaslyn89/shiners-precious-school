@@ -218,6 +218,9 @@ collections:
       - { label: "Category", name: "category", widget: "select", options: ["facilities", "classes", "events", "uniform", "staff"] }
       - { label: "Featured on Homepage", name: "featured", widget: "boolean", default: false }
 
+  # ========================================
+  # NEWS - FIXED: widget: text instead of markdown
+  # ========================================
   - name: "news"
     label: "📰 News & Events"
     label_singular: "News Article"
@@ -228,7 +231,7 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
-      - { label: "Content", name: "content", widget: "markdown" }
+      - { label: "Content", name: "content", widget: "text" }
       - { label: "Featured Image", name: "image", widget: "image", required: false }
       - { label: "Category", name: "category", widget: "select", options: ["Academic", "Co-Curricular", "School News", "Admissions", "Achievement"] }
 
