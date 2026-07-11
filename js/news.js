@@ -7,18 +7,21 @@ document.addEventListener('DOMContentLoaded', function() {
         const container = document.getElementById('news-container');
         if (!container) return;
 
-        // List of news files in order (newest first)
+        // List of news files in data/news/ folder
+        // The CMS saves new articles here automatically
         const newsFiles = [
+            '2026-07-11-school-closing-dates',
             '2026-06-15-term-3-opens',
             '2026-05-20-new-uniform'
         ];
 
-        // Additional files can be added here as they are created
-
         let newsHTML = '';
         let counts = { academic: 0, 'school-news': 0, 'co-curricular': 0, admissions: 0, achievement: 0 };
 
-        for (const file of newsFiles) {
+        // Sort files by date (newest first)
+        const sortedFiles = newsFiles.sort().reverse();
+
+        for (const file of sortedFiles) {
             try {
                 const response = await fetch(`data/news/${file}.md`);
                 if (response.ok) {
@@ -111,6 +114,137 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // ========== LOAD NEWS ON PAGE LOAD ==========
-    loadNews();
+    // ========== LOAD TERM DATES ==========
+    async function loadTermDates() {
+        try {
+            const response = await fetch('data/term-dates.json');
+            if (!response.ok) return;
+            
+            const data = await response.json();
+            
+            // Update the term dates in the sidebar
+            const termContainer = document.querySelector('.term-card .term-dates');
+            if (termContainer && data) {
+                termContainer.innerHTML = `
+                    <p><strong>Opening Date:</strong> ${data.opening_date || 'To be announced'}</p>
+                    <p><strong>Mid-Term Break:</strong> ${data.mid_term_break || 'To be announced'}</p>
+                    <p><strong>Closing Date:</strong> ${data.closing_date || 'To be announced'}</p>
+                    <p><strong>Next Holiday:</strong> ${data.next_holiday || 'To be announced'}</p>
+                `;
+            }
+            
+            // Update the term name in the sidebar
+            const termTitle = document.querySelector('.term-card h3');
+            if (termTitle && data.term_name) {
+                termTitle.textContent = `📅 ${data.term_name}`;
+            }
+            
+            console.log('Term dates loaded successfully');
+        } catch (e) {
+            console.log('Term dates: Using default content');
+        }
+    }
+
+    // ========== LOAD UPCOMING EVENTS ==========
+    async function loadUpcomingEvents() {
+        try {
+            // List of upcoming event files
+            const eventFiles = [
+                'mid-term-break-begins',
+                'mid-term-break-ends'
+            ];
+            
+            let eventsHTML = '';
+            
+            for (const file of eventFiles) {
+                try {
+                    const response = await fetch(`data/upcoming-events/${file}.md`);
+                    if (response.ok) {
+                        const text = await response.text();
+                        const parsed = parseEventMarkdown(text);
+                        if (parsed) {
+                            eventsHTML += `
+                                <div class="upcoming-event">
+                                    <div class="event-date">
+                                        <div class="event-day">${parsed.day}</div>
+                                        <div class="event-month">${parsed.month}</div>
+                                    </div>
+                                    <div class="event-info">
+                                        <h4>${parsed.title}</h4>
+                                        <p>${parsed.description}</p>
+                                    </div>
+                                </div>
+                            `;
+                        }
+                    }
+                } catch (e) {
+                    // Skip if file not found
+                }
+            }
+            
+            // Update the upcoming events in the sidebar
+            const eventsContainer = document.querySelector('.sidebar-card .upcoming-event');
+            if (eventsContainer && eventsHTML) {
+                // Find the parent container and replace all events
+                const parentContainer = eventsContainer.parentElement;
+                if (parentContainer) {
+                    // Remove all existing events
+                    const existingEvents = parentContainer.querySelectorAll('.upcoming-event');
+                    existingEvents.forEach(el => el.remove());
+                    
+                    // Insert new events after the title
+                    const title = parentContainer.querySelector('.sidebar-title');
+                    if (title) {
+                        const tempDiv = document.createElement('div');
+                        tempDiv.innerHTML = eventsHTML;
+                        while (tempDiv.firstChild) {
+                            title.after(tempDiv.firstChild);
+                        }
+                    }
+                }
+            }
+            
+            console.log('Upcoming events loaded successfully');
+        } catch (e) {
+            console.log('Upcoming events: Using default content');
+        }
+    }
+
+    // ========== PARSE EVENT MARKDOWN ==========
+    function parseEventMarkdown(text) {
+        try {
+            const match = text.match(/---\n([\s\S]*?)\n---\n([\s\S]*)/);
+            if (!match) return null;
+
+            const frontmatter = match[1];
+
+            const titleMatch = frontmatter.match(/title:\s*"([^"]*)"/);
+            const dayMatch = frontmatter.match(/day:\s*(\d+)/);
+            const monthMatch = frontmatter.match(/month:\s*"([^"]*)"/);
+            const descriptionMatch = frontmatter.match(/description:\s*"([^"]*)"/);
+            const dateMatch = frontmatter.match(/date:\s*"([^"]*)"/);
+            const orderMatch = frontmatter.match(/order:\s*(\d+)/);
+
+            return {
+                title: titleMatch ? titleMatch[1] : 'Untitled',
+                day: dayMatch ? dayMatch[1] : '',
+                month: monthMatch ? monthMatch[1] : '',
+                description: descriptionMatch ? descriptionMatch[1] : '',
+                date: dateMatch ? dateMatch[1] : '',
+                order: orderMatch ? parseInt(orderMatch[1]) : 0
+            };
+        } catch (e) {
+            return null;
+        }
+    }
+
+    // ========== LOAD ALL DATA ==========
+    async function loadAllData() {
+        await loadNews();
+        await loadTermDates();
+        await loadUpcomingEvents();
+    }
+
+    // ========== LOAD ALL DATA ON PAGE LOAD ==========
+    loadAllData();
 });

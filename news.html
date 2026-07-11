@@ -513,12 +513,12 @@
                     <div>
                         <!-- Term Card -->
                         <div class="sidebar-card term-card">
-                            <h3>📅 TERM 2 2026</h3>
-                            <div class="term-dates" id="news-term-dates">
-                                <p><strong>Opening Date:</strong> April 27, 2026</p>
-                                <p><strong>Mid-Term Break:</strong> June 24-28, 2026</p>
-                                <p><strong>Closing Date:</strong> July 31, 2026</p>
-                                <p><strong>Next Holiday:</strong> Aug 3-21, 2026</p>
+                            <h3 id="term-title">📅 TERM 2 2026</h3>
+                            <div class="term-dates" id="term-dates-container">
+                                <p><strong>Opening Date:</strong> <span id="term-opening">April 27, 2026</span></p>
+                                <p><strong>Mid-Term Break:</strong> <span id="term-mid">June 24-28, 2026</span></p>
+                                <p><strong>Closing Date:</strong> <span id="term-closing">July 31, 2026</span></p>
+                                <p><strong>Next Holiday:</strong> <span id="term-holiday">Aug 3-21, 2026</span></p>
                             </div>
                             <div class="info-note" style="background: rgba(255,255,255,0.1); padding: 10px; border-radius: 8px; margin-top: 15px; font-size: 12px;">
                                 📌 According to Ministry of Education calendar
@@ -529,22 +529,7 @@
                         <div class="sidebar-card">
                             <h3 class="sidebar-title">📅 Upcoming Events</h3>
                             <div id="news-upcoming-events">
-                                <div class="upcoming-event">
-                                    <div class="event-date"><div class="event-day">24</div><div class="event-month">JUN</div></div>
-                                    <div class="event-info"><h4>Mid-Term Break Begins</h4><p>School closes for half-term</p></div>
-                                </div>
-                                <div class="upcoming-event">
-                                    <div class="event-date"><div class="event-day">28</div><div class="event-month">JUN</div></div>
-                                    <div class="event-info"><h4>Mid-Term Break Ends</h4><p>Learners return to school</p></div>
-                                </div>
-                                <div class="upcoming-event">
-                                    <div class="event-date"><div class="event-day">31</div><div class="event-month">JUL</div></div>
-                                    <div class="event-info"><h4>Term 2 Closes</h4><p>End of second term</p></div>
-                                </div>
-                                <div class="upcoming-event">
-                                    <div class="event-date"><div class="event-day">3</div><div class="event-month">AUG</div></div>
-                                    <div class="event-info"><h4>August Holiday Begins</h4><p>3-week holiday</p></div>
-                                </div>
+                                <!-- Events will be loaded dynamically from data/upcoming-events/ -->
                             </div>
                             <div class="info-note" style="margin-top: 15px;">
                                 📌 <strong>Note:</strong> Dates are subject to change. Confirm with school office.

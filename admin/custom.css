@@ -1,0 +1,69 @@
+/* ========================================
+   SHINNERS PRECIOUS SCHOOL - CMS BRANDING
+   ======================================== */
+
+/* ---- LOGIN PAGE ---- */
+.decap-cms-login-page {
+    background: linear-gradient(135deg, #800020 0%, #5a0016 100%) !important;
+    min-height: 100vh !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.decap-cms-login-box {
+    background: white !important;
+    border-radius: 16px !important;
+    padding: 40px !important;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4) !important;
+    border-top: 6px solid #D4AF37 !important;
+}
+
+/* ---- HEADER ---- */
+.decap-cms-header {
+    background: #800020 !important;
+    border-bottom: 4px solid #D4AF37 !important;
+    padding: 12px 25px !important;
+    min-height: 65px !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.decap-cms-header .decap-cms-logo {
+    display: none !important;
+}
+
+/* ---- SIDEBAR ---- */
+.decap-cms-sidebar {
+    background: #1a1a2e !important;
+    border-right: 2px solid #D4AF37 !important;
+}
+
+.decap-cms-sidebar-item {
+    color: #ccc !important;
+    font-weight: 500 !important;
+    padding: 12px 20px !important;
+    border-radius: 8px !important;
+    margin: 4px 10px !important;
+    transition: all 0.3s !important;
+}
+
+.decap-cms-sidebar-item:hover {
+    background: rgba(128, 0, 32, 0.3) !important;
+    color: white !important;
+}
+
+.decap-cms-sidebar-item-active {
+    background: #800020 !important;
+    color: #D4AF37 !important;
+    border-left: 4px solid #D4AF37 !important;
+}
+
+/* ---- COLLECTION DESCRIPTIONS ---- */
+.decap-cms-sidebar-item .collection-description {
+    display: block !important;
+    font-size: 11px !important;
+    color: #888 !important;
+    font-weight: 400 !important;
+    margin-top: 2px !important;
+}
