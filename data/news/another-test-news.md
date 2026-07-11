@@ -1,6 +1,6 @@
 ---
-title: "Another Test news "
-date: 2026-07-11
-content: This is my second test news
+title: Academic Test News
+date: 2026-07-12
+content: This an academic Test news
 category: Academic
 ---
