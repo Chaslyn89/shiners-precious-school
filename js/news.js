@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 } else {
                     console.log('GitHub API not available, using fallback list');
                     newsFiles = [
+                        'another-test-news',
                         'test-news',
                         'shinners-precious-academy-parents-meeting'
                     ];
@@ -31,6 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
             } catch (e) {
                 console.log('Error fetching file list, using fallback list');
                 newsFiles = [
+                    'another-test-news',
                     'test-news',
                     'shinners-precious-academy-parents-meeting'
                 ];
@@ -63,13 +65,16 @@ document.addEventListener('DOMContentLoaded', function() {
                                 counts[categoryClass] = (counts[categoryClass] || 0) + 1;
                             }
 
+                            // Determine content: use frontmatter content OR body content
+                            let contentText = parsed.content || parsed.frontmatter_content || '';
+
                             newsHTML += `
                                 <div class="news-card">
                                     <div class="news-content">
                                         <span class="news-category ${categoryClass}">${parsed.category || 'School News'}</span>
                                         <div class="news-date">📅 ${parsed.date || 'Date not set'}</div>
                                         <h2 class="news-title">${parsed.title}</h2>
-                                        <p class="news-excerpt">${parsed.content}</p>
+                                        <p class="news-excerpt">${contentText}</p>
                                         ${parsed.author ? `<p style="font-size: 12px; color: #999; margin-top: 10px;">✍️ ${parsed.author}</p>` : ''}
                                     </div>
                                 </div>
@@ -119,18 +124,20 @@ document.addEventListener('DOMContentLoaded', function() {
                     date: 'Date not set',
                     category: 'School News',
                     author: '',
-                    content: text.trim()
+                    content: text.trim(),
+                    frontmatter_content: ''
                 };
             }
 
             const frontmatter = match[1];
-            const content = match[2].trim();
+            const bodyContent = match[2].trim();
 
             // Extract fields with or without quotes
             const titleMatch = frontmatter.match(/title:\s*"?([^"\n]*?)"?\s*$/m);
             const dateMatch = frontmatter.match(/date:\s*"?([^"\n]*?)"?\s*$/m);
             const categoryMatch = frontmatter.match(/category:\s*"?([^"\n]*?)"?\s*$/m);
             const authorMatch = frontmatter.match(/author:\s*"?([^"\n]*?)"?\s*$/m);
+            const contentMatch = frontmatter.match(/content:\s*"?([^"\n]*?)"?\s*$/m);
 
             let title = titleMatch ? titleMatch[1].trim() : 'Untitled';
             
@@ -142,14 +149,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 formattedDate = `${months[parseInt(parts[1]) - 1]} ${parseInt(parts[2])}, ${parts[0]}`;
             }
 
+            // Get content from body OR from frontmatter
+            let content = bodyContent || '';
+            let frontmatterContent = contentMatch ? contentMatch[1].trim() : '';
+
+            // If there's content in frontmatter and no body content, use frontmatter content
+            if (!content && frontmatterContent) {
+                content = frontmatterContent;
+            }
+
             return {
                 title: title,
                 date: formattedDate || 'Date not set',
                 category: categoryMatch ? categoryMatch[1].trim() : 'School News',
                 author: authorMatch ? authorMatch[1].trim() : '',
-                content: content || ''
+                content: content,
+                frontmatter_content: frontmatterContent
             };
         } catch (e) {
+            console.error('Error parsing markdown:', e);
             return null;
         }
     }
