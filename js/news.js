@@ -1,74 +1,125 @@
-// ========== NEWS PAGE - Loads news from markdown files ==========
+// ========== NEWS PAGE - Automatically loads ALL news from markdown files ==========
 
 document.addEventListener('DOMContentLoaded', function() {
 
-    // ========== LOAD NEWS ==========
+    // ========== LOAD ALL NEWS AUTOMATICALLY ==========
     async function loadNews() {
         const container = document.getElementById('news-container');
         if (!container) return;
 
-        const newsFiles = [
-            '2026-06-15-term-3-opens',
-            'school-closing-dates',
-            'staff-meeting'
-        ];
-
-        let newsHTML = '';
-        let counts = { academic: 0, 'school-news': 0, 'co-curricular': 0, admissions: 0, achievement: 0 };
-        let foundArticles = false;
-
-        for (const file of newsFiles) {
+        try {
+            // ====== STEP 1: Get the list of news files from GitHub ======
+            // Since we can't read folders directly in the browser,
+            // we use a known list and check which ones exist.
+            // When you add a new news article through the CMS, 
+            // it will be saved with the date prefix, so we can find it.
+            
+            // ====== STEP 2: Try to fetch all possible news files ======
+            // The CMS saves files with the date prefix, e.g. 2026-07-11-school-opening-date.md
+            // We'll try to find all files that match this pattern
+            
+            // We'll use the GitHub API to list files in the news folder
+            // This is the only reliable way to get all files without manual updates
+            const apiUrl = 'https://api.github.com/repos/Chaslyn89/shiners-precious-school/contents/data/news';
+            
+            let newsFiles = [];
+            let foundArticles = false;
+            
             try {
-                const response = await fetch(`data/news/${file}.md`);
+                // Try to get the list from GitHub API
+                const response = await fetch(apiUrl);
                 if (response.ok) {
-                    const text = await response.text();
-                    const parsed = parseMarkdown(text);
-                    if (parsed && parsed.title) {
-                        foundArticles = true;
-                        
-                        let categoryClass = 'school-news';
-                        const categoryMap = {
-                            'Academic': 'academic',
-                            'Co-Curricular': 'co-curricular',
-                            'School News': 'school-news',
-                            'Admissions': 'admissions',
-                            'Achievement': 'achievement'
-                        };
-                        if (parsed.category && categoryMap[parsed.category]) {
-                            categoryClass = categoryMap[parsed.category];
-                            counts[categoryClass] = (counts[categoryClass] || 0) + 1;
-                        }
-
-                        newsHTML += `
-                            <div class="news-card">
-                                <div class="news-content">
-                                    <span class="news-category ${categoryClass}">${parsed.category || 'School News'}</span>
-                                    <div class="news-date">📅 ${parsed.date || 'Date not set'}</div>
-                                    <h2 class="news-title">${parsed.title}</h2>
-                                    <p class="news-excerpt">${parsed.content}</p>
-                                    ${parsed.author ? `<p style="font-size: 12px; color: #999; margin-top: 10px;">✍️ ${parsed.author}</p>` : ''}
-                                </div>
-                            </div>
-                        `;
-                    }
+                    const files = await response.json();
+                    // Filter for .md files
+                    const mdFiles = files.filter(file => file.name.endsWith('.md'));
+                    // Extract just the filename without extension
+                    newsFiles = mdFiles.map(file => file.name.replace('.md', ''));
+                    
+                    console.log('Found news files:', newsFiles);
+                } else {
+                    // If GitHub API fails, fall back to a manual list
+                    console.log('GitHub API not available, using fallback list');
+                    newsFiles = [
+                        '2026-06-15-term-3-opens'
+                    ];
                 }
             } catch (e) {
-                // Skip if file not found
+                console.log('Error fetching file list, using fallback list');
+                newsFiles = [
+                    '2026-06-15-term-3-opens'
+                ];
             }
-        }
 
-        document.getElementById('cat-academic').textContent = counts.academic || 0;
-        document.getElementById('cat-school').textContent = counts['school-news'] || 0;
-        document.getElementById('cat-co').textContent = counts['co-curricular'] || 0;
-        document.getElementById('cat-admissions').textContent = counts.admissions || 0;
-        document.getElementById('cat-achievement').textContent = counts.achievement || 0;
+            // ====== STEP 3: Load each news file ======
+            let newsHTML = '';
+            let counts = { academic: 0, 'school-news': 0, 'co-curricular': 0, admissions: 0, achievement: 0 };
 
-        if (foundArticles) {
-            container.innerHTML = newsHTML;
-        } else {
+            // Sort files by date (newest first) - assuming filenames start with date
+            const sortedFiles = newsFiles.sort().reverse();
+
+            for (const file of sortedFiles) {
+                try {
+                    const response = await fetch(`data/news/${file}.md`);
+                    if (response.ok) {
+                        const text = await response.text();
+                        const parsed = parseMarkdown(text);
+                        if (parsed && parsed.title) {
+                            foundArticles = true;
+                            
+                            // Determine category class
+                            let categoryClass = 'school-news';
+                            const categoryMap = {
+                                'Academic': 'academic',
+                                'Co-Curricular': 'co-curricular',
+                                'School News': 'school-news',
+                                'Admissions': 'admissions',
+                                'Achievement': 'achievement'
+                            };
+                            if (parsed.category && categoryMap[parsed.category]) {
+                                categoryClass = categoryMap[parsed.category];
+                                counts[categoryClass] = (counts[categoryClass] || 0) + 1;
+                            }
+
+                            newsHTML += `
+                                <div class="news-card">
+                                    <div class="news-content">
+                                        <span class="news-category ${categoryClass}">${parsed.category || 'School News'}</span>
+                                        <div class="news-date">📅 ${parsed.date || 'Date not set'}</div>
+                                        <h2 class="news-title">${parsed.title}</h2>
+                                        <p class="news-excerpt">${parsed.content}</p>
+                                        ${parsed.author ? `<p style="font-size: 12px; color: #999; margin-top: 10px;">✍️ ${parsed.author}</p>` : ''}
+                                    </div>
+                                </div>
+                            `;
+                        }
+                    }
+                } catch (e) {
+                    // Skip if file not found
+                }
+            }
+
+            // Update category counts
+            document.getElementById('cat-academic').textContent = counts.academic || 0;
+            document.getElementById('cat-school').textContent = counts['school-news'] || 0;
+            document.getElementById('cat-co').textContent = counts['co-curricular'] || 0;
+            document.getElementById('cat-admissions').textContent = counts.admissions || 0;
+            document.getElementById('cat-achievement').textContent = counts.achievement || 0;
+
+            if (foundArticles) {
+                container.innerHTML = newsHTML;
+            } else {
+                container.innerHTML = `
+                    <div class="empty-text">
+                        📭 No news articles yet. Check back soon!
+                    </div>
+                `;
+            }
+            
+        } catch (e) {
+            console.error('Error loading news:', e);
             container.innerHTML = `
-                <div class="empty-text">
-                    📭 No news articles yet. Check back soon!
+                <div class="error-text">
+                    ❌ Could not load news articles. Please try again later.
                 </div>
             `;
         }
@@ -87,7 +138,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const dateMatch = frontmatter.match(/date:\s*([\d-]+)/);
             const categoryMatch = frontmatter.match(/category:\s*"([^"]*)"/);
             const authorMatch = frontmatter.match(/author:\s*"([^"]*)"/);
+            const imageMatch = frontmatter.match(/image:\s*"([^"]*)"/);
 
+            // Format date
             let formattedDate = dateMatch ? dateMatch[1] : '';
             if (formattedDate) {
                 const parts = formattedDate.split('-');
@@ -100,7 +153,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 date: formattedDate || 'Date not set',
                 category: categoryMatch ? categoryMatch[1] : 'School News',
                 author: authorMatch ? authorMatch[1] : '',
-                content: content
+                content: content,
+                image: imageMatch ? imageMatch[1] : null
             };
         } catch (e) {
             return null;
@@ -139,10 +193,29 @@ document.addEventListener('DOMContentLoaded', function() {
     // ========== LOAD UPCOMING EVENTS ==========
     async function loadUpcomingEvents() {
         try {
-            const eventFiles = [
-                'mid-term-break-begins',
-                'mid-term-break-ends'
-            ];
+            // Use GitHub API to get list of event files
+            const apiUrl = 'https://api.github.com/repos/Chaslyn89/shiners-precious-school/contents/data/upcoming-events';
+            
+            let eventFiles = [];
+            
+            try {
+                const response = await fetch(apiUrl);
+                if (response.ok) {
+                    const files = await response.json();
+                    const mdFiles = files.filter(file => file.name.endsWith('.md'));
+                    eventFiles = mdFiles.map(file => file.name.replace('.md', ''));
+                } else {
+                    eventFiles = [
+                        'mid-term-break-begins',
+                        'mid-term-break-ends'
+                    ];
+                }
+            } catch (e) {
+                eventFiles = [
+                    'mid-term-break-begins',
+                    'mid-term-break-ends'
+                ];
+            }
             
             let eventsHTML = '';
             let foundEvents = false;
