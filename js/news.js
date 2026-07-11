@@ -7,18 +7,21 @@ document.addEventListener('DOMContentLoaded', function() {
         const container = document.getElementById('news-container');
         if (!container) return;
 
-        // List of news files in order (newest first)
+        // List of news files in data/news/ folder
+        // The CMS saves new articles here automatically
         const newsFiles = [
+            '2026-07-11-school-closing-dates',
             '2026-06-15-term-3-opens',
             '2026-05-20-new-uniform'
         ];
 
-        // Additional files can be added here as they are created
-
         let newsHTML = '';
         let counts = { academic: 0, 'school-news': 0, 'co-curricular': 0, admissions: 0, achievement: 0 };
 
-        for (const file of newsFiles) {
+        // Sort files by date (newest first)
+        const sortedFiles = newsFiles.sort().reverse();
+
+        for (const file of sortedFiles) {
             try {
                 const response = await fetch(`data/news/${file}.md`);
                 if (response.ok) {
