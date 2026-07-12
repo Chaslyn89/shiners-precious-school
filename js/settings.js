@@ -77,62 +77,6 @@ async function loadSettings() {
 }
 
 // ========================================
-// LOAD STATISTICS FROM HOMEPAGE.JSON
-// ========================================
-async function loadStatistics() {
-    try {
-        const response = await fetch('data/homepage.json');
-        if (!response.ok) return;
-        
-        const data = await response.json();
-        
-        // Find the stats grid container
-        const container = document.querySelector('.stats-grid');
-        if (!container) return;
-        
-        // Clear existing content
-        container.innerHTML = '';
-        
-        // If statistics exist in the JSON, load them
-        if (data.statistics && data.statistics.length > 0) {
-            data.statistics.forEach(stat => {
-                const card = document.createElement('div');
-                card.className = 'stat-card';
-                card.innerHTML = `
-                    <div class="stat-number">${stat.number}</div>
-                    <div class="stat-label">${stat.label}</div>
-                `;
-                container.appendChild(card);
-            });
-        } else {
-            // Fallback if no statistics in JSON
-            container.innerHTML = `
-                <div class="stat-card">
-                    <div class="stat-number">Playgroup – Grade 9</div>
-                    <div class="stat-label">Full CBC Cycle</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">CBC Curriculum</div>
-                    <div class="stat-label">Competency Based</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">Digital Literacy</div>
-                    <div class="stat-label">ICT from Grade 1</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">French Programme</div>
-                    <div class="stat-label">From Grade 4</div>
-                </div>
-            `;
-        }
-        
-        console.log('Statistics loaded successfully');
-    } catch (e) {
-        console.log('Statistics: Using default content');
-    }
-}
-
-// ========================================
 // LOAD TESTIMONIALS
 // ========================================
 async function loadTestimonials() {
@@ -233,6 +177,5 @@ function parseTestimonial(text) {
 // ========================================
 document.addEventListener('DOMContentLoaded', function() {
     loadSettings();
-    loadStatistics();
     loadTestimonials();
 });
