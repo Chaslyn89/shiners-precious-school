@@ -1,0 +1,74 @@
+// ========== HOMEPAGE - Loads homepage.json ==========
+
+document.addEventListener('DOMContentLoaded', function() {
+
+    // ========== LOAD HOMEPAGE DATA ==========
+    async function loadHomepageData() {
+        try {
+            const response = await fetch('data/homepage.json');
+            if (!response.ok) return;
+            
+            const data = await response.json();
+
+            // Hero Title
+            if (data.hero_title) {
+                const el = document.getElementById('hero-title');
+                if (el) el.textContent = data.hero_title;
+            }
+
+            // Hero Subtitle
+            if (data.hero_subtitle) {
+                const el = document.getElementById('hero-subtitle');
+                if (el) el.textContent = data.hero_subtitle;
+            }
+
+            // Hero Image - THIS IS THE KEY FIX
+            if (data.hero_image) {
+                const heroSection = document.querySelector('.hero');
+                if (heroSection) {
+                    heroSection.style.backgroundImage = `linear-gradient(rgba(128, 0, 32, 0.75), rgba(128, 0, 32, 0.75)), url('${data.hero_image}')`;
+                    heroSection.style.backgroundSize = 'cover';
+                    heroSection.style.backgroundPosition = 'center';
+                    heroSection.style.backgroundRepeat = 'no-repeat';
+                }
+            }
+
+            // CTA Button Text
+            if (data.cta_button) {
+                const el = document.querySelector('.hero-buttons .btn-primary');
+                if (el) el.textContent = data.cta_button;
+            }
+
+            // Welcome Section
+            if (data.welcome_title) {
+                const el = document.getElementById('welcome-title');
+                if (el) el.textContent = data.welcome_title;
+            }
+            if (data.welcome_content) {
+                const el = document.getElementById('welcome-content');
+                if (el) el.innerHTML = data.welcome_content;
+            }
+
+            // Statistics
+            if (data.statistics && data.statistics.length > 0) {
+                const el = document.getElementById('homepage-stats');
+                if (el) {
+                    el.innerHTML = data.statistics.map(stat => `
+                        <div class="stat-card">
+                            <div class="stat-number">${stat.number}</div>
+                            <div class="stat-label">${stat.label}</div>
+                        </div>
+                    `).join('');
+                }
+            }
+
+            console.log('Homepage data loaded successfully');
+
+        } catch (e) {
+            console.log('Homepage: Using default content');
+        }
+    }
+
+    // ========== INITIALIZE ==========
+    loadHomepageData();
+});
