@@ -23,6 +23,8 @@
     "grade7_8": { "term1": 16400, "term2": 15400, "term3": 15100 },
     "grade9": { "term1": 16400, "term2": 15400, "term3": 15100 }
   },
+  "grade6_note": "Grade 6 tuition is KSh 10,800 per term",
+  "grade9_note": "Grade 9 tuition is KSh 14,700 per term",
   "annual_summary": {
     "playgroup_grade3": 24400,
     "grade4_5": 32200,
@@ -32,6 +34,7 @@
   },
   "optional_services": {
     "meals": 3900,
+    "meals_description": "Nutritious lunch served daily. Optional for all learners.",
     "transport": {
       "imara_daima": 7000,
       "pipeline": 6000,
@@ -41,11 +44,13 @@
   },
   "admission_fee": {
     "playgroup_grade6": 1000,
-    "grade7_9": 1500
+    "grade7_9": 1500,
+    "playgroup_grade6_label": "For Playgroup - Grade 6",
+    "grade7_9_label": "For Grade 7 - Grade 9 (Junior Secondary)"
   },
   "new_admission_example": {
-    "grade1": { "term1_fees": 8800, "admission_fee": 1000, "meals": 3900, "total": 13700 },
-    "grade7": { "term1_fees": 16400, "admission_fee": 1500, "meals": 3900, "total": 21800 }
+    "grade1": { "term1_fees": 8800, "admission_fee": 1000, "uniform": "Contact School", "meals": 3900, "total": 13700 },
+    "grade7": { "term1_fees": 16400, "admission_fee": 1500, "uniform": "Contact School", "meals": 3900, "total": 21800 }
   },
   "payment_methods": {
     "bank": {
@@ -56,9 +61,11 @@
     },
     "mpesa": {
       "paybill": "522123",
-      "account_format": "82747K-LearnerName-Class"
+      "account_format": "82747K-LearnerName-Class",
+      "example": "82747K-JOHNDOE-G4"
     },
-    "note": "No cash payments accepted. All fees must be paid via Bank or Mpesa."
+    "note": "No cash payments accepted. All fees must be paid via Bank or Mpesa.",
+    "receipt_note": "Keep your payment receipt for reference"
   },
   "payment_schedule": {
     "term1": "Due before opening day (January)",
