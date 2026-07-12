@@ -114,7 +114,7 @@ async function loadTestimonials() {
                 if (response.ok) {
                     const text = await response.text();
                     const parsed = parseTestimonial(text);
-                    if (parsed) {
+                    if (parsed && parsed.name) {
                         found = true;
                         const stars = '⭐'.repeat(parsed.rating || 5);
                         testimonialHTML += `
@@ -153,7 +153,7 @@ async function loadTestimonials() {
 }
 
 // ========================================
-// PARSE TESTIMONIAL MARKDOWN
+// PARSE TESTIMONIAL MARKDOWN - Handles values with or without quotes
 // ========================================
 function parseTestimonial(text) {
     try {
@@ -162,27 +162,29 @@ function parseTestimonial(text) {
         
         const frontmatter = match[1];
         
-        const nameMatch = frontmatter.match(/name:\s*"([^"]*)"/);
-        const gradeMatch = frontmatter.match(/grade:\s*"([^"]*)"/);
-        const reviewMatch = frontmatter.match(/review:\s*"([^"]*)"/);
+        // Match values with or without quotes
+        const nameMatch = frontmatter.match(/name:\s*"?([^"\n]*?)"?\s*$/m);
+        const gradeMatch = frontmatter.match(/grade:\s*"?([^"\n]*?)"?\s*$/m);
+        const reviewMatch = frontmatter.match(/review:\s*"?([^"\n]*?)"?\s*$/m);
         const ratingMatch = frontmatter.match(/rating:\s*([\d.]+)/);
-        const dateMatch = frontmatter.match(/date:\s*([\d-]+)/);
+        const dateMatch = frontmatter.match(/date:\s*"?([^"\n]*?)"?\s*$/m);
         
-        let formattedDate = dateMatch ? dateMatch[1] : '';
-        if (formattedDate) {
+        let formattedDate = dateMatch ? dateMatch[1].trim() : '';
+        if (formattedDate && formattedDate.match(/\d{4}-\d{2}-\d{2}/)) {
             const parts = formattedDate.split('-');
             const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
             formattedDate = `${months[parseInt(parts[1]) - 1]} ${parseInt(parts[2])}, ${parts[0]}`;
         }
         
         return {
-            name: nameMatch ? nameMatch[1] : 'Parent',
-            grade: gradeMatch ? gradeMatch[1] : '',
-            review: reviewMatch ? reviewMatch[1] : '',
+            name: nameMatch ? nameMatch[1].trim() : 'Parent',
+            grade: gradeMatch ? gradeMatch[1].trim() : '',
+            review: reviewMatch ? reviewMatch[1].trim() : '',
             rating: ratingMatch ? parseInt(ratingMatch[1]) : 5,
-            date: formattedDate
+            date: formattedDate || 'Date not set'
         };
     } catch (e) {
+        console.log('Error parsing testimonial:', e);
         return null;
     }
 }
