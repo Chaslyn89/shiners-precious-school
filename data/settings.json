@@ -1,14 +1,39 @@
 {
-  "core_values": "Integrity • Excellence • Discipline • Creativity • Faith",
-  "phone2": "0726 314 846",
-  "director_title": "School Director",
-  "vision": "To be a center of excellence that produces lifelong learners and critical thinkers equipped for global success.",
-  "welcome_message": "Dear Parents and Guardians,\n\nIt is my honor to welcome you to Shinners Precious School. We are committed to providing quality CBC education that nurtures every child's potential. Our dedicated teachers ensure that each learner receives personal attention and support.\n\nWe invite you to visit our school and experience the Shinners difference.",
-  "mission": "To provide high quality education and childcare in a safe, respectful and inclusive environment that builds a foundation for lifelong learning.",
+  "school_name": "Shinners Precious School",
+  "logo": "/images/logo.png",
+  "motto": "Determined to win",
+  "favicon": "/images/favicon.ico",
   "phone": "0720 994 337",
-  "admission_fee": "KSh 1,0000",
-  "meals_fee": "KSh 3,900",
+  "phone2": "0726 314 846",
   "email": "shinnersprecious@gmail.com",
-  "director_name": "Shem Oyugi",
-  "director_photo": "/images/uploads/whatsapp-image-2026-07-09-at-00.42.53.jpeg"
+  "address": "Embakasi, near Imara Daima",
+  "po_box": "P.O. Box 40-0521, Embakasi",
+  "director": {
+    "name": "Shem Oyugi",
+    "title": "School Director",
+    "photo": "/images/uploads/whatsapp-image-2026-07-09-at-00.42.53.jpeg",
+    "message": "Dear Parents and Guardians,\n\nIt is my honor to welcome you to Shinners Precious School. We are committed to providing quality CBC education that nurtures every child's potential. Our dedicated teachers ensure that each learner receives personal attention and support.\n\nWe invite you to visit our school and experience the Shinners difference.",
+    "signature": "Yours in education,\n\nShem Oyugi\nDirector, Shinners Precious School"
+  },
+  "mission_vision": {
+    "mission": "To provide high quality education and childcare in a safe, respectful and inclusive environment that builds a foundation for lifelong learning.",
+    "vision": "To be a center of excellence that produces lifelong learners and critical thinkers equipped for global success.",
+    "core_values": "Integrity • Excellence • Discipline • Creativity • Faith"
+  },
+  "social": {
+    "facebook": "",
+    "instagram": "",
+    "whatsapp": "0720 994 337",
+    "tiktok": "",
+    "youtube": ""
+  },
+  "google_maps": "",
+  "hours": {
+    "weekdays": "8:00 AM - 4:00 PM",
+    "saturday": "9:00 AM - 12:00 PM (Office only)",
+    "sunday": "Closed"
+  },
+  "footer_text": "Shinners Precious School. All rights reserved.",
+  "admission_fee": "KSh 1,000",
+  "meals_fee": "KSh 3,900"
 }
