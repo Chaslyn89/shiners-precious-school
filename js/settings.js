@@ -1,4 +1,6 @@
-// ========== SETTINGS - Loads settings.json ==========
+// ========================================
+// SETTINGS - Loads settings.json
+// ========================================
 
 async function loadSettings() {
     try {
@@ -73,3 +75,164 @@ async function loadSettings() {
         console.log('Settings: Using default content');
     }
 }
+
+// ========================================
+// LOAD STATISTICS FROM HOMEPAGE.JSON
+// ========================================
+async function loadStatistics() {
+    try {
+        const response = await fetch('data/homepage.json');
+        if (!response.ok) return;
+        
+        const data = await response.json();
+        
+        // Find the stats grid container
+        const container = document.querySelector('.stats-grid');
+        if (!container) return;
+        
+        // Clear existing content
+        container.innerHTML = '';
+        
+        // If statistics exist in the JSON, load them
+        if (data.statistics && data.statistics.length > 0) {
+            data.statistics.forEach(stat => {
+                const card = document.createElement('div');
+                card.className = 'stat-card';
+                card.innerHTML = `
+                    <div class="stat-number">${stat.number}</div>
+                    <div class="stat-label">${stat.label}</div>
+                `;
+                container.appendChild(card);
+            });
+        } else {
+            // Fallback if no statistics in JSON
+            container.innerHTML = `
+                <div class="stat-card">
+                    <div class="stat-number">Playgroup – Grade 9</div>
+                    <div class="stat-label">Full CBC Cycle</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">CBC Curriculum</div>
+                    <div class="stat-label">Competency Based</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">Digital Literacy</div>
+                    <div class="stat-label">ICT from Grade 1</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">French Programme</div>
+                    <div class="stat-label">From Grade 4</div>
+                </div>
+            `;
+        }
+        
+        console.log('Statistics loaded successfully');
+    } catch (e) {
+        console.log('Statistics: Using default content');
+    }
+}
+
+// ========================================
+// LOAD TESTIMONIALS
+// ========================================
+async function loadTestimonials() {
+    try {
+        const testimonialFiles = [
+            'mrs-wanjiku',
+            'mr-otieno',
+            'mrs-kamau'
+        ];
+        
+        const container = document.getElementById('testimonials-container');
+        if (!container) return;
+        
+        let testimonialHTML = '';
+        let found = false;
+        
+        for (const file of testimonialFiles) {
+            try {
+                const response = await fetch(`data/testimonials/${file}.md`);
+                if (response.ok) {
+                    const text = await response.text();
+                    const parsed = parseTestimonial(text);
+                    if (parsed) {
+                        found = true;
+                        const stars = '⭐'.repeat(parsed.rating || 5);
+                        testimonialHTML += `
+                            <div class="card">
+                                <div class="card-content">
+                                    <p>${stars}</p>
+                                    <p>"${parsed.review}"</p>
+                                    <p><strong>— ${parsed.name}, Parent of ${parsed.grade} Learner</strong></p>
+                                    <p style="font-size: 0.8rem; color: #666;">📅 ${parsed.date}</p>
+                                </div>
+                            </div>
+                        `;
+                    }
+                }
+            } catch (e) {
+                // Skip if file not found
+            }
+        }
+        
+        if (found) {
+            container.innerHTML = testimonialHTML;
+        } else {
+            container.innerHTML = `
+                <div class="card">
+                    <div class="card-content">
+                        <p>No testimonials yet.</p>
+                    </div>
+                </div>
+            `;
+        }
+        
+        console.log('Testimonials loaded successfully');
+    } catch (e) {
+        console.log('Testimonials: Using default content');
+    }
+}
+
+// ========================================
+// PARSE TESTIMONIAL MARKDOWN
+// ========================================
+function parseTestimonial(text) {
+    try {
+        const match = text.match(/---\n([\s\S]*?)\n---\n([\s\S]*)/);
+        if (!match) return null;
+        
+        const frontmatter = match[1];
+        
+        const nameMatch = frontmatter.match(/name:\s*"([^"]*)"/);
+        const gradeMatch = frontmatter.match(/grade:\s*"([^"]*)"/);
+        const reviewMatch = frontmatter.match(/review:\s*"([^"]*)"/);
+        const ratingMatch = frontmatter.match(/rating:\s*([\d.]+)/);
+        const dateMatch = frontmatter.match(/date:\s*([\d-]+)/);
+        
+        let formattedDate = dateMatch ? dateMatch[1] : '';
+        if (formattedDate) {
+            const parts = formattedDate.split('-');
+            const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            formattedDate = `${months[parseInt(parts[1]) - 1]} ${parseInt(parts[2])}, ${parts[0]}`;
+        }
+        
+        return {
+            name: nameMatch ? nameMatch[1] : 'Parent',
+            grade: gradeMatch ? gradeMatch[1] : '',
+            review: reviewMatch ? reviewMatch[1] : '',
+            rating: ratingMatch ? parseInt(ratingMatch[1]) : 5,
+            date: formattedDate
+        };
+    } catch (e) {
+        return null;
+    }
+}
+
+// ========================================
+// LOAD ALL DATA ON PAGE LOAD
+// ========================================
+document.addEventListener('DOMContentLoaded', function() {
+    loadSettings();
+    loadStatistics();
+    loadTestimonials();
+});
