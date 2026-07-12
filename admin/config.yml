@@ -255,6 +255,36 @@ collections:
       - { label: "Slug", name: "slug", widget: "string", required: true }
 
   # ========================================
+  # FEES
+  # ========================================
+  - name: "fees"
+    label: "💰 Fees"
+    label_singular: "Fee"
+    description: "Update the school fee structure."
+    files:
+      - name: "fees"
+        label: "Fee Structure"
+        file: "data/fees.json"
+        fields:
+          - { label: "Playgroup", name: "playgroup", widget: "number", default: 6500 }
+          - { label: "PP1", name: "pp1", widget: "number", default: 7000 }
+          - { label: "PP2", name: "pp2", widget: "number", default: 7500 }
+          - { label: "Grade 1-3", name: "grade1-3", widget: "number", default: 7800 }
+          - { label: "Grade 4-5", name: "grade4-5", widget: "number", default: 8100 }
+          - { label: "Grade 6", name: "grade6", widget: "number", default: 10800 }
+          - { label: "Grade 7-8", name: "grade7-8", widget: "number", default: 9500 }
+          - { label: "Grade 9", name: "grade9", widget: "number", default: 14700 }
+          - { label: "Meals (per term)", name: "meals", widget: "number", default: 3900 }
+          - label: "Transport Fees"
+            name: "transport"
+            widget: "object"
+            fields:
+              - { label: "Imara Daima", name: "imara", widget: "number", default: 7000 }
+              - { label: "AA & KOBIL", name: "aakobil", widget: "number", default: 6000 }
+              - { label: "Pipeline", name: "pipeline", widget: "number", default: 6000 }
+              - { label: "Kwanjenga", name: "kwanjenga", widget: "number", default: 6000 }
+
+  # ========================================
   # OTHER
   # ========================================
   - name: "uniform"
