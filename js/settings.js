@@ -77,22 +77,37 @@ async function loadSettings() {
 }
 
 // ========================================
-// LOAD TESTIMONIALS
+// LOAD TESTIMONIALS - Auto-detect all files
 // ========================================
 async function loadTestimonials() {
     try {
-        const testimonialFiles = [
-            'mrs-wanjiku',
-            'mr-otieno',
-            'mrs-kamau'
-        ];
-        
         const container = document.getElementById('testimonials-container');
         if (!container) return;
+
+        // Use GitHub API to list all files in the testimonials folder
+        const apiUrl = 'https://api.github.com/repos/Chaslyn89/shiners-precious-school/contents/data/testimonials';
         
+        let testimonialFiles = [];
+        
+        try {
+            const response = await fetch(apiUrl);
+            if (response.ok) {
+                const files = await response.json();
+                const mdFiles = files.filter(file => file.name.endsWith('.md'));
+                testimonialFiles = mdFiles.map(file => file.name.replace('.md', ''));
+                console.log('Found testimonial files:', testimonialFiles);
+            } else {
+                console.log('GitHub API not available');
+                testimonialFiles = [];
+            }
+        } catch (e) {
+            console.log('Error fetching file list');
+            testimonialFiles = [];
+        }
+
         let testimonialHTML = '';
         let found = false;
-        
+
         for (const file of testimonialFiles) {
             try {
                 const response = await fetch(`data/testimonials/${file}.md`);
@@ -118,7 +133,7 @@ async function loadTestimonials() {
                 // Skip if file not found
             }
         }
-        
+
         if (found) {
             container.innerHTML = testimonialHTML;
         } else {
@@ -130,7 +145,7 @@ async function loadTestimonials() {
                 </div>
             `;
         }
-        
+
         console.log('Testimonials loaded successfully');
     } catch (e) {
         console.log('Testimonials: Using default content');
