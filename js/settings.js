@@ -24,23 +24,29 @@ async function loadSettings() {
             if (el) el.textContent = settings.email;
         }
 
-        // Director info (for homepage)
-        if (settings.director_name) {
+        // Director info (for homepage) - Supports both flat and nested structure
+        const director = settings.director || {};
+        const directorName = settings.director_name || director.name;
+        const directorTitle = settings.director_title || director.title;
+        const directorPhoto = settings.director_photo || director.photo;
+        const welcomeMessage = settings.welcome_message || director.message;
+
+        if (directorName) {
             const el = document.getElementById('director-name');
-            if (el) el.textContent = settings.director_name;
+            if (el) el.textContent = directorName;
         }
-        if (settings.director_title) {
+        if (directorTitle) {
             const el = document.getElementById('director-title');
-            if (el) el.textContent = settings.director_title;
+            if (el) el.textContent = directorTitle;
         }
-        if (settings.director_photo) {
+        if (directorPhoto) {
             const el = document.getElementById('director-photo');
-            if (el) el.src = settings.director_photo;
+            if (el) el.src = directorPhoto;
         }
-        if (settings.welcome_message) {
+        if (welcomeMessage) {
             const el = document.getElementById('welcome-message');
             if (el) {
-                const paragraphs = settings.welcome_message.split('\n').filter(p => p.trim());
+                const paragraphs = welcomeMessage.split('\n').filter(p => p.trim());
                 el.innerHTML = paragraphs.map(p => `<p>${p}</p>`).join('');
             }
         }
