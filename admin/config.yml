@@ -237,7 +237,7 @@ collections:
       - { label: "Category", name: "category", widget: "select", options: ["Academic", "Co-Curricular", "School News", "Admissions", "Achievement"] }
 
   # ========================================
-  # TESTIMONIALS - FIXED: slug uses name field
+  # TESTIMONIALS - FIXED: slugify the name
   # ========================================
   - name: "testimonials"
     label: "💬 Testimonials"
@@ -245,7 +245,7 @@ collections:
     description: "Manage parent and student testimonials."
     folder: "data/testimonials"
     create: true
-    slug: "{{name}}"
+    slug: "{{name | slugify}}"
     fields:
       - { label: "Parent Name", name: "name", widget: "string" }
       - { label: "Child's Grade", name: "grade", widget: "string" }
