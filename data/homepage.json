@@ -23,7 +23,7 @@ async function loadHomepageData() {
             if (el) el.textContent = data.hero_subtitle;
         }
 
-        // Hero Image - Dynamically loads from CMS
+        // Hero Image
         if (data.hero_image) {
             var heroSection = document.querySelector('.hero');
             if (heroSection) {
@@ -34,7 +34,7 @@ async function loadHomepageData() {
             }
         }
 
-        // CTA Button Text
+        // CTA Button
         if (data.cta_button) {
             var el = document.querySelector('.hero-buttons .btn-primary');
             if (el) el.textContent = data.cta_button;
