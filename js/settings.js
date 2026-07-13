@@ -196,9 +196,70 @@ function parseTestimonial(text) {
 }
 
 // ========================================
+// LOAD HOMEPAGE GALLERY IMAGES
+// ========================================
+async function loadHomepageGallery() {
+    try {
+        const response = await fetch('data/gallery.json');
+        if (!response.ok) return;
+        
+        const data = await response.json();
+        const container = document.querySelector('.gallery-grid');
+        if (!container) return;
+        
+        // Get all images from all categories
+        let allImages = [];
+        if (data.categories) {
+            for (let category in data.categories) {
+                if (data.categories[category].photos) {
+                    allImages = allImages.concat(data.categories[category].photos);
+                }
+            }
+        }
+        
+        // Also check for direct images array
+        if (data.images && data.images.length > 0) {
+            allImages = allImages.concat(data.images);
+        }
+        
+        // Filter only featured images for homepage
+        let featuredImages = allImages.filter(img => img.featured === true);
+        
+        // If no featured images, use first 4 images
+        if (featuredImages.length === 0) {
+            featuredImages = allImages.slice(0, 4);
+        }
+        
+        if (featuredImages.length > 0) {
+            let html = '';
+            for (let i = 0; i < featuredImages.length; i++) {
+                let img = featuredImages[i];
+                let imgSrc = img.image || img.src || 'images/placeholder-gallery.jpg';
+                let imgTitle = img.title || img.caption || 'School Life';
+                
+                html += `
+                    <div class="gallery-item">
+                        <img src="${imgSrc}" alt="${imgTitle}" loading="lazy" onerror="this.src='images/placeholder-gallery.jpg'">
+                        <div class="gallery-caption"><p>${imgTitle}</p></div>
+                    </div>
+                `;
+            }
+            container.innerHTML = html;
+            console.log('Homepage gallery loaded successfully');
+        } else {
+            console.log('No gallery images found for homepage');
+        }
+
+    } catch (e) {
+        console.log('Homepage gallery: Using default content');
+    }
+}
+
+// ========================================
 // LOAD ALL DATA ON PAGE LOAD
 // ========================================
 document.addEventListener('DOMContentLoaded', function() {
     loadSettings();
     loadTestimonials();
+    loadHomepageGallery();
 });
