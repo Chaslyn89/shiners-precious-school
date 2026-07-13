@@ -11,41 +11,41 @@
   "categories": {
     "facilities": {
       "photos": [
-        { "src": "/images/uploads/school-building.jpg", "caption": "School Building", "description": "School Building Exterior" },
-        { "src": "/images/uploads/classroom.jpg", "caption": "Classroom", "description": "Modern Classroom" },
-        { "src": "/images/uploads/library.jpg", "caption": "Library", "description": "School Library" },
-        { "src": "/images/uploads/computer-lab.jpg", "caption": "Computer Lab", "description": "Computer Lab" },
-        { "src": "/images/uploads/playground.jpg", "caption": "Playground", "description": "Playground" },
-        { "src": "/images/uploads/school-bus.jpg", "caption": "School Bus", "description": "School Transport" }
+        { "image": "/images/uploads/school-building.jpg", "title": "School Building", "caption": "School Building Exterior", "featured": true },
+        { "image": "/images/uploads/classroom.jpg", "title": "Classroom", "caption": "Modern Classroom", "featured": true },
+        { "image": "/images/uploads/library.jpg", "title": "Library", "caption": "School Library", "featured": true },
+        { "image": "/images/uploads/computer-lab.jpg", "title": "Computer Lab", "caption": "Computer Lab", "featured": true },
+        { "image": "/images/uploads/playground.jpg", "title": "Playground", "caption": "Playground", "featured": true },
+        { "image": "/images/uploads/school-bus.jpg", "title": "School Bus", "caption": "School Transport", "featured": true }
       ]
     },
     "classes": {
       "photos": [
-        { "src": "/images/uploads/students-learning.jpg", "caption": "Students Learning", "description": "Active Classroom Learning" },
-        { "src": "/images/uploads/digital-literacy.jpg", "caption": "Digital Literacy Class", "description": "Digital Literacy Lesson" },
-        { "src": "/images/uploads/french-class.jpg", "caption": "French Class", "description": "French Language Class" },
-        { "src": "/images/uploads/group-learning.jpg", "caption": "Group Learning", "description": "Group Discussion" }
+        { "image": "/images/uploads/students-learning.jpg", "title": "Students Learning", "caption": "Active Classroom Learning", "featured": true },
+        { "image": "/images/uploads/digital-literacy.jpg", "title": "Digital Literacy Class", "caption": "Digital Literacy Lesson", "featured": true },
+        { "image": "/images/uploads/french-class.jpg", "title": "French Class", "caption": "French Language Class", "featured": true },
+        { "image": "/images/uploads/group-learning.jpg", "title": "Group Learning", "caption": "Group Discussion", "featured": true }
       ]
     },
     "events": {
       "photos": [
-        { "src": "/images/uploads/sports-day.jpg", "caption": "Sports Day", "description": "Sports Day" },
-        { "src": "/images/uploads/graduation.jpg", "caption": "Graduation", "description": "Graduation Ceremony" },
-        { "src": "/images/uploads/prize-giving.jpg", "caption": "Prize Giving", "description": "Prize Giving Day" },
-        { "src": "/images/uploads/cultural-day.jpg", "caption": "Cultural Day", "description": "Cultural Day" }
+        { "image": "/images/uploads/sports-day.jpg", "title": "Sports Day", "caption": "Sports Day", "featured": true },
+        { "image": "/images/uploads/graduation.jpg", "title": "Graduation", "caption": "Graduation Ceremony", "featured": true },
+        { "image": "/images/uploads/prize-giving.jpg", "title": "Prize Giving", "caption": "Prize Giving Day", "featured": true },
+        { "image": "/images/uploads/cultural-day.jpg", "title": "Cultural Day", "caption": "Cultural Day", "featured": true }
       ]
     },
     "uniform": {
       "photos": [
-        { "src": "/images/uploads/maroon-uniform.jpg", "caption": "Maroon Uniform", "description": "Maroon Uniform (Playgroup - Grade 6)" },
-        { "src": "/images/uploads/navy-uniform.jpg", "caption": "Navy Uniform", "description": "Navy Blue Uniform (Grade 7 - 9)" }
+        { "image": "/images/uploads/maroon-uniform.jpg", "title": "Maroon Uniform", "caption": "Maroon Uniform (Playgroup - Grade 6)", "featured": true },
+        { "image": "/images/uploads/navy-uniform.jpg", "title": "Navy Uniform", "caption": "Navy Blue Uniform (Grade 7 - 9)", "featured": true }
       ]
     },
     "staff": {
       "photos": [
-        { "src": "/images/uploads/director.jpg", "caption": "School Director", "description": "School Director" },
-        { "src": "/images/uploads/teaching-staff.jpg", "caption": "Teaching Staff", "description": "Our Dedicated Teachers" },
-        { "src": "/images/uploads/support-staff.jpg", "caption": "Support Staff", "description": "Support Staff" }
+        { "image": "/images/uploads/director.jpg", "title": "School Director", "caption": "School Director", "featured": true },
+        { "image": "/images/uploads/teaching-staff.jpg", "title": "Teaching Staff", "caption": "Our Dedicated Teachers", "featured": true },
+        { "image": "/images/uploads/support-staff.jpg", "title": "Support Staff", "caption": "Support Staff", "featured": true }
       ]
     }
   },
