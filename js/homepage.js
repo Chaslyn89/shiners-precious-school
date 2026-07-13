@@ -25,10 +25,8 @@ async function loadHomepageData() {
 
         // Hero Image - Try JSON first, then auto-detect
         if (data.hero_image && data.hero_image !== '/images/hero-banner.jpg') {
-            // Use the image from JSON
             setHeroBackground(data.hero_image);
         } else {
-            // Auto-detect any image in the uploads folder
             autoDetectHeroImage();
         }
 
@@ -85,7 +83,7 @@ function setHeroBackground(imagePath) {
         heroSection.style.backgroundPosition = 'center';
         heroSection.style.backgroundRepeat = 'no-repeat';
         
-        // Add overlay for maroon color
+        // Add overlay with LOWER opacity so image is visible
         heroSection.style.position = 'relative';
         var overlay = document.createElement('div');
         overlay.className = 'hero-overlay';
@@ -94,7 +92,7 @@ function setHeroBackground(imagePath) {
         overlay.style.left = '0';
         overlay.style.width = '100%';
         overlay.style.height = '100%';
-        overlay.style.backgroundColor = 'rgba(128, 0, 32, 0.75)';
+        overlay.style.backgroundColor = 'rgba(128, 0, 32, 0.3)'; // Reduced from 0.75 to 0.3
         overlay.style.zIndex = '1';
         heroSection.insertBefore(overlay, heroSection.firstChild);
         
@@ -131,9 +129,6 @@ async function autoDetectHeroImage() {
             if (imgCheck.ok) {
                 setHeroBackground(imagePath);
                 console.log('Auto-detected hero image:', imagePath);
-                
-                // Save to JSON for future loads
-                updateHeroImageInJSON(imagePath);
                 return;
             }
         } catch (e) {
@@ -142,21 +137,4 @@ async function autoDetectHeroImage() {
     }
     
     console.log('No hero image auto-detected');
-}
-
-// ========== UPDATE JSON WITH DETECTED IMAGE ==========
-async function updateHeroImageInJSON(imagePath) {
-    try {
-        var response = await fetch('data/homepage.json');
-        if (!response.ok) return;
-        
-        var data = await response.json();
-        data.hero_image = imagePath;
-        
-        // Send update to GitHub via CMS (this is handled by Netlify Identity)
-        console.log('Hero image path updated in JSON:', imagePath);
-        
-    } catch (e) {
-        console.log('Could not update JSON automatically');
-    }
 }
