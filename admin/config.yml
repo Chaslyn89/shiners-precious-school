@@ -2,23 +2,629 @@ backend:
   name: git-gateway
   branch: master
 
+# ====== OFFICIAL DECAP CMS BRANDING ======
+logo_url: "https://shinners-precious-academy.netlify.app/images/logo.png"
+display_name: "Shinners Precious School"
+
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
 
 collections:
-  - import: "collections/settings.yml"
-  - import: "collections/homepage.yml"
-  - import: "collections/about.yml"
-  - import: "collections/academics.yml"
-  - import: "collections/admissions.yml"
-  - import: "collections/contact.yml"
-  - import: "collections/leadership.yml"
-  - import: "collections/staff.yml"
-  - import: "collections/gallery.yml"
-  - import: "collections/news.yml"
-  - import: "collections/testimonials.yml"
-  - import: "collections/fees.yml"
-  - import: "collections/uniform.yml"
-  - import: "collections/school-life.yml"
-  - import: "collections/term-dates.yml"
-  - import: "collections/upcoming-events.yml"
+  # ========================================
+  # GLOBAL SETTINGS (Single Source of Truth)
+  # ========================================
+  - name: "settings"
+    label: "⚙️ Website Settings"
+    label_singular: "Setting"
+    description: "Manage all global website settings. This is the single source of truth for phone numbers, director info, and social links."
+    files:
+      - name: "general"
+        label: "General Settings"
+        file: "data/settings.json"
+        fields:
+          # School Identity
+          - { label: "School Name", name: "school_name", widget: "string", default: "Shinners Precious School" }
+          - { label: "School Logo", name: "logo", widget: "image" }
+          - { label: "School Motto", name: "motto", widget: "string", default: "Determined to win" }
+          - { label: "Favicon", name: "favicon", widget: "image", required: false }
+          
+          # Contact Information
+          - { label: "Phone Number", name: "phone", widget: "string" }
+          - { label: "Secondary Phone", name: "phone2", widget: "string" }
+          - { label: "Email Address", name: "email", widget: "string" }
+          - { label: "Physical Address", name: "address", widget: "string", default: "Embakasi, near Imara Daima" }
+          - { label: "P.O. Box", name: "po_box", widget: "string", default: "P.O. Box 40-0521, Embakasi" }
+          
+          # Director Information
+          - label: "Director Information"
+            name: "director"
+            widget: "object"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Title", name: "title", widget: "string", default: "School Director" }
+              - { label: "Photo", name: "photo", widget: "image" }
+              - { label: "Message", name: "message", widget: "markdown" }
+              - { label: "Signature", name: "signature", widget: "markdown" }
+          
+          # Mission & Vision
+          - label: "School Mission & Vision"
+            name: "mission_vision"
+            widget: "object"
+            fields:
+              - { label: "Mission", name: "mission", widget: "markdown" }
+              - { label: "Vision", name: "vision", widget: "markdown" }
+              - { label: "Core Values", name: "core_values", widget: "string" }
+          
+          # Social Links
+          - label: "Social Media Links"
+            name: "social"
+            widget: "object"
+            fields:
+              - { label: "Facebook URL", name: "facebook", widget: "string", required: false }
+              - { label: "Instagram URL", name: "instagram", widget: "string", required: false }
+              - { label: "WhatsApp Number", name: "whatsapp", widget: "string" }
+              - { label: "TikTok URL", name: "tiktok", widget: "string", required: false }
+              - { label: "YouTube URL", name: "youtube", widget: "string", required: false }
+          
+          # Google Maps
+          - { label: "Google Maps Embed URL", name: "google_maps", widget: "string", required: false }
+          
+          # School Hours
+          - label: "School Hours"
+            name: "hours"
+            widget: "object"
+            fields:
+              - { label: "Monday - Friday", name: "weekdays", widget: "string", default: "8:00 AM - 4:00 PM" }
+              - { label: "Saturday", name: "saturday", widget: "string", default: "9:00 AM - 12:00 PM (Office only)" }
+              - { label: "Sunday", name: "sunday", widget: "string", default: "Closed" }
+          
+          # Footer
+          - { label: "Footer Copyright Text", name: "footer_text", widget: "string", default: "Shinners Precious School. All rights reserved." }
+          
+          # Fees
+          - { label: "Admission Fee", name: "admission_fee", widget: "string", default: "KSh 1,000" }
+          - { label: "Meals Fee (per term)", name: "meals_fee", widget: "string", default: "KSh 3,900" }
+
+  # ========================================
+  # WEBSITE PAGES
+  # ========================================
+  - name: "homepage"
+    label: "🏠 Homepage"
+    label_singular: "Homepage"
+    description: "Edit the homepage content including hero, welcome section, and statistics."
+    files:
+      - name: "homepage"
+        label: "Homepage Content"
+        file: "data/homepage.json"
+        fields:
+          - { label: "Hero Title", name: "hero_title", widget: "string" }
+          - { label: "Hero Subtitle", name: "hero_subtitle", widget: "text" }
+          - { label: "Hero Image", name: "hero_image", widget: "image" }
+          - { label: "CTA Button Text", name: "cta_button", widget: "string", default: "Enroll Today" }
+          - { label: "Welcome Section Title", name: "welcome_title", widget: "string" }
+          - { label: "Welcome Content", name: "welcome_content", widget: "markdown" }
+          - { label: "Statistics", name: "statistics", widget: "list", fields: [
+              { label: "Number", name: "number", widget: "string" },
+              { label: "Label", name: "label", widget: "string" }
+            ] }
+
+  - name: "about"
+    label: "🏫 About the School"
+    label_singular: "About Page"
+    description: "Edit the about page content. Director info comes from Website Settings."
+    files:
+      - name: "about"
+        label: "About Content"
+        file: "data/about.json"
+        fields:
+          - { label: "Hero Title", name: "hero_title", widget: "string" }
+          - { label: "Hero Subtitle", name: "hero_subtitle", widget: "string" }
+          - { label: "Welcome Text", name: "welcome_text", widget: "markdown" }
+          - { label: "History", name: "history", widget: "list", fields: [
+              { label: "Year/Event", name: "year", widget: "string" },
+              { label: "Description", name: "description", widget: "text" }
+            ] }
+          - { label: "School Motto", name: "motto", widget: "string", required: false }
+          - { label: "Motto Description", name: "motto_description", widget: "text", required: false }
+          - { label: "Brochure Link", name: "brochure_link", widget: "string", required: false }
+
+  # ========================================
+  # ACADEMICS
+  # ========================================
+  - name: "academics"
+    label: "📚 Academics"
+    label_singular: "Academics Page"
+    description: "Update curriculum information, subjects, and academic programs."
+    files:
+      - name: "academics"
+        label: "Academics Content"
+        file: "data/academics.json"
+        fields:
+          - { label: "Hero Title", name: "hero_title", widget: "string", default: "Our Academics" }
+          - { label: "Hero Subtitle", name: "hero_subtitle", widget: "string", default: "Competency Based Curriculum (CBC) | Playgroup to Grade 9" }
+          - { label: "Pathway Description", name: "pathway_description", widget: "text", default: "Our CBC pathway ensures smooth progression from early years to Junior Secondary." }
+          - { label: "Curriculum Overview", name: "curriculum_overview", widget: "markdown", default: "Shinners Precious School follows the Competency Based Curriculum (CBC) approved by the Kenya Institute of Curriculum Development (KICD)." }
+          
+          - label: "Achievements"
+            name: "achievements"
+            widget: "list"
+            fields:
+              - { label: "Number", name: "number", widget: "string" }
+              - { label: "Label", name: "label", widget: "string" }
+          
+          - label: "Special Programs"
+            name: "special_programs"
+            widget: "list"
+            fields:
+              - { label: "Icon", name: "icon", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Detail", name: "detail", widget: "text" }
+          
+          - label: "Assessment"
+            name: "assessment"
+            widget: "list"
+            fields:
+              - { label: "Type", name: "type", widget: "string" }
+              - { label: "Frequency", name: "frequency", widget: "string" }
+              - { label: "Purpose", name: "purpose", widget: "text" }
+          
+          - label: "Academic Calendar"
+            name: "calendar"
+            widget: "list"
+            fields:
+              - { label: "Term", name: "term", widget: "string" }
+              - { label: "Opening Date", name: "opening", widget: "string" }
+              - { label: "Closing Date", name: "closing", widget: "string" }
+              - { label: "Half-Term Break", name: "half_term", widget: "string" }
+          
+          - label: "Downloads"
+            name: "downloads"
+            widget: "list"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Link", name: "link", widget: "string" }
+
+  - name: "admissions"
+    label: "📝 Admissions"
+    label_singular: "Admissions Page"
+    description: "Manage admission requirements, process, fees, and FAQs."
+    files:
+      - name: "admissions"
+        label: "Admissions Content"
+        file: "data/admissions.json"
+        fields:
+          - { label: "Hero Title", name: "hero_title", widget: "string" }
+          - { label: "Hero Subtitle", name: "hero_subtitle", widget: "string" }
+          - { label: "Admission Process", name: "process", widget: "markdown" }
+          - { label: "Requirements", name: "requirements", widget: "markdown" }
+
+  - name: "contact"
+    label: "📞 Contact Information"
+    label_singular: "Contact Page"
+    description: "Edit contact page. Phone and email come from Website Settings."
+    files:
+      - name: "contact"
+        label: "Contact Content"
+        file: "data/contact.json"
+        fields:
+          - { label: "Hero Title", name: "hero_title", widget: "string" }
+          - { label: "Hero Subtitle", name: "hero_subtitle", widget: "string" }
+          - { label: "Emergency Contact", name: "emergency_contact", widget: "string" }
+          - { label: "Contact Form Endpoint", name: "form_endpoint", widget: "string", required: false }
+
+  # ========================================
+  # PEOPLE
+  # ========================================
+  - name: "leadership"
+    label: "👨‍🏫 Leadership Team"
+    label_singular: "Leader"
+    description: "Manage the school's leadership team members."
+    folder: "data/leadership"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Photo", name: "photo", widget: "image", required: false }
+      - { label: "Display Order", name: "order", widget: "number", default: 0 }
+
+  - name: "staff"
+    label: "👥 Staff Directory"
+    label_singular: "Staff Member"
+    description: "Manage all teaching and support staff profiles."
+    folder: "data/staff"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Qualifications", name: "qualifications", widget: "string", required: false }
+      - { label: "Subjects", name: "subjects", widget: "string", required: false }
+      - { label: "Photo", name: "photo", widget: "image", required: false }
+      - { label: "Display Order", name: "order", widget: "number", default: 0 }
+      - { label: "Type", name: "type", widget: "select", options: ["teacher", "support", "leadership"], default: "teacher" }
+
+  # ========================================
+  # MEDIA & CONTENT
+  # ========================================
+  - name: "gallery"
+    label: "🖼️ Gallery"
+    label_singular: "Image"
+    description: "Manage all school photos and gallery images."
+    folder: "data/gallery"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Caption", name: "caption", widget: "text", required: false }
+      - { label: "Category", name: "category", widget: "select", options: ["facilities", "classes", "events", "uniform", "staff"] }
+      - { label: "Featured on Homepage", name: "featured", widget: "boolean", default: false }
+
+  # ========================================
+  # NEWS - With Author Field Added
+  # ========================================
+  - name: "news"
+    label: "📰 News & Events"
+    label_singular: "News Article"
+    description: "Add, edit, or remove news articles and announcements."
+    folder: "data/news"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Content", name: "content", widget: "text" }
+      - { label: "Author", name: "author", widget: "string", default: "Administration" }
+      - { label: "Featured Image", name: "image", widget: "image", required: false }
+      - { label: "Category", name: "category", widget: "select", options: ["Academic", "Co-Curricular", "School News", "Admissions", "Achievement"] }
+
+  # ========================================
+  # TESTIMONIALS - Same as News approach
+  # ========================================
+  - name: "testimonials"
+    label: "💬 Testimonials"
+    label_singular: "Testimonial"
+    description: "Manage parent and student testimonials."
+    folder: "data/testimonials"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Parent Name", name: "name", widget: "string" }
+      - { label: "Child's Grade", name: "grade", widget: "string" }
+      - { label: "Review", name: "review", widget: "markdown" }
+      - { label: "Rating (1-5)", name: "rating", widget: "number", default: 5, min: 1, max: 5 }
+      - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Slug", name: "slug", widget: "string", required: true }
+
+  # ========================================
+  # FEES - Full Dynamic
+  # ========================================
+  - name: "fees"
+    label: "💰 Fees"
+    label_singular: "Fee"
+    description: "Update the complete fee structure."
+    files:
+      - name: "fees"
+        label: "Fee Structure"
+        file: "data/fees.json"
+        fields:
+          - label: "Tuition Fees"
+            name: "tuition"
+            widget: "object"
+            fields:
+              - label: "Playgroup"
+                name: "playgroup"
+                widget: "object"
+                fields:
+                  - { label: "Term 1", name: "term1", widget: "number", default: 7400 }
+                  - { label: "Term 2", name: "term2", widget: "number", default: 7400 }
+                  - { label: "Term 3", name: "term3", widget: "number", default: 7400 }
+              - label: "PP1"
+                name: "pp1"
+                widget: "object"
+                fields:
+                  - { label: "Term 1", name: "term1", widget: "number", default: 7400 }
+                  - { label: "Term 2", name: "term2", widget: "number", default: 7400 }
+                  - { label: "Term 3", name: "term3", widget: "number", default: 7400 }
+              - label: "PP2"
+                name: "pp2"
+                widget: "object"
+                fields:
+                  - { label: "Term 1", name: "term1", widget: "number", default: 7400 }
+                  - { label: "Term 2", name: "term2", widget: "number", default: 7400 }
+                  - { label: "Term 3", name: "term3", widget: "number", default: 7400 }
+              - label: "Grade 1-3"
+                name: "grade1_3"
+                widget: "object"
+                fields:
+                  - { label: "Term 1", name: "term1", widget: "number", default: 7400 }
+                  - { label: "Term 2", name: "term2", widget: "number", default: 7400 }
+                  - { label: "Term 3", name: "term3", widget: "number", default: 7400 }
+              - label: "Grade 4-5"
+                name: "grade4_5"
+                widget: "object"
+                fields:
+                  - { label: "Term 1", name: "term1", widget: "number", default: 9400 }
+                  - { label: "Term 2", name: "term2", widget: "number", default: 9400 }
+                  - { label: "Term 3", name: "term3", widget: "number", default: 9400 }
+              - label: "Grade 6"
+                name: "grade6"
+                widget: "object"
+                fields:
+                  - { label: "Term 1", name: "term1", widget: "number", default: 10800 }
+                  - { label: "Term 2", name: "term2", widget: "number", default: 10800 }
+                  - { label: "Term 3", name: "term3", widget: "number", default: 10800 }
+              - label: "Grade 7-8"
+                name: "grade7_8"
+                widget: "object"
+                fields:
+                  - { label: "Term 1", name: "term1", widget: "number", default: 14200 }
+                  - { label: "Term 2", name: "term2", widget: "number", default: 14200 }
+                  - { label: "Term 3", name: "term3", widget: "number", default: 14200 }
+              - label: "Grade 9"
+                name: "grade9"
+                widget: "object"
+                fields:
+                  - { label: "Term 1", name: "term1", widget: "number", default: 14700 }
+                  - { label: "Term 2", name: "term2", widget: "number", default: 14700 }
+                  - { label: "Term 3", name: "term3", widget: "number", default: 14700 }
+          
+          - label: "Extra Fees"
+            name: "extra_fees"
+            widget: "object"
+            fields:
+              - label: "Playgroup"
+                name: "playgroup"
+                widget: "object"
+                fields:
+                  - { label: "Assessment", name: "assessment", widget: "number", default: 300 }
+                  - { label: "Activity", name: "activity", widget: "number", default: 200 }
+                  - { label: "Diary", name: "diary", widget: "number", default: 300 }
+                  - { label: "PTA", name: "pta", widget: "number", default: 200 }
+                  - { label: "Assessment Book", name: "assessment_book", widget: "number", default: 400 }
+              - label: "Grade 1-3"
+                name: "grade1_3"
+                widget: "object"
+                fields:
+                  - { label: "Assessment", name: "assessment", widget: "number", default: 300 }
+                  - { label: "Activity", name: "activity", widget: "number", default: 200 }
+                  - { label: "Diary", name: "diary", widget: "number", default: 300 }
+                  - { label: "PTA", name: "pta", widget: "number", default: 200 }
+                  - { label: "Assessment Book", name: "assessment_book", widget: "number", default: 400 }
+              - label: "Grade 4-6"
+                name: "grade4_6"
+                widget: "object"
+                fields:
+                  - { label: "Assessment", name: "assessment", widget: "number", default: 300 }
+                  - { label: "Activity", name: "activity", widget: "number", default: 200 }
+                  - { label: "Diary", name: "diary", widget: "number", default: 300 }
+                  - { label: "PTA", name: "pta", widget: "number", default: 200 }
+                  - { label: "Assessment Book", name: "assessment_book", widget: "number", default: 400 }
+                  - { label: "Digital Literacy & French", name: "digital_literacy", widget: "number", default: 600 }
+              - label: "Grade 7-9"
+                name: "grade7_9"
+                widget: "object"
+                fields:
+                  - { label: "Assessment", name: "assessment", widget: "number", default: 300 }
+                  - { label: "Activity", name: "activity", widget: "number", default: 300 }
+                  - { label: "Diary", name: "diary", widget: "number", default: 300 }
+                  - { label: "PTA", name: "pta", widget: "number", default: 200 }
+                  - { label: "Assessment Book", name: "assessment_book", widget: "number", default: 500 }
+                  - { label: "Digital Literacy & French", name: "digital_literacy", widget: "number", default: 600 }
+          
+          - label: "Totals"
+            name: "totals"
+            widget: "object"
+            fields:
+              - label: "Playgroup"
+                name: "playgroup"
+                widget: "object"
+                fields:
+                  - { label: "Term 1", name: "term1", widget: "number", default: 8800 }
+                  - { label: "Term 2", name: "term2", widget: "number", default: 7900 }
+                  - { label: "Term 3", name: "term3", widget: "number", default: 7700 }
+              - label: "Grade 1-3"
+                name: "grade1_3"
+                widget: "object"
+                fields:
+                  - { label: "Term 1", name: "term1", widget: "number", default: 8800 }
+                  - { label: "Term 2", name: "term2", widget: "number", default: 7900 }
+                  - { label: "Term 3", name: "term3", widget: "number", default: 7700 }
+              - label: "Grade 4-5"
+                name: "grade4_5"
+                widget: "object"
+                fields:
+                  - { label: "Term 1", name: "term1", widget: "number", default: 11400 }
+                  - { label: "Term 2", name: "term2", widget: "number", default: 10500 }
+                  - { label: "Term 3", name: "term3", widget: "number", default: 10300 }
+              - label: "Grade 6"
+                name: "grade6"
+                widget: "object"
+                fields:
+                  - { label: "Term 1", name: "term1", widget: "number", default: 11400 }
+                  - { label: "Term 2", name: "term2", widget: "number", default: 10500 }
+                  - { label: "Term 3", name: "term3", widget: "number", default: 10300 }
+              - label: "Grade 7-8"
+                name: "grade7_8"
+                widget: "object"
+                fields:
+                  - { label: "Term 1", name: "term1", widget: "number", default: 16400 }
+                  - { label: "Term 2", name: "term2", widget: "number", default: 15400 }
+                  - { label: "Term 3", name: "term3", widget: "number", default: 15100 }
+              - label: "Grade 9"
+                name: "grade9"
+                widget: "object"
+                fields:
+                  - { label: "Term 1", name: "term1", widget: "number", default: 16400 }
+                  - { label: "Term 2", name: "term2", widget: "number", default: 15400 }
+                  - { label: "Term 3", name: "term3", widget: "number", default: 15100 }
+          
+          - { label: "Grade 6 Note", name: "grade6_note", widget: "string", default: "Grade 6 tuition is KSh 10,800 per term" }
+          - { label: "Grade 9 Note", name: "grade9_note", widget: "string", default: "Grade 9 tuition is KSh 14,700 per term" }
+          
+          - label: "Annual Summary"
+            name: "annual_summary"
+            widget: "object"
+            fields:
+              - { label: "Playgroup - Grade 3", name: "playgroup_grade3", widget: "number", default: 24400 }
+              - { label: "Grade 4 - 5", name: "grade4_5", widget: "number", default: 32200 }
+              - { label: "Grade 6", name: "grade6", widget: "number", default: 34600 }
+              - { label: "Grade 7 - 8", name: "grade7_8", widget: "number", default: 46900 }
+              - { label: "Grade 9", name: "grade9", widget: "number", default: 47400 }
+          
+          - label: "Optional Services"
+            name: "optional_services"
+            widget: "object"
+            fields:
+              - { label: "Meals (per term)", name: "meals", widget: "number", default: 3900 }
+              - { label: "Meals Description", name: "meals_description", widget: "string", default: "Nutritious lunch served daily. Optional for all learners." }
+              - label: "Transport"
+                name: "transport"
+                widget: "object"
+                fields:
+                  - { label: "Imara Daima", name: "imara_daima", widget: "number", default: 7000 }
+                  - { label: "Pipeline", name: "pipeline", widget: "number", default: 6000 }
+                  - { label: "AA & KOBIL", name: "aa_kobil", widget: "number", default: 6000 }
+                  - { label: "Kwanjenga", name: "kwanjenga", widget: "number", default: 6000 }
+          
+          - label: "Admission Fee"
+            name: "admission_fee"
+            widget: "object"
+            fields:
+              - { label: "Playgroup - Grade 6", name: "playgroup_grade6", widget: "number", default: 1000 }
+              - { label: "Playgroup - Grade 6 Label", name: "playgroup_grade6_label", widget: "string", default: "For Playgroup - Grade 6" }
+              - { label: "Grade 7 - 9", name: "grade7_9", widget: "number", default: 1500 }
+              - { label: "Grade 7 - 9 Label", name: "grade7_9_label", widget: "string", default: "For Grade 7 - Grade 9 (Junior Secondary)" }
+          
+          - label: "New Admission Example"
+            name: "new_admission_example"
+            widget: "object"
+            fields:
+              - label: "Grade 1"
+                name: "grade1"
+                widget: "object"
+                fields:
+                  - { label: "Term 1 Fees", name: "term1_fees", widget: "number", default: 8800 }
+                  - { label: "Admission Fee", name: "admission_fee", widget: "number", default: 1000 }
+                  - { label: "Uniform", name: "uniform", widget: "string", default: "Contact School" }
+                  - { label: "Meals (Optional)", name: "meals", widget: "number", default: 3900 }
+                  - { label: "Estimated Total", name: "total", widget: "number", default: 13700 }
+              - label: "Grade 7"
+                name: "grade7"
+                widget: "object"
+                fields:
+                  - { label: "Term 1 Fees", name: "term1_fees", widget: "number", default: 16400 }
+                  - { label: "Admission Fee", name: "admission_fee", widget: "number", default: 1500 }
+                  - { label: "Uniform", name: "uniform", widget: "string", default: "Contact School" }
+                  - { label: "Meals (Optional)", name: "meals", widget: "number", default: 3900 }
+                  - { label: "Estimated Total", name: "total", widget: "number", default: 21800 }
+          
+          - label: "Payment Methods"
+            name: "payment_methods"
+            widget: "object"
+            fields:
+              - label: "Bank"
+                name: "bank"
+                widget: "object"
+                fields:
+                  - { label: "Bank Name", name: "name", widget: "string", default: "Kenya Commercial Bank (KCB)" }
+                  - { label: "Branch", name: "branch", widget: "string", default: "Utawala Branch" }
+                  - { label: "Account Name", name: "account_name", widget: "string", default: "Shinners Precious School" }
+                  - { label: "Account Number", name: "account_number", widget: "string", default: "1282776983" }
+              - label: "Mpesa"
+                name: "mpesa"
+                widget: "object"
+                fields:
+                  - { label: "Paybill Number", name: "paybill", widget: "string", default: "522123" }
+                  - { label: "Account Format", name: "account_format", widget: "string", default: "82747K-LearnerName-Class" }
+                  - { label: "Example", name: "example", widget: "string", default: "82747K-JOHNDOE-G4" }
+              - { label: "Payment Note", name: "note", widget: "string", default: "No cash payments accepted. All fees must be paid via Bank or Mpesa." }
+              - { label: "Receipt Note", name: "receipt_note", widget: "string", default: "Keep your payment receipt for reference" }
+          
+          - label: "Payment Schedule"
+            name: "payment_schedule"
+            widget: "object"
+            fields:
+              - { label: "Term 1", name: "term1", widget: "string", default: "Due before opening day (January)" }
+              - { label: "Term 2", name: "term2", widget: "string", default: "Due before opening day (April/May)" }
+              - { label: "Term 3", name: "term3", widget: "string", default: "Due before opening day (August/September)" }
+          
+          - { label: "FAQs", name: "faqs", widget: "list", fields: [
+              { label: "Question", name: "question", widget: "string" },
+              { label: "Answer", name: "answer", widget: "text" }
+            ] }
+          
+          - { label: "Important Notes", name: "important_notes", widget: "list", field: { label: "Note", name: "note", widget: "text" } }
+          
+          - { label: "Last Updated", name: "last_updated", widget: "string", default: "June 2026" }
+          - { label: "Download Link", name: "download_link", widget: "string", default: "assets/Fee-Structure-2026.pdf" }
+
+  # ========================================
+  # OTHER
+  # ========================================
+  - name: "uniform"
+    label: "👕 School Uniform"
+    label_singular: "Uniform Item"
+    description: "Manage uniform items, descriptions, and pricing."
+    folder: "data/uniform"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Price", name: "price", widget: "string" }
+      - { label: "Category", name: "category", widget: "select", options: ["maroon", "navy"] }
+      - { label: "Display Order", name: "order", widget: "number", default: 0 }
+
+  - name: "school-life"
+    label: "⚽ School Life"
+    label_singular: "Activity"
+    description: "Manage sports, clubs, events, and extra-curricular activities."
+    folder: "data/school-life"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "markdown" }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Category", name: "category", widget: "select", options: ["sports", "clubs", "events", "testimonials"] }
+      - { label: "Display Order", name: "order", widget: "number", default: 0 }
+
+  # ========================================
+  # TERM DATES
+  # ========================================
+  - name: "term-dates"
+    label: "📅 Term Dates"
+    label_singular: "Term Dates"
+    description: "Update the current term dates."
+    files:
+      - name: "term2"
+        label: "Term 2 2026"
+        file: "data/term-dates.json"
+        fields:
+          - { label: "Term Name", name: "term_name", widget: "string", default: "Term 2 2026" }
+          - { label: "Opening Date", name: "opening_date", widget: "string" }
+          - { label: "Mid-Term Break", name: "mid_term_break", widget: "string" }
+          - { label: "Closing Date", name: "closing_date", widget: "string" }
+          - { label: "Next Holiday", name: "next_holiday", widget: "string" }
+
+  # ========================================
+  # UPCOMING EVENTS
+  # ========================================
+  - name: "upcoming-events"
+    label: "📅 Upcoming Events"
+    label_singular: "Event"
+    description: "Add, edit, or remove upcoming events."
+    folder: "data/upcoming-events"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Event Title", name: "title", widget: "string" }
+      - { label: "Day", name: "day", widget: "number" }
+      - { label: "Month", name: "month", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Date", name: "date", widget: "datetime", date_format: "MMMM DD, YYYY", time_format: false }
+      - { label: "Display Order", name: "order", widget: "number", default: 0 }

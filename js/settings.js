@@ -24,23 +24,29 @@ async function loadSettings() {
             if (el) el.textContent = settings.email;
         }
 
-        // Director info (for homepage)
-        if (settings.director_name) {
+        // Director info (for homepage) - Supports both flat and nested structure
+        const director = settings.director || {};
+        const directorName = settings.director_name || director.name;
+        const directorTitle = settings.director_title || director.title;
+        const directorPhoto = settings.director_photo || director.photo;
+        const welcomeMessage = settings.welcome_message || director.message;
+
+        if (directorName) {
             const el = document.getElementById('director-name');
-            if (el) el.textContent = settings.director_name;
+            if (el) el.textContent = directorName;
         }
-        if (settings.director_title) {
+        if (directorTitle) {
             const el = document.getElementById('director-title');
-            if (el) el.textContent = settings.director_title;
+            if (el) el.textContent = directorTitle;
         }
-        if (settings.director_photo) {
+        if (directorPhoto) {
             const el = document.getElementById('director-photo');
-            if (el) el.src = settings.director_photo;
+            if (el) el.src = directorPhoto;
         }
-        if (settings.welcome_message) {
+        if (welcomeMessage) {
             const el = document.getElementById('welcome-message');
             if (el) {
-                const paragraphs = settings.welcome_message.split('\n').filter(p => p.trim());
+                const paragraphs = welcomeMessage.split('\n').filter(p => p.trim());
                 el.innerHTML = paragraphs.map(p => `<p>${p}</p>`).join('');
             }
         }
@@ -77,85 +83,44 @@ async function loadSettings() {
 }
 
 // ========================================
-// LOAD STATISTICS FROM HOMEPAGE.JSON
-// ========================================
-async function loadStatistics() {
-    try {
-        const response = await fetch('data/homepage.json');
-        if (!response.ok) return;
-        
-        const data = await response.json();
-        
-        // Find the stats grid container
-        const container = document.querySelector('.stats-grid');
-        if (!container) return;
-        
-        // Clear existing content
-        container.innerHTML = '';
-        
-        // If statistics exist in the JSON, load them
-        if (data.statistics && data.statistics.length > 0) {
-            data.statistics.forEach(stat => {
-                const card = document.createElement('div');
-                card.className = 'stat-card';
-                card.innerHTML = `
-                    <div class="stat-number">${stat.number}</div>
-                    <div class="stat-label">${stat.label}</div>
-                `;
-                container.appendChild(card);
-            });
-        } else {
-            // Fallback if no statistics in JSON
-            container.innerHTML = `
-                <div class="stat-card">
-                    <div class="stat-number">Playgroup – Grade 9</div>
-                    <div class="stat-label">Full CBC Cycle</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">CBC Curriculum</div>
-                    <div class="stat-label">Competency Based</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">Digital Literacy</div>
-                    <div class="stat-label">ICT from Grade 1</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">French Programme</div>
-                    <div class="stat-label">From Grade 4</div>
-                </div>
-            `;
-        }
-        
-        console.log('Statistics loaded successfully');
-    } catch (e) {
-        console.log('Statistics: Using default content');
-    }
-}
-
-// ========================================
-// LOAD TESTIMONIALS
+// LOAD TESTIMONIALS - Auto-detect all files
 // ========================================
 async function loadTestimonials() {
     try {
-        const testimonialFiles = [
-            'mrs-wanjiku',
-            'mr-otieno',
-            'mrs-kamau'
-        ];
-        
         const container = document.getElementById('testimonials-container');
         if (!container) return;
+
+        // Use GitHub API to list all files in the testimonials folder
+        const apiUrl = 'https://api.github.com/repos/Chaslyn89/shiners-precious-school/contents/data/testimonials';
         
+        let testimonialFiles = [];
+        
+        try {
+            const response = await fetch(apiUrl);
+            if (response.ok) {
+                const files = await response.json();
+                const mdFiles = files.filter(file => file.name.endsWith('.md'));
+                testimonialFiles = mdFiles.map(file => file.name.replace('.md', ''));
+                console.log('Found testimonial files:', testimonialFiles);
+            } else {
+                console.log('GitHub API not available');
+                testimonialFiles = [];
+            }
+        } catch (e) {
+            console.log('Error fetching file list');
+            testimonialFiles = [];
+        }
+
         let testimonialHTML = '';
         let found = false;
-        
+
         for (const file of testimonialFiles) {
             try {
                 const response = await fetch(`data/testimonials/${file}.md`);
                 if (response.ok) {
                     const text = await response.text();
                     const parsed = parseTestimonial(text);
-                    if (parsed) {
+                    if (parsed && parsed.name) {
                         found = true;
                         const stars = '⭐'.repeat(parsed.rating || 5);
                         testimonialHTML += `
@@ -174,7 +139,7 @@ async function loadTestimonials() {
                 // Skip if file not found
             }
         }
-        
+
         if (found) {
             container.innerHTML = testimonialHTML;
         } else {
@@ -186,7 +151,7 @@ async function loadTestimonials() {
                 </div>
             `;
         }
-        
+
         console.log('Testimonials loaded successfully');
     } catch (e) {
         console.log('Testimonials: Using default content');
@@ -194,7 +159,7 @@ async function loadTestimonials() {
 }
 
 // ========================================
-// PARSE TESTIMONIAL MARKDOWN
+// PARSE TESTIMONIAL MARKDOWN - Handles values with or without quotes
 // ========================================
 function parseTestimonial(text) {
     try {
@@ -203,27 +168,29 @@ function parseTestimonial(text) {
         
         const frontmatter = match[1];
         
-        const nameMatch = frontmatter.match(/name:\s*"([^"]*)"/);
-        const gradeMatch = frontmatter.match(/grade:\s*"([^"]*)"/);
-        const reviewMatch = frontmatter.match(/review:\s*"([^"]*)"/);
+        // Match values with or without quotes
+        const nameMatch = frontmatter.match(/name:\s*"?([^"\n]*?)"?\s*$/m);
+        const gradeMatch = frontmatter.match(/grade:\s*"?([^"\n]*?)"?\s*$/m);
+        const reviewMatch = frontmatter.match(/review:\s*"?([^"\n]*?)"?\s*$/m);
         const ratingMatch = frontmatter.match(/rating:\s*([\d.]+)/);
-        const dateMatch = frontmatter.match(/date:\s*([\d-]+)/);
+        const dateMatch = frontmatter.match(/date:\s*"?([^"\n]*?)"?\s*$/m);
         
-        let formattedDate = dateMatch ? dateMatch[1] : '';
-        if (formattedDate) {
+        let formattedDate = dateMatch ? dateMatch[1].trim() : '';
+        if (formattedDate && formattedDate.match(/\d{4}-\d{2}-\d{2}/)) {
             const parts = formattedDate.split('-');
             const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
             formattedDate = `${months[parseInt(parts[1]) - 1]} ${parseInt(parts[2])}, ${parts[0]}`;
         }
         
         return {
-            name: nameMatch ? nameMatch[1] : 'Parent',
-            grade: gradeMatch ? gradeMatch[1] : '',
-            review: reviewMatch ? reviewMatch[1] : '',
+            name: nameMatch ? nameMatch[1].trim() : 'Parent',
+            grade: gradeMatch ? gradeMatch[1].trim() : '',
+            review: reviewMatch ? reviewMatch[1].trim() : '',
             rating: ratingMatch ? parseInt(ratingMatch[1]) : 5,
-            date: formattedDate
+            date: formattedDate || 'Date not set'
         };
     } catch (e) {
+        console.log('Error parsing testimonial:', e);
         return null;
     }
 }
@@ -233,6 +200,5 @@ function parseTestimonial(text) {
 // ========================================
 document.addEventListener('DOMContentLoaded', function() {
     loadSettings();
-    loadStatistics();
     loadTestimonials();
 });

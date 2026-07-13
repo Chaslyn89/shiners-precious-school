@@ -1,17 +1,94 @@
 {
-    "playgroup": 6500,
-    "pp1": 7000,
-    "pp2": 7500,
-    "grade1-3": 7800,
-    "grade4-5": 8100,
-    "grade6": 10800,
-    "grade7-8": 9500,
-    "grade9": 14700,
+  "tuition": {
+    "playgroup": { "term1": 7400, "term2": 7400, "term3": 7400 },
+    "pp1": { "term1": 7400, "term2": 7400, "term3": 7400 },
+    "pp2": { "term1": 7400, "term2": 7400, "term3": 7400 },
+    "grade1_3": { "term1": 7400, "term2": 7400, "term3": 7400 },
+    "grade4_5": { "term1": 9400, "term2": 9400, "term3": 9400 },
+    "grade6": { "term1": 10800, "term2": 10800, "term3": 10800 },
+    "grade7_8": { "term1": 14200, "term2": 14200, "term3": 14200 },
+    "grade9": { "term1": 14700, "term2": 14700, "term3": 14700 }
+  },
+  "extra_fees": {
+    "playgroup": { "assessment": 300, "activity": 200, "diary": 300, "pta": 200, "assessment_book": 400 },
+    "grade1_3": { "assessment": 300, "activity": 200, "diary": 300, "pta": 200, "assessment_book": 400 },
+    "grade4_6": { "assessment": 300, "activity": 200, "diary": 300, "pta": 200, "assessment_book": 400, "digital_literacy": 600 },
+    "grade7_9": { "assessment": 300, "activity": 300, "diary": 300, "pta": 200, "assessment_book": 500, "digital_literacy": 600 }
+  },
+  "totals": {
+    "playgroup": { "term1": 8800, "term2": 7900, "term3": 7700 },
+    "grade1_3": { "term1": 8800, "term2": 7900, "term3": 7700 },
+    "grade4_5": { "term1": 11400, "term2": 10500, "term3": 10300 },
+    "grade6": { "term1": 11400, "term2": 10500, "term3": 10300 },
+    "grade7_8": { "term1": 16400, "term2": 15400, "term3": 15100 },
+    "grade9": { "term1": 16400, "term2": 15400, "term3": 15100 }
+  },
+  "grade6_note": "Grade 6 tuition is KSh 10,800 per term",
+  "grade9_note": "Grade 9 tuition is KSh 14,700 per term",
+  "annual_summary": {
+    "playgroup_grade3": 24400,
+    "grade4_5": 32200,
+    "grade6": 34600,
+    "grade7_8": 46900,
+    "grade9": 47400
+  },
+  "optional_services": {
     "meals": 3900,
+    "meals_description": "Nutritious lunch served daily. Optional for all learners.",
     "transport": {
-        "imara": 7000,
-        "aakobil": 6000,
-        "pipeline": 6000,
-        "kwanjenga": 6000
+      "imara_daima": 7000,
+      "pipeline": 6000,
+      "aa_kobil": 6000,
+      "kwanjenga": 6000
     }
+  },
+  "admission_fee": {
+    "playgroup_grade6": 1000,
+    "grade7_9": 1500,
+    "playgroup_grade6_label": "For Playgroup - Grade 6",
+    "grade7_9_label": "For Grade 7 - Grade 9 (Junior Secondary)"
+  },
+  "new_admission_example": {
+    "grade1": { "term1_fees": 8800, "admission_fee": 1000, "uniform": "Contact School", "meals": 3900, "total": 13700 },
+    "grade7": { "term1_fees": 16400, "admission_fee": 1500, "uniform": "Contact School", "meals": 3900, "total": 21800 }
+  },
+  "payment_methods": {
+    "bank": {
+      "name": "Kenya Commercial Bank (KCB)",
+      "branch": "Utawala Branch",
+      "account_name": "Shinners Precious School",
+      "account_number": "1282776983"
+    },
+    "mpesa": {
+      "paybill": "522123",
+      "account_format": "82747K-LearnerName-Class",
+      "example": "82747K-JOHNDOE-G4"
+    },
+    "note": "No cash payments accepted. All fees must be paid via Bank or Mpesa.",
+    "receipt_note": "Keep your payment receipt for reference"
+  },
+  "payment_schedule": {
+    "term1": "Due before opening day (January)",
+    "term2": "Due before opening day (April/May)",
+    "term3": "Due before opening day (August/September)"
+  },
+  "faqs": [
+    { "question": "Can fees be paid in installments?", "answer": "Contact the school office to discuss installment arrangements." },
+    { "question": "Are meals compulsory?", "answer": "No, meals are optional. You can choose to add or remove." },
+    { "question": "Is transport compulsory?", "answer": "No, transport is optional for parents who wish to use it." },
+    { "question": "Are fees refundable?", "answer": "Fees are generally non-refundable. Discuss with administration for exceptions." },
+    { "question": "What is the admission fee for?", "answer": "The admission fee covers registration and processing of new learners." },
+    { "question": "When is the fee payment deadline?", "answer": "Fees should be paid before the term begins. Late payment may incur penalties." }
+  ],
+  "important_notes": [
+    "Fees are payable per term, before the term begins.",
+    "Admission fee is paid once upon enrollment.",
+    "Meals and transport are optional but payable per term.",
+    "Digital Literacy & French are mandatory for Grade 4-9.",
+    "Activity fee covers sports, clubs, and co-curricular events.",
+    "PTA fee supports parents' association activities.",
+    "Diary and assessment books are issued in Term 1 only."
+  ],
+  "last_updated": "June 2026",
+  "download_link": "assets/Fee-Structure-2026.pdf"
 }

@@ -1,14 +1,39 @@
 {
-  "core_values": "Integrity • Excellence • Discipline • Creativity • Faith",
   "phone2": "0726 314 846",
-  "director_title": "School Director",
-  "vision": "To be a center of excellence that produces lifelong learners and critical thinkers equipped for global success.",
-  "welcome_message": "Dear Parents and Guardians,\n\nIt is my honor to welcome you to Shinners Precious School. We are committed to providing quality CBC education that nurtures every child's potential. Our dedicated teachers ensure that each learner receives personal attention and support.\n\nWe invite you to visit our school and experience the Shinners difference.",
-  "mission": "To provide high quality education and childcare in a safe, respectful and inclusive environment that builds a foundation for lifelong learning.",
+  "logo": "/images/uploads/360_f_1512041110_c0nfjdchlmujiwfdowzckugspalmbjdd.jpg",
+  "po_box": "P.O. Box 40-0521, Embakasi",
+  "director": {
+    "name": "Shem Oyugi",
+    "title": "School Director",
+    "photo": "/images/uploads/360_f_1512041110_c0nfjdchlmujiwfdowzckugspalmbjdd.jpg",
+    "message": "Dear Parents and Guardians,\n\nIt is my honor to welcome you to Shinners Precious School. We are committed to providing quality CBC education that nurtures every child's potential. Our dedicated teachers ensure that each learner receives personal attention and support.\n\nWe invite you to visit our school and experience the Shinners difference.",
+    "signature": "Yours in education,\n\nShem Oyugi\nDirector, Shinners Precious School"
+  },
+  "motto": "Determined to win",
+  "social": {
+    "facebook": "",
+    "instagram": "",
+    "whatsapp": "0720 994 337",
+    "tiktok": "",
+    "youtube": ""
+  },
   "phone": "0720 994 337",
-  "admission_fee": "KSh 1,0000",
+  "hours": {
+    "weekdays": "8:00 AM - 4:00 PM",
+    "saturday": "9:00 AM - 12:00 PM (Office only)",
+    "sunday": "Closed"
+  },
+  "admission_fee": "KSh 1,500",
+  "footer_text": "Shinners Precious School. All rights reserved.",
+  "favicon": "/images/favicon.ico",
+  "address": "Embakasi, near Imara Daima",
+  "school_name": "Shinners Precious School",
   "meals_fee": "KSh 3,900",
+  "mission_vision": {
+    "mission": "To provide high quality education and childcare in a safe, respectful and inclusive environment that builds a foundation for lifelong learning.",
+    "vision": "To be a center of excellence that produces lifelong learners and critical thinkers equipped for global success.",
+    "core_values": "Integrity • Excellence • Discipline • Creativity • Faith"
+  },
   "email": "shinnersprecious@gmail.com",
-  "director_name": "Shem Oyugi",
-  "director_photo": "/images/uploads/whatsapp-image-2026-07-09-at-00.42.53.jpeg"
+  "google_maps": ""
 }
