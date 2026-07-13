@@ -11,42 +11,25 @@
   "categories": {
     "facilities": {
       "photos": [
-        { "image": "/images/uploads/school-building.jpg", "title": "School Building", "caption": "School Building Exterior", "featured": true },
-        { "image": "/images/uploads/classroom.jpg", "title": "Classroom", "caption": "Modern Classroom", "featured": true },
-        { "image": "/images/uploads/library.jpg", "title": "Library", "caption": "School Library", "featured": true },
-        { "image": "/images/uploads/computer-lab.jpg", "title": "Computer Lab", "caption": "Computer Lab", "featured": true },
-        { "image": "/images/uploads/playground.jpg", "title": "Playground", "caption": "Playground", "featured": true },
-        { "image": "/images/uploads/school-bus.jpg", "title": "School Bus", "caption": "School Transport", "featured": true }
+        { "image": "/images/uploads/school-building.jpg", "title": "School Building", "caption": "School Building", "featured": true }
       ]
     },
     "classes": {
       "photos": [
-        { "image": "/images/uploads/students-learning.jpg", "title": "Students Learning", "caption": "Active Classroom Learning", "featured": true },
-        { "image": "/images/uploads/digital-literacy.jpg", "title": "Digital Literacy Class", "caption": "Digital Literacy Lesson", "featured": true },
-        { "image": "/images/uploads/french-class.jpg", "title": "French Class", "caption": "French Language Class", "featured": true },
-        { "image": "/images/uploads/group-learning.jpg", "title": "Group Learning", "caption": "Group Discussion", "featured": true }
+        { "image": "/images/uploads/classroom-learning.png", "title": "Classroom Learning", "caption": "Classroom Learning", "featured": true }
       ]
     },
     "events": {
       "photos": [
         { "image": "/images/uploads/sports-day.jpg", "title": "Sports Day", "caption": "Sports Day", "featured": true },
-        { "image": "/images/uploads/graduation.jpg", "title": "Graduation", "caption": "Graduation Ceremony", "featured": true },
-        { "image": "/images/uploads/prize-giving.jpg", "title": "Prize Giving", "caption": "Prize Giving Day", "featured": true },
-        { "image": "/images/uploads/cultural-day.jpg", "title": "Cultural Day", "caption": "Cultural Day", "featured": true }
+        { "image": "/images/uploads/graduation.jpg", "title": "Graduation", "caption": "Graduation", "featured": true }
       ]
     },
     "uniform": {
-      "photos": [
-        { "image": "/images/uploads/maroon-uniform.jpg", "title": "Maroon Uniform", "caption": "Maroon Uniform (Playgroup - Grade 6)", "featured": true },
-        { "image": "/images/uploads/navy-uniform.jpg", "title": "Navy Uniform", "caption": "Navy Blue Uniform (Grade 7 - 9)", "featured": true }
-      ]
+      "photos": []
     },
     "staff": {
-      "photos": [
-        { "image": "/images/uploads/director.jpg", "title": "School Director", "caption": "School Director", "featured": true },
-        { "image": "/images/uploads/teaching-staff.jpg", "title": "Teaching Staff", "caption": "Our Dedicated Teachers", "featured": true },
-        { "image": "/images/uploads/support-staff.jpg", "title": "Support Staff", "caption": "Support Staff", "featured": true }
-      ]
+      "photos": []
     }
   },
   "videos": [
