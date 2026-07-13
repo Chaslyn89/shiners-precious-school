@@ -1,5 +1,5 @@
 ---
-name: "Mr. Kiara "
+name: Mr. Kimani
 grade: Grade 4
 review: I appreciate alot my child has improved discipline wise and academically.
 rating: 5
