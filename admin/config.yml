@@ -217,6 +217,11 @@ collections:
       - { label: "Caption", name: "caption", widget: "text", required: false }
       - { label: "Category", name: "category", widget: "select", options: ["facilities", "classes", "events", "uniform", "staff"] }
       - { label: "Featured on Homepage", name: "featured", widget: "boolean", default: false }
+      - { label: "Description", name: "description", widget: "text", required: false, hint: "Detailed description of the image" }
+      - { label: "Photographer", name: "photographer", widget: "string", required: false, hint: "Name of the photographer" }
+      - { label: "Date Taken", name: "date_taken", widget: "datetime", required: false, date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Display Order", name: "order", widget: "number", default: 0, hint: "Lower numbers appear first" }
+      - { label: "Tags", name: "tags", widget: "list", required: false, field: { label: "Tag", name: "tag", widget: "string" } }
 
   # ========================================
   # NEWS - With Author Field Added
