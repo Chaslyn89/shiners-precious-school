@@ -7,16 +7,20 @@
   "welcome_content": "Welcome to Shinners Precious School, where we nurture young minds through a holistic approach to education.",
   "statistics": [
     {
-      "number": "CBC",
-      "label": "Curriculum"
+      "number": "CBC Curriculum",
+      "label": "Competency Based"
     },
     {
-      "number": "PG-9",
-      "label": "Classes Offered"
+      "number": "Playgroup – Grade 9",
+      "label": "Full CBC Cycle"
     },
     {
-      "number": "Qualified",
-      "label": "Teaching Staff"
+      "number": "Digital Literacy",
+      "label": "ICT from Grade 1"
+    },
+    {
+      "number": "French Programme",
+      "label": "From Grade 4"
     }
   ]
 }
