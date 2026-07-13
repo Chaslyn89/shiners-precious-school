@@ -1,6 +1,6 @@
 ---
 title: School Building
-image: /images/uploads/whatsapp-image-2026-06-16-at-16.55.48.jpeg
+image: /images/uploads/chatgpt-image-jul-13-2026-10_15_26-pm.png
 category: facilities
 featured: true
 ---
