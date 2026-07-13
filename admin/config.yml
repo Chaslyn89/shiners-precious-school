@@ -1,111 +1,174 @@
+backend:
+  name: git-gateway
+  branch: master
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
   # ========================================
-  # GALLERY - Category-based sections
+  # GLOBAL SETTINGS
+  # ========================================
+  - name: "settings"
+    label: "⚙️ Website Settings"
+    files:
+      - name: "general"
+        label: "General Settings"
+        file: "data/settings.json"
+        fields:
+          - { label: "School Name", name: "school_name", widget: "string" }
+          - { label: "School Logo", name: "logo", widget: "image" }
+          - { label: "Phone Number", name: "phone", widget: "string" }
+          - { label: "Secondary Phone", name: "phone2", widget: "string" }
+          - { label: "Email Address", name: "email", widget: "string" }
+          - { label: "Admission Fee", name: "admission_fee", widget: "string" }
+          - { label: "Meals Fee (per term)", name: "meals_fee", widget: "string" }
+
+  # ========================================
+  # HOMEPAGE
+  # ========================================
+  - name: "homepage"
+    label: "🏠 Homepage"
+    files:
+      - name: "homepage"
+        label: "Homepage Content"
+        file: "data/homepage.json"
+        fields:
+          - { label: "Hero Title", name: "hero_title", widget: "string" }
+          - { label: "Hero Subtitle", name: "hero_subtitle", widget: "text" }
+          - { label: "Hero Image", name: "hero_image", widget: "image" }
+          - { label: "CTA Button Text", name: "cta_button", widget: "string" }
+          - { label: "Welcome Section Title", name: "welcome_title", widget: "string" }
+          - { label: "Welcome Content", name: "welcome_content", widget: "markdown" }
+          - label: "Statistics"
+            name: "statistics"
+            widget: "list"
+            fields:
+              - { label: "Number", name: "number", widget: "string" }
+              - { label: "Label", name: "label", widget: "string" }
+
+  # ========================================
+  # ABOUT
+  # ========================================
+  - name: "about"
+    label: "🏫 About the School"
+    files:
+      - name: "about"
+        label: "About Content"
+        file: "data/about.json"
+        fields:
+          - { label: "Hero Title", name: "hero_title", widget: "string" }
+          - { label: "Hero Subtitle", name: "hero_subtitle", widget: "string" }
+          - { label: "Welcome Text", name: "welcome_text", widget: "markdown" }
+          - label: "History"
+            name: "history"
+            widget: "list"
+            fields:
+              - { label: "Year/Event", name: "year", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+
+  # ========================================
+  # GALLERY
   # ========================================
   - name: "gallery"
     label: "🖼️ Gallery"
-    label_singular: "Image"
-    description: "Manage all school photos and gallery images."
+    folder: "data/gallery"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Caption", name: "caption", widget: "text", required: false }
+      - { label: "Category", name: "category", widget: "select", options: ["facilities", "classes", "events", "uniform", "staff"] }
+      - { label: "Featured on Homepage", name: "featured", widget: "boolean", default: false }
+
+  # ========================================
+  # NEWS
+  # ========================================
+  - name: "news"
+    label: "📰 News & Events"
+    folder: "data/news"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Content", name: "content", widget: "text" }
+      - { label: "Author", name: "author", widget: "string", default: "Administration" }
+      - { label: "Featured Image", name: "image", widget: "image", required: false }
+      - { label: "Category", name: "category", widget: "select", options: ["Academic", "Co-Curricular", "School News", "Admissions", "Achievement"] }
+
+  # ========================================
+  # TESTIMONIALS
+  # ========================================
+  - name: "testimonials"
+    label: "💬 Testimonials"
+    folder: "data/testimonials"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Parent Name", name: "name", widget: "string" }
+      - { label: "Child's Grade", name: "grade", widget: "string" }
+      - { label: "Review", name: "review", widget: "markdown" }
+      - { label: "Rating (1-5)", name: "rating", widget: "number", default: 5 }
+      - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+
+  # ========================================
+  # STAFF
+  # ========================================
+  - name: "staff"
+    label: "👥 Staff Directory"
+    folder: "data/staff"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Qualifications", name: "qualifications", widget: "string", required: false }
+      - { label: "Subjects", name: "subjects", widget: "string", required: false }
+      - { label: "Photo", name: "photo", widget: "image", required: false }
+
+  # ========================================
+  # UNIFORM
+  # ========================================
+  - name: "uniform"
+    label: "👕 School Uniform"
+    folder: "data/uniform"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Price", name: "price", widget: "string" }
+      - { label: "Category", name: "category", widget: "select", options: ["maroon", "navy"] }
+
+  # ========================================
+  # SCHOOL LIFE
+  # ========================================
+  - name: "school-life"
+    label: "⚽ School Life"
+    folder: "data/school-life"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "markdown" }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Category", name: "category", widget: "select", options: ["sports", "clubs", "events", "testimonials"] }
+
+  # ========================================
+  # TERM DATES
+  # ========================================
+  - name: "term-dates"
+    label: "📅 Term Dates"
     files:
-      - name: "gallery"
-        label: "Gallery Images"
-        file: "data/gallery.json"
+      - name: "term2"
+        label: "Term 2 2026"
+        file: "data/term-dates.json"
         fields:
-          # Hero Section
-          - { label: "Hero Title", name: "hero_title", widget: "string", default: "Our Gallery" }
-          - { label: "Hero Subtitle", name: "hero_subtitle", widget: "string", default: "Photos of school life, facilities, and activities" }
-          
-          # Featured Album
-          - label: "Featured Album"
-            name: "featured"
-            widget: "object"
-            fields:
-              - { label: "Title", name: "title", widget: "string", default: "2026 Sports Day" }
-              - { label: "Description", name: "description", widget: "text", default: "Our annual Sports Day was filled with energy, teamwork, and great performances." }
-              - { label: "Meta Info", name: "meta", widget: "string", default: "15 Photos | 2 Videos" }
-              - { label: "Image", name: "image", widget: "image" }
-              - { label: "Link", name: "link", widget: "string", required: false }
-          
-          # Category: Facilities
-          - label: "🏫 School Facilities"
-            name: "facilities"
-            widget: "object"
-            fields:
-              - label: "Photos"
-                name: "photos"
-                widget: "list"
-                fields:
-                  - { label: "Image", name: "src", widget: "image" }
-                  - { label: "Caption", name: "caption", widget: "string" }
-                  - { label: "Description", name: "description", widget: "text", required: false }
-          
-          # Category: Classes
-          - label: "📚 Students in Class"
-            name: "classes"
-            widget: "object"
-            fields:
-              - label: "Photos"
-                name: "photos"
-                widget: "list"
-                fields:
-                  - { label: "Image", name: "src", widget: "image" }
-                  - { label: "Caption", name: "caption", widget: "string" }
-                  - { label: "Description", name: "description", widget: "text", required: false }
-          
-          # Category: Events
-          - label: "🎉 Events & Activities"
-            name: "events"
-            widget: "object"
-            fields:
-              - label: "Photos"
-                name: "photos"
-                widget: "list"
-                fields:
-                  - { label: "Image", name: "src", widget: "image" }
-                  - { label: "Caption", name: "caption", widget: "string" }
-                  - { label: "Description", name: "description", widget: "text", required: false }
-          
-          # Category: Uniform
-          - label: "👕 Uniform Showcase"
-            name: "uniform"
-            widget: "object"
-            fields:
-              - label: "Photos"
-                name: "photos"
-                widget: "list"
-                fields:
-                  - { label: "Image", name: "src", widget: "image" }
-                  - { label: "Caption", name: "caption", widget: "string" }
-                  - { label: "Description", name: "description", widget: "text", required: false }
-          
-          # Category: Staff
-          - label: "👨‍🏫 Staff & Leadership"
-            name: "staff"
-            widget: "object"
-            fields:
-              - label: "Photos"
-                name: "photos"
-                widget: "list"
-                fields:
-                  - { label: "Image", name: "src", widget: "image" }
-                  - { label: "Caption", name: "caption", widget: "string" }
-                  - { label: "Description", name: "description", widget: "text", required: false }
-          
-          # Videos Section
-          - label: "School Videos"
-            name: "videos"
-            widget: "list"
-            fields:
-              - { label: "Video URL", name: "src", widget: "string" }
-              - { label: "Caption", name: "caption", widget: "string" }
-              - { label: "Poster Image", name: "poster", widget: "image", required: false }
-          
-          # CTA Section
-          - { label: "CTA Title", name: "cta_title", widget: "string", default: "Experience Shinners Precious School" }
-          - { label: "CTA Description", name: "cta_description", widget: "text", default: "The best way to experience our school is to visit us in person." }
-          - { label: "CTA Button 1 Text", name: "cta_button1", widget: "string", default: "📅 Book a School Visit" }
-          - { label: "CTA Button 1 Link", name: "cta_button1_link", widget: "string", default: "/contact.html" }
-          - { label: "CTA Button 2 Text", name: "cta_button2", widget: "string", default: "📝 Enroll Your Child" }
-          - { label: "CTA Button 2 Link", name: "cta_button2_link", widget: "string", default: "/admissions.html" }
-          
-          # Footer Note
-          - { label: "Footer Note", name: "footer_note", widget: "text", default: "📸 All photos used with parental consent. For inquiries about photo usage, contact the school administration." }
+          - { label: "Term Name", name: "term_name", widget: "string" }
+          - { label: "Opening Date", name: "opening_date", widget: "string" }
+          - { label: "Mid-Term Break", name: "mid_term_break", widget: "string" }
+          - { label: "Closing Date", name: "closing_date", widget: "string" }
+          - { label: "Next Holiday", name: "next_holiday", widget: "string" }
