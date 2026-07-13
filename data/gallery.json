@@ -1,57 +1,64 @@
 {
-  "hero_title": "Our Gallery",
-  "hero_subtitle": "Photos of school life, facilities, and activities",
+  "hero_title": "Photo Gallery",
+  "hero_subtitle": "Explore life at Shinners Precious School",
   "featured": {
-    "image": "/images/uploads/featured.jpg",
-    "title": "Featured Album",
-    "description": "Highlights from our school events.",
-    "meta": "Updated 2026",
-    "link": "/gallery.html"
+    "title": "2026 Sports Day",
+    "description": "Our annual Sports Day was filled with energy, teamwork, and great performances.",
+    "meta": "15 Photos | 2 Videos",
+    "image": "/images/uploads/featured-sports-day.jpg",
+    "link": "#"
   },
   "categories": {
     "facilities": {
       "photos": [
-        {
-          "src": "/images/uploads/computer-lab.jpg",
-          "alt": "Computer Lab",
-          "caption": "Modern Computer Lab"
-        },
-        {
-          "src": "/images/uploads/library.jpg",
-          "alt": "Library",
-          "caption": "Well-stocked Library"
-        }
+        { "src": "/images/uploads/school-building.jpg", "caption": "School Building", "description": "School Building Exterior" },
+        { "src": "/images/uploads/classroom.jpg", "caption": "Classroom", "description": "Modern Classroom" },
+        { "src": "/images/uploads/library.jpg", "caption": "Library", "description": "School Library" },
+        { "src": "/images/uploads/computer-lab.jpg", "caption": "Computer Lab", "description": "Computer Lab" },
+        { "src": "/images/uploads/playground.jpg", "caption": "Playground", "description": "Playground" },
+        { "src": "/images/uploads/school-bus.jpg", "caption": "School Bus", "description": "School Transport" }
       ]
     },
     "classes": {
       "photos": [
-        {
-          "src": "/images/uploads/classroom.jpg",
-          "alt": "Classroom",
-          "caption": "Classroom Learning"
-        }
+        { "src": "/images/uploads/students-learning.jpg", "caption": "Students Learning", "description": "Active Classroom Learning" },
+        { "src": "/images/uploads/digital-literacy.jpg", "caption": "Digital Literacy Class", "description": "Digital Literacy Lesson" },
+        { "src": "/images/uploads/french-class.jpg", "caption": "French Class", "description": "French Language Class" },
+        { "src": "/images/uploads/group-learning.jpg", "caption": "Group Learning", "description": "Group Discussion" }
       ]
     },
     "events": {
       "photos": [
-        {
-          "src": "/images/uploads/sports-day.jpg",
-          "alt": "Sports Day",
-          "caption": "Sports Day"
-        },
-        {
-          "src": "/images/uploads/graduation.jpg",
-          "alt": "Graduation",
-          "caption": "Graduation Ceremony"
-        }
+        { "src": "/images/uploads/sports-day.jpg", "caption": "Sports Day", "description": "Sports Day" },
+        { "src": "/images/uploads/graduation.jpg", "caption": "Graduation", "description": "Graduation Ceremony" },
+        { "src": "/images/uploads/prize-giving.jpg", "caption": "Prize Giving", "description": "Prize Giving Day" },
+        { "src": "/images/uploads/cultural-day.jpg", "caption": "Cultural Day", "description": "Cultural Day" }
       ]
     },
     "uniform": {
-      "photos": []
+      "photos": [
+        { "src": "/images/uploads/maroon-uniform.jpg", "caption": "Maroon Uniform", "description": "Maroon Uniform (Playgroup - Grade 6)" },
+        { "src": "/images/uploads/navy-uniform.jpg", "caption": "Navy Uniform", "description": "Navy Blue Uniform (Grade 7 - 9)" }
+      ]
     },
     "staff": {
-      "photos": []
+      "photos": [
+        { "src": "/images/uploads/director.jpg", "caption": "School Director", "description": "School Director" },
+        { "src": "/images/uploads/teaching-staff.jpg", "caption": "Teaching Staff", "description": "Our Dedicated Teachers" },
+        { "src": "/images/uploads/support-staff.jpg", "caption": "Support Staff", "description": "Support Staff" }
+      ]
     }
   },
-  "videos": []
+  "videos": [
+    { "src": "video-url-1.mp4", "caption": "🎬 School Tour" },
+    { "src": "video-url-2.mp4", "caption": "🎓 Graduation Ceremony 2026" },
+    { "src": "video-url-3.mp4", "caption": "⚽ Sports Day Highlights" }
+  ],
+  "cta_title": "Experience Shinners Precious School",
+  "cta_description": "The best way to experience our school is to visit us in person.",
+  "cta_button1": "📅 Book a School Visit",
+  "cta_button1_link": "/contact.html",
+  "cta_button2": "📝 Enroll Your Child",
+  "cta_button2_link": "/admissions.html",
+  "footer_note": "📸 All photos used with parental consent. For inquiries about photo usage, contact the school administration."
 }
