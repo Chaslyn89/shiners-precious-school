@@ -1,0 +1,12 @@
+name: "leadership"
+label: "👨‍🏫 Leadership Team"
+label_singular: "Leader"
+description: "Manage the school's leadership team members."
+folder: "data/leadership"
+create: true
+slug: "{{slug}}"
+fields:
+  - { label: "Name", name: "name", widget: "string" }
+  - { label: "Title", name: "title", widget: "string" }
+  - { label: "Photo", name: "photo", widget: "image", required: false }
+  - { label: "Display Order", name: "order", widget: "number", default: 0 }

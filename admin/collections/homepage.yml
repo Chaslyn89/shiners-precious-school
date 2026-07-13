@@ -1,0 +1,21 @@
+name: "homepage"
+label: "🏠 Homepage"
+label_singular: "Homepage"
+description: "Edit the homepage content including hero, welcome section, and statistics."
+files:
+  - name: "homepage"
+    label: "Homepage Content"
+    file: "data/homepage.json"
+    fields:
+      - { label: "Hero Title", name: "hero_title", widget: "string" }
+      - { label: "Hero Subtitle", name: "hero_subtitle", widget: "text" }
+      - { label: "Hero Image", name: "hero_image", widget: "image" }
+      - { label: "CTA Button Text", name: "cta_button", widget: "string", default: "Enroll Today" }
+      - { label: "Welcome Section Title", name: "welcome_title", widget: "string" }
+      - { label: "Welcome Content", name: "welcome_content", widget: "markdown" }
+      - label: "Statistics"
+        name: "statistics"
+        widget: "list"
+        fields:
+          - { label: "Number", name: "number", widget: "string" }
+          - { label: "Label", name: "label", widget: "string" }

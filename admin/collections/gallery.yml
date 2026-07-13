@@ -1,0 +1,13 @@
+name: "gallery"
+label: "🖼️ Gallery"
+label_singular: "Image"
+description: "Manage all school photos and gallery images."
+folder: "data/gallery"
+create: true
+slug: "{{slug}}"
+fields:
+  - { label: "Title", name: "title", widget: "string" }
+  - { label: "Image", name: "image", widget: "image" }
+  - { label: "Caption", name: "caption", widget: "text", required: false }
+  - { label: "Category", name: "category", widget: "select", options: ["facilities", "classes", "events", "uniform", "staff"] }
+  - { label: "Featured on Homepage", name: "featured", widget: "boolean", default: false }

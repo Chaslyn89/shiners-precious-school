@@ -1,0 +1,15 @@
+name: "staff"
+label: "👥 Staff Directory"
+label_singular: "Staff Member"
+description: "Manage all teaching and support staff profiles."
+folder: "data/staff"
+create: true
+slug: "{{slug}}"
+fields:
+  - { label: "Name", name: "name", widget: "string" }
+  - { label: "Title", name: "title", widget: "string" }
+  - { label: "Qualifications", name: "qualifications", widget: "string", required: false }
+  - { label: "Subjects", name: "subjects", widget: "string", required: false }
+  - { label: "Photo", name: "photo", widget: "image", required: false }
+  - { label: "Display Order", name: "order", widget: "number", default: 0 }
+  - { label: "Type", name: "type", widget: "select", options: ["teacher", "support", "leadership"], default: "teacher" }

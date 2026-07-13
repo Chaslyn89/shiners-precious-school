@@ -1,0 +1,54 @@
+name: "settings"
+label: "⚙️ Website Settings"
+label_singular: "Setting"
+description: "Manage all global website settings."
+files:
+  - name: "general"
+    label: "General Settings"
+    file: "data/settings.json"
+    fields:
+      - { label: "School Name", name: "school_name", widget: "string", default: "Shinners Precious School" }
+      - { label: "School Logo", name: "logo", widget: "image" }
+      - { label: "School Motto", name: "motto", widget: "string", default: "Determined to win" }
+      - { label: "Favicon", name: "favicon", widget: "image", required: false }
+      - { label: "Phone Number", name: "phone", widget: "string" }
+      - { label: "Secondary Phone", name: "phone2", widget: "string" }
+      - { label: "Email Address", name: "email", widget: "string" }
+      - { label: "Physical Address", name: "address", widget: "string", default: "Embakasi, near Imara Daima" }
+      - { label: "P.O. Box", name: "po_box", widget: "string", default: "P.O. Box 40-0521, Embakasi" }
+      - label: "Director Information"
+        name: "director"
+        widget: "object"
+        fields:
+          - { label: "Name", name: "name", widget: "string" }
+          - { label: "Title", name: "title", widget: "string", default: "School Director" }
+          - { label: "Photo", name: "photo", widget: "image" }
+          - { label: "Message", name: "message", widget: "markdown" }
+          - { label: "Signature", name: "signature", widget: "markdown" }
+      - label: "School Mission & Vision"
+        name: "mission_vision"
+        widget: "object"
+        fields:
+          - { label: "Mission", name: "mission", widget: "markdown" }
+          - { label: "Vision", name: "vision", widget: "markdown" }
+          - { label: "Core Values", name: "core_values", widget: "string" }
+      - label: "Social Media Links"
+        name: "social"
+        widget: "object"
+        fields:
+          - { label: "Facebook URL", name: "facebook", widget: "string", required: false }
+          - { label: "Instagram URL", name: "instagram", widget: "string", required: false }
+          - { label: "WhatsApp Number", name: "whatsapp", widget: "string" }
+          - { label: "TikTok URL", name: "tiktok", widget: "string", required: false }
+          - { label: "YouTube URL", name: "youtube", widget: "string", required: false }
+      - { label: "Google Maps Embed URL", name: "google_maps", widget: "string", required: false }
+      - label: "School Hours"
+        name: "hours"
+        widget: "object"
+        fields:
+          - { label: "Monday - Friday", name: "weekdays", widget: "string", default: "8:00 AM - 4:00 PM" }
+          - { label: "Saturday", name: "saturday", widget: "string", default: "9:00 AM - 12:00 PM (Office only)" }
+          - { label: "Sunday", name: "sunday", widget: "string", default: "Closed" }
+      - { label: "Footer Copyright Text", name: "footer_text", widget: "string", default: "Shinners Precious School. All rights reserved." }
+      - { label: "Admission Fee", name: "admission_fee", widget: "string", default: "KSh 1,000" }
+      - { label: "Meals Fee (per term)", name: "meals_fee", widget: "string", default: "KSh 3,900" }

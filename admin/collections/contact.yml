@@ -1,0 +1,13 @@
+name: "contact"
+label: "📞 Contact Information"
+label_singular: "Contact Page"
+description: "Edit contact page. Phone and email come from Website Settings."
+files:
+  - name: "contact"
+    label: "Contact Content"
+    file: "data/contact.json"
+    fields:
+      - { label: "Hero Title", name: "hero_title", widget: "string" }
+      - { label: "Hero Subtitle", name: "hero_subtitle", widget: "string" }
+      - { label: "Emergency Contact", name: "emergency_contact", widget: "string" }
+      - { label: "Contact Form Endpoint", name: "form_endpoint", widget: "string", required: false }
