@@ -2,77 +2,111 @@
 
 document.addEventListener('DOMContentLoaded', function() {
 
-    // ========== LOAD NEWS ==========
+    // ========== LOAD ALL NEWS AUTOMATICALLY ==========
     async function loadNews() {
         const container = document.getElementById('news-container');
         if (!container) return;
 
-        // List of news files in data/news/ folder
-        // The CMS saves new articles here automatically
-        const newsFiles = [
-            '2026-07-11-school-closing-dates',
-            '2026-06-15-term-3-opens',
-            '2026-05-20-new-uniform'
-        ];
-
-        let newsHTML = '';
-        let counts = { academic: 0, 'school-news': 0, 'co-curricular': 0, admissions: 0, achievement: 0 };
-
-        // Sort files by date (newest first)
-        const sortedFiles = newsFiles.sort().reverse();
-
-        for (const file of sortedFiles) {
+        try {
+            // Use GitHub API to list all files in the news folder
+            const apiUrl = 'https://api.github.com/repos/Chaslyn89/shiners-precious-school/contents/data/news';
+            
+            let newsFiles = [];
+            let foundArticles = false;
+            
             try {
-                const response = await fetch(`data/news/${file}.md`);
+                const response = await fetch(apiUrl);
                 if (response.ok) {
-                    const text = await response.text();
-                    const parsed = parseMarkdown(text);
-                    if (parsed) {
-                        // Determine category class
-                        let categoryClass = 'school-news';
-                        const categoryMap = {
-                            'Academic': 'academic',
-                            'Co-Curricular': 'co-curricular',
-                            'School News': 'school-news',
-                            'Admissions': 'admissions',
-                            'Achievement': 'achievement'
-                        };
-                        if (parsed.category && categoryMap[parsed.category]) {
-                            categoryClass = categoryMap[parsed.category];
-                            counts[categoryClass] = (counts[categoryClass] || 0) + 1;
-                        }
-
-                        newsHTML += `
-                            <div class="news-card">
-                                <div class="news-content">
-                                    <span class="news-category ${categoryClass}">${parsed.category || 'School News'}</span>
-                                    <div class="news-date">📅 ${parsed.date}</div>
-                                    <h2 class="news-title">${parsed.title}</h2>
-                                    <p class="news-excerpt">${parsed.content}</p>
-                                    ${parsed.author ? `<p style="font-size: 12px; color: #999; margin-top: 10px;">✍️ ${parsed.author}</p>` : ''}
-                                </div>
-                            </div>
-                        `;
-                    }
+                    const files = await response.json();
+                    const mdFiles = files.filter(file => file.name.endsWith('.md'));
+                    newsFiles = mdFiles.map(file => file.name.replace('.md', ''));
+                    console.log('Found news files:', newsFiles);
+                } else {
+                    console.log('GitHub API not available, using fallback list');
+                    newsFiles = [
+                        'another-test-news',
+                        'test-news',
+                        'shinners-precious-academy-parents-meeting'
+                    ];
                 }
             } catch (e) {
-                // Skip if file not found
+                console.log('Error fetching file list, using fallback list');
+                newsFiles = [
+                    'another-test-news',
+                    'test-news',
+                    'shinners-precious-academy-parents-meeting'
+                ];
             }
-        }
 
-        // Update category counts
-        document.getElementById('cat-academic').textContent = counts.academic || 0;
-        document.getElementById('cat-school').textContent = counts['school-news'] || 0;
-        document.getElementById('cat-co').textContent = counts['co-curricular'] || 0;
-        document.getElementById('cat-admissions').textContent = counts.admissions || 0;
-        document.getElementById('cat-achievement').textContent = counts.achievement || 0;
+            let newsHTML = '';
+            let counts = { academic: 0, 'school-news': 0, 'co-curricular': 0, admissions: 0, achievement: 0 };
 
-        if (newsHTML) {
-            container.innerHTML = newsHTML;
-        } else {
+            const sortedFiles = newsFiles.sort().reverse();
+
+            for (const file of sortedFiles) {
+                try {
+                    const response = await fetch(`data/news/${file}.md`);
+                    if (response.ok) {
+                        const text = await response.text();
+                        const parsed = parseMarkdown(text);
+                        if (parsed && parsed.title) {
+                            foundArticles = true;
+                            
+                            let categoryClass = 'school-news';
+                            const categoryMap = {
+                                'Academic': 'academic',
+                                'Co-Curricular': 'co-curricular',
+                                'School News': 'school-news',
+                                'Admissions': 'admissions',
+                                'Achievement': 'achievement'
+                            };
+                            if (parsed.category && categoryMap[parsed.category]) {
+                                categoryClass = categoryMap[parsed.category];
+                                counts[categoryClass] = (counts[categoryClass] || 0) + 1;
+                            }
+
+                            // Determine content: use frontmatter content OR body content
+                            let contentText = parsed.content || parsed.frontmatter_content || '';
+
+                            newsHTML += `
+                                <div class="news-card">
+                                    <div class="news-content">
+                                        <span class="news-category ${categoryClass}">${parsed.category || 'School News'}</span>
+                                        <div class="news-date">📅 ${parsed.date || 'Date not set'}</div>
+                                        <h2 class="news-title">${parsed.title}</h2>
+                                        <p class="news-excerpt">${contentText}</p>
+                                        ${parsed.author ? `<p style="font-size: 12px; color: #999; margin-top: 10px;">✍️ ${parsed.author}</p>` : ''}
+                                    </div>
+                                </div>
+                            `;
+                        }
+                    }
+                } catch (e) {
+                    // Skip if file not found
+                }
+            }
+
+            document.getElementById('cat-academic').textContent = counts.academic || 0;
+            document.getElementById('cat-school').textContent = counts['school-news'] || 0;
+            document.getElementById('cat-co').textContent = counts['co-curricular'] || 0;
+            document.getElementById('cat-admissions').textContent = counts.admissions || 0;
+            document.getElementById('cat-achievement').textContent = counts.achievement || 0;
+
+            if (foundArticles) {
+                container.innerHTML = newsHTML;
+            } else {
+                container.innerHTML = `
+                    <div class="empty-text">
+                        📭 No news articles yet. Check back soon!
+                    </div>
+                `;
+            }
+            
+        } catch (e) {
+            console.error('Error loading news:', e);
             container.innerHTML = `
-                <div class="empty-text">
-                    📭 No news articles yet. Check back soon!
+                <div class="error-text">
+                    ❌ Could not load news articles. Please try again later.
                 </div>
             `;
         }
@@ -81,35 +115,59 @@ document.addEventListener('DOMContentLoaded', function() {
     // ========== PARSE MARKDOWN FRONTMATTER ==========
     function parseMarkdown(text) {
         try {
+            // Check if the file has frontmatter
             const match = text.match(/---\n([\s\S]*?)\n---\n([\s\S]*)/);
-            if (!match) return null;
+            if (!match) {
+                // If no frontmatter, treat the whole text as content
+                return {
+                    title: 'Untitled',
+                    date: 'Date not set',
+                    category: 'School News',
+                    author: '',
+                    content: text.trim(),
+                    frontmatter_content: ''
+                };
+            }
 
             const frontmatter = match[1];
-            const content = match[2].trim();
+            const bodyContent = match[2].trim();
 
-            const titleMatch = frontmatter.match(/title:\s*"([^"]*)"/);
-            const dateMatch = frontmatter.match(/date:\s*([\d-]+)/);
-            const categoryMatch = frontmatter.match(/category:\s*"([^"]*)"/);
-            const authorMatch = frontmatter.match(/author:\s*"([^"]*)"/);
-            const imageMatch = frontmatter.match(/image:\s*"([^"]*)"/);
+            // Extract fields with or without quotes
+            const titleMatch = frontmatter.match(/title:\s*"?([^"\n]*?)"?\s*$/m);
+            const dateMatch = frontmatter.match(/date:\s*"?([^"\n]*?)"?\s*$/m);
+            const categoryMatch = frontmatter.match(/category:\s*"?([^"\n]*?)"?\s*$/m);
+            const authorMatch = frontmatter.match(/author:\s*"?([^"\n]*?)"?\s*$/m);
+            const contentMatch = frontmatter.match(/content:\s*"?([^"\n]*?)"?\s*$/m);
 
+            let title = titleMatch ? titleMatch[1].trim() : 'Untitled';
+            
             // Format date
-            let formattedDate = dateMatch ? dateMatch[1] : '';
-            if (formattedDate) {
+            let formattedDate = dateMatch ? dateMatch[1].trim() : '';
+            if (formattedDate && formattedDate.match(/\d{4}-\d{2}-\d{2}/)) {
                 const parts = formattedDate.split('-');
                 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
                 formattedDate = `${months[parseInt(parts[1]) - 1]} ${parseInt(parts[2])}, ${parts[0]}`;
             }
 
+            // Get content from body OR from frontmatter
+            let content = bodyContent || '';
+            let frontmatterContent = contentMatch ? contentMatch[1].trim() : '';
+
+            // If there's content in frontmatter and no body content, use frontmatter content
+            if (!content && frontmatterContent) {
+                content = frontmatterContent;
+            }
+
             return {
-                title: titleMatch ? titleMatch[1] : 'Untitled',
-                date: formattedDate,
-                category: categoryMatch ? categoryMatch[1] : 'School News',
-                author: authorMatch ? authorMatch[1] : '',
+                title: title,
+                date: formattedDate || 'Date not set',
+                category: categoryMatch ? categoryMatch[1].trim() : 'School News',
+                author: authorMatch ? authorMatch[1].trim() : '',
                 content: content,
-                image: imageMatch ? imageMatch[1] : null
+                frontmatter_content: frontmatterContent
             };
         } catch (e) {
+            console.error('Error parsing markdown:', e);
             return null;
         }
     }
@@ -122,7 +180,6 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const data = await response.json();
             
-            // Update the term dates in the sidebar
             const termContainer = document.querySelector('.term-card .term-dates');
             if (termContainer && data) {
                 termContainer.innerHTML = `
@@ -133,7 +190,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 `;
             }
             
-            // Update the term name in the sidebar
             const termTitle = document.querySelector('.term-card h3');
             if (termTitle && data.term_name) {
                 termTitle.textContent = `📅 ${data.term_name}`;
@@ -148,13 +204,25 @@ document.addEventListener('DOMContentLoaded', function() {
     // ========== LOAD UPCOMING EVENTS ==========
     async function loadUpcomingEvents() {
         try {
-            // List of upcoming event files
-            const eventFiles = [
-                'mid-term-break-begins',
-                'mid-term-break-ends'
-            ];
+            const apiUrl = 'https://api.github.com/repos/Chaslyn89/shiners-precious-school/contents/data/upcoming-events';
+            
+            let eventFiles = [];
+            
+            try {
+                const response = await fetch(apiUrl);
+                if (response.ok) {
+                    const files = await response.json();
+                    const mdFiles = files.filter(file => file.name.endsWith('.md'));
+                    eventFiles = mdFiles.map(file => file.name.replace('.md', ''));
+                } else {
+                    eventFiles = [];
+                }
+            } catch (e) {
+                eventFiles = [];
+            }
             
             let eventsHTML = '';
+            let foundEvents = false;
             
             for (const file of eventFiles) {
                 try {
@@ -163,6 +231,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         const text = await response.text();
                         const parsed = parseEventMarkdown(text);
                         if (parsed) {
+                            foundEvents = true;
                             eventsHTML += `
                                 <div class="upcoming-event">
                                     <div class="event-date">
@@ -182,25 +251,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
             
-            // Update the upcoming events in the sidebar
-            const eventsContainer = document.querySelector('.sidebar-card .upcoming-event');
-            if (eventsContainer && eventsHTML) {
-                // Find the parent container and replace all events
-                const parentContainer = eventsContainer.parentElement;
-                if (parentContainer) {
-                    // Remove all existing events
-                    const existingEvents = parentContainer.querySelectorAll('.upcoming-event');
-                    existingEvents.forEach(el => el.remove());
-                    
-                    // Insert new events after the title
-                    const title = parentContainer.querySelector('.sidebar-title');
-                    if (title) {
-                        const tempDiv = document.createElement('div');
-                        tempDiv.innerHTML = eventsHTML;
-                        while (tempDiv.firstChild) {
-                            title.after(tempDiv.firstChild);
-                        }
-                    }
+            const eventsContainer = document.getElementById('news-upcoming-events');
+            if (eventsContainer) {
+                if (foundEvents) {
+                    eventsContainer.innerHTML = eventsHTML;
+                } else {
+                    eventsContainer.innerHTML = `
+                        <div style="padding: 10px 0; text-align: center; color: #999;">
+                            No upcoming events
+                        </div>
+                    `;
                 }
             }
             
@@ -218,20 +278,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const frontmatter = match[1];
 
-            const titleMatch = frontmatter.match(/title:\s*"([^"]*)"/);
+            const titleMatch = frontmatter.match(/title:\s*"?([^"\n]*?)"?\s*$/m);
             const dayMatch = frontmatter.match(/day:\s*(\d+)/);
-            const monthMatch = frontmatter.match(/month:\s*"([^"]*)"/);
-            const descriptionMatch = frontmatter.match(/description:\s*"([^"]*)"/);
-            const dateMatch = frontmatter.match(/date:\s*"([^"]*)"/);
-            const orderMatch = frontmatter.match(/order:\s*(\d+)/);
+            const monthMatch = frontmatter.match(/month:\s*"?([^"\n]*?)"?\s*$/m);
+            const descriptionMatch = frontmatter.match(/description:\s*"?([^"\n]*?)"?\s*$/m);
 
             return {
-                title: titleMatch ? titleMatch[1] : 'Untitled',
+                title: titleMatch ? titleMatch[1].trim() : 'Untitled',
                 day: dayMatch ? dayMatch[1] : '',
-                month: monthMatch ? monthMatch[1] : '',
-                description: descriptionMatch ? descriptionMatch[1] : '',
-                date: dateMatch ? dateMatch[1] : '',
-                order: orderMatch ? parseInt(orderMatch[1]) : 0
+                month: monthMatch ? monthMatch[1].trim() : '',
+                description: descriptionMatch ? descriptionMatch[1].trim() : ''
             };
         } catch (e) {
             return null;
@@ -245,6 +301,5 @@ document.addEventListener('DOMContentLoaded', function() {
         await loadUpcomingEvents();
     }
 
-    // ========== LOAD ALL DATA ON PAGE LOAD ==========
     loadAllData();
 });

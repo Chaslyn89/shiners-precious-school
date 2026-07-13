@@ -260,7 +260,7 @@
 
     <!-- ========== ANNOUNCEMENT BAR ========== -->
     <div id="announcement-bar" class="announcement-bar" style="display: flex; justify-content: space-between; align-items: center;">
-        <span>💰 2026 Fee Structure | Last Updated: June 2026 | No cash payments accepted</span>
+        <span>💰 2026 Fee Structure | Last Updated: <span id="announcement-last-updated">June 2026</span> | No cash payments accepted</span>
         <span id="close-announcement" aria-label="Close announcement" style="cursor: pointer; font-size: 20px; padding: 0 10px;">&times;</span>
     </div>
 
@@ -324,13 +324,7 @@
                             <tr><th>ITEM</th><th>TERM 1</th><th>TERM 2</th><th>TERM 3</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td>Tuition Fees</td><td>KSh 7,400</td><td>KSh 7,400</td><td>KSh 7,400</td></tr>
-                            <tr><td>Assessment</td><td>KSh 300</td><td>KSh 300</td><td>KSh 300</td></tr>
-                            <tr><td>Activity</td><td>KSh 200</td><td>KSh 200</td><td>-</td></tr>
-                            <tr><td>Diary</td><td>KSh 300</td><td>-</td><td>-</td></tr>
-                            <tr><td>PTA</td><td>KSh 200</td><td>-</td><td>-</td></tr>
-                            <tr><td>Assessment Book</td><td>KSh 400</td><td>-</td><td>-</td></tr>
-                            <tr style="background: var(--gray-light); font-weight: bold;"><td>TOTAL</td><td>KSh 8,800</td><td>KSh 7,900</td><td>KSh 7,700</td></tr>
+                            <!-- Dynamic content will be loaded here -->
                         </tbody>
                     </table>
                 </div>
@@ -346,17 +340,10 @@
                             <tr><th>ITEM</th><th>TERM 1</th><th>TERM 2</th><th>TERM 3</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td>Tuition Fees</td><td>KSh 9,400</td><td>KSh 9,400</td><td>KSh 9,400</td></tr>
-                            <tr><td>Assessment</td><td>KSh 300</td><td>KSh 300</td><td>KSh 300</td></tr>
-                            <tr><td>Activity</td><td>KSh 200</td><td>KSh 200</td><td>-</td></tr>
-                            <tr><td>Diary</td><td>KSh 300</td><td>-</td><td>-</td></tr>
-                            <tr><td>PTA</td><td>KSh 200</td><td>-</td><td>-</td></tr>
-                            <tr><td>Assessment Book</td><td>KSh 400</td><td>-</td><td>-</td></tr>
-                            <tr><td>Digital Literacy & French</td><td>KSh 600</td><td>KSh 600</td><td>KSh 600</td></tr>
-                            <tr style="background: var(--gray-light); font-weight: bold;"><td>TOTAL</td><td>KSh 11,400</td><td>KSh 10,500</td><td>KSh 10,300</td></tr>
+                            <!-- Dynamic content will be loaded here -->
                         </tbody>
                     </table>
-                    <p style="font-size: 12px; color: #666; margin-top: 5px;">* Grade 6 tuition is KSh 10,800 per term</p>
+                    <p id="grade6-note" style="font-size: 12px; color: #666; margin-top: 5px;">* Grade 6 tuition is KSh 10,800 per term</p>
                 </div>
             </div>
         </section>
@@ -370,17 +357,10 @@
                             <tr><th>ITEM</th><th>TERM 1</th><th>TERM 2</th><th>TERM 3</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td>Tuition Fees</td><td>KSh 14,200</td><td>KSh 14,200</td><td>KSh 14,200</td></tr>
-                            <tr><td>Assessment</td><td>KSh 300</td><td>KSh 300</td><td>KSh 300</td></tr>
-                            <tr><td>Activity</td><td>KSh 300</td><td>KSh 300</td><td>-</td></tr>
-                            <tr><td>Diary</td><td>KSh 300</td><td>-</td><td>-</td></tr>
-                            <tr><td>PTA</td><td>KSh 200</td><td>-</td><td>-</td></tr>
-                            <tr><td>Assessment Book</td><td>KSh 500</td><td>-</td><td>-</td></tr>
-                            <tr><td>Digital Literacy & French</td><td>KSh 600</td><td>KSh 600</td><td>KSh 600</td></tr>
-                            <tr style="background: var(--gray-light); font-weight: bold;"><td>TOTAL (Grade 7-8)</td><td>KSh 16,400</td><td>KSh 15,400</td><td>KSh 15,100</td></tr>
+                            <!-- Dynamic content will be loaded here -->
                         </tbody>
                     </table>
-                    <p style="font-size: 12px; color: #666; margin-top: 5px;">* Grade 9 tuition is KSh 14,700 per term</p>
+                    <p id="grade9-note" style="font-size: 12px; color: #666; margin-top: 5px;">* Grade 9 tuition is KSh 14,700 per term</p>
                 </div>
             </div>
         </section>
@@ -393,11 +373,7 @@
                     <table class="fee-table" id="fees-annual-summary">
                         <thead><tr><th>Level</th><th>Annual Fees (3 Terms)</th></tr></thead>
                         <tbody>
-                            <tr><td>Playgroup - Grade 3</td><td>KSh 24,400</td></tr>
-                            <tr><td>Grade 4 - Grade 5</td><td>KSh 32,200</td></tr>
-                            <tr><td>Grade 6</td><td>KSh 34,600</td></tr>
-                            <tr><td>Grade 7 - Grade 8</td><td>KSh 46,900</td></tr>
-                            <tr><td>Grade 9</td><td>KSh 47,400</td></tr>
+                            <!-- Dynamic content will be loaded here -->
                         </tbody>
                     </table>
                 </div>
@@ -405,15 +381,15 @@
         </section>
 
         <!-- Optional Services -->
-        <section class="section">
+        <section class="section" id="optional-services">
             <div class="container">
                 <h2 class="section-title">Optional Services</h2>
                 <div class="grid-3">
                     <div class="card">
-                        <div class="card-content">
+                        <div class="card-content" id="meals-service">
                             <h3>🍎 Meals Program</h3>
-                            <p><strong>KSh 3,900 per term</strong></p>
-                            <p>Nutritious lunch served daily. Optional for all learners.</p>
+                            <p><strong id="meals-price">KSh 3,900 per term</strong></p>
+                            <p id="meals-description">Nutritious lunch served daily. Optional for all learners.</p>
                         </div>
                     </div>
                     <div class="card">
@@ -421,20 +397,14 @@
                             <h3>🚌 Transport Services</h3>
                             <table class="transport-table" id="fees-transport-table">
                                 <tr><th>Route</th><th>Fee/Term</th></tr>
-                                <tr><td>Imara Daima</td><td>KSh 7,000</td></tr>
-                                <tr><td>Pipeline</td><td>KSh 6,000</td></tr>
-                                <tr><td>AA & KOBIL</td><td>KSh 6,000</td></tr>
-                                <tr><td>Kwanjenga</td><td>KSh 6,000</td></tr>
+                                <!-- Dynamic content will be loaded here -->
                             </table>
                         </div>
                     </div>
                     <div class="card">
-                        <div class="card-content">
+                        <div class="card-content" id="admission-fee-container">
                             <h3>💰 Admission Fee</h3>
-                            <p><strong>KSh 1,000 (once)</strong></p>
-                            <p>For Playgroup - Grade 6</p>
-                            <p><strong>KSh 1,500 (once)</strong></p>
-                            <p>For Grade 7 - Grade 9 (Junior Secondary)</p>
+                            <!-- Dynamic content will be loaded here -->
                         </div>
                     </div>
                 </div>
@@ -449,11 +419,7 @@
                     <table class="fee-table" id="fees-admission-example">
                         <thead><tr><th>Item</th><th>New Grade 1 Learner</th><th>New Grade 7 Learner</th></tr></thead>
                         <tbody>
-                            <tr><td>Term 1 Fees</td><td>KSh 8,800</td><td>KSh 16,400</td></tr>
-                            <tr><td>Admission Fee</td><td>KSh 1,000</td><td>KSh 1,500</td></tr>
-                            <tr><td>Uniform (Approx.)</td><td>Contact School</td><td>Contact School</td></tr>
-                            <tr><td>Meals (Optional)</td><td>KSh 3,900</td><td>KSh 3,900</td></tr>
-                            <tr style="background: var(--gray-light); font-weight: bold;"><td>Estimated Total</td><td>KSh 13,700+</td><td>KSh 21,800+</td></tr>
+                            <!-- Dynamic content will be loaded here -->
                         </tbody>
                     </table>
                     <p style="font-size: 12px; margin-top: 10px;">* Uniform costs available from school shop. Meals are optional.</p>
@@ -500,22 +466,22 @@
         <section class="section section-light">
             <div class="container">
                 <h2 class="section-title">Payment Methods</h2>
-                <div class="grid-3">
-                    <div class="payment-method">
+                <div class="grid-3" id="payment-methods-container">
+                    <div class="payment-method" id="payment-bank">
                         <h3>🏦 Bank Deposit</h3>
                         <p><strong>Kenya Commercial Bank (KCB)</strong></p>
                         <p>Utawala Branch</p>
                         <p><strong>A/C Name:</strong> Shinners Precious School</p>
                         <p><strong>A/C Number:</strong> 1282776983</p>
                     </div>
-                    <div class="payment-method">
+                    <div class="payment-method" id="payment-mpesa">
                         <h3>📱 Lipa Na Mpesa</h3>
                         <p><strong>Paybill Number:</strong> 522123</p>
                         <p><strong>Account Number:</strong></p>
                         <p><code>82747K-LearnerName-Class</code></p>
                         <p style="font-size: 12px; margin-top: 10px;">Example: 82747K-JOHNDOE-G4</p>
                     </div>
-                    <div class="payment-method">
+                    <div class="payment-method" id="payment-note">
                         <h3>⚠️ Important</h3>
                         <p style="color: var(--maroon); font-weight: bold;">❌ No cash payments accepted</p>
                         <p>All fees must be paid via Bank or Mpesa</p>
@@ -526,26 +492,26 @@
         </section>
 
         <!-- Payment Schedule -->
-        <section class="section">
+        <section class="section" id="payment-schedule">
             <div class="container">
                 <h2 class="section-title">Payment Schedule</h2>
                 <div class="grid-3">
                     <div class="card">
                         <div class="card-content">
                             <h3>📅 Term 1</h3>
-                            <p>Due before opening day (January)</p>
+                            <p id="schedule-term1">Due before opening day (January)</p>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-content">
                             <h3>📅 Term 2</h3>
-                            <p>Due before opening day (April/May)</p>
+                            <p id="schedule-term2">Due before opening day (April/May)</p>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-content">
                             <h3>📅 Term 3</h3>
-                            <p>Due before opening day (August/September)</p>
+                            <p id="schedule-term3">Due before opening day (August/September)</p>
                         </div>
                     </div>
                 </div>
@@ -560,30 +526,7 @@
             <div class="container">
                 <h2 class="section-title">Frequently Asked Questions</h2>
                 <div class="grid-3" id="fees-faqs">
-                    <div class="faq-item">
-                        <div class="faq-question">❓ Can fees be paid in installments?</div>
-                        <div class="faq-answer">Contact the school office to discuss installment arrangements.</div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question">❓ Are meals compulsory?</div>
-                        <div class="faq-answer">No, meals are optional. You can choose to add or remove.</div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question">❓ Is transport compulsory?</div>
-                        <div class="faq-answer">No, transport is optional for parents who wish to use it.</div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question">❓ Are fees refundable?</div>
-                        <div class="faq-answer">Fees are generally non-refundable. Discuss with administration for exceptions.</div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question">❓ What is the admission fee for?</div>
-                        <div class="faq-answer">The admission fee covers registration and processing of new learners.</div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question">❓ When is the fee payment deadline?</div>
-                        <div class="faq-answer">Fees should be paid before the term begins. Late payment may incur penalties.</div>
-                    </div>
+                    <!-- Dynamic content will be loaded here -->
                 </div>
             </div>
         </section>
@@ -594,13 +537,7 @@
                 <div class="fee-note" id="fees-notes">
                     <h3>📌 Important Notes</h3>
                     <ul>
-                        <li>Fees are payable per term, before the term begins.</li>
-                        <li>Admission fee is paid once upon enrollment.</li>
-                        <li>Meals and transport are optional but payable per term.</li>
-                        <li>Digital Literacy & French are mandatory for Grade 4-9.</li>
-                        <li>Activity fee covers sports, clubs, and co-curricular events.</li>
-                        <li>PTA fee supports parents' association activities.</li>
-                        <li>Diary and assessment books are issued in Term 1 only.</li>
+                        <!-- Dynamic content will be loaded here -->
                     </ul>
                 </div>
             </div>
@@ -609,7 +546,7 @@
         <!-- Download Button -->
         <section class="section section-light" style="text-align: center;">
             <div class="container">
-                <a href="assets/Fee-Structure-2026.pdf" class="btn-primary" download style="font-size: 18px; padding: 15px 30px;">
+                <a id="fees-download-link" href="assets/Fee-Structure-2026.pdf" class="btn-primary" download style="font-size: 18px; padding: 15px 30px;">
                     📄 Download Fee Structure (PDF)
                 </a>
             </div>
