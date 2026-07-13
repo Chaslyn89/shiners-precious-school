@@ -1,13 +1,10 @@
 // ========== GALLERY PAGE - Loads gallery images from CMS ==========
 
 document.addEventListener('DOMContentLoaded', function() {
-    loadGalleryImages();
-    loadFeaturedAlbum();
-    loadVideos();
+    loadGalleryData();
 });
 
-// ========== LOAD GALLERY IMAGES ==========
-async function loadGalleryImages() {
+async function loadGalleryData() {
     try {
         var response = await fetch('data/gallery.json');
         if (!response.ok) {
@@ -16,18 +13,16 @@ async function loadGalleryImages() {
         }
         
         var data = await response.json();
+        console.log('Gallery data loaded:', data);
         
-        // Update Hero
-        if (data.hero_title) {
-            var el = document.getElementById('gallery-hero-title');
-            if (el) el.textContent = data.hero_title;
+        // Get the container
+        var container = document.getElementById('gallery-container');
+        if (!container) {
+            console.log('Gallery container not found');
+            return;
         }
-        if (data.hero_subtitle) {
-            var el = document.getElementById('gallery-hero-subtitle');
-            if (el) el.textContent = data.hero_subtitle;
-        }
-
-        // Get all images from all categories
+        
+        // Check if data has categories with photos
         var allImages = [];
         if (data.categories) {
             for (var category in data.categories) {
@@ -37,112 +32,46 @@ async function loadGalleryImages() {
             }
         }
         
-        // Display images in each category
-        if (data.categories) {
-            for (var cat in data.categories) {
-                var categoryData = data.categories[cat];
-                var gridEl = document.getElementById(cat + '-grid');
-                if (gridEl && categoryData.photos) {
-                    var html = '';
-                    for (var i = 0; i < categoryData.photos.length; i++) {
-                        var img = categoryData.photos[i];
-                        html += `
-                            <div class="gallery-item">
-                                <img src="${img.src}" alt="${img.alt || img.caption || 'Gallery Image'}" loading="lazy" onerror="this.src='images/placeholder-gallery.jpg'">
-                                <div class="gallery-caption">
-                                    <p>${img.caption || ''}</p>
-                                    ${img.description ? '<span>' + img.description + '</span>' : ''}
-                                    ${img.photographer ? '<span>📸 ' + img.photographer + '</span>' : ''}
-                                    ${img.date_taken ? '<span>📅 ' + img.date_taken + '</span>' : ''}
-                                </div>
-                            </div>
-                        `;
-                    }
-                    gridEl.innerHTML = html;
-                    
-                    // Update count
-                    var countEl = document.getElementById(cat + '-count');
-                    if (countEl) {
-                        countEl.textContent = '(' + categoryData.photos.length + ' Photos)';
-                    }
-                }
-            }
+        // Also check for direct images array (alternative structure)
+        if (data.images && data.images.length > 0) {
+            allImages = allImages.concat(data.images);
         }
         
-        console.log('Gallery loaded successfully');
-
-    } catch (e) {
-        console.log('Gallery: Using default content');
-    }
-}
-
-// ========== LOAD FEATURED ALBUM ==========
-async function loadFeaturedAlbum() {
-    try {
-        var response = await fetch('data/gallery.json');
-        if (!response.ok) return;
+        console.log('Total images found:', allImages.length);
         
-        var data = await response.json();
-        
-        if (data.featured) {
-            var featured = data.featured;
-            
-            if (featured.image) {
-                var el = document.getElementById('featured-image');
-                if (el) el.src = featured.image;
-            }
-            if (featured.title) {
-                var el = document.getElementById('featured-title');
-                if (el) el.textContent = featured.title;
-            }
-            if (featured.description) {
-                var el = document.getElementById('featured-description');
-                if (el) el.textContent = featured.description;
-            }
-            if (featured.meta) {
-                var el = document.getElementById('featured-meta');
-                if (el) el.textContent = featured.meta;
-            }
-            if (featured.link) {
-                var el = document.getElementById('featured-link');
-                if (el) el.href = featured.link;
-            }
-        }
-        
-    } catch (e) {
-        console.log('Featured album: Using default content');
-    }
-}
-
-// ========== LOAD VIDEOS ==========
-async function loadVideos() {
-    try {
-        var response = await fetch('data/gallery.json');
-        if (!response.ok) return;
-        
-        var data = await response.json();
-        
-        if (data.videos && data.videos.length > 0) {
-            var el = document.getElementById('gallery-videos');
-            if (el) {
-                var html = '';
-                for (var i = 0; i < data.videos.length; i++) {
-                    var video = data.videos[i];
-                    html += `
-                        <div class="video-card">
-                            <video controls poster="${video.poster || ''}">
-                                <source src="${video.src}" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                            <div class="video-caption"><p>${video.caption || ''}</p></div>
+        if (allImages.length > 0) {
+            var html = '';
+            for (var i = 0; i < allImages.length; i++) {
+                var img = allImages[i];
+                var imgSrc = img.image || img.src || '';
+                var imgTitle = img.title || img.caption || 'Gallery Image';
+                var imgCaption = img.caption || img.description || '';
+                var imgPhotographer = img.photographer || '';
+                var imgDate = img.date_taken || '';
+                
+                html += `
+                    <div class="gallery-item">
+                        <img src="${imgSrc}" alt="${imgTitle}" loading="lazy" onerror="this.src='images/placeholder-gallery.jpg'">
+                        <div class="gallery-caption">
+                            <p>${imgTitle}</p>
+                            ${imgCaption ? '<span class="description">' + imgCaption + '</span>' : ''}
+                            ${imgPhotographer ? '<span class="meta">📸 ' + imgPhotographer + '</span>' : ''}
+                            ${imgDate ? '<span class="meta">📅 ' + imgDate + '</span>' : ''}
                         </div>
-                    `;
-                }
-                el.innerHTML = html;
+                    </div>
+                `;
             }
+            container.innerHTML = html;
+            console.log('Gallery displayed:', allImages.length + ' images');
+        } else {
+            container.innerHTML = '<div class="empty-gallery"><h3>📸 No Gallery Images Yet</h3><p>Add images through the CMS at /admin</p></div>';
         }
         
     } catch (e) {
-        console.log('Videos: Using default content');
+        console.log('Gallery error:', e);
+        var container = document.getElementById('gallery-container');
+        if (container) {
+            container.innerHTML = '<div class="empty-gallery"><h3>📸 Gallery Coming Soon</h3><p>Images will appear here once added through the CMS.</p></div>';
+        }
     }
 }
