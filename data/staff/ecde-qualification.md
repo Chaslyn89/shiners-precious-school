@@ -1,7 +1,7 @@
 ---
 name: "Catherine Akinyi "
-title: "PP2 Teacher "
-qualifications: "ECDE Qualifiaction. "
+title: "Class Teacher "
+qualifications: "ECDE "
 photo: /images/uploads/catherine-akinyi.jpeg
 order: 0
 type: teacher
