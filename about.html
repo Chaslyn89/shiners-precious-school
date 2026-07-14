@@ -82,10 +82,127 @@
             margin: 5px;
             font-size: 12px;
         }
+
+        /* ========================================
+           DIRECTOR SECTION - OPTIMIZED FOR MOBILE
+           ======================================== */
+        .director-section {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .director-photo {
+            text-align: center;
+        }
+
+        .director-photo img {
+            width: 100%;
+            max-width: 250px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .director-photo .director-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--maroon);
+            margin-top: 10px;
+        }
+
+        .director-photo .director-title {
+            color: var(--gold);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .director-message {
+            background: var(--gray-light);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid var(--gold);
+        }
+
+        .director-message h3 {
+            color: var(--maroon);
+            margin-top: 0;
+        }
+
+        .director-message p {
+            color: #333;
+            line-height: 1.7;
+        }
+
+        .director-signature {
+            margin-top: 20px;
+            font-style: italic;
+            color: var(--navy);
+        }
+
+        /* ========================================
+           MOBILE RESPONSIVE
+           ======================================== */
         @media (max-width: 768px) {
             .director-section {
                 grid-template-columns: 1fr;
                 text-align: center;
+                gap: 20px;
+            }
+
+            /* Photo smaller on mobile - Option C */
+            .director-photo img {
+                max-width: 130px;
+                border-radius: 50%;
+                border: 4px solid var(--gold);
+                box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            }
+
+            .director-photo .director-name {
+                font-size: 1.1rem;
+                margin-top: 8px;
+            }
+
+            .director-photo .director-title {
+                font-size: 0.85rem;
+            }
+
+            .director-message {
+                padding: 20px;
+                text-align: left;
+                border-left: 4px solid var(--gold);
+            }
+
+            .director-message h3 {
+                font-size: 1.2rem;
+                text-align: center;
+            }
+
+            .director-message p {
+                font-size: 0.95rem;
+            }
+
+            .director-signature {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* Even smaller on very small screens */
+            .director-photo img {
+                max-width: 100px;
+            }
+
+            .director-photo .director-name {
+                font-size: 1rem;
+            }
+
+            .director-message {
+                padding: 15px;
+            }
+
+            .director-message p {
+                font-size: 0.9rem;
             }
         }
         
@@ -96,7 +213,7 @@
             overflow: visible !important;
         }
         
-        /* Dropdown styles - NO YELLOW HIGHLIGHTING */
+        /* Dropdown styles */
         .dropdown {
             position: relative;
         }
@@ -165,7 +282,7 @@
             border-bottom: 2px solid var(--gold);
         }
         
-        /* WhatsApp float button - show text on ALL devices */
+        /* WhatsApp float button */
         .whatsapp-float {
             position: fixed;
             bottom: 20px;
@@ -207,7 +324,7 @@
             }
         }
         
-        /* Back to top button with label */
+        /* Back to top button */
         #back-to-top {
             position: fixed;
             bottom: 100px;
@@ -411,17 +528,17 @@
             </div>
         </section>
 
-        <!-- Director's Message -->
+        <!-- ========== DIRECTOR'S MESSAGE ========== -->
         <section class="section section-light">
             <div class="container">
                 <h2 class="section-title">Message from the Director</h2>
-                <div class="director-section" style="display: grid; grid-template-columns: 1fr 2fr; gap: 40px; align-items: start;">
-                    <div class="director-photo" style="text-align: center;">
-                        <img id="about-director-photo" src="images/director-placeholder.jpg" alt="School Director" style="width: 100%; max-width: 250px; border-radius: 15px; box-shadow: var(--shadow);" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27250%27 height=%27250%27 viewBox=%270 0 250 250%27%3E%3Crect width=%27250%27 height=%27250%27 fill=%27%23800020%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dy=%27.3em%27 fill=%27white%27 font-size=%2716%27%3EDirector Photo%3C/text%3E%3C/svg%3E'">
-                        <p><strong id="about-director-name">Shem Oyugi</strong></p>
-                        <p id="about-director-title">Director, Shinners Precious School</p>
+                <div class="director-section">
+                    <div class="director-photo">
+                        <img id="about-director-photo" src="images/director-placeholder.jpg" alt="School Director">
+                        <div class="director-name" id="about-director-name">Shem Oyugi</div>
+                        <div class="director-title" id="about-director-title">School Director</div>
                     </div>
-                    <div class="director-message" style="background: var(--gray-light); padding: 25px; border-radius: 15px; border-left: 5px solid var(--gold);">
+                    <div class="director-message">
                         <h3>Welcome to Shinners Precious School</h3>
                         <div id="about-director-message">
                             <p>Dear Parents, Guardians, and Learners,</p>
@@ -430,7 +547,7 @@
                             <p>As we continue to grow, we remain focused on our mission: to provide quality, affordable education that builds character and excellence.</p>
                             <p>Thank you for entrusting your child to us. Together, we will build a bright future.</p>
                         </div>
-                        <div id="about-director-signature" class="director-signature" style="margin-top: 20px; font-style: italic; color: var(--navy);">
+                        <div id="about-director-signature" class="director-signature">
                             <p>Yours in education,</p>
                             <p><strong>Shem Oyugi</strong><br>Director, Shinners Precious School</p>
                         </div>
@@ -445,24 +562,24 @@
                 <h2 class="section-title">School Leadership</h2>
                 <div id="about-leadership" class="leadership-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px;">
                     <div class="leader-card" style="background: var(--white); border-radius: 10px; overflow: hidden; text-align: center; box-shadow: var(--shadow);" data-leader="0">
-                        <img id="leader-img-0" src="images/director-placeholder.jpg" alt="Director" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27250%27 height=%27200%27 viewBox=%270 0 250 200%27%3E%3Crect width=%27250%27 height=%27200%27 fill=%27%23800020%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dy=%27.3em%27 fill=%27white%27%3EDirector%3C/text%3E%3C/svg%3E'">
+                        <img id="leader-img-0" src="images/director-placeholder.jpg" alt="Director">
                         <h3 id="leader-name-0">Shem Oyugi</h3>
-                        <div class="leader-title" style="color: var(--gold); font-weight: bold;">Director</div>
+                        <div class="leader-title">Director</div>
                     </div>
                     <div class="leader-card" style="background: var(--white); border-radius: 10px; overflow: hidden; text-align: center; box-shadow: var(--shadow);" data-leader="1">
-                        <img id="leader-img-1" src="images/headteacher-placeholder.jpg" alt="Headteacher" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27250%27 height=%27200%27 viewBox=%270 0 250 200%27%3E%3Crect width=%27250%27 height=%27200%27 fill=%27%231F3A93%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dy=%27.3em%27 fill=%27white%27%3EHeadteacher%3C/text%3E%3C/svg%3E'">
+                        <img id="leader-img-1" src="images/headteacher-placeholder.jpg" alt="Headteacher">
                         <h3 id="leader-name-1">Benard Ochanda</h3>
-                        <div class="leader-title" style="color: var(--gold); font-weight: bold;">Headteacher</div>
+                        <div class="leader-title">Headteacher</div>
                     </div>
                     <div class="leader-card" style="background: var(--white); border-radius: 10px; overflow: hidden; text-align: center; box-shadow: var(--shadow);" data-leader="2">
-                        <img id="leader-img-2" src="images/deputy-placeholder.jpg" alt="Deputy Headteacher" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27250%27 height=%27200%27 viewBox=%270 0 250 200%27%3E%3Crect width=%27250%27 height=%27200%27 fill=%27%231F3A93%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dy=%27.3em%27 fill=%27white%27%3EDeputy%3C/text%3E%3C/svg%3E'">
+                        <img id="leader-img-2" src="images/deputy-placeholder.jpg" alt="Deputy Headteacher">
                         <h3 id="leader-name-2">[DEPUTY NAME]</h3>
-                        <div class="leader-title" style="color: var(--gold); font-weight: bold;">Deputy Headteacher</div>
+                        <div class="leader-title">Deputy Headteacher</div>
                     </div>
                     <div class="leader-card" style="background: var(--white); border-radius: 10px; overflow: hidden; text-align: center; box-shadow: var(--shadow);" data-leader="3">
-                        <img id="leader-img-3" src="images/academic-placeholder.jpg" alt="Academic Coordinator" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27250%27 height=%27200%27 viewBox=%270 0 250 200%27%3E%3Crect width=%27250%27 height=%27200%27 fill=%27%231F3A93%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dy=%27.3em%27 fill=%27white%27%3EAcademic Coordinator%3C/text%3E%3C/svg%3E'">
+                        <img id="leader-img-3" src="images/academic-placeholder.jpg" alt="Academic Coordinator">
                         <h3 id="leader-name-3">[COORDINATOR NAME]</h3>
-                        <div class="leader-title" style="color: var(--gold); font-weight: bold;">Academic Coordinator</div>
+                        <div class="leader-title">Academic Coordinator</div>
                     </div>
                 </div>
             </div>
