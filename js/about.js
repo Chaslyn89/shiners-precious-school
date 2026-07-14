@@ -16,7 +16,7 @@ async function loadAboutData() {
 
         // Load staff.json for leadership photos
         const staffResponse = await fetch('data/staff.json');
-        let staffData = [];
+        let staffData = {};
         if (staffResponse.ok) {
             staffData = await staffResponse.json();
         }
@@ -136,14 +136,13 @@ async function loadAboutData() {
         }
 
         // ===== LEADERSHIP - LOAD FROM STAFF.JSON =====
-        // Filter staff with type "leadership"
-        const leadership = staffData.filter(member => member.type === 'leadership');
+        // Get leadership array from staff.json
+        const leadership = staffData.leadership || [];
         
         const leadershipEl = document.getElementById('about-leadership');
         if (leadershipEl) {
             const leaderCards = leadershipEl.querySelectorAll('.leader-card');
             
-            // If we have leadership data from staff.json, use it
             if (leadership.length > 0) {
                 leadership.forEach((member, index) => {
                     if (leaderCards[index]) {
@@ -159,8 +158,12 @@ async function loadAboutData() {
                             if (index === 0 && directorPhoto) {
                                 imgEl.src = directorPhoto;
                             } else if (member.photo) {
-                                // Use the photo from staff.json (set by CMS)
-                                imgEl.src = member.photo;
+                                // Check if photo path starts with /images/ or images/
+                                let photoPath = member.photo;
+                                if (!photoPath.startsWith('/')) {
+                                    photoPath = '/' + photoPath;
+                                }
+                                imgEl.src = photoPath;
                             }
                             imgEl.alt = member.name || 'Leader';
                             imgEl.onerror = function() {
