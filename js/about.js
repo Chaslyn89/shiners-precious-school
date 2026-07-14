@@ -128,7 +128,7 @@ async function loadAboutData() {
             sigEl.innerHTML = paragraphs.map(p => `<p>${p}</p>`).join('');
         }
 
-        // Leadership
+        // ===== LEADERSHIP - Director card uses settings photo =====
         if (data.leadership && data.leadership.length > 0) {
             const el = document.getElementById('about-leadership');
             if (el) {
@@ -142,8 +142,13 @@ async function loadAboutData() {
                         if (titleEl) titleEl.textContent = leader.title || '';
                         
                         const imgEl = leaderCards[index].querySelector('img');
-                        if (imgEl && leader.photo) {
-                            imgEl.src = leader.photo;
+                        if (imgEl) {
+                            // If it's the Director card (index 0), use the settings photo
+                            if (index === 0 && directorPhoto) {
+                                imgEl.src = directorPhoto;
+                            } else if (leader.photo) {
+                                imgEl.src = leader.photo;
+                            }
                             imgEl.alt = leader.name || 'Leader';
                         }
                     }
