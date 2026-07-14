@@ -11,6 +11,13 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const data = await response.json();
 
+            // Load settings.json for director info
+            const settingsResponse = await fetch('data/settings.json');
+            let settings = {};
+            if (settingsResponse.ok) {
+                settings = await settingsResponse.json();
+            }
+
             // Hero
             if (data.hero_title) {
                 const el = document.getElementById('staff-hero-title');
@@ -21,7 +28,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (el) el.textContent = data.hero_subtitle;
             }
 
-            // ===== LOAD LEADERSHIP FROM .md FILES =====
+            // ===== DIRECTOR INFO - FROM SETTINGS =====
+            const director = settings.director || {};
+            const directorName = settings.director_name || director.name || 'Shem Oyugi';
+            const directorTitle = settings.director_title || director.title || 'School Director';
+            const directorPhoto = settings.director_photo || director.photo || 'images/staff-director.jpg';
+            const directorQualifications = settings.director_qualifications || director.qualifications || 'B.Ed, M.Ed';
+
+            // ===== LOAD STAFF FROM .md FILES =====
             let staffFiles = [];
             try {
                 const apiUrl = 'https://api.github.com/repos/Chaslyn89/shiners-precious-school/contents/data/staff';
@@ -50,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (fileResponse.ok) {
                         const text = await fileResponse.text();
                         const parsed = parseStaffMarkdown(text);
-                        if (parsed) {
+                        if (parsed && parsed.name && parsed.name !== '[NAME]' && parsed.name.trim() !== '') {
                             if (parsed.type === 'leadership') {
                                 leadership.push(parsed);
                             } else if (parsed.type === 'teacher') {
@@ -70,38 +84,67 @@ document.addEventListener('DOMContentLoaded', function() {
             teachers.sort((a, b) => (a.order || 0) - (b.order || 0));
             support.sort((a, b) => (a.order || 0) - (b.order || 0));
 
-            // If no leadership from .md files, fallback to staff.json
-            if (leadership.length === 0 && data.leadership) {
-                leadership = data.leadership;
-            }
-            if (teachers.length === 0 && data.teachers) {
-                teachers = data.teachers;
-            }
-            if (support.length === 0 && data.support) {
-                support = data.support;
-            }
-
             // ===== DISPLAY LEADERSHIP =====
+            // First card is always Director from settings
             const leadershipEl = document.getElementById('staff-leadership');
-            if (leadershipEl && leadership.length > 0) {
+            if (leadershipEl) {
                 const leaderCards = leadershipEl.querySelectorAll('.leader-card');
-                leadership.forEach((leader, index) => {
-                    if (leaderCards[index]) {
-                        const img = leaderCards[index].querySelector('img');
-                        if (img && leader.photo) {
-                            img.src = leader.photo;
-                            img.alt = leader.name || 'Leader';
+                
+                // Card 0: Director (from settings)
+                if (leaderCards[0]) {
+                    const img = leaderCards[0].querySelector('img');
+                    if (img) {
+                        img.src = directorPhoto;
+                        img.alt = directorName || 'Director';
+                    }
+                    const nameEl = leaderCards[0].querySelector('.staff-name');
+                    if (nameEl) nameEl.textContent = directorName || 'Shem Oyugi';
+                    
+                    const titleEl = leaderCards[0].querySelector('.staff-title');
+                    if (titleEl) titleEl.textContent = directorTitle || 'School Director';
+                    
+                    const qualEl = leaderCards[0].querySelector('.staff-qualification');
+                    if (qualEl) qualEl.textContent = directorQualifications || 'B.Ed, M.Ed';
+                }
+
+                // Cards 1+: Other leadership from .md files
+                leadership.forEach((member, index) => {
+                    const cardIndex = index + 1; // Skip card 0 (Director)
+                    if (leaderCards[cardIndex]) {
+                        const img = leaderCards[cardIndex].querySelector('img');
+                        if (img && member.photo) {
+                            img.src = member.photo;
+                            img.alt = member.name || 'Leader';
                         }
-                        const nameEl = leaderCards[index].querySelector('.staff-name');
-                        if (nameEl) nameEl.textContent = leader.name || '[NAME]';
+                        const nameEl = leaderCards[cardIndex].querySelector('.staff-name');
+                        if (nameEl) nameEl.textContent = member.name || '[NAME]';
                         
-                        const titleEl = leaderCards[index].querySelector('.staff-title');
-                        if (titleEl) titleEl.textContent = leader.title || '';
+                        const titleEl = leaderCards[cardIndex].querySelector('.staff-title');
+                        if (titleEl) titleEl.textContent = member.title || '';
                         
-                        const qualEl = leaderCards[index].querySelector('.staff-qualification');
-                        if (qualEl) qualEl.textContent = leader.qualifications || '';
+                        const qualEl = leaderCards[cardIndex].querySelector('.staff-qualification');
+                        if (qualEl) qualEl.textContent = member.qualifications || '';
                     }
                 });
+
+                // If no leadership from .md files, use fallback from staff.json
+                if (leadership.length === 0 && data.leadership) {
+                    data.leadership.forEach((member, index) => {
+                        const cardIndex = index + 1;
+                        if (leaderCards[cardIndex]) {
+                            const nameEl = leaderCards[cardIndex].querySelector('.staff-name');
+                            if (nameEl) nameEl.textContent = member.name || '[NAME]';
+                            
+                            const titleEl = leaderCards[cardIndex].querySelector('.staff-title');
+                            if (titleEl) titleEl.textContent = member.title || '';
+                            
+                            const img = leaderCards[cardIndex].querySelector('img');
+                            if (img && member.photo) {
+                                img.src = member.photo;
+                            }
+                        }
+                    });
+                }
             }
 
             // ===== DISPLAY TEACHERS =====
@@ -114,13 +157,26 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div class="staff-info">
                                 <h3 class="staff-name">${teacher.name}</h3>
                                 <div class="staff-title">${teacher.title}</div>
-                                <div class="staff-qualification">${teacher.qualifications || ''}</div>
-                                <div class="staff-subjects">Teaches: ${teacher.subjects || ''}</div>
+                                ${teacher.qualifications ? `<div class="staff-qualification">${teacher.qualifications}</div>` : ''}
+                                ${teacher.subjects ? `<div class="staff-subjects">Teaches: ${teacher.subjects}</div>` : ''}
+                            </div>
+                        </div>
+                    `).join('');
+                } else if (data.teachers && data.teachers.length > 0) {
+                    // Fallback to staff.json
+                    teachersEl.innerHTML = data.teachers.map(teacher => `
+                        <div class="staff-card">
+                            <img src="${teacher.photo || 'images/teacher-placeholder.jpg'}" alt="${teacher.name}" class="staff-image" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27300%27 height=%27250%27 viewBox=%270 0 300 250%27%3E%3Crect width=%27300%27 height=%27250%27 fill=%27%23800020%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dy=%27.3em%27 fill=%27white%27%3ETeacher%3C/text%3E%3C/svg%3E'">
+                            <div class="staff-info">
+                                <h3 class="staff-name">${teacher.name}</h3>
+                                <div class="staff-title">${teacher.title}</div>
+                                ${teacher.qualifications ? `<div class="staff-qualification">${teacher.qualifications}</div>` : ''}
+                                ${teacher.subjects ? `<div class="staff-subjects">Teaches: ${teacher.subjects}</div>` : ''}
                             </div>
                         </div>
                     `).join('');
                 } else {
-                    teachersEl.innerHTML = `<p style="text-align:center;padding:20px;color:#999;">No teachers added yet. Add staff through the CMS.</p>`;
+                    teachersEl.innerHTML = `<p style="text-align:center;padding:20px;color:#999;">Add teachers through the CMS (Staff Directory → Type: teacher).</p>`;
                 }
             }
 
@@ -137,8 +193,18 @@ document.addEventListener('DOMContentLoaded', function() {
                             </div>
                         </div>
                     `).join('');
+                } else if (data.support && data.support.length > 0) {
+                    supportEl.innerHTML = data.support.map(staff => `
+                        <div class="staff-card">
+                            <img src="${staff.photo || 'images/support-placeholder.jpg'}" alt="${staff.name}" class="staff-image" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27300%27 height=%27250%27 viewBox=%270 0 300 250%27%3E%3Crect width=%27300%27 height=%27250%27 fill=%27%23800020%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 dy=%27.3em%27 fill=%27white%27%3ESupport%3C/text%3E%3C/svg%3E'">
+                            <div class="staff-info">
+                                <h3 class="staff-name">${staff.name}</h3>
+                                <div class="staff-title">${staff.title}</div>
+                            </div>
+                        </div>
+                    `).join('');
                 } else {
-                    supportEl.innerHTML = `<p style="text-align:center;padding:20px;color:#999;">No support staff added yet. Add staff through the CMS.</p>`;
+                    supportEl.innerHTML = `<p style="text-align:center;padding:20px;color:#999;">Add support staff through the CMS (Staff Directory → Type: support).</p>`;
                 }
             }
 
@@ -179,7 +245,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const subjectsMatch = frontmatter.match(/subjects:\s*"?([^"\n]*?)"?\s*$/m);
             
             return {
-                name: nameMatch ? nameMatch[1].trim() : '[NAME]',
+                name: nameMatch ? nameMatch[1].trim() : '',
                 title: titleMatch ? titleMatch[1].trim() : '',
                 photo: photoMatch ? photoMatch[1].trim() : '',
                 type: typeMatch ? typeMatch[1].trim() : 'teacher',
