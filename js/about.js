@@ -2,10 +2,17 @@
 
 async function loadAboutData() {
     try {
-        const response = await fetch('data/about.json');
-        if (!response.ok) return;
-        
-        const data = await response.json();
+        // Load about.json
+        const aboutResponse = await fetch('data/about.json');
+        if (!aboutResponse.ok) return;
+        const data = await aboutResponse.json();
+
+        // Load settings.json for director info
+        const settingsResponse = await fetch('data/settings.json');
+        let settings = {};
+        if (settingsResponse.ok) {
+            settings = await settingsResponse.json();
+        }
 
         // Hero
         if (data.hero_title) {
@@ -84,32 +91,41 @@ async function loadAboutData() {
             }
         }
 
-        // Director
-        if (data.director_name) {
-            const el = document.getElementById('about-director-name');
-            if (el) el.textContent = data.director_name;
+        // ===== DIRECTOR INFO - FROM SETTINGS =====
+        const director = settings.director || {};
+        const directorName = settings.director_name || director.name || data.director_name || 'Shem Oyugi';
+        const directorTitle = settings.director_title || director.title || data.director_title || 'School Director';
+        const directorPhoto = settings.director_photo || director.photo || data.director_photo || 'images/director-placeholder.jpg';
+        const directorMessage = settings.welcome_message || director.message || data.director_message || '';
+        const directorSignature = settings.director_signature || director.signature || data.director_signature || '';
+
+        // Director Name
+        const nameEl = document.getElementById('about-director-name');
+        if (nameEl) nameEl.textContent = directorName;
+
+        // Director Title
+        const titleEl = document.getElementById('about-director-title');
+        if (titleEl) titleEl.textContent = directorTitle;
+
+        // Director Photo
+        const photoEl = document.getElementById('about-director-photo');
+        if (photoEl && directorPhoto) {
+            photoEl.src = directorPhoto;
+            photoEl.alt = directorName || 'School Director';
         }
-        if (data.director_title) {
-            const el = document.getElementById('about-director-title');
-            if (el) el.textContent = data.director_title;
+
+        // Director Message
+        const messageEl = document.getElementById('about-director-message');
+        if (messageEl && directorMessage) {
+            const paragraphs = directorMessage.split('\n').filter(p => p.trim());
+            messageEl.innerHTML = paragraphs.map(p => `<p>${p}</p>`).join('');
         }
-        if (data.director_photo) {
-            const el = document.getElementById('about-director-photo');
-            if (el) el.src = data.director_photo;
-        }
-        if (data.director_message) {
-            const el = document.getElementById('about-director-message');
-            if (el) {
-                const paragraphs = data.director_message.split('\n').filter(p => p.trim());
-                el.innerHTML = paragraphs.map(p => `<p>${p}</p>`).join('');
-            }
-        }
-        if (data.director_signature) {
-            const el = document.getElementById('about-director-signature');
-            if (el) {
-                const paragraphs = data.director_signature.split('\n').filter(p => p.trim());
-                el.innerHTML = paragraphs.map(p => `<p>${p}</p>`).join('');
-            }
+
+        // Director Signature
+        const sigEl = document.getElementById('about-director-signature');
+        if (sigEl && directorSignature) {
+            const paragraphs = directorSignature.split('\n').filter(p => p.trim());
+            sigEl.innerHTML = paragraphs.map(p => `<p>${p}</p>`).join('');
         }
 
         // Leadership
