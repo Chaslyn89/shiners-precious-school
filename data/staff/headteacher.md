@@ -1,7 +1,7 @@
 ---
 name: Benard Ochanda
 title: "Headteacher "
-photo: /images/uploads/360_f_1512041110_c0nfjdchlmujiwfdowzckugspalmbjdd.jpg
+photo: /images/uploads/benard-ochanda.webp
 order: 0
 type: leadership
 ---
