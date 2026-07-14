@@ -15,7 +15,6 @@ async function loadAboutData() {
         }
 
         // ===== LOAD STAFF FROM .md FILES =====
-        // Get list of staff files from GitHub API
         let staffFiles = [];
         try {
             const apiUrl = 'https://api.github.com/repos/Chaslyn89/shiners-precious-school/contents/data/staff';
@@ -30,12 +29,10 @@ async function loadAboutData() {
             console.log('Could not fetch staff list');
         }
 
-        // If GitHub API fails, use fallback list
         if (staffFiles.length === 0) {
             staffFiles = ['headteacher', 'deputy-headteacher', 'academic-coordinator'];
         }
 
-        // Parse each staff file
         let leadership = [];
 
         for (const slug of staffFiles) {
@@ -53,7 +50,6 @@ async function loadAboutData() {
             }
         }
 
-        // Sort by order
         leadership.sort((a, b) => (a.order || 0) - (b.order || 0));
 
         // Hero
@@ -133,7 +129,7 @@ async function loadAboutData() {
             }
         }
 
-        // ===== DIRECTOR INFO - FROM SETTINGS =====
+        // ===== DIRECTOR INFO - FROM SETTINGS (ONLY SOURCE) =====
         const director = settings.director || {};
         const directorName = settings.director_name || director.name || data.director_name || 'Shem Oyugi';
         const directorTitle = settings.director_title || director.title || data.director_title || 'School Director';
@@ -170,16 +166,28 @@ async function loadAboutData() {
             sigEl.innerHTML = paragraphs.map(p => `<p>${p}</p>`).join('');
         }
 
-        // ===== LEADERSHIP - LOAD FROM STAFF .MD FILES =====
+        // ===== SCHOOL LEADERSHIP SECTION =====
         const leadershipEl = document.getElementById('about-leadership');
         if (leadershipEl) {
             const leaderCards = leadershipEl.querySelectorAll('.leader-card');
             
-            // If we have leadership from staff files, use them
+            // CARD 0: DIRECTOR (FROM SETTINGS - ALWAYS)
+            if (leaderCards[0]) {
+                const imgEl = leaderCards[0].querySelector('img');
+                if (imgEl && directorPhoto) {
+                    imgEl.src = directorPhoto;
+                    imgEl.alt = directorName || 'Director';
+                }
+                const nameEl = leaderCards[0].querySelector('h3');
+                if (nameEl) nameEl.textContent = directorName || 'Shem Oyugi';
+                const titleEl = leaderCards[0].querySelector('.leader-title');
+                if (titleEl) titleEl.textContent = 'Director';
+            }
+
+            // CARD 1+: OTHER LEADERSHIP (FROM STAFF FILES)
             if (leadership.length > 0) {
                 leadership.forEach((member, index) => {
-                    // Skip index 0 (Director) since we use settings for that
-                    const cardIndex = index + 1; // Offset by 1 because card 0 is Director
+                    const cardIndex = index + 1; // Skip card 0 (Director)
                     if (leaderCards[cardIndex]) {
                         const nameEl = leaderCards[cardIndex].querySelector('h3');
                         if (nameEl) nameEl.textContent = member.name || '[NAME]';
@@ -188,8 +196,10 @@ async function loadAboutData() {
                         if (titleEl) titleEl.textContent = member.title || '';
                         
                         const imgEl = leaderCards[cardIndex].querySelector('img');
-                        if (imgEl && member.photo) {
-                            imgEl.src = member.photo;
+                        if (imgEl) {
+                            if (member.photo) {
+                                imgEl.src = member.photo;
+                            }
                             imgEl.alt = member.name || 'Leader';
                             imgEl.onerror = function() {
                                 this.src = 'images/placeholder-gallery.jpg';
@@ -198,17 +208,19 @@ async function loadAboutData() {
                     }
                 });
             } 
-            // Fallback: use leadership from about.json
+            // Fallback: if no staff files, use about.json
             else if (data.leadership && data.leadership.length > 0) {
                 data.leadership.forEach((member, index) => {
-                    if (leaderCards[index]) {
-                        const nameEl = leaderCards[index].querySelector('h3');
+                    // Skip index 0 (Director) since we use settings
+                    const cardIndex = index;
+                    if (cardIndex > 0 && leaderCards[cardIndex]) {
+                        const nameEl = leaderCards[cardIndex].querySelector('h3');
                         if (nameEl) nameEl.textContent = member.name || '[NAME]';
                         
-                        const titleEl = leaderCards[index].querySelector('.leader-title');
+                        const titleEl = leaderCards[cardIndex].querySelector('.leader-title');
                         if (titleEl) titleEl.textContent = member.title || '';
                         
-                        const imgEl = leaderCards[index].querySelector('img');
+                        const imgEl = leaderCards[cardIndex].querySelector('img');
                         if (imgEl && member.photo) {
                             imgEl.src = member.photo;
                             imgEl.alt = member.name || 'Leader';
