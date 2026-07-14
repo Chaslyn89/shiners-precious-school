@@ -14,15 +14,29 @@ async function loadAboutData() {
             settings = await settingsResponse.json();
         }
 
-        // Load staff .md files from data/staff/
-        const staffFiles = [
-            'headteacher'
-            // Add other staff slugs here as they are created
-        ];
-        
+        // ===== LOAD STAFF FROM .md FILES =====
+        // Get list of staff files from GitHub API
+        let staffFiles = [];
+        try {
+            const apiUrl = 'https://api.github.com/repos/Chaslyn89/shiners-precious-school/contents/data/staff';
+            const response = await fetch(apiUrl);
+            if (response.ok) {
+                const files = await response.json();
+                const mdFiles = files.filter(file => file.name.endsWith('.md'));
+                staffFiles = mdFiles.map(file => file.name.replace('.md', ''));
+                console.log('Found staff files:', staffFiles);
+            }
+        } catch (e) {
+            console.log('Could not fetch staff list');
+        }
+
+        // If GitHub API fails, use fallback list
+        if (staffFiles.length === 0) {
+            staffFiles = ['headteacher', 'deputy-headteacher', 'academic-coordinator'];
+        }
+
+        // Parse each staff file
         let leadership = [];
-        let teachers = [];
-        let support = [];
 
         for (const slug of staffFiles) {
             try {
@@ -30,20 +44,17 @@ async function loadAboutData() {
                 if (response.ok) {
                     const text = await response.text();
                     const parsed = parseStaffMarkdown(text);
-                    if (parsed) {
-                        if (parsed.type === 'leadership') {
-                            leadership.push(parsed);
-                        } else if (parsed.type === 'teacher') {
-                            teachers.push(parsed);
-                        } else if (parsed.type === 'support') {
-                            support.push(parsed);
-                        }
+                    if (parsed && parsed.type === 'leadership') {
+                        leadership.push(parsed);
                     }
                 }
             } catch (e) {
                 // Skip if file not found
             }
         }
+
+        // Sort by order
+        leadership.sort((a, b) => (a.order || 0) - (b.order || 0));
 
         // Hero
         if (data.hero_title) {
@@ -159,28 +170,26 @@ async function loadAboutData() {
             sigEl.innerHTML = paragraphs.map(p => `<p>${p}</p>`).join('');
         }
 
-        // ===== LEADERSHIP - LOAD FROM STAFF FILES =====
+        // ===== LEADERSHIP - LOAD FROM STAFF .MD FILES =====
         const leadershipEl = document.getElementById('about-leadership');
         if (leadershipEl) {
             const leaderCards = leadershipEl.querySelectorAll('.leader-card');
             
+            // If we have leadership from staff files, use them
             if (leadership.length > 0) {
                 leadership.forEach((member, index) => {
-                    if (leaderCards[index]) {
-                        const nameEl = leaderCards[index].querySelector('h3');
+                    // Skip index 0 (Director) since we use settings for that
+                    const cardIndex = index + 1; // Offset by 1 because card 0 is Director
+                    if (leaderCards[cardIndex]) {
+                        const nameEl = leaderCards[cardIndex].querySelector('h3');
                         if (nameEl) nameEl.textContent = member.name || '[NAME]';
                         
-                        const titleEl = leaderCards[index].querySelector('.leader-title');
+                        const titleEl = leaderCards[cardIndex].querySelector('.leader-title');
                         if (titleEl) titleEl.textContent = member.title || '';
                         
-                        const imgEl = leaderCards[index].querySelector('img');
-                        if (imgEl) {
-                            // If it's the Director (index 0), use the settings photo
-                            if (index === 0 && directorPhoto) {
-                                imgEl.src = directorPhoto;
-                            } else if (member.photo) {
-                                imgEl.src = member.photo;
-                            }
+                        const imgEl = leaderCards[cardIndex].querySelector('img');
+                        if (imgEl && member.photo) {
+                            imgEl.src = member.photo;
                             imgEl.alt = member.name || 'Leader';
                             imgEl.onerror = function() {
                                 this.src = 'images/placeholder-gallery.jpg';
@@ -200,12 +209,8 @@ async function loadAboutData() {
                         if (titleEl) titleEl.textContent = member.title || '';
                         
                         const imgEl = leaderCards[index].querySelector('img');
-                        if (imgEl) {
-                            if (index === 0 && directorPhoto) {
-                                imgEl.src = directorPhoto;
-                            } else if (member.photo) {
-                                imgEl.src = member.photo;
-                            }
+                        if (imgEl && member.photo) {
+                            imgEl.src = member.photo;
                             imgEl.alt = member.name || 'Leader';
                             imgEl.onerror = function() {
                                 this.src = 'images/placeholder-gallery.jpg';
