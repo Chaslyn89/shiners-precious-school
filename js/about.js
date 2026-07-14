@@ -1,4 +1,4 @@
-// ========== ABOUT PAGE - Loads about.json + staff.json ==========
+// ========== ABOUT PAGE - Loads about.json + staff .md files ==========
 
 async function loadAboutData() {
     try {
@@ -14,11 +14,35 @@ async function loadAboutData() {
             settings = await settingsResponse.json();
         }
 
-        // Load staff.json for leadership photos
-        const staffResponse = await fetch('data/staff.json');
-        let staffData = {};
-        if (staffResponse.ok) {
-            staffData = await staffResponse.json();
+        // Load staff .md files from data/staff/
+        const staffFiles = [
+            'headteacher'
+            // Add other staff slugs here as they are created
+        ];
+        
+        let leadership = [];
+        let teachers = [];
+        let support = [];
+
+        for (const slug of staffFiles) {
+            try {
+                const response = await fetch(`data/staff/${slug}.md`);
+                if (response.ok) {
+                    const text = await response.text();
+                    const parsed = parseStaffMarkdown(text);
+                    if (parsed) {
+                        if (parsed.type === 'leadership') {
+                            leadership.push(parsed);
+                        } else if (parsed.type === 'teacher') {
+                            teachers.push(parsed);
+                        } else if (parsed.type === 'support') {
+                            support.push(parsed);
+                        }
+                    }
+                }
+            } catch (e) {
+                // Skip if file not found
+            }
         }
 
         // Hero
@@ -135,10 +159,7 @@ async function loadAboutData() {
             sigEl.innerHTML = paragraphs.map(p => `<p>${p}</p>`).join('');
         }
 
-        // ===== LEADERSHIP - LOAD FROM STAFF.JSON =====
-        // Get leadership array from staff.json
-        const leadership = staffData.leadership || [];
-        
+        // ===== LEADERSHIP - LOAD FROM STAFF FILES =====
         const leadershipEl = document.getElementById('about-leadership');
         if (leadershipEl) {
             const leaderCards = leadershipEl.querySelectorAll('.leader-card');
@@ -158,12 +179,7 @@ async function loadAboutData() {
                             if (index === 0 && directorPhoto) {
                                 imgEl.src = directorPhoto;
                             } else if (member.photo) {
-                                // Check if photo path starts with /images/ or images/
-                                let photoPath = member.photo;
-                                if (!photoPath.startsWith('/')) {
-                                    photoPath = '/' + photoPath;
-                                }
-                                imgEl.src = photoPath;
+                                imgEl.src = member.photo;
                             }
                             imgEl.alt = member.name || 'Leader';
                             imgEl.onerror = function() {
@@ -251,5 +267,32 @@ async function loadAboutData() {
 
     } catch (e) {
         console.log('About page: Using default content');
+    }
+}
+
+// ===== PARSE STAFF MARKDOWN =====
+function parseStaffMarkdown(text) {
+    try {
+        const match = text.match(/---\n([\s\S]*?)\n---/);
+        if (!match) return null;
+        
+        const frontmatter = match[1];
+        
+        const nameMatch = frontmatter.match(/name:\s*"?([^"\n]*?)"?\s*$/m);
+        const titleMatch = frontmatter.match(/title:\s*"?([^"\n]*?)"?\s*$/m);
+        const photoMatch = frontmatter.match(/photo:\s*"?([^"\n]*?)"?\s*$/m);
+        const typeMatch = frontmatter.match(/type:\s*"?([^"\n]*?)"?\s*$/m);
+        const orderMatch = frontmatter.match(/order:\s*([\d.]+)/);
+        
+        return {
+            name: nameMatch ? nameMatch[1].trim() : '[NAME]',
+            title: titleMatch ? titleMatch[1].trim() : '',
+            photo: photoMatch ? photoMatch[1].trim() : '',
+            type: typeMatch ? typeMatch[1].trim() : 'teacher',
+            order: orderMatch ? parseInt(orderMatch[1]) : 0
+        };
+    } catch (e) {
+        console.log('Error parsing staff markdown:', e);
+        return null;
     }
 }
