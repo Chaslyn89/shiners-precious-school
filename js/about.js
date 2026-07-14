@@ -1,4 +1,4 @@
-// ========== ABOUT PAGE - Loads about.json ==========
+// ========== ABOUT PAGE - Loads about.json + staff.json ==========
 
 async function loadAboutData() {
     try {
@@ -12,6 +12,13 @@ async function loadAboutData() {
         let settings = {};
         if (settingsResponse.ok) {
             settings = await settingsResponse.json();
+        }
+
+        // Load staff.json for leadership photos
+        const staffResponse = await fetch('data/staff.json');
+        let staffData = [];
+        if (staffResponse.ok) {
+            staffData = await staffResponse.json();
         }
 
         // Hero
@@ -128,13 +135,17 @@ async function loadAboutData() {
             sigEl.innerHTML = paragraphs.map(p => `<p>${p}</p>`).join('');
         }
 
-        // ===== LEADERSHIP - LOAD FROM ABOUT.JSON =====
-        if (data.leadership && data.leadership.length > 0) {
-            const leadershipEl = document.getElementById('about-leadership');
-            if (leadershipEl) {
-                const leaderCards = leadershipEl.querySelectorAll('.leader-card');
-                
-                data.leadership.forEach((member, index) => {
+        // ===== LEADERSHIP - LOAD FROM STAFF.JSON =====
+        // Filter staff with type "leadership"
+        const leadership = staffData.filter(member => member.type === 'leadership');
+        
+        const leadershipEl = document.getElementById('about-leadership');
+        if (leadershipEl) {
+            const leaderCards = leadershipEl.querySelectorAll('.leader-card');
+            
+            // If we have leadership data from staff.json, use it
+            if (leadership.length > 0) {
+                leadership.forEach((member, index) => {
                     if (leaderCards[index]) {
                         const nameEl = leaderCards[index].querySelector('h3');
                         if (nameEl) nameEl.textContent = member.name || '[NAME]';
@@ -145,6 +156,32 @@ async function loadAboutData() {
                         const imgEl = leaderCards[index].querySelector('img');
                         if (imgEl) {
                             // If it's the Director (index 0), use the settings photo
+                            if (index === 0 && directorPhoto) {
+                                imgEl.src = directorPhoto;
+                            } else if (member.photo) {
+                                // Use the photo from staff.json (set by CMS)
+                                imgEl.src = member.photo;
+                            }
+                            imgEl.alt = member.name || 'Leader';
+                            imgEl.onerror = function() {
+                                this.src = 'images/placeholder-gallery.jpg';
+                            };
+                        }
+                    }
+                });
+            } 
+            // Fallback: use leadership from about.json
+            else if (data.leadership && data.leadership.length > 0) {
+                data.leadership.forEach((member, index) => {
+                    if (leaderCards[index]) {
+                        const nameEl = leaderCards[index].querySelector('h3');
+                        if (nameEl) nameEl.textContent = member.name || '[NAME]';
+                        
+                        const titleEl = leaderCards[index].querySelector('.leader-title');
+                        if (titleEl) titleEl.textContent = member.title || '';
+                        
+                        const imgEl = leaderCards[index].querySelector('img');
+                        if (imgEl) {
                             if (index === 0 && directorPhoto) {
                                 imgEl.src = directorPhoto;
                             } else if (member.photo) {
