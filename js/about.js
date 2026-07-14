@@ -1,4 +1,4 @@
-// ========== ABOUT PAGE - Loads about.json ==========
+// ========== ABOUT PAGE - Loads about.json + staff.json ==========
 
 async function loadAboutData() {
     try {
@@ -12,6 +12,13 @@ async function loadAboutData() {
         let settings = {};
         if (settingsResponse.ok) {
             settings = await settingsResponse.json();
+        }
+
+        // Load staff.json for leadership photos
+        const staffResponse = await fetch('data/staff.json');
+        let staffData = [];
+        if (staffResponse.ok) {
+            staffData = await staffResponse.json();
         }
 
         // Hero
@@ -128,32 +135,37 @@ async function loadAboutData() {
             sigEl.innerHTML = paragraphs.map(p => `<p>${p}</p>`).join('');
         }
 
-        // ===== LEADERSHIP - Director card uses settings photo =====
-        if (data.leadership && data.leadership.length > 0) {
-            const el = document.getElementById('about-leadership');
-            if (el) {
-                const leaderCards = el.querySelectorAll('.leader-card');
-                data.leadership.forEach((leader, index) => {
-                    if (leaderCards[index]) {
-                        const nameEl = leaderCards[index].querySelector('h3');
-                        if (nameEl) nameEl.textContent = leader.name || '[NAME]';
-                        
-                        const titleEl = leaderCards[index].querySelector('.leader-title');
-                        if (titleEl) titleEl.textContent = leader.title || '';
-                        
-                        const imgEl = leaderCards[index].querySelector('img');
-                        if (imgEl) {
-                            // If it's the Director card (index 0), use the settings photo
-                            if (index === 0 && directorPhoto) {
-                                imgEl.src = directorPhoto;
-                            } else if (leader.photo) {
-                                imgEl.src = leader.photo;
-                            }
-                            imgEl.alt = leader.name || 'Leader';
+        // ===== LEADERSHIP - LOAD FROM STAFF.JSON =====
+        // Filter staff with type "leadership"
+        const leadership = staffData.filter(member => member.type === 'leadership');
+        
+        const leadershipEl = document.getElementById('about-leadership');
+        if (leadershipEl && leadership.length > 0) {
+            const leaderCards = leadershipEl.querySelectorAll('.leader-card');
+            
+            leadership.forEach((member, index) => {
+                if (leaderCards[index]) {
+                    const nameEl = leaderCards[index].querySelector('h3');
+                    if (nameEl) nameEl.textContent = member.name || '[NAME]';
+                    
+                    const titleEl = leaderCards[index].querySelector('.leader-title');
+                    if (titleEl) titleEl.textContent = member.title || '';
+                    
+                    const imgEl = leaderCards[index].querySelector('img');
+                    if (imgEl) {
+                        // Use the photo path from staff.json (set by CMS)
+                        // This works with ANY file format (jpg, png, webp, etc.)
+                        if (member.photo) {
+                            imgEl.src = member.photo;
+                            imgEl.alt = member.name || 'Leader';
                         }
+                        // Remove onerror so we don't override the CMS image
+                        imgEl.onerror = function() {
+                            this.src = 'images/placeholder-gallery.jpg';
+                        };
                     }
-                });
-            }
+                }
+            });
         }
 
         // Facilities
