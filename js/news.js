@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             let newsFiles = [];
             let foundArticles = false;
+            let articlesData = []; // Store parsed articles for sorting
             
             try {
                 const response = await fetch(apiUrl);
@@ -38,62 +39,71 @@ document.addEventListener('DOMContentLoaded', function() {
                 ];
             }
 
-            let newsHTML = '';
             let counts = { academic: 0, 'school-news': 0, 'co-curricular': 0, admissions: 0, achievement: 0 };
 
-            // ===== FIX: Sort by date (newest first) =====
-            const sortedFiles = newsFiles.sort((a, b) => {
-                // Extract date from filename (assuming format: YYYY-MM-DD-title)
-                const dateA = a.match(/^(\d{4}-\d{2}-\d{2})/);
-                const dateB = b.match(/^(\d{4}-\d{2}-\d{2})/);
-                
-                if (dateA && dateB) {
-                    return dateB[1].localeCompare(dateA[1]);
-                }
-                return 0;
-            });
-
-            for (const file of sortedFiles) {
+            // ===== LOAD AND PARSE ALL ARTICLES =====
+            for (const file of newsFiles) {
                 try {
                     const response = await fetch(`data/news/${file}.md`);
                     if (response.ok) {
                         const text = await response.text();
                         const parsed = parseMarkdown(text);
                         if (parsed && parsed.title) {
-                            foundArticles = true;
-                            
-                            let categoryClass = 'school-news';
-                            const categoryMap = {
-                                'Academic': 'academic',
-                                'Co-Curricular': 'co-curricular',
-                                'School News': 'school-news',
-                                'Admissions': 'admissions',
-                                'Achievement': 'achievement'
-                            };
-                            if (parsed.category && categoryMap[parsed.category]) {
-                                categoryClass = categoryMap[parsed.category];
-                                counts[categoryClass] = (counts[categoryClass] || 0) + 1;
-                            }
-
-                            // Determine content: use frontmatter content OR body content
-                            let contentText = parsed.content || parsed.frontmatter_content || '';
-
-                            newsHTML += `
-                                <div class="news-card">
-                                    <div class="news-content">
-                                        <span class="news-category ${categoryClass}">${parsed.category || 'School News'}</span>
-                                        <div class="news-date">📅 ${parsed.date || 'Date not set'}</div>
-                                        <h2 class="news-title">${parsed.title}</h2>
-                                        <p class="news-excerpt">${contentText}</p>
-                                        ${parsed.author ? `<p style="font-size: 12px; color: #999; margin-top: 10px;">✍️ ${parsed.author}</p>` : ''}
-                                    </div>
-                                </div>
-                            `;
+                            // Store parsed article with its date for sorting
+                            articlesData.push(parsed);
                         }
                     }
                 } catch (e) {
                     // Skip if file not found
                 }
+            }
+
+            // ===== SORT ARTICLES BY DATE (NEWEST FIRST) =====
+            articlesData.sort((a, b) => {
+                // Parse dates for comparison
+                const dateA = new Date(a.date);
+                const dateB = new Date(b.date);
+                
+                // If both dates are valid, compare them
+                if (!isNaN(dateA) && !isNaN(dateB)) {
+                    return dateB - dateA; // Newest first
+                }
+                return 0;
+            });
+
+            // ===== BUILD HTML FROM SORTED ARTICLES =====
+            let newsHTML = '';
+
+            for (const parsed of articlesData) {
+                foundArticles = true;
+                
+                let categoryClass = 'school-news';
+                const categoryMap = {
+                    'Academic': 'academic',
+                    'Co-Curricular': 'co-curricular',
+                    'School News': 'school-news',
+                    'Admissions': 'admissions',
+                    'Achievement': 'achievement'
+                };
+                if (parsed.category && categoryMap[parsed.category]) {
+                    categoryClass = categoryMap[parsed.category];
+                    counts[categoryClass] = (counts[categoryClass] || 0) + 1;
+                }
+
+                // Determine content: use frontmatter content OR body content
+                let contentText = parsed.content || parsed.frontmatter_content || '';
+
+                newsHTML += `
+                    <div class="news-card">
+                        <div class="news-content">
+                            <span class="news-category ${categoryClass}">${parsed.category || 'School News'}</span>
+                            <div class="news-date">📅 ${parsed.date || 'Date not set'}</div>
+                            <h2 class="news-title">${parsed.title}</h2>
+                            <p class="news-excerpt">${contentText}</p>
+                            ${parsed.author ? `<p style="font-size: 12px; color: #999; margin-top: 10px;">✍️ ${parsed.author}</p>` : ''}
+                        </div>
+                    </div>
+                `;
             }
 
             document.getElementById('cat-academic').textContent = counts.academic || 0;
