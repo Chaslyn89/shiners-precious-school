@@ -41,7 +41,17 @@ document.addEventListener('DOMContentLoaded', function() {
             let newsHTML = '';
             let counts = { academic: 0, 'school-news': 0, 'co-curricular': 0, admissions: 0, achievement: 0 };
 
-            const sortedFiles = newsFiles.sort().reverse();
+            // ===== FIX: Sort by date (newest first) =====
+            const sortedFiles = newsFiles.sort((a, b) => {
+                // Extract date from filename (assuming format: YYYY-MM-DD-title)
+                const dateA = a.match(/^(\d{4}-\d{2}-\d{2})/);
+                const dateB = b.match(/^(\d{4}-\d{2}-\d{2})/);
+                
+                if (dateA && dateB) {
+                    return dateB[1].localeCompare(dateA[1]);
+                }
+                return 0;
+            });
 
             for (const file of sortedFiles) {
                 try {
