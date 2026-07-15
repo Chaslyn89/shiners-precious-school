@@ -122,6 +122,12 @@
             text-align: center;
         }
         
+        .loading-text {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+        
         @media (max-width: 768px) {
             .sports-section {
                 padding: 25px;
@@ -138,7 +144,6 @@
             overflow: visible !important;
         }
         
-        /* Dropdown styles - NO YELLOW HIGHLIGHTING */
         .dropdown {
             position: relative;
         }
@@ -201,13 +206,11 @@
             }
         }
         
-        /* Active navigation link */
         .nav-links li a.active {
             color: var(--gold);
             border-bottom: 2px solid var(--gold);
         }
         
-        /* WhatsApp float button - show text on ALL devices */
         .whatsapp-float {
             position: fixed;
             bottom: 20px;
@@ -249,7 +252,6 @@
             }
         }
         
-        /* Back to top button with label */
         #back-to-top {
             position: fixed;
             bottom: 100px;
@@ -275,7 +277,6 @@
             transform: translateY(-3px);
         }
 
-        /* Social media links in footer */
         .social-footer {
             display: flex;
             flex-wrap: wrap;
@@ -356,7 +357,7 @@
             </div>
         </section>
 
-        <!-- Sports Section with detailed structure -->
+        <!-- Sports Section -->
         <section class="section">
             <div class="container">
                 <div class="sports-section">
@@ -364,48 +365,9 @@
                     <p id="school-life-sports-intro" style="text-align: center; max-width: 800px; margin: 0 auto 30px auto;">We believe in nurturing talent through competitive and recreational sports. Our learners participate in inter-school competitions and annual sports events.</p>
                     
                     <div id="school-life-sports" class="sports-grid">
-                        <div class="sport-item">
-                            <div class="sport-icon" aria-label="Football">⚽</div>
-                            <h3>Football</h3>
-                            <p>Boys and girls teams compete in local leagues</p>
-                            <div class="sport-details">
-                                <p><strong>Training:</strong> Tuesday & Thursday</p>
-                                <p><strong>Competitions:</strong> Monthly inter-school</p>
-                                <p><strong>Grades:</strong> 4 - 9</p>
-                            </div>
-                        </div>
-                        <div class="sport-item">
-                            <div class="sport-icon" aria-label="Netball">🏀</div>
-                            <h3>Netball</h3>
-                            <p>Girls netball team with regular training</p>
-                            <div class="sport-details">
-                                <p><strong>Training:</strong> Monday & Wednesday</p>
-                                <p><strong>Competitions:</strong> Weekly fixtures</p>
-                                <p><strong>Grades:</strong> 4 - 9</p>
-                            </div>
-                        </div>
-                        <div class="sport-item">
-                            <div class="sport-icon" aria-label="Athletics">🏃</div>
-                            <h3>Athletics</h3>
-                            <p>Track, field, and cross-country events</p>
-                            <div class="sport-details">
-                                <p><strong>Training:</strong> Friday</p>
-                                <p><strong>Competitions:</strong> Termly</p>
-                                <p><strong>Grades:</strong> 3 - 9</p>
-                            </div>
-                        </div>
-                        <div class="sport-item">
-                            <div class="sport-icon" aria-label="Swimming">🏊</div>
-                            <h3>Swimming</h3>
-                            <p>Swimming program (coming soon)</p>
-                            <div class="sport-details">
-                                <p><strong>Status:</strong> Planned for 2027</p>
-                                <p><strong>Grades:</strong> 2 - 9</p>
-                            </div>
-                        </div>
+                        <!-- Sports will be loaded from school-life.json -->
                     </div>
                     
-                    <!-- CTA inside Sports section -->
                     <div class="section-cta">
                         <a href="admissions.html" class="btn-secondary">⚽ Join Sports Program →</a>
                     </div>
@@ -418,45 +380,8 @@
             <div class="container">
                 <h2 class="section-title">🎭 Clubs & Societies</h2>
                 <div id="school-life-clubs" class="activity-grid">
-                    <div class="activity-card">
-                        <div class="activity-icon" aria-label="Performing Arts">🎭</div>
-                        <div class="activity-content">
-                            <h3>Performing Arts</h3>
-                            <ul class="activity-list">
-                                <li>Drama Club</li>
-                                <li>Music & Choir</li>
-                                <li>Traditional Dances</li>
-                                <li>Poetry & Recitals</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="activity-card">
-                        <div class="activity-icon" aria-label="Intellectual Clubs">♟️</div>
-                        <div class="activity-content">
-                            <h3>Intellectual Clubs</h3>
-                            <ul class="activity-list">
-                                <li>Chess Club</li>
-                                <li>Debate Club</li>
-                                <li>Journalism Club</li>
-                                <li>Scouts Movement</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="activity-card">
-                        <div class="activity-icon" aria-label="Special Interest">🌍</div>
-                        <div class="activity-content">
-                            <h3>Special Interest</h3>
-                            <ul class="activity-list">
-                                <li>French Club</li>
-                                <li>Digital Literacy Club</li>
-                                <li>Environment Club</li>
-                                <li>Christian Union (CU)</li>
-                            </ul>
-                        </div>
-                    </div>
+                    <!-- Clubs will be loaded from school-life.json -->
                 </div>
-                
-                <!-- CTA inside Clubs section -->
                 <div class="section-cta">
                     <a href="admissions.html" class="btn-secondary">🎭 Enroll in Clubs →</a>
                 </div>
@@ -468,42 +393,7 @@
             <div class="container">
                 <h2 class="section-title">📅 Annual Events & Traditions</h2>
                 <div id="school-life-events" class="activity-grid">
-                    <div class="activity-card">
-                        <div class="activity-content">
-                            <h3>🏆 Sports Day</h3>
-                            <p>Annual inter-house competitions in athletics, football, and netball. Parents are invited to participate.</p>
-                        </div>
-                    </div>
-                    <div class="activity-card">
-                        <div class="activity-content">
-                            <h3>🎓 Graduation Ceremony</h3>
-                            <p>Celebrating Grade 6 learners transitioning to Junior Secondary.</p>
-                        </div>
-                    </div>
-                    <div class="activity-card">
-                        <div class="activity-content">
-                            <h3>🎄 Christmas Party</h3>
-                            <p>End-of-year celebration with performances, games, and fun activities.</p>
-                        </div>
-                    </div>
-                    <div class="activity-card">
-                        <div class="activity-content">
-                            <h3>🎨 Cultural Day</h3>
-                            <p>Celebrating Kenya's diverse cultures through music, dance, and food.</p>
-                        </div>
-                    </div>
-                    <div class="activity-card">
-                        <div class="activity-content">
-                            <h3>📚 Open Day</h3>
-                            <p>Parents visit classrooms to see learners' work and meet teachers.</p>
-                        </div>
-                    </div>
-                    <div class="activity-card">
-                        <div class="activity-content">
-                            <h3>🏅 Prize Giving Day</h3>
-                            <p>Recognizing academic excellence and co-curricular achievements.</p>
-                        </div>
-                    </div>
+                    <!-- Events will be loaded from school-life.json -->
                 </div>
             </div>
         </section>
@@ -513,9 +403,7 @@
             <div class="container">
                 <h2 class="section-title">📸 Life at Shinners</h2>
                 <div id="school-life-gallery" class="gallery-mini">
-                    <img src="images/placeholder-event.jpg" alt="Sports Day at Shinners Precious School" loading="lazy">
-                    <img src="images/placeholder-classroom.jpg" alt="Classroom Activity at Shinners Precious School" loading="lazy">
-                    <img src="images/placeholder-event.jpg" alt="Graduation Ceremony at Shinners Precious School" loading="lazy">
+                    <!-- Gallery images will be loaded from school-life.json -->
                 </div>
                 <div style="text-align: center; margin-top: 20px;">
                     <a href="gallery.html" class="btn-secondary">View Full Gallery →</a>
@@ -526,8 +414,8 @@
         <!-- Call to Action -->
         <section class="section section-light" style="text-align: center;">
             <div class="container">
-                <h2 style="color: var(--maroon);">Ready to Join Our School Family?</h2>
-                <p style="margin: 20px 0;">Give your child a holistic education that builds character, talent, and academic excellence.</p>
+                <h2 id="school-life-cta-title" style="color: var(--maroon);">Ready to Join Our School Family?</h2>
+                <p id="school-life-cta-text" style="margin: 20px 0;">Give your child a holistic education that builds character, talent, and academic excellence.</p>
                 <a href="admissions.html" class="btn-primary" style="margin-right: 15px;">Apply Now</a>
                 <a href="contact.html" class="btn-secondary">Contact Us</a>
             </div>
