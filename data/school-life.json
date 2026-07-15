@@ -1,93 +1,108 @@
-{
-    "hero_title": "School Life",
-    "hero_subtitle": "Beyond the Classroom — Sports, Clubs, and Holistic Development",
-    "sports_intro": "We believe in nurturing talent through competitive and recreational sports. Our learners participate in inter-school competitions and annual sports events.",
-    "sports": [
-        {
-            "icon": "⚽",
-            "name": "Football",
-            "description": "Boys and girls teams compete in local leagues",
-            "details": [
-                { "label": "Training", "value": "Tuesday & Thursday" },
-                { "label": "Competitions", "value": "Monthly inter-school" },
-                { "label": "Grades", "value": "4 - 9" }
-            ]
-        },
-        {
-            "icon": "🏀",
-            "name": "Netball",
-            "description": "Girls netball team with regular training",
-            "details": [
-                { "label": "Training", "value": "Monday & Wednesday" },
-                { "label": "Competitions", "value": "Weekly fixtures" },
-                { "label": "Grades", "value": "4 - 9" }
-            ]
-        },
-        {
-            "icon": "🏃",
-            "name": "Athletics",
-            "description": "Track, field, and cross-country events",
-            "details": [
-                { "label": "Training", "value": "Friday" },
-                { "label": "Competitions", "value": "Termly" },
-                { "label": "Grades", "value": "3 - 9" }
-            ]
-        },
-        {
-            "icon": "🏊",
-            "name": "Swimming",
-            "description": "Swimming program (coming soon)",
-            "details": [
-                { "label": "Status", "value": "Planned for 2027" },
-                { "label": "Grades", "value": "2 - 9" }
-            ]
+// ========== SCHOOL LIFE PAGE - Loads school-life.json ==========
+
+document.addEventListener('DOMContentLoaded', function() {
+
+    // ========== LOAD SCHOOL LIFE DATA ==========
+    async function loadSchoolLifeData() {
+        try {
+            const response = await fetch('data/school-life.json');
+            if (!response.ok) return;
+            
+            const data = await response.json();
+
+            // Hero
+            if (data.hero_title) {
+                const el = document.getElementById('school-life-hero-title');
+                if (el) el.textContent = data.hero_title;
+            }
+            if (data.hero_subtitle) {
+                const el = document.getElementById('school-life-hero-subtitle');
+                if (el) el.textContent = data.hero_subtitle;
+            }
+
+            // Sports Intro
+            if (data.sports_intro) {
+                const el = document.getElementById('school-life-sports-intro');
+                if (el) el.textContent = data.sports_intro;
+            }
+
+            // Sports - matches your JSON structure with "details" array
+            if (data.sports && data.sports.length > 0) {
+                const el = document.getElementById('school-life-sports');
+                if (el) {
+                    el.innerHTML = data.sports.map(sport => `
+                        <div class="sport-item">
+                            <div class="sport-icon" aria-label="${sport.name}">${sport.icon}</div>
+                            <h3>${sport.name}</h3>
+                            <p>${sport.description}</p>
+                            <div class="sport-details">
+                                ${sport.details.map(detail => `<p><strong>${detail.label}:</strong> ${detail.value}</p>`).join('')}
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            }
+
+            // Clubs
+            if (data.clubs && data.clubs.length > 0) {
+                const el = document.getElementById('school-life-clubs');
+                if (el) {
+                    el.innerHTML = data.clubs.map(club => `
+                        <div class="activity-card">
+                            <div class="activity-icon" aria-label="${club.name}">${club.icon}</div>
+                            <div class="activity-content">
+                                <h3>${club.name}</h3>
+                                <ul class="activity-list">
+                                    ${club.items.map(item => `<li>${item}</li>`).join('')}
+                                </ul>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            }
+
+            // Events
+            if (data.events && data.events.length > 0) {
+                const el = document.getElementById('school-life-events');
+                if (el) {
+                    el.innerHTML = data.events.map(event => `
+                        <div class="activity-card">
+                            <div class="activity-content">
+                                <h3>${event.icon} ${event.title}</h3>
+                                <p>${event.description}</p>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            }
+
+            // Gallery Images - matches your JSON structure with "gallery"
+            if (data.gallery && data.gallery.length > 0) {
+                const el = document.getElementById('school-life-gallery');
+                if (el) {
+                    el.innerHTML = data.gallery.map(img => `
+                        <img src="${img.src}" alt="${img.alt}" loading="lazy" onerror="this.src='images/placeholder-gallery.jpg'">
+                    `).join('');
+                }
+            }
+
+            // CTA Section
+            if (data.cta_title) {
+                const el = document.getElementById('school-life-cta-title');
+                if (el) el.textContent = data.cta_title;
+            }
+            if (data.cta_text) {
+                const el = document.getElementById('school-life-cta-text');
+                if (el) el.textContent = data.cta_text;
+            }
+
+            console.log('School Life page data loaded successfully');
+
+        } catch (e) {
+            console.log('School Life page: Using default content');
         }
-    ],
-    "clubs": [
-        {
-            "icon": "🎭",
-            "name": "Performing Arts",
-            "items": ["Drama Club", "Music & Choir", "Traditional Dances", "Poetry & Recitals"]
-        },
-        {
-            "icon": "♟️",
-            "name": "Intellectual Clubs",
-            "items": ["Chess Club", "Debate Club", "Journalism Club", "Scouts Movement"]
-        },
-        {
-            "icon": "🌍",
-            "name": "Special Interest",
-            "items": ["French Club", "Digital Literacy Club", "Environment Club", "Christian Union (CU)"]
-        }
-    ],
-    "events": [
-        { "icon": "🏆", "title": "Sports Day", "description": "Annual inter-house competitions in athletics, football, and netball. Parents are invited to participate." },
-        { "icon": "🎓", "title": "Graduation Ceremony", "description": "Celebrating Grade 6 learners transitioning to Junior Secondary." },
-        { "icon": "🎄", "title": "Christmas Party", "description": "End-of-year celebration with performances, games, and fun activities." },
-        { "icon": "🎨", "title": "Cultural Day", "description": "Celebrating Kenya's diverse cultures through music, dance, and food." },
-        { "icon": "📚", "title": "Open Day", "description": "Parents visit classrooms to see learners' work and meet teachers." },
-        { "icon": "🏅", "title": "Prize Giving Day", "description": "Recognizing academic excellence and co-curricular achievements." }
-    ],
-    "gallery": [
-        { "src": "images/placeholder-event.jpg", "alt": "Sports Day at Shinners Precious School" },
-        { "src": "images/placeholder-classroom.jpg", "alt": "Classroom Activity at Shinners Precious School" },
-        { "src": "images/placeholder-event.jpg", "alt": "Graduation Ceremony at Shinners Precious School" }
-    ],
-    "testimonials": [
-        {
-            "text": "My daughter improved in confidence after joining drama club. She's now in Grade 5 and loves performing.",
-            "author": "Mrs. Wanjiku",
-            "grade": "Parent of Grade 5 Learner"
-        },
-        {
-            "text": "The chess club has transformed my son's critical thinking. He represents the school in competitions.",
-            "author": "Mr. Otieno",
-            "grade": "Parent of Grade 7 Learner"
-        },
-        {
-            "text": "The sports program is excellent. My daughter made new friends and stays active through netball.",
-            "author": "Mrs. Kamau",
-            "grade": "Parent of Grade 4 Learner"
-        }
-    ]
-}
+    }
+
+    // ========== INITIALIZE ==========
+    loadSchoolLifeData();
+});
