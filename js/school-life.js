@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (el) el.textContent = data.sports_intro;
             }
 
-            // Sports
+            // Sports - matches your JSON structure with "details" array
             if (data.sports && data.sports.length > 0) {
                 const el = document.getElementById('school-life-sports');
                 if (el) {
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <h3>${sport.name}</h3>
                             <p>${sport.description}</p>
                             <div class="sport-details">
-                                ${sport.details.map(d => `<p><strong>${d.label}:</strong> ${d.value}</p>`).join('')}
+                                ${sport.details.map(detail => `<p><strong>${detail.label}:</strong> ${detail.value}</p>`).join('')}
                             </div>
                         </div>
                     `).join('');
@@ -76,29 +76,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
 
-            // Gallery
+            // Gallery Images - matches your JSON structure with "gallery"
             if (data.gallery && data.gallery.length > 0) {
                 const el = document.getElementById('school-life-gallery');
                 if (el) {
                     el.innerHTML = data.gallery.map(img => `
-                        <img src="${img.src}" alt="${img.alt}" loading="lazy">
+                        <img src="${img.src}" alt="${img.alt}" loading="lazy" onerror="this.src='images/placeholder-gallery.jpg'">
                     `).join('');
                 }
             }
 
-            // Testimonials
-            if (data.testimonials && data.testimonials.length > 0) {
-                const el = document.getElementById('school-life-testimonials');
-                if (el) {
-                    el.innerHTML = data.testimonials.map(t => `
-                        <div class="testimonial-item">
-                            <div class="testimonial-text">⭐ ⭐ ⭐ ⭐ ⭐</div>
-                            <div class="testimonial-text">"${t.text}"</div>
-                            <div class="testimonial-author">— ${t.author}</div>
-                            <div class="testimonial-grade">${t.grade}</div>
-                        </div>
-                    `).join('');
-                }
+            // CTA Section
+            if (data.cta_title) {
+                const el = document.getElementById('school-life-cta-title');
+                if (el) el.textContent = data.cta_title;
+            }
+            if (data.cta_text) {
+                const el = document.getElementById('school-life-cta-text');
+                if (el) el.textContent = data.cta_text;
             }
 
             console.log('School Life page data loaded successfully');
