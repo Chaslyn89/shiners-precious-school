@@ -1,10 +1,11 @@
-// ========== SCHOOL LIFE PAGE - Loads school-life.json ==========
+// ========== SCHOOL LIFE PAGE - Loads school-life from .md files ==========
 
 document.addEventListener('DOMContentLoaded', function() {
 
     // ========== LOAD SCHOOL LIFE DATA ==========
     async function loadSchoolLifeData() {
         try {
+            // Load school-life.json for hero, intro, events, gallery, cta
             const response = await fetch('data/school-life.json');
             if (!response.ok) return;
             
@@ -26,20 +27,62 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (el) el.textContent = data.sports_intro;
             }
 
-            // Sports - matches your JSON structure with "details" array
-            if (data.sports && data.sports.length > 0) {
-                const el = document.getElementById('school-life-sports');
-                if (el) {
-                    el.innerHTML = data.sports.map(sport => `
+            // ===== LOAD SPORTS FROM .md FILES =====
+            let sports = [];
+            try {
+                const apiUrl = 'https://api.github.com/repos/Chaslyn89/shiners-precious-school/contents/data/school-life';
+                const apiResponse = await fetch(apiUrl);
+                if (apiResponse.ok) {
+                    const files = await apiResponse.json();
+                    const mdFiles = files.filter(file => file.name.endsWith('.md'));
+                    const sportFiles = mdFiles.map(file => file.name.replace('.md', ''));
+                    
+                    for (const slug of sportFiles) {
+                        try {
+                            const fileResponse = await fetch(`data/school-life/${slug}.md`);
+                            if (fileResponse.ok) {
+                                const text = await fileResponse.text();
+                                const parsed = parseSchoolLifeMarkdown(text);
+                                if (parsed) {
+                                    sports.push(parsed);
+                                }
+                            }
+                        } catch (e) {
+                            // Skip if file not found
+                        }
+                    }
+                }
+            } catch (e) {
+                console.log('Could not fetch school-life list');
+            }
+
+            // Sort sports by order
+            sports.sort((a, b) => (a.order || 0) - (b.order || 0));
+
+            // If no sports from .md files, fallback to JSON
+            if (sports.length === 0 && data.sports) {
+                sports = data.sports;
+            }
+
+            // ===== DISPLAY SPORTS =====
+            const sportsEl = document.getElementById('school-life-sports');
+            if (sportsEl) {
+                if (sports.length > 0) {
+                    sportsEl.innerHTML = sports.map(sport => `
                         <div class="sport-item">
-                            <div class="sport-icon" aria-label="${sport.name}">${sport.icon}</div>
+                            <div class="sport-icon" aria-label="${sport.name}">${sport.icon || '⚽'}</div>
                             <h3>${sport.name}</h3>
-                            <p>${sport.description}</p>
-                            <div class="sport-details">
-                                ${sport.details.map(detail => `<p><strong>${detail.label}:</strong> ${detail.value}</p>`).join('')}
-                            </div>
+                            <p>${sport.description || ''}</p>
+                            ${sport.details && sport.details.length > 0 ? `
+                                <div class="sport-details">
+                                    ${sport.details.map(detail => `<p><strong>${detail.label}:</strong> ${detail.value}</p>`).join('')}
+                                </div>
+                            ` : ''}
+                            ${sport.image ? `<img src="${sport.image}" alt="${sport.name}" style="width:100%;height:120px;object-fit:cover;border-radius:8px;margin-top:10px;">` : ''}
                         </div>
                     `).join('');
+                } else {
+                    sportsEl.innerHTML = `<p style="text-align:center;padding:20px;color:#999;">No sports added yet. Add through the CMS.</p>`;
                 }
             }
 
@@ -76,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
 
-            // Gallery Images - matches your JSON structure with "gallery"
+            // Gallery Images
             if (data.gallery && data.gallery.length > 0) {
                 const el = document.getElementById('school-life-gallery');
                 if (el) {
@@ -100,6 +143,54 @@ document.addEventListener('DOMContentLoaded', function() {
 
         } catch (e) {
             console.log('School Life page: Using default content');
+        }
+    }
+
+    // ===== PARSE SCHOOL LIFE MARKDOWN =====
+    function parseSchoolLifeMarkdown(text) {
+        try {
+            const match = text.match(/---\n([\s\S]*?)\n---/);
+            if (!match) return null;
+            
+            const frontmatter = match[1];
+            
+            const titleMatch = frontmatter.match(/title:\s*"?([^"\n]*?)"?\s*$/m);
+            const descriptionMatch = frontmatter.match(/description:\s*"?([^"\n]*?)"?\s*$/m);
+            const imageMatch = frontmatter.match(/image:\s*"?([^"\n]*?)"?\s*$/m);
+            const categoryMatch = frontmatter.match(/category:\s*"?([^"\n]*?)"?\s*$/m);
+            const orderMatch = frontmatter.match(/order:\s*([\d.]+)/);
+            
+            // Extract details from description if it contains structured data
+            let details = [];
+            let cleanDescription = descriptionMatch ? descriptionMatch[1].trim() : '';
+            
+            // Try to parse details from description (if it has Training, Competitions, Grades)
+            const trainingMatch = cleanDescription.match(/Training:?\s*([^\n]+)/i);
+            const competitionsMatch = cleanDescription.match(/Competitions:?\s*([^\n]+)/i);
+            const gradesMatch = cleanDescription.match(/Grades:?\s*([^\n]+)/i);
+            
+            if (trainingMatch) {
+                details.push({ label: 'Training', value: trainingMatch[1].trim() });
+            }
+            if (competitionsMatch) {
+                details.push({ label: 'Competitions', value: competitionsMatch[1].trim() });
+            }
+            if (gradesMatch) {
+                details.push({ label: 'Grades', value: gradesMatch[1].trim() });
+            }
+            
+            return {
+                name: titleMatch ? titleMatch[1].trim() : 'Untitled',
+                description: cleanDescription,
+                icon: categoryMatch ? categoryMatch[1].trim() === 'sports' ? '⚽' : '🎯' : '⚽',
+                image: imageMatch ? imageMatch[1].trim() : '',
+                category: categoryMatch ? categoryMatch[1].trim() : 'sports',
+                order: orderMatch ? parseInt(orderMatch[1]) : 0,
+                details: details
+            };
+        } catch (e) {
+            console.log('Error parsing school-life markdown:', e);
+            return null;
         }
     }
 
