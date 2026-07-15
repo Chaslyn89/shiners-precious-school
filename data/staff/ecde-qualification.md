@@ -1,6 +1,6 @@
 ---
 name: "Catherine Akinyi "
-title: "Class Teacher "
+title: "Play Group Class Teacher "
 qualifications: "ECDE "
 photo: /images/uploads/catherine-akinyi.jpeg
 order: 0
