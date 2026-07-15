@@ -1,8 +1,8 @@
 ---
 name: Eunice Kamau
-title: "Class Teacher "
+title: "PP1 Class Teacher "
 qualifications: ECDE
 photo: /images/uploads/eunice-kamau.jpg
-order: 1
+order: 2
 type: teacher
 ---
