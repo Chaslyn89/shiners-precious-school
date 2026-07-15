@@ -1,8 +1,8 @@
 ---
 name: Onesmus Mwangi
-title: "Teacher "
+title: "PP2 Class Teacher "
 qualifications: P1
 photo: /images/uploads/onesmus-mwangi.jpg
-order: 0
+order: 3
 type: teacher
 ---
