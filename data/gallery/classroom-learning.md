@@ -1,6 +1,6 @@
 ---
 title: Classroom Learning
-image: /images/uploads/classroom-learning.png
+image: /images/uploads/eunice-kamau.jpg
 category: classes
 featured: true
 ---
