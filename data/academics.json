@@ -50,6 +50,10 @@
     {
       "number": "📈",
       "label": "Consistent Year-on-Year Improvement"
+    },
+    {
+      "number": "100%",
+      "label": "Transition Rate to Next Grade"
     }
   ],
   "learning_areas": {
@@ -148,7 +152,7 @@
       "Chapel Services"
     ]
   },
-  "pathway_description": "Our CBC pathway ensures smooth progression from early years to Junior Secondary.",
+  "pathway_description": "Our CBE pathway ensures smooth progression from early years to Junior Secondary.",
   "downloads": [
     {
       "name": "📅 Academic Calendar",
@@ -192,8 +196,8 @@
       "detail": "🤝 Guidance Session: Weekly mentorship"
     }
   ],
-  "curriculum_overview": "Shinners Precious School follows the Competency Based Curriculum (CBC) approved by the Kenya Institute of Curriculum Development (KICD). Our approach focuses on developing learners' potential through practical, learner-centered activities that build competencies for the 21st century.",
-  "hero_subtitle": "Competency Based Curriculum (CBC) | Playgroup to Grade 9",
+  "curriculum_overview": "Shinners Precious School follows the Competency Based Education (CBE) approved by the Kenya Institute of Curriculum Development (KICD). Our approach focuses on developing learners' potential through practical, learner-centered activities that build competencies for the 21st century.",
+  "hero_subtitle": "Competency Based Education (CBE) | Playgroup to Grade 9",
   "calendar": [
     {
       "term": "Term 1 2026",
