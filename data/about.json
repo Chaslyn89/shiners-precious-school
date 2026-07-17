@@ -1,32 +1,34 @@
 {
-  "hero_title": "About Shinners Precious School",
-  "hero_subtitle": "Excellence in Education | Shaping Future Leaders",
-  "welcome_text": "Shinners Precious School is a leading CBC educational institution located in Embakasi, Nairobi. Established in <strong>2009</strong>, we offer quality education from Playgroup to Grade 9, nurturing young minds with a strong foundation in academics, character, and faith. Our school is committed to providing affordable, holistic education that prepares learners for the future.",
-  "mission": "To provide high quality education and childcare in a safe, respectful and inclusive environment that builds a foundation for lifelong learning.",
-  "vision": "To be a center of excellence that produces lifelong learners and critical thinkers equipped for global success.",
-  "motto": "Determined to win",
-  "motto_description": "Striving for excellence in everything we do.",
-  "curriculum_badges": [
-    "📚 CBC Curriculum",
-    "💻 Digital Literacy",
-    "🇫🇷 French Language",
-    "⚽ Sports",
-    "🎭 Clubs & Activities",
-    "⛪ Christian Education"
-  ],
-  "curriculum_text": "We follow the Competency Based Curriculum (CBC) which emphasizes practical learning, creativity, and critical thinking. Our learners are prepared for Junior Secondary (Grade 7-9) and beyond with a strong foundation in core subjects and essential life skills.",
-  "history": [
+  "facilities": [
     {
-      "year": "📅 2009 - School Established",
-      "description": "Shinners Precious School was established with a vision to provide quality, affordable education to the Embakasi community."
+      "icon": "💻",
+      "name": "Computer Lab",
+      "description": "Modern computers with internet access"
     },
     {
-      "year": "📈 Growth & Expansion",
-      "description": "Starting with Playgroup and PP1, the school has grown to offer education up to Grade 9, now serving over 500 learners."
+      "icon": "📚",
+      "name": "Library",
+      "description": "Well-stocked reading materials"
     },
     {
-      "year": "🏆 Excellence in CBC",
-      "description": "The school is recognized for excellence in CBC implementation and holistic learner development."
+      "icon": "🚌",
+      "name": "School Bus",
+      "description": "Safe transport across Embakasi"
+    },
+    {
+      "icon": "⚽",
+      "name": "Playground",
+      "description": "Safe outdoor play area"
+    },
+    {
+      "icon": "🔬",
+      "name": "CBC Learning Areas",
+      "description": "Activity-based learning spaces"
+    },
+    {
+      "icon": "🍎",
+      "name": "Dining Area",
+      "description": "Clean, spacious dining hall"
     }
   ],
   "values": [
@@ -78,43 +80,13 @@
       "photo": "/images/academic-placeholder.jpg"
     }
   ],
-  "director_name": "Shem Oyugi",
-  "director_title": "School Director",
-  "director_photo": "/images/director-placeholder.jpg",
-  "director_message": "Dear Parents, Guardians, and Learners,\n\nIt is my honor to welcome you to Shinners Precious School. We are committed to providing a nurturing environment where every child can thrive academically, socially, and spiritually.\n\nOur dedicated team of CBC-trained teachers works tirelessly to ensure that each learner reaches their full potential. We believe in holistic education that prepares our children not just for exams, but for life.\n\nAs we continue to grow, we remain focused on our mission: to provide quality, affordable education that builds character and excellence.\n\nThank you for entrusting your child to us. Together, we will build a bright future.",
   "director_signature": "Yours in education,\n\nShem Oyugi\nDirector, Shinners Precious School",
-  "facilities": [
-    {
-      "icon": "💻",
-      "name": "Computer Lab",
-      "description": "Modern computers with internet access"
-    },
-    {
-      "icon": "📚",
-      "name": "Library",
-      "description": "Well-stocked reading materials"
-    },
-    {
-      "icon": "🚌",
-      "name": "School Bus",
-      "description": "Safe transport across Embakasi"
-    },
-    {
-      "icon": "⚽",
-      "name": "Playground",
-      "description": "Safe outdoor play area"
-    },
-    {
-      "icon": "🔬",
-      "name": "CBC Learning Areas",
-      "description": "Activity-based learning spaces"
-    },
-    {
-      "icon": "🍎",
-      "name": "Dining Area",
-      "description": "Clean, spacious dining hall"
-    }
-  ],
+  "director_title": "School Director",
+  "vision": "To be a center of excellence that produces lifelong learners and critical thinkers equipped for global success.",
+  "motto_description": "Striving for excellence in everything we do.",
+  "welcome_text": "Shinners Precious School is a leading CBC educational institution located in Embakasi, Nairobi. Established in <strong>2009</strong>, we offer quality education from Playgroup to Grade 9, nurturing young minds with a strong foundation in academics, character, and faith. Our school is committed to providing affordable, holistic education that prepares learners for the future.",
+  "mission": "To provide high quality education and childcare in a safe, respectful and inclusive environment that builds a foundation for lifelong learning.",
+  "motto": "Determined to win",
   "why_choose": [
     "Modern CBC Curriculum - Fully trained teachers implementing Competency Based Curriculum with Digital Literacy and French.",
     "Qualified Teachers - Experienced, passionate, and CBC-trained educators dedicated to each child's success.",
@@ -123,11 +95,55 @@
     "Christian Values - Strong moral and spiritual foundation integrated into daily learning.",
     "Holistic Development - Sports, clubs, music, drama, and co-curricular activities for all-round growth."
   ],
-  "stats": [
-    { "number": "15+", "label": "Years of Excellence" },
-    { "number": "CBC", "label": "Curriculum" },
-    { "number": "PG-9", "label": "Classes Offered" },
-    { "number": "Qualified", "label": "Teaching Staff" }
+  "curriculum_text": "We follow the Competency Based Curriculum (CBC) which emphasizes practical learning, creativity, and critical thinking. Our learners are prepared for Junior Secondary (Grade 7-9) and beyond with a strong foundation in core subjects and essential life skills.",
+  "hero_title": "About Shinners Precious School",
+  "history": [
+    {
+      "year": "📅 2009 - School Established",
+      "description": "Shinners Precious School was established with a vision to provide quality, affordable education to the Embakasi community."
+    },
+    {
+      "year": "📈 Growth & Expansion",
+      "description": "Starting with Playgroup and Lower Primary, the school has grown to offer education up to Grade 9, now serving over 800 learners."
+    },
+    {
+      "year": "🏆 Excellence in CBC",
+      "description": "The school is recognized for excellence in CBC implementation and holistic learner development."
+    },
+    {
+      "year": "2009 - School Established.",
+      "description": "Shinners Precious School was established with a vision to provide quality, affordable education to the Embakasi community.\nYear/Event: 📈 Growth & Expansion\nStarting with Playgroup and Lower Primary, the school has grown to offer education up to Grade 9, now serving over 800 learners.\nYear/Event: 🏆 Excellence in CBE\nThe school is recognized for excellence in CBE implementation and holistic learner development and previously excellent mean scores  taking many pupils to top National schools."
+    }
   ],
-  "brochure_link": "assets/School-Brochure.pdf"
+  "curriculum_badges": [
+    "📚 CBC Curriculum",
+    "💻 Digital Literacy",
+    "🇫🇷 French Language",
+    "⚽ Sports",
+    "🎭 Clubs & Activities",
+    "⛪ Christian Education"
+  ],
+  "director_message": "Dear Parents, Guardians, and Learners,\n\nIt is my honor to welcome you to Shinners Precious School. We are committed to providing a nurturing environment where every child can thrive academically, socially, and spiritually.\n\nOur dedicated team of CBC-trained teachers works tirelessly to ensure that each learner reaches their full potential. We believe in holistic education that prepares our children not just for exams, but for life.\n\nAs we continue to grow, we remain focused on our mission: to provide quality, affordable education that builds character and excellence.\n\nThank you for entrusting your child to us. Together, we will build a bright future.",
+  "brochure_link": "assets/School-Brochure.pdf",
+  "hero_subtitle": "Excellence in Education | Shaping Future Leaders",
+  "director_name": "Shem Oyugi",
+  "stats": [
+    {
+      "number": "15+",
+      "label": "Years of Excellence"
+    },
+    {
+      "number": "CBC",
+      "label": "Curriculum"
+    },
+    {
+      "number": "PG-9",
+      "label": "Classes Offered"
+    },
+    {
+      "number": "Qualified",
+      "label": "Teaching Staff"
+    }
+  ],
+  "director_photo": "/images/director-placeholder.jpg"
 }
