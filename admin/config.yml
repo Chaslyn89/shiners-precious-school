@@ -310,217 +310,98 @@ collections:
         label: "Fee Structure"
         file: "data/fees.json"
         fields:
-          - label: "Tuition Fees"
-            name: "tuition"
+
+          # ---------------- PAGE CONTENT ----------------
+          - label: "Page Content"
+            name: "page_content"
             widget: "object"
             fields:
-              - label: "Playgroup"
-                name: "playgroup"
-                widget: "object"
-                fields:
-                  - { label: "Term 1", name: "term1", widget: "number", default: 7400 }
-                  - { label: "Term 2", name: "term2", widget: "number", default: 7400 }
-                  - { label: "Term 3", name: "term3", widget: "number", default: 7400 }
-              - label: "PP1"
-                name: "pp1"
-                widget: "object"
-                fields:
-                  - { label: "Term 1", name: "term1", widget: "number", default: 7400 }
-                  - { label: "Term 2", name: "term2", widget: "number", default: 7400 }
-                  - { label: "Term 3", name: "term3", widget: "number", default: 7400 }
-              - label: "PP2"
-                name: "pp2"
-                widget: "object"
-                fields:
-                  - { label: "Term 1", name: "term1", widget: "number", default: 7400 }
-                  - { label: "Term 2", name: "term2", widget: "number", default: 7400 }
-                  - { label: "Term 3", name: "term3", widget: "number", default: 7400 }
-              - label: "Grade 1-3"
-                name: "grade1_3"
-                widget: "object"
-                fields:
-                  - { label: "Term 1", name: "term1", widget: "number", default: 7400 }
-                  - { label: "Term 2", name: "term2", widget: "number", default: 7400 }
-                  - { label: "Term 3", name: "term3", widget: "number", default: 7400 }
-              - label: "Grade 4-5"
-                name: "grade4_5"
-                widget: "object"
-                fields:
-                  - { label: "Term 1", name: "term1", widget: "number", default: 9400 }
-                  - { label: "Term 2", name: "term2", widget: "number", default: 9400 }
-                  - { label: "Term 3", name: "term3", widget: "number", default: 9400 }
-              - label: "Grade 6"
-                name: "grade6"
-                widget: "object"
-                fields:
-                  - { label: "Term 1", name: "term1", widget: "number", default: 10800 }
-                  - { label: "Term 2", name: "term2", widget: "number", default: 10800 }
-                  - { label: "Term 3", name: "term3", widget: "number", default: 10800 }
-              - label: "Grade 7-8"
-                name: "grade7_8"
-                widget: "object"
-                fields:
-                  - { label: "Term 1", name: "term1", widget: "number", default: 14200 }
-                  - { label: "Term 2", name: "term2", widget: "number", default: 14200 }
-                  - { label: "Term 3", name: "term3", widget: "number", default: 14200 }
-              - label: "Grade 9"
-                name: "grade9"
-                widget: "object"
-                fields:
-                  - { label: "Term 1", name: "term1", widget: "number", default: 14700 }
-                  - { label: "Term 2", name: "term2", widget: "number", default: 14700 }
-                  - { label: "Term 3", name: "term3", widget: "number", default: 14700 }
-          
-          - label: "Extra Fees"
-            name: "extra_fees"
-            widget: "object"
-            fields:
-              - label: "Playgroup"
-                name: "playgroup"
-                widget: "object"
-                fields:
-                  - { label: "Assessment", name: "assessment", widget: "number", default: 300 }
-                  - { label: "Activity", name: "activity", widget: "number", default: 200 }
-                  - { label: "Diary", name: "diary", widget: "number", default: 300 }
-                  - { label: "PTA", name: "pta", widget: "number", default: 200 }
-                  - { label: "Assessment Book", name: "assessment_book", widget: "number", default: 400 }
-              - label: "Grade 1-3"
-                name: "grade1_3"
-                widget: "object"
-                fields:
-                  - { label: "Assessment", name: "assessment", widget: "number", default: 300 }
-                  - { label: "Activity", name: "activity", widget: "number", default: 200 }
-                  - { label: "Diary", name: "diary", widget: "number", default: 300 }
-                  - { label: "PTA", name: "pta", widget: "number", default: 200 }
-                  - { label: "Assessment Book", name: "assessment_book", widget: "number", default: 400 }
-              - label: "Grade 4-6"
-                name: "grade4_6"
-                widget: "object"
-                fields:
-                  - { label: "Assessment", name: "assessment", widget: "number", default: 300 }
-                  - { label: "Activity", name: "activity", widget: "number", default: 200 }
-                  - { label: "Diary", name: "diary", widget: "number", default: 300 }
-                  - { label: "PTA", name: "pta", widget: "number", default: 200 }
-                  - { label: "Assessment Book", name: "assessment_book", widget: "number", default: 400 }
-                  - { label: "Digital Literacy & French", name: "digital_literacy", widget: "number", default: 600 }
-              - label: "Grade 7-9"
-                name: "grade7_9"
-                widget: "object"
-                fields:
-                  - { label: "Assessment", name: "assessment", widget: "number", default: 300 }
-                  - { label: "Activity", name: "activity", widget: "number", default: 300 }
-                  - { label: "Diary", name: "diary", widget: "number", default: 300 }
-                  - { label: "PTA", name: "pta", widget: "number", default: 200 }
-                  - { label: "Assessment Book", name: "assessment_book", widget: "number", default: 500 }
-                  - { label: "Digital Literacy & French", name: "digital_literacy", widget: "number", default: 600 }
-          
-          - label: "Totals"
-            name: "totals"
-            widget: "object"
-            fields:
-              - label: "Playgroup"
-                name: "playgroup"
-                widget: "object"
-                fields:
-                  - { label: "Term 1", name: "term1", widget: "number", default: 8800 }
-                  - { label: "Term 2", name: "term2", widget: "number", default: 7900 }
-                  - { label: "Term 3", name: "term3", widget: "number", default: 7700 }
-              - label: "Grade 1-3"
-                name: "grade1_3"
-                widget: "object"
-                fields:
-                  - { label: "Term 1", name: "term1", widget: "number", default: 8800 }
-                  - { label: "Term 2", name: "term2", widget: "number", default: 7900 }
-                  - { label: "Term 3", name: "term3", widget: "number", default: 7700 }
-              - label: "Grade 4-5"
-                name: "grade4_5"
-                widget: "object"
-                fields:
-                  - { label: "Term 1", name: "term1", widget: "number", default: 11400 }
-                  - { label: "Term 2", name: "term2", widget: "number", default: 10500 }
-                  - { label: "Term 3", name: "term3", widget: "number", default: 10300 }
-              - label: "Grade 6"
-                name: "grade6"
-                widget: "object"
-                fields:
-                  - { label: "Term 1", name: "term1", widget: "number", default: 11400 }
-                  - { label: "Term 2", name: "term2", widget: "number", default: 10500 }
-                  - { label: "Term 3", name: "term3", widget: "number", default: 10300 }
-              - label: "Grade 7-8"
-                name: "grade7_8"
-                widget: "object"
-                fields:
-                  - { label: "Term 1", name: "term1", widget: "number", default: 16400 }
-                  - { label: "Term 2", name: "term2", widget: "number", default: 15400 }
-                  - { label: "Term 3", name: "term3", widget: "number", default: 15100 }
-              - label: "Grade 9"
-                name: "grade9"
-                widget: "object"
-                fields:
-                  - { label: "Term 1", name: "term1", widget: "number", default: 16400 }
-                  - { label: "Term 2", name: "term2", widget: "number", default: 15400 }
-                  - { label: "Term 3", name: "term3", widget: "number", default: 15100 }
-          
-          - { label: "Grade 6 Note", name: "grade6_note", widget: "string", default: "Grade 6 tuition is KSh 10,800 per term" }
-          - { label: "Grade 9 Note", name: "grade9_note", widget: "string", default: "Grade 9 tuition is KSh 14,700 per term" }
-          
-          - label: "Annual Summary"
-            name: "annual_summary"
-            widget: "object"
-            fields:
-              - { label: "Playgroup - Grade 3", name: "playgroup_grade3", widget: "number", default: 24400 }
-              - { label: "Grade 4 - 5", name: "grade4_5", widget: "number", default: 32200 }
-              - { label: "Grade 6", name: "grade6", widget: "number", default: 34600 }
-              - { label: "Grade 7 - 8", name: "grade7_8", widget: "number", default: 46900 }
-              - { label: "Grade 9", name: "grade9", widget: "number", default: 47400 }
-          
-          - label: "Optional Services"
-            name: "optional_services"
-            widget: "object"
-            fields:
-              - { label: "Meals (per term)", name: "meals", widget: "number", default: 3900 }
-              - { label: "Meals Description", name: "meals_description", widget: "string", default: "Nutritious lunch served daily. Optional for all learners." }
-              - label: "Transport"
-                name: "transport"
-                widget: "object"
-                fields:
-                  - { label: "Imara Daima", name: "imara_daima", widget: "number", default: 7000 }
-                  - { label: "Pipeline", name: "pipeline", widget: "number", default: 6000 }
-                  - { label: "AA & KOBIL", name: "aa_kobil", widget: "number", default: 6000 }
-                  - { label: "Kwanjenga", name: "kwanjenga", widget: "number", default: 6000 }
-          
+              - { label: "Announcement Bar Text", name: "announcement_text", widget: "string", default: "💰 2026 Fee Structure | No cash payments accepted" }
+              - { label: "Hero Title", name: "hero_title", widget: "string", default: "Fee Structure 2026" }
+              - { label: "Hero Subtitle", name: "hero_subtitle", widget: "string", default: "Affordable, transparent fees with flexible payment options" }
+              - { label: "Contact Line (bottom of page)", name: "contact_line", widget: "string", default: "For questions, call 0720 994 337" }
+
+          # ---------------- ADMISSION FEE ----------------
           - label: "Admission Fee"
             name: "admission_fee"
             widget: "object"
             fields:
               - { label: "Playgroup - Grade 6", name: "playgroup_grade6", widget: "number", default: 1000 }
               - { label: "Playgroup - Grade 6 Label", name: "playgroup_grade6_label", widget: "string", default: "For Playgroup - Grade 6" }
-              - { label: "Grade 7 - 9", name: "grade7_9", widget: "number", default: 1500 }
-              - { label: "Grade 7 - 9 Label", name: "grade7_9_label", widget: "string", default: "For Grade 7 - Grade 9 (Junior Secondary)" }
-          
+              - { label: "Grade 7 - Grade 9", name: "grade7_9", widget: "number", default: 1500 }
+              - { label: "Grade 7 - Grade 9 Label", name: "grade7_9_label", widget: "string", default: "For Grade 7 - Grade 9 (Junior Secondary)" }
+
+          # ---------------- GRADE LEVELS ----------------
+          - label: "Grade Levels"
+            name: "levels"
+            widget: "list"
+            label_singular: "Grade Level"
+            summary: "{{fields.name}}"
+            fields:
+              - { label: "Level ID (do not change)", name: "id", widget: "string", hint: "Must match tableMap in js/fees.js: pre_primary, lower_primary_g1_3, upper_primary_g4_5, upper_primary_g6, junior_g7_8, junior_g9" }
+              - { label: "Display Name", name: "name", widget: "string" }
+              - label: "Fee Items"
+                name: "items"
+                widget: "list"
+                label_singular: "Item"
+                summary: "{{fields.label}}"
+                fields:
+                  - { label: "Label", name: "label", widget: "string" }
+                  - { label: "Term 1", name: "term1", widget: "number", default: 0 }
+                  - { label: "Term 2", name: "term2", widget: "number", default: 0 }
+                  - { label: "Term 3", name: "term3", widget: "number", default: 0 }
+              - label: "Total Per Term"
+                name: "total"
+                widget: "object"
+                fields:
+                  - { label: "Term 1 Total", name: "term1", widget: "number", default: 0 }
+                  - { label: "Term 2 Total", name: "term2", widget: "number", default: 0 }
+                  - { label: "Term 3 Total", name: "term3", widget: "number", default: 0 }
+              - { label: "Annual Total (3 Terms)", name: "annual", widget: "number", default: 0 }
+
+          # ---------------- ANNUAL SUMMARY TABLE ----------------
+          - label: "Annual Summary Table"
+            name: "annual_summary"
+            widget: "list"
+            label_singular: "Row"
+            summary: "{{fields.label}}"
+            fields:
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "Amount", name: "amount", widget: "number", default: 0 }
+
+          # ---------------- OPTIONAL SERVICES ----------------
+          - label: "Optional Services"
+            name: "optional_services"
+            widget: "object"
+            fields:
+              - { label: "Meals (per term)", name: "meals", widget: "number", default: 3900 }
+              - { label: "Meals Description", name: "meals_description", widget: "string", default: "Nutritious lunch served daily. Optional for all learners." }
+              - label: "Transport Routes"
+                name: "transport"
+                widget: "list"
+                label_singular: "Route"
+                summary: "{{fields.label}}"
+                fields:
+                  - { label: "Route Label", name: "label", widget: "string" }
+                  - { label: "Fee per Term", name: "amount", widget: "number", default: 0 }
+
+          # ---------------- NEW ADMISSION EXAMPLE ----------------
           - label: "New Admission Example"
             name: "new_admission_example"
             widget: "object"
             fields:
-              - label: "Grade 1"
-                name: "grade1"
-                widget: "object"
+              - { label: "Column Headers", name: "columns", widget: "list", field: { label: "Column", name: "col", widget: "string" } }
+              - label: "Rows"
+                name: "rows"
+                widget: "list"
+                label_singular: "Row"
+                summary: "{{fields.label}}"
                 fields:
-                  - { label: "Term 1 Fees", name: "term1_fees", widget: "number", default: 8800 }
-                  - { label: "Admission Fee", name: "admission_fee", widget: "number", default: 1000 }
-                  - { label: "Uniform", name: "uniform", widget: "string", default: "Contact School" }
-                  - { label: "Meals (Optional)", name: "meals", widget: "number", default: 3900 }
-                  - { label: "Estimated Total", name: "total", widget: "number", default: 13700 }
-              - label: "Grade 7"
-                name: "grade7"
-                widget: "object"
-                fields:
-                  - { label: "Term 1 Fees", name: "term1_fees", widget: "number", default: 16400 }
-                  - { label: "Admission Fee", name: "admission_fee", widget: "number", default: 1500 }
-                  - { label: "Uniform", name: "uniform", widget: "string", default: "Contact School" }
-                  - { label: "Meals (Optional)", name: "meals", widget: "number", default: 3900 }
-                  - { label: "Estimated Total", name: "total", widget: "number", default: 21800 }
-          
+                  - { label: "Label", name: "label", widget: "string" }
+                  - { label: "Values", name: "values", widget: "list", field: { label: "Value", name: "val", widget: "string" } }
+                  - { label: "Bold?", name: "bold", widget: "boolean", default: false, required: false }
+
+          # ---------------- PAYMENT METHODS ----------------
           - label: "Payment Methods"
             name: "payment_methods"
             widget: "object"
@@ -542,7 +423,8 @@ collections:
                   - { label: "Example", name: "example", widget: "string", default: "82747K-JOHNDOE-G4" }
               - { label: "Payment Note", name: "note", widget: "string", default: "No cash payments accepted. All fees must be paid via Bank or Mpesa." }
               - { label: "Receipt Note", name: "receipt_note", widget: "string", default: "Keep your payment receipt for reference" }
-          
+
+          # ---------------- PAYMENT SCHEDULE ----------------
           - label: "Payment Schedule"
             name: "payment_schedule"
             widget: "object"
@@ -550,14 +432,17 @@ collections:
               - { label: "Term 1", name: "term1", widget: "string", default: "Due before opening day (January)" }
               - { label: "Term 2", name: "term2", widget: "string", default: "Due before opening day (April/May)" }
               - { label: "Term 3", name: "term3", widget: "string", default: "Due before opening day (August/September)" }
-          
+
+          # ---------------- FAQS ----------------
           - { label: "FAQs", name: "faqs", widget: "list", fields: [
               { label: "Question", name: "question", widget: "string" },
               { label: "Answer", name: "answer", widget: "text" }
             ] }
-          
+
+          # ---------------- IMPORTANT NOTES ----------------
           - { label: "Important Notes", name: "important_notes", widget: "list", field: { label: "Note", name: "note", widget: "text" } }
-          
+
+          # ---------------- FOOTER ----------------
           - { label: "Last Updated", name: "last_updated", widget: "string", default: "June 2026" }
           - { label: "Download Link", name: "download_link", widget: "string", default: "assets/Fee-Structure-2026.pdf" }
 
