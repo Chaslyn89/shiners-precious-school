@@ -1,0 +1,5 @@
+
+User-agent: *
+Allow: /
+
+Sitemap: https://shinnerspreciousschool.sc.ke/sitemap.xml
